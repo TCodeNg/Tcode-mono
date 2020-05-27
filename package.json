@@ -38,7 +38,11 @@
     "@angular/router": "^9.1.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.4",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.2",
+    "@nestjs/common": "^6.8.3",
+    "@nestjs/core": "^6.8.3",
+    "@nestjs/platform-express": "^6.8.3",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@nrwl/angular": "9.3.0",
@@ -61,6 +65,13 @@
     "@types/jest": "25.1.4",
     "ts-jest": "25.2.1",
     "cypress": "^4.1.0",
-    "@nrwl/cypress": "9.3.0"
+    "@nrwl/cypress": "9.3.0",
+    "@nrwl/node": "9.3.0",
+    "@nestjs/schematics": "^6.7.0",
+    "@nestjs/testing": "^6.8.3",
+    "@nrwl/eslint-plugin-nx": "9.3.0",
+    "@typescript-eslint/parser": "2.19.2",
+    "@typescript-eslint/eslint-plugin": "2.19.2",
+    "eslint-config-prettier": "6.0.0"
   }
 }

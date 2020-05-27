@@ -20,11 +20,21 @@
   },
   "projects": {
     "storefront": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["shared-assets"]
     },
     "storefront-e2e": {
       "tags": [],
       "implicitDependencies": ["storefront"]
+    },
+    "storefront-api": {
+      "tags": []
+    },
+    "api-interface": {
+      "tags": []
+    },
+    "shared-assets": {
+      "tags": []
     }
   }
 }
