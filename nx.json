@@ -18,5 +18,13 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "storefront": {
+      "tags": []
+    },
+    "storefront-e2e": {
+      "tags": [],
+      "implicitDependencies": ["storefront"]
+    }
+  }
 }
