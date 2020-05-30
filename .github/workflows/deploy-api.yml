@@ -29,7 +29,7 @@ jobs:
           npm i -g @nrwl/cli
           npm i
           nx build storefront-api --prod
-          ./tools/docker/storefront-api/deploy.sh
+          ./tools/docker/storefront/deploy.sh
       - name: Login to Heroku Container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -39,10 +39,10 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           cd dist/apps/storefront-api
-          heroku container:push -a ${{ secrets.STOREFRONT_APP_NAME_STAGE }} web
+          heroku container:push -a ${{ secrets.STOREFRONT_API_NAME_STAGE }} web
       - name: Release
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           cd dist/apps/storefront-api
-          heroku container:release -a ${{ secrets.STOREFRONT_APP_NAME_STAGE }} web
+          heroku container:release -a ${{ secrets.STOREFRONT_API_NAME_STAGE }} web
