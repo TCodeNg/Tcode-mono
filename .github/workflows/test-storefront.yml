@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run:  |
-        npm i -g @nrwl/nx
+        npm i -g @nrwl/cli
         npm i
         nx test storefront
