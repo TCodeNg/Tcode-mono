@@ -27,6 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run:  |
           npm i -g @nrwl/cli
+          npm i
           nx build storefront --prod
           ./tools/docker/storefront/deploy.sh
       - name: Login to Heroku Container registry
