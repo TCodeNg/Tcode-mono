@@ -30,4 +30,11 @@ describe('AppComponent', () => {
       't-Code'
     );
   });
+
+  it('should render subtitle', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('span.subtitle')).toBeTruthy();
+  });
 });
