@@ -19,7 +19,7 @@ describe('AppComponent', () => {
   it(`should have as title 'storefront'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('storefront');
+    expect(app.title).toEqual('t-Code');
   });
 
   it('should render title', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to storefront!'
+      't-Code'
     );
   });
 });
