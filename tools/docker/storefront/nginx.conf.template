@@ -32,7 +32,6 @@ http {
 
   server {
     listen $PORT;
-    listen [::]:$PORT;
 
 
     include /etc/nginx/mime.types;
