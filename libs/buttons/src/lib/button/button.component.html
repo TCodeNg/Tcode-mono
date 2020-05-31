@@ -1,0 +1,23 @@
+<div class="content">
+    <ng-container [ngTemplateOutlet] = "type === 'normal' ? normalButton : iconButton"></ng-container>
+</div>
+
+<ng-template #normalButton>
+    <button mat-raised-button color="primary" (click)="onClick()" [disabled]="disabled">
+        <ng-container [ngTemplateOutlet] = "state === 'idle' ? idle : loading"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #iconButton>
+    <button mat-icon-button color="primary" [disabled]="disabled">
+        <mat-icon>{{ iconName }}</mat-icon>
+    </button>
+</ng-template>
+
+<ng-template #idle>
+    <ng-content></ng-content>
+</ng-template>
+
+<ng-template #loading>
+    <mat-spinner diameter="20"></mat-spinner>
+</ng-template>

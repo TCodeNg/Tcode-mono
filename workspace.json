@@ -242,6 +242,38 @@
           }
         }
       }
+    },
+    "buttons": {
+      "projectType": "library",
+      "root": "libs/buttons",
+      "sourceRoot": "libs/buttons/src",
+      "prefix": "tcode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/buttons/tsconfig.lib.json",
+              "libs/buttons/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/buttons/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/buttons/jest.config.js",
+            "tsConfig": "libs/buttons/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/buttons/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {
