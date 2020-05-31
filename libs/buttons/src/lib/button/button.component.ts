@@ -9,7 +9,7 @@ export class ButtonComponent implements OnInit {
 
   constructor() { }
   @Input() state: 'idle' | 'loading' = 'idle';
-  @Input() type: 'icon' | 'normal' = 'icon';
+  @Input() type: 'icon' | 'normal' | 'outline' = 'icon';
   @Input() disabled: boolean = false;
   @Output() handleClick = new EventEmitter();
   @Input() iconName: string = 'favorite_border';
