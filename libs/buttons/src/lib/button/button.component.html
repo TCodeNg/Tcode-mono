@@ -2,11 +2,11 @@
     <ng-container [ngSwitch]="type">
         <ng-container *ngSwitchCase="'normal'" [ngTemplateOutlet]="normalButton"></ng-container>
         <ng-container *ngSwitchCase="'icon'" [ngTemplateOutlet]="iconButton"></ng-container>
-        <ng-container *ngSwitchCase="'stroke'" [ngTemplateOutlet]="strokeButton"></ng-container>
+        <ng-container *ngSwitchCase="'outline'" [ngTemplateOutlet]="outlineButton"></ng-container>
     </ng-container>
 </div>
 
-<ng-template #strokeButton>
+<ng-template #outlineButton>
     <button mat-stroked-button color="primary" (click)="onClick()" [disabled]="disabled">
         <ng-container [ngTemplateOutlet] = "state === 'idle' ? idle : loading"></ng-container>
     </button>
