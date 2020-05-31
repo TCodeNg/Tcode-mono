@@ -20,7 +20,8 @@ export const ProductSchema = new mongoose.Schema({
   },
   category: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
+    ref: 'Category',
+    required: true
   }],
   agent: {
     type: mongoose.Schema.Types.ObjectId,
@@ -41,7 +42,7 @@ export const ProductSchema = new mongoose.Schema({
   },
   description: {
     type: Number,
-    required: false
+    required: true
   },
   images: [
     {
@@ -64,7 +65,13 @@ export const ProductSchema = new mongoose.Schema({
   },
   created: {
     type: Date,
-    required: true
+    required: true,
+    default: Date.now
+  },
+  updated: {
+    type: Date,
+    required: true,
+    default: Date.now
   }
 });
 
