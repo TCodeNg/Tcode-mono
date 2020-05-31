@@ -25,7 +25,7 @@ export const ProductSchema = new mongoose.Schema({
   }],
   agent: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Agent',
+    ref: 'Business',
     required: false
   },
   rooms: {
@@ -75,6 +75,6 @@ export const ProductSchema = new mongoose.Schema({
   }
 });
 
-export const Currency = new mongoose.Schema({
+export const CurrencySchema = new mongoose.Schema({
 
 });

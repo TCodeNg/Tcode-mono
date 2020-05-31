@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductSchema } from '@tcode/api-interface';
 import { ProductService } from './product.service';
+import { ProductController } from './product.controller';
 
 @Module({
   imports: [
@@ -9,7 +10,8 @@ import { ProductService } from './product.service';
       { name: 'Product', schema: ProductSchema }
     ])
   ],
-  providers: [ProductService]
+  providers: [ProductService],
+  controllers: [ProductController]
 })
 export class ProductModule {
 }

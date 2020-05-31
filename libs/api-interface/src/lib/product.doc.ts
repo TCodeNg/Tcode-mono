@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export class Product extends Document {
+export class ProductDoc extends Document {
   title: string;
   price: number;
   currency: string; // Currency ID
