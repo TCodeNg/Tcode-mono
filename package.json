@@ -38,13 +38,16 @@
     "@angular/platform-browser": "^9.1.0",
     "@angular/platform-browser-dynamic": "^9.1.0",
     "@angular/router": "^9.1.0",
+    "core-js": "^2.5.4",
+    "mongoose": "5.9.16",
+    "mongoose-geojson-schema": "2.1.5",
+    "rxjs": "~6.5.4",
+    "zone.js": "^0.10.2",
     "@nestjs/common": "^6.8.3",
     "@nestjs/core": "^6.8.3",
+    "@nestjs/mongoose": "7.0.1",
     "@nestjs/platform-express": "^6.8.3",
-    "core-js": "^2.5.4",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "~6.5.4",
-    "zone.js": "^0.10.2"
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@nrwl/angular": "9.3.0",
@@ -60,6 +63,7 @@
     "@angular/compiler-cli": "^9.1.0",
     "@angular/language-service": "^9.1.0",
     "@angular-devkit/build-angular": "0.901.0",
+    "@types/mongoose-geojson-schema": "2.1.4",
     "codelyzer": "~5.0.1",
     "jest-preset-angular": "8.1.2",
     "@nrwl/jest": "9.3.0",
