@@ -1,0 +1,18 @@
+<div class="content">
+    <div class="img-list">
+        <div class="img" *ngFor="let image of images" (click)="pickImage(image)">
+            <ng-container [ngTemplateOutlet]="imgThumbnail"  [ngTemplateOutletContext]="{image: image}"></ng-container>
+        </div>
+    </div>
+    <div class="banner">
+        <ng-container [ngTemplateOutlet]="imgBanner" [ngTemplateOutletContext]="{image: selectedImage}"></ng-container>
+    </div>
+</div>
+
+<ng-template #imgThumbnail let-image="image">
+    <img [src]="image.thumb" alt="picture" class="img-thumb" [ngClass]="{selected: image.id === selectedImage.id}">
+</ng-template>
+
+<ng-template #imgBanner let-image="image">
+    <img [src]="image.image" alt="picture" class="img-banner">
+</ng-template>
