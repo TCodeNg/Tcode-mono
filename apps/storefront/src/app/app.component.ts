@@ -39,6 +39,21 @@ export class AppComponent {
       id: 'ccc',
       image: 'https://res.cloudinary.com/horlabyc/image/upload/v1554666364/rtyz0twfrmswuwxrzglh.jpg',
       thumb: 'https://res.cloudinary.com/horlabyc/image/upload/c_scale,w_200/v1554666364/rtyz0twfrmswuwxrzglh.jpg'
+    },
+    {
+      id: 'xxx',
+      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1542298591/pexels-photo-273222_ttkift.jpg',
+      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/c_scale,w_200/v1542298591/pexels-photo-273222_ttkift.jpg'
+    },
+    {
+      id: 'xxxx',
+      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1554634140/xllfebhzlrgceropiqhp.jpg',
+      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/c_scale,w_200/v1554634140/xllfebhzlrgceropiqhp.jpg'
+    },
+    {
+      id: 'ccc',
+      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1554666364/rtyz0twfrmswuwxrzglh.jpg',
+      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/c_scale,w_200/v1554666364/rtyz0twfrmswuwxrzglh.jpg'
     }
 
   ]
