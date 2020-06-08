@@ -19,14 +19,18 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
     display: inline-flex !important;
     margin: 10px;
 }
-.mat-raised-button {
-    color: white !important;
+.mat-raised-button,.mat-stroked-button {
     font-size: 1rem;
     min-height: 3.5rem;
     min-width: 7rem;
 }
+.mat-raised-button {
+    color: white !important;
+}
 .mat-raised-button.mat-primary {
     background-color: #36B37E !important;
+}
+.mat-raised-button.mat-primary,.mat-stroked-button {
     border-radius: 8px;
     display: flex;
     justify-content: center;

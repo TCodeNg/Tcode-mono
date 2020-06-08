@@ -18,7 +18,8 @@
     "paths": {
       "@tcode/api-interface": ["libs/api-interface/src/index.ts"],
       "@tcode/shared/assets": ["libs/shared/assets/src/index.ts"],
-      "@tcode/buttons": ["libs/buttons/src/index.ts"]
+      "@tcode/buttons": ["libs/buttons/src/index.ts"],
+      "@tcode/imagepreview": ["libs/imagepreview/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
