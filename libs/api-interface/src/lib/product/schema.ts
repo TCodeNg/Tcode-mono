@@ -72,6 +72,10 @@ export const ProductSchema = new mongoose.Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  acl: {
+    type: Object,
+    required: true
   }
 });
 
