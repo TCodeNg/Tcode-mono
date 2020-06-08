@@ -1,6 +1,7 @@
-import { Currency } from './currency';
-import { Business } from './business';
-import { Image } from './image';
+import { Currency } from '../currency';
+import { Business } from '../business';
+import { Image } from '../image';
+import { ProductRating } from './product-rating';
 
 export interface Product {
   agent: Business;
@@ -22,6 +23,7 @@ export interface Product {
   title: string;
   type: 'estate | farm | inverter';
   updated: Date;
+  rating: ProductRating;
 }
 
 export interface ProductResponse {
