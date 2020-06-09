@@ -20,7 +20,8 @@
       "@tcode/shared/assets": ["libs/shared/assets/src/index.ts"],
       "@tcode/buttons": ["libs/buttons/src/index.ts"],
       "@tcode/imagepreview": ["libs/imagepreview/src/index.ts"],
-      "@tcode/mongo-utils": ["libs/mongo-utils/src/index.ts"]
+      "@tcode/mongo-utils": ["libs/mongo-utils/src/index.ts"],
+      "@tcode/acl-util": ["libs/acl-util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
