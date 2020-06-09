@@ -41,6 +41,9 @@
     },
     "imagepreview": {
       "tags": []
+    },
+    "mongo-utils": {
+      "tags": []
     }
   }
 }

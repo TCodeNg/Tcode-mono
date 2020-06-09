@@ -306,6 +306,32 @@
           "style": "scss"
         }
       }
+    },
+    "mongo-utils": {
+      "root": "libs/mongo-utils",
+      "sourceRoot": "libs/mongo-utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mongo-utils/tsconfig.lib.json",
+              "libs/mongo-utils/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/mongo-utils/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mongo-utils/jest.config.js",
+            "tsConfig": "libs/mongo-utils/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

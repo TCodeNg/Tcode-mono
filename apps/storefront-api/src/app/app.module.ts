@@ -2,17 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './product/product.module';
-
-const app = 'storefront-db'
-
-const DB = process.env.MONGODB_URI || `mongodb://localhost/${app}`;
+import { MongoUtilsModule } from '@tcode/mongo-utils';
 
 @Module({
   imports: [
     ProductModule,
-    MongooseModule.forRoot(DB)
+    MongoUtilsModule
   ],
   controllers: [AppController],
   providers: [AppService],
