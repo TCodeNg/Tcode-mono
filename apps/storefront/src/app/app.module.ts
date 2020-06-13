@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImagepreviewModule } from '@tcode/imagepreview';
+import { ProductratingModule } from '@tcode/productrating';
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,6 +13,7 @@ import { ImagepreviewModule } from '@tcode/imagepreview';
     BrowserModule,
     BrowserAnimationsModule,
     ImagepreviewModule,
+    ProductratingModule,
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
   ],
   providers: [],
