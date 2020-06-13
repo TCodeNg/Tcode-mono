@@ -1,0 +1,9 @@
+<div class="content">
+    <div 
+        class="rating" 
+        *ngFor="let star of stars; let i = index" 
+        [ngClass]="{'solid': star === 'solid', 'light': star === 'light'}" 
+        (click)="rate(i+1)">
+    </div>
+    <small class="totalRating">( {{ totalRatings }} )</small>
+</div>
