@@ -79,8 +79,3 @@ export const ProductSchema = new mongoose.Schema({
   }
 });
 
-export const CurrencySchema = new mongoose.Schema({
-  iso: {
-    type: String
-  }
-});
