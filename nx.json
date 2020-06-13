@@ -42,7 +42,16 @@
     "imagepreview": {
       "tags": []
     },
+    "mongo-utils": {
+      "tags": []
+    },
+    "acl-util": {
+      "tags": []
+    },
     "productrating": {
+      "tags": []
+    },
+    "auth": {
       "tags": []
     }
   }

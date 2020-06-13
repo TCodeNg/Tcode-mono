@@ -1,3 +1,5 @@
+import { ACL } from '../auth';
+
 export class ProductDto {
   title: string;
   price: number;
@@ -11,7 +13,6 @@ export class ProductDto {
   description: string;
   images: string[]; // Array of image IDs,
   owner?: string; // Owner's ID. Farm produce
-  status: 'pending | published | out-of-stock';
-  created: Date;
-  updated: Date;
+  status?: 'pending | published | out-of-stock';
+  acl?: ACL;
 }
