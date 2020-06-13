@@ -1,0 +1,24 @@
+<div class="content">
+    <div class="image">
+        <ng-container [ngTemplateOutlet]="image"></ng-container>
+        <div class="cart-bag-wrapper" (click)="handleAddtoCart()">
+            <div class="cart-bag"></div>
+        </div>
+    </div>
+    <div class="rating">
+        <tcode-product-rating [score]="productUserScore === 0 ? product?.rating?.userScore : product?.rating?.score"></tcode-product-rating>
+    </div>
+    <div class="type">
+        <p>{{ product?.type | titlecase }}</p>
+    </div>
+    <div class="title">
+        <p>{{ product?.title | titlecase }}</p>
+    </div>
+    <div class="price">
+        <p>{{ product?.price | currency: (product.currency.iso): 'code' }}</p>
+    </div>
+</div>
+
+<ng-template #image>
+    <tcode-product-image [image]="product.images[0]?.image"></tcode-product-image>
+</ng-template>
