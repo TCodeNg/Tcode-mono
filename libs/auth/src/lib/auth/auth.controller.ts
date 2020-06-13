@@ -22,7 +22,7 @@ export class AuthController {
     return req.user;
   }
 
-  @Post('sign-up')
+  @Post('signUp')
   signUp(@Body() user: UserDto) {
     return from(this.authService.signUp(user)).pipe(
       catchError(err => {
