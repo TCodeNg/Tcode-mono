@@ -17,6 +17,7 @@ export class ProductService {
     const { limit, page, skip } = param;
     return from(this.getAll(limit, page, skip, userId)).pipe(
       map(res => {
+        console.log(res)
         let response;
         if(Array.isArray(res)) {
           response = res.length > 0 ? res[0] : {page: 0, total: 0, products: []}
