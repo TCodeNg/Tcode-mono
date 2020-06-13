@@ -21,6 +21,8 @@ import * as bcrypt from 'bcrypt';
             if (this.isModified('password')) {
               try {
                 this.password = await bcrypt.hash(this.password, 10);
+                this.createdAt = new Date();
+                this.updatedAt = new Date();
                 next();
               } catch (e) {
                 console.log(e);
