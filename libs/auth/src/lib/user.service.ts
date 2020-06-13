@@ -1,27 +1,27 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { RefreshTokenDoc, RefreshTokenDto, UserDoc, UserDto, UserModel } from '@tcode/api-interface';
+import { RefreshTokenDoc, RefreshTokenDto, User, UserDto, UserModel } from '@tcode/api-interface';
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel('User') private readonly userModel: Model<UserDoc>,
+    @InjectModel('User') private readonly userModel: Model<User>,
     @InjectModel('RefreshToken') private readonly refreshModel: Model<RefreshTokenDoc>
   ) {
   }
 
   findOne(username: string, showPassword = false, showId = true): Observable<UserModel> {
     return from(this.userModel.findOne({ username }).exec()).pipe(
-      map((user: UserDoc) => UserService.toUser(user, showPassword, showId)),
+      map((user: User) => UserService.toUser(user, showPassword, showId)),
     );
   }
 
   create(user: UserDto): Observable<UserModel> {
     return from(this.userModel.create(user)).pipe(
-      map((user: UserDoc) => UserService.toUser(user, false, false)),
+      map((user: User) => UserService.toUser(user, false, false)),
       catchError(err => {
         const errorMessages = {
           username: 'Username is taken',
@@ -43,7 +43,7 @@ export class UserService {
     return this.refreshModel.findOne(token).exec();
   }
 
-  private static toUser(user: UserDoc, showPassword = false, showId = false): UserModel {
+  private static toUser(user: User, showPassword = false, showId = false): UserModel {
     if (!user) return null;
     return {
       id: showId ? user._id : undefined,

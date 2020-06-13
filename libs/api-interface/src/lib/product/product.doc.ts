@@ -1,6 +1,8 @@
 import { Document } from 'mongoose';
 import { ACL } from '../auth';
+import { Schema } from '@nestjs/mongoose';
 
+@Schema()
 export class ProductDoc extends Document {
   acl?: ACL;
   title: string;

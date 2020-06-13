@@ -55,6 +55,20 @@ export class ProductService {
       },
       {
         $lookup: {
+          from: 'categories',
+          as: 'category',
+          pipeline: [
+            {
+              $project: {
+                title: 1,
+                _id: 0
+              }
+            }
+          ]
+        }
+      },
+      {
+        $lookup: {
           from: 'currencies',
           as: 'currency',
           pipeline: [
@@ -74,10 +88,7 @@ export class ProductService {
             {
               $project: {
                 _id: 0,
-                totalRating: {
-                  $sum: 1
-                },
-                score: {
+                totalScore: {
                   $sum: "$score"
                 },
                 userScore: {
@@ -92,22 +103,30 @@ export class ProductService {
               }
             }
           ],
-          as: 'rating'
+          as: 'computedRating'
         }
       },
       {
-        $unwind: {
-          path: "$currency"
-        }
-      },
-      {
-        $unwind: {
-          path: "$rating"
+        $set: {
+          rating: {
+            totalRating: {
+              $size: "$computedRating"
+            },
+            totalScore: {
+              $avg: "$computedRating.totalScore"
+            },
+            userScore: {
+              $ceil: {
+                $sum: "$computedRating.userScore"
+              }
+            }
+          }
         }
       },
       {
         $project: {
-          __v: 0
+          __v: 0,
+          computedRating: 0
         }
       },
       {
@@ -117,9 +136,24 @@ export class ProductService {
       },
       {
         $group: {
-          _id: 0,
-          total: {$sum: 1},
+          _id: null,
           products: { $push: '$$ROOT' }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          total: {
+            $cond: {
+              if: {$isArray: "$products"},
+              then: {$size: "$products"},
+              else: 0
+            }
+          },
+          products: 1,
+          page: {
+            $literal: page ? page : 1
+          }
         }
       }
     ];

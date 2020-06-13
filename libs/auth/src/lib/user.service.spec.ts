@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserService } from './user.service';
-import { RefreshTokenDoc, RefreshTokenDto, RefreshTokenModel, UserDoc, UserDto, UserModel } from '@tcode/api-interface';
+import { RefreshTokenDoc, RefreshTokenDto, RefreshTokenModel, User, UserDto, UserModel } from '@tcode/api-interface';
 import { Model } from 'mongoose';
 import { getModelToken } from '@nestjs/mongoose';
 
@@ -38,7 +38,7 @@ const mockUser: (user: UserDto) => UserModel = (u: UserDto) => {
   }
 };
 
-const mockUserDoc: (mock?: UserDto) => Partial<UserDoc> = (mock?: UserDto) => {
+const mockUserDoc: (mock?: UserDto) => Partial<User> = (mock?: UserDto) => {
   return {
     _id: 'user',
     email: '',
@@ -63,7 +63,7 @@ const mockUserDto: (user?: UserDto) => UserDto = (user: UserDto = {
 
 describe('UserService', () => {
   let service: UserService;
-  let userModel: Model<UserDoc>;
+  let userModel: Model<User>;
   let tokenModel: Model<RefreshTokenDoc>;
 
   beforeEach(async () => {
@@ -100,7 +100,7 @@ describe('UserService', () => {
     }).compile();
 
     service = module.get<UserService>(UserService);
-    userModel = module.get<Model<UserDoc>>(getModelToken('User'));
+    userModel = module.get<Model<User>>(getModelToken('User'));
     tokenModel = module.get<Model<RefreshTokenDoc>>(getModelToken('RefreshToken'));
   });
 
