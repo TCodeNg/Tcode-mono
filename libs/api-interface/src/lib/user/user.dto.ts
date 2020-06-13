@@ -18,4 +18,7 @@ export class UserDto {
   @IsEmail()
   email: string;
 
+  createdAt?: Date;
+  updatedAt?: Date;
+
 }
