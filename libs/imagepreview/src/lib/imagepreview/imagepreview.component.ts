@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Image } from '../../../../api-interface/src/lib/image'
+import { Image } from '@tcode/api-interface'
 
 @Component({
   selector: 'tcode-img-preview',
