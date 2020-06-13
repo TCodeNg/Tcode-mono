@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { UserModule } from './user.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth.service';
@@ -12,7 +12,11 @@ import { JwtStrategy } from './jwt.strategy';
   providers: [
     AuthService,
     LocalStrategy,
-    JwtStrategy
+    JwtStrategy,
+    {
+      provide: Logger,
+      useValue: new Logger()
+    }
   ],
   exports: [
     UserModule,
