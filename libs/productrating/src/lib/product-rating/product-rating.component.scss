@@ -1,0 +1,34 @@
+:host{
+    display: flex;
+}
+.content{
+    display: inline-flex;
+}
+.rating {
+    display:inline-flex;
+    align-items: center;
+    cursor: pointer;
+    &.solid {
+        background-image: url('../../../../shared/assets/img/Star.svg') ;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        margin-right: 2px;
+        background-repeat: no-repeat;
+    }
+    &.light {
+        background: url('../../../../shared/assets/img/Star_light.svg') ;;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        margin-right: 2px;
+        background-repeat: no-repeat;
+        &:last-of-type{
+            margin-right: 2.5px;
+        }
+    }
+}
+.totalRating {
+    color: #9B9B9B;
+    font-size: 10px;
+}
