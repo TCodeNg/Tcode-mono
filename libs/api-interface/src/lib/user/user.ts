@@ -16,7 +16,6 @@ export class User extends Document {
   readonly updatedAt:         Date;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
-
-UserSchema.index({ username: 1 }, { unique: true });
-UserSchema.index({ email: 1 }, { unique: true });
+export const UserSchema = SchemaFactory.createForClass(User)
+  .index({ username: 1 }, { unique: true })
+  .index({ email: 1 }, { unique: true });
