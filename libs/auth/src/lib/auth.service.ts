@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   async signUp(user: UserDto) {
-    const password = await bcrypt.hash(user.password, 10);
+    const password = bcrypt.hashSync(user.password, 10);
     const _user: UserDto = {
       ...user,
       password,
