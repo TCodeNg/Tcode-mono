@@ -18,6 +18,7 @@ import * as bcrypt from 'bcrypt';
         useFactory: () => {
           const schema = UserSchema;
           schema.pre<User>('save', async function(next: Function) {
+            console.log(this);
             if (this.isModified('password')) {
               this.password = await bcrypt.hash(this.password, 10);
             }
