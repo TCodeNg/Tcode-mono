@@ -7,8 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ProductRatingComponent implements OnInit {
 
-  @Input() score: number = 3;
-  @Input() totalRatings: number = 50;
+  @Input() score: number = 0;
+  @Input() totalRatings: number = 0;
   @Output() onRate = new EventEmitter();
   stars = [];
   constructor() { }
@@ -28,9 +28,13 @@ export class ProductRatingComponent implements OnInit {
   }
 
   rate(number: number){
-    this.score = number;
+    if(this.score === 1 && number === 1){
+      this.score = 0;
+    } else {
+      this.score = number;
+    }
     this.createStars();
-    this.onRate.emit(this.score)
+    this.onRate.emit(this.score);
   }
 
 }
