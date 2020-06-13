@@ -1,8 +1,10 @@
-import { Controller, Post, UseGuards, Request, Get, Body } from '@nestjs/common';
+import { Controller, Post, UseGuards, Request, Get, Body, Logger, HttpException, HttpStatus } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import { LocalAuthGuard } from '../local-auth.guard';
 import { RefreshTokenDto, UserDto } from '@tcode/api-interface';
 import { JwtAuthGuard } from '../jwt-auth.guard';
+import { from, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +24,12 @@ export class AuthController {
 
   @Post('sign-up')
   signUp(@Body() user: UserDto) {
-    return this.authService.signUp(user);
+    return from(this.authService.signUp(user)).pipe(
+      catchError(err => {
+        new Logger().error(err);
+        return throwError(new HttpException(err, HttpStatus.BAD_REQUEST))
+      })
+    );
   }
 
   @Post('refresh-token')
