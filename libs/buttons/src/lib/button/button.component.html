@@ -1,0 +1,33 @@
+<div class="content">
+    <ng-container [ngSwitch]="type">
+        <ng-container *ngSwitchCase="'normal'" [ngTemplateOutlet]="normalButton"></ng-container>
+        <ng-container *ngSwitchCase="'icon'" [ngTemplateOutlet]="iconButton"></ng-container>
+        <ng-container *ngSwitchCase="'outline'" [ngTemplateOutlet]="outlineButton"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #outlineButton>
+    <button mat-stroked-button color="primary" (click)="onClick()" [disabled]="disabled">
+        <ng-container [ngTemplateOutlet] = "state === 'idle' ? idle : loading"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #normalButton>
+    <button mat-raised-button color="primary" (click)="onClick()" [disabled]="disabled">
+        <ng-container [ngTemplateOutlet] = "state === 'idle' ? idle : loading"></ng-container>
+    </button>
+</ng-template>
+
+<ng-template #iconButton>
+    <button mat-icon-button color="primary" [disabled]="disabled">
+        <mat-icon>{{ iconName }}</mat-icon>
+    </button>
+</ng-template>
+
+<ng-template #idle>
+    <ng-content></ng-content>
+</ng-template>
+
+<ng-template #loading>
+    <mat-spinner diameter="20"></mat-spinner>
+</ng-template>

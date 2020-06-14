@@ -1,0 +1,28 @@
+.img-thumb {
+    width: 100%;
+    height: 107px;
+    border-radius: 6px;
+    &.selected {
+        border: 2px solid #02B075;
+    }
+}
+@media screen and (min-width: 990px) {
+    .img-thumb  {
+        height: 107px;
+   }
+ }
+@media screen and (max-width: 990px) {
+    .img-thumb  {
+        height: 90px;
+   }
+ }
+@media screen and (max-width: 560px) {
+    .img-thumb  {
+        height: 80px;
+   }
+ }
+@media screen and (max-width: 360px) {
+    .img-thumb  {
+         height: 70px;
+    }
+ }

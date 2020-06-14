@@ -17,7 +17,14 @@
     "baseUrl": ".",
     "paths": {
       "@tcode/api-interface": ["libs/api-interface/src/index.ts"],
-      "@tcode/shared/assets": ["libs/shared/assets/src/index.ts"]
+      "@tcode/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@tcode/buttons": ["libs/buttons/src/index.ts"],
+      "@tcode/imagepreview": ["libs/imagepreview/src/index.ts"],
+      "@tcode/mongo-utils": ["libs/mongo-utils/src/index.ts"],
+      "@tcode/acl-util": ["libs/acl-util/src/index.ts"],
+      "@tcode/productrating": ["libs/productrating/src/index.ts"],
+      "@tcode/auth": ["libs/auth/src/index.ts"],
+      "@tcode/product": ["libs/product/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

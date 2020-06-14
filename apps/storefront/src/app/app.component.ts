@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Image } from 'libs/api-interface/src/lib/image';
 
 @Component({
   selector: 'tcode-root',
