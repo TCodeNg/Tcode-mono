@@ -1,6 +1,10 @@
 import * as mongoose from 'mongoose';
 
 export const ProductSchema = new mongoose.Schema({
+  removed: {
+    type: Boolean,
+    default: false
+  },
   title: {
     type: String,
     required: true
