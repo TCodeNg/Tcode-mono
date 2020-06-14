@@ -26,6 +26,14 @@ export class ProductController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  getProduct(@Req() req: Request, @Param() params) {
+    const { userId } = req.user as any;
+    const { id } = params;
+    return this.service.getProduct(id, userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post(':id/rate')
   rateProduct(@Req() req: Request, @Body() dto: RateProductDto, @Param() params) {
     const { userId } = req.user as any;
