@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductSchema } from '@tcode/api-interface';
+import { ProductSchema, RatingSchema } from '@tcode/api-interface';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { AuthModule } from '@tcode/auth';
@@ -14,6 +14,10 @@ import { AuthModule } from '@tcode/auth';
         useFactory: () => {
           return ProductSchema;
         }
+      },
+      {
+        name: 'Rating',
+        useFactory: () => RatingSchema
       }
     ])
   ],

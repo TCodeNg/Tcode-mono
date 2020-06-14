@@ -45,6 +45,7 @@
     "@nestjs/passport": "7.0.0",
     "@nestjs/platform-express": "^6.8.3",
     "bcrypt": "5.0.0",
+    "class-transformer": "0.2.3",
     "class-validator": "0.12.2",
     "core-js": "^2.5.4",
     "jsonwebtoken": "8.5.1",
