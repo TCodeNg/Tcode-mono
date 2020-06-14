@@ -22,10 +22,7 @@ export class ProductItemComponent implements OnInit {
     title: "Locally made hand sanitizer",
     price: {
       value: 200,
-      currency: {
-        id: 'xxx',
-        iso: 'NGN'
-      }
+      currency: 'NGN'
     },
     type: "farm",
     description: "premium bed machine",
@@ -47,7 +44,7 @@ export class ProductItemComponent implements OnInit {
     }
   }
 
-  @Input() product: Product = this.dummyPdt;
+  @Input() product: Product;
   @Output() onAddToCart = new EventEmitter();
   @Output() onRateProduct = new EventEmitter();
   constructor() { }

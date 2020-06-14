@@ -1,14 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Product, ProductDoc, ProductDto, ProductQueryFilter, ProductResponse } from '@tcode/api-interface';
+import {
+  Product,
+  ProductDoc,
+  ProductDto,
+  ProductQueryFilter,
+  ProductResponse,
+  RateProductDto, Rating
+} from '@tcode/api-interface';
 import { Model } from 'mongoose';
-import { from, Observable } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { ACLUtils } from '@tcode/acl-util';
-import { map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDoc>) {
+  constructor(
+    @InjectModel('Product') private readonly productModel: Model<ProductDoc>,
+    @InjectModel('Rating') private readonly ratingModel: Model<Rating>
+  ) {
   }
 
   getProducts(
@@ -102,7 +112,18 @@ export class ProductService {
       {
         $lookup: {
           from: 'ratings',
+          let: { 'id': '$_id' },
           pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { 'className': 'Product' },
+                    { 'entityId': '$$id' }
+                  ]
+                }
+              }
+            },
             {
               $project: {
                 _id: 0,
@@ -131,7 +152,9 @@ export class ProductService {
               $size: '$computedRating'
             },
             totalScore: {
-              $avg: '$computedRating.totalScore'
+              $floor: {
+                $avg: '$computedRating.totalScore'
+              }
             },
             userScore: {
               $ceil: {
@@ -177,5 +200,48 @@ export class ProductService {
       }
     ];
     return await this.productModel.aggregate(aggregationPipeline).exec();
+  }
+
+  rateProduct(userId: any, id: any, dto: RateProductDto) {
+
+    const actions = {
+      create: (user, productId, score): Promise<any> => {
+        return this.ratingModel.create({
+          user,
+          className: 'Product',
+          score,
+          entityId: productId
+        });
+      },
+      update: (model: Rating, score) => {
+        model.score = score;
+        return model.save();
+      },
+      find: (user, productId): Promise<Rating> => {
+        return this.ratingModel.findOne({
+          user,
+          entityId: productId,
+          className: 'Product'
+        }).exec();
+      }
+    };
+
+
+    return from(actions.find(userId, id,)).pipe(
+      switchMap(rating => {
+        if (rating) {
+          return from(actions.update(rating, dto.rating))
+        } else {
+          throw new Error('Rating not found');
+        }
+      }),
+      catchError(err => {
+        if (err.message === 'Rating not found') {
+          return from(actions.create(userId, id, dto.rating))
+        } else {
+          throwError(err)
+        }
+      })
+    );
   }
 }

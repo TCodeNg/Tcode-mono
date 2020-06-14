@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Image } from 'libs/api-interface/src/lib/image';
+import { IImage } from '@tcode/api-interface';
 
 @Component({
   selector: 'tcode-img-banner',
@@ -7,7 +7,7 @@ import { Image } from 'libs/api-interface/src/lib/image';
   styleUrls: ['./img-banner.component.scss']
 })
 export class ImgBannerComponent implements OnInit {
-  @Input() image: Image;
+  @Input() image: IImage;
   
   constructor() { }
 
