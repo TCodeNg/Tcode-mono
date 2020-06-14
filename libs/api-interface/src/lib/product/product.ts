@@ -1,6 +1,5 @@
-import { Currency } from '../currency';
 import { Business } from '../business';
-import { Image } from '../image';
+import { IImage } from '../image';
 import { ProductRating } from './product-rating';
 
 export interface Product {
@@ -10,20 +9,20 @@ export interface Product {
   created: Date;
   description: string;
   id: string;
-  images: Image[];
+  images: IImage[];
   livingRooms?: number;
   owner?: Business;
   price: {
     value: number;
-    currency: Currency;
+    currency: string;
   };
   rooms?: number;
-  status: 'pending | published | out-of-stock';
+  status: 'pending' | 'published' | 'out-of-stock';
   stock?: number;
   title: string;
-  type: 'estate | farm | inverter';
+  type: 'estate' | 'farm' | 'inverter';
   updated: Date;
-  rating: ProductRating;
+  rating?: ProductRating;
 }
 
 export interface ProductResponse {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Image } from '../../../../api-interface/src/lib/image'
+import { IImage } from '@tcode/api-interface'
 
 @Component({
   selector: 'tcode-img-preview',
@@ -8,15 +8,15 @@ import { Image } from '../../../../api-interface/src/lib/image'
 })
 export class ImagepreviewComponent implements OnInit {
 
-  @Input() images: Image[];
-  selectedImage: Image;
+  @Input() images: IImage[];
+  selectedImage: IImage;
   constructor() { }
 
   ngOnInit(): void {
     this.selectedImage = this.images.length > 0 ? this.images[0] : undefined;
   }
 
-  pickImage(image: Image){
+  pickImage(image: IImage){
     this.selectedImage = image;
   }
 
