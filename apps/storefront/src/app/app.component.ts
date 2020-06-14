@@ -8,8 +8,4 @@ import { Image } from 'libs/api-interface/src/lib/image';
 })
 export class AppComponent {
   title = 't-Code';
-
-  addToCart(e){
-    console.log(e)
-  }
 }
