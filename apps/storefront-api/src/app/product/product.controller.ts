@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Param, Post, Query, Req, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+  UseInterceptors
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Observable } from 'rxjs';
 import { ProductDto, ProductQueryFilter, ProductResponse, RateProductDto } from '@tcode/api-interface';
@@ -31,6 +43,14 @@ export class ProductController {
     const { userId } = req.user as any;
     const { id } = params;
     return this.service.getProduct(id, userId);
+  }
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  @HttpCode(204)
+  deleteProduct(@Req() req: Request, @Param() params) {
+    const { userId } = req.user as any;
+    const { id } = params;
+    return this.service.deleteProduct(userId, id);
   }
 
   @UseGuards(JwtAuthGuard)
