@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDoc>) {}
+  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDoc>) {
+  }
 
   getProducts(
     param: ProductQueryFilter,
@@ -19,8 +20,8 @@ export class ProductService {
       map(res => {
         console.log(res)
         let response;
-        if(Array.isArray(res)) {
-          response = res.length > 0 ? res[0] : {page: 0, total: 0, products: []}
+        if (Array.isArray(res)) {
+          response = res.length > 0 ? res[0] : { page: 0, total: 0, products: [] };
         } else {
           response = res;
         }
@@ -31,8 +32,8 @@ export class ProductService {
   }
 
   async createProduct(dto: ProductDto, userId: string) {
-    const acl = ACLUtils.generate(dto.acl, userId, true)
-    return await this.productModel.create({...dto, acl, status: 'pending'} as any);
+    const acl = ACLUtils.generate(dto.acl, userId, true);
+    return await this.productModel.create({ ...dto, acl, status: 'pending' } as any);
   }
 
   async getAll(limit: number, page: number, skip: number, userId?: string): Promise<ProductResponse> {
@@ -41,7 +42,7 @@ export class ProductService {
         $match: {
           $or: [
             {
-              "acl.*.read": true
+              'acl.*.read': true
 
             },
             {
@@ -52,7 +53,21 @@ export class ProductService {
               [`acl.friendsOf_${userId}.read`]: true
             }
           ]
-        },
+        }
+      },
+      {
+        $lookup: {
+          from: 'categories',
+          as: 'category',
+          pipeline: [
+            {
+              $project: {
+                title: 1,
+                _id: 0
+              }
+            }
+          ]
+        }
       },
       {
         $lookup: {
@@ -62,10 +77,26 @@ export class ProductService {
             {
               $project: {
                 iso: 1,
-                _id: 0,
+                _id: 0
               }
             }
           ]
+        }
+      },
+      {
+        $addFields: {
+          price: {
+            value: '$price',
+            currency: { $arrayElemAt: ['$currency', 0] }
+          }
+        }
+      },
+      {
+        $set: {
+          price: {
+            value: '$price.value',
+            currency: '$price.currency.iso'
+          }
         }
       },
       {
@@ -75,40 +106,46 @@ export class ProductService {
             {
               $project: {
                 _id: 0,
-                totalRating: {
-                  $sum: 1
-                },
-                score: {
-                  $sum: "$score"
+                totalScore: {
+                  $sum: '$score'
                 },
                 userScore: {
                   $cond: {
                     if: {
-                      $eq: ["$user", userId]
+                      $eq: ['$user', userId]
                     },
-                    then: "$score",
+                    then: '$score',
                     else: 0
                   }
                 }
               }
             }
           ],
-          as: 'rating'
+          as: 'computedRating'
         }
       },
       {
-        $unwind: {
-          path: "$currency"
-        }
-      },
-      {
-        $unwind: {
-          path: "$rating"
+        $set: {
+          rating: {
+            totalRating: {
+              $size: '$computedRating'
+            },
+            totalScore: {
+              $avg: '$computedRating.totalScore'
+            },
+            userScore: {
+              $ceil: {
+                $sum: '$computedRating.userScore'
+              }
+            }
+          }
         }
       },
       {
         $project: {
-          __v: 0
+          __v: 0,
+          computedRating: 0,
+          currency: 0
         }
       },
       {
@@ -118,9 +155,24 @@ export class ProductService {
       },
       {
         $group: {
-          _id: 0,
-          total: {$sum: 1},
+          _id: null,
           products: { $push: '$$ROOT' }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          total: {
+            $cond: {
+              if: { $isArray: '$products' },
+              then: { $size: '$products' },
+              else: 0
+            }
+          },
+          products: 1,
+          page: {
+            $literal: page ? page : 1
+          }
         }
       }
     ];

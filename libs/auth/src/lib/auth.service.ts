@@ -27,7 +27,9 @@ export class AuthService {
   async login(user: UserModel) {
     const payload = { username: user.username, sub: user.id };
     const tokens = {
-      accessToken: this.jwtService.sign(payload),
+      accessToken: this.jwtService.sign(payload, {
+        expiresIn: process.env.JWT_TTL || 60 * 60 * 30
+      }),
       refreshToken: this.jwtService.sign(payload, {
         expiresIn: 60 * 60 * 24 * 30,
       }),
@@ -65,6 +67,13 @@ export class AuthService {
   }
 
   async signUp(user: UserDto) {
-    return await this.usersService.create(user).toPromise();
+    const password = bcrypt.hashSync(user.password, 10);
+    const _user: UserDto = {
+      ...user,
+      password,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+    return await this.usersService.create(_user).toPromise();
   }
 }

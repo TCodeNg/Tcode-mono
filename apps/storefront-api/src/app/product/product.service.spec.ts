@@ -11,6 +11,8 @@ describe('ProductService', () => {
         ProductService,
         { provide: getModelToken('Product'), useValue: {} }
       ],
+      imports: [
+      ]
     }).compile();
 
     service = module.get<ProductService>(ProductService);
