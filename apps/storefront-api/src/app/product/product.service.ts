@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import {
   Product,
@@ -6,12 +6,14 @@ import {
   ProductDto,
   ProductQueryFilter,
   ProductResponse,
-  RateProductDto, Rating
+  RateProductDto,
+  Rating
 } from '@tcode/api-interface';
 import { Model } from 'mongoose';
 import { from, Observable, throwError } from 'rxjs';
 import { ACLUtils } from '@tcode/acl-util';
 import { catchError, map, switchMap } from 'rxjs/operators';
+import * as mongoose from 'mongoose';
 
 @Injectable()
 export class ProductService {
@@ -28,14 +30,12 @@ export class ProductService {
     const { limit, page, skip } = param;
     return from(this.getAll(limit, page, skip, userId)).pipe(
       map(res => {
-        console.log(res)
         let response;
         if (Array.isArray(res)) {
           response = res.length > 0 ? res[0] : { page: 0, total: 0, products: [] };
         } else {
           response = res;
         }
-        delete response._id;
         return response;
       })
     );
@@ -65,20 +65,159 @@ export class ProductService {
           ]
         }
       },
+      ProductService.getCategoryStage(),
+      ...ProductService.getCurrencyStage(),
+      ...ProductService.getRatingStage(userId),
       {
-        $lookup: {
-          from: 'categories',
-          as: 'category',
-          pipeline: [
-            {
-              $project: {
-                title: 1,
-                _id: 0
-              }
-            }
-          ]
+        $sort: {
+          created: 1
         }
       },
+      {
+        $group: {
+          _id: null,
+          products: { $push: '$$ROOT' }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          total: {
+            $cond: {
+              if: { $isArray: '$products' },
+              then: { $size: '$products' },
+              else: 0
+            }
+          },
+          products: 1,
+          page: {
+            $literal: page ? page : 1
+          }
+        }
+      }
+    ];
+    return await this.productModel.aggregate(aggregationPipeline).exec();
+  }
+
+  rateProduct(userId: any, id: any, dto: RateProductDto) {
+
+    const actions = {
+      create: (user, productId, score): Promise<any> => {
+        return this.ratingModel.create({
+          user,
+          className: 'Product',
+          score,
+          entityId: productId
+        });
+      },
+      update: (model: Rating, score) => {
+        model.score = score;
+        return model.save();
+      },
+      find: (user, productId): Promise<Rating> => {
+        return this.ratingModel.findOne({
+          user,
+          entityId: productId,
+          className: 'Product'
+        }).exec();
+      }
+    };
+
+
+    return from(actions.find(userId, id)).pipe(
+      switchMap(rating => {
+        if (rating) {
+          return from(actions.update(rating, dto.rating));
+        } else {
+          throw new Error('Rating not found');
+        }
+      }),
+      catchError(err => {
+        if (err.message === 'Rating not found') {
+          return from(actions.create(userId, id, dto.rating));
+        } else {
+          throwError(err);
+        }
+      })
+    );
+  }
+
+  getProduct(id: string, userId: string) {
+    const _id = mongoose.Types.ObjectId(id);
+    return from(this.productModel.aggregate(
+      [
+        {
+          $match: {
+            '_id': _id,
+            $or: [
+              {
+                'acl.*.read': true
+
+              },
+              {
+                [`acl.${userId}.read`]: true
+
+              },
+              {
+                [`acl.friendsOf_${userId}.read`]: true
+              }
+            ]
+          }
+        },
+        ProductService.getCategoryStage(),
+        ...ProductService.getCurrencyStage(),
+        ...ProductService.getRatingStage(userId),
+        {
+          $project: {
+            "acl.*": 0,
+            [`acl.friendsOf_${userId}`]: 0
+          }
+        }
+      ]
+    )).pipe(
+      map(res => {
+        let response;
+        if (Array.isArray(res)) {
+          response = res.length > 0 ? res[0] : null;
+        } else {
+          response = res;
+        }
+        return response;
+      }),
+      map(res => {
+        if (!res) {
+          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+        }
+        const isOwner = res.acl[userId].create === true;
+        const isPending = res.status === 'pending';
+        if (!isOwner && isPending) {
+          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+        }
+        delete res.acl;
+        return res;
+      })
+    );
+  }
+
+  private static getCategoryStage() {
+    return {
+      $lookup: {
+        from: 'categories',
+        as: 'category',
+        pipeline: [
+          {
+            $project: {
+              title: 1,
+              _id: 0
+            }
+          }
+        ]
+      }
+    };
+  }
+
+  private static getCurrencyStage() {
+    return [
       {
         $lookup: {
           from: 'currencies',
@@ -108,7 +247,12 @@ export class ProductService {
             currency: '$price.currency.iso'
           }
         }
-      },
+      }
+    ];
+  }
+
+  private static getRatingStage(userId) {
+    return [
       {
         $lookup: {
           from: 'ratings',
@@ -170,78 +314,7 @@ export class ProductService {
           computedRating: 0,
           currency: 0
         }
-      },
-      {
-        $sort: {
-          created: 1
-        }
-      },
-      {
-        $group: {
-          _id: null,
-          products: { $push: '$$ROOT' }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          total: {
-            $cond: {
-              if: { $isArray: '$products' },
-              then: { $size: '$products' },
-              else: 0
-            }
-          },
-          products: 1,
-          page: {
-            $literal: page ? page : 1
-          }
-        }
       }
-    ];
-    return await this.productModel.aggregate(aggregationPipeline).exec();
-  }
-
-  rateProduct(userId: any, id: any, dto: RateProductDto) {
-
-    const actions = {
-      create: (user, productId, score): Promise<any> => {
-        return this.ratingModel.create({
-          user,
-          className: 'Product',
-          score,
-          entityId: productId
-        });
-      },
-      update: (model: Rating, score) => {
-        model.score = score;
-        return model.save();
-      },
-      find: (user, productId): Promise<Rating> => {
-        return this.ratingModel.findOne({
-          user,
-          entityId: productId,
-          className: 'Product'
-        }).exec();
-      }
-    };
-
-
-    return from(actions.find(userId, id,)).pipe(
-      switchMap(rating => {
-        if (rating) {
-          return from(actions.update(rating, dto.rating))
-        } else {
-          throw new Error('Rating not found');
-        }
-      }),
-      catchError(err => {
-        if (err.message === 'Rating not found') {
-          return from(actions.create(userId, id, dto.rating))
-        } else {
-          throwError(err)
-        }
-      })
-    );
+    ]
   }
 }
