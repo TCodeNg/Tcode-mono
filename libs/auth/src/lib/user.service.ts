@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { RefreshTokenDoc, RefreshTokenDto, User, UserDto, UserModel } from '@tcode/api-interface';
@@ -23,6 +23,7 @@ export class UserService {
     return from(this.userModel.create(user)).pipe(
       map((user: User) => UserService.toUser(user, false, false)),
       catchError(err => {
+        new Logger().error(err);
         const errorMessages = {
           username: 'Username is taken',
           email: 'Email is taken',

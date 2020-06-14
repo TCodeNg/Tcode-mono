@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDoc>) {}
+  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDoc>) {
+  }
 
   getProducts(
     param: ProductQueryFilter,
@@ -18,8 +19,8 @@ export class ProductService {
     return from(this.getAll(limit, page, skip, userId)).pipe(
       map(res => {
         let response;
-        if(Array.isArray(res)) {
-          response = res.length > 0 ? res[0] : {page: 0, total: 0, products: []}
+        if (Array.isArray(res)) {
+          response = res.length > 0 ? res[0] : { page: 0, total: 0, products: [] };
         } else {
           response = res;
         }
@@ -30,8 +31,8 @@ export class ProductService {
   }
 
   async createProduct(dto: ProductDto, userId: string) {
-    const acl = ACLUtils.generate(dto.acl, userId, true)
-    return await this.productModel.create({...dto, acl, status: 'pending'} as any);
+    const acl = ACLUtils.generate(dto.acl, userId, true);
+    return await this.productModel.create({ ...dto, acl, status: 'pending' } as any);
   }
 
   async getAll(limit: number, page: number, skip: number, userId?: string): Promise<ProductResponse> {
@@ -40,7 +41,7 @@ export class ProductService {
         $match: {
           $or: [
             {
-              "acl.*.read": true
+              'acl.*.read': true
 
             },
             {
@@ -51,7 +52,7 @@ export class ProductService {
               [`acl.friendsOf_${userId}.read`]: true
             }
           ]
-        },
+        }
       },
       {
         $lookup: {
@@ -75,10 +76,26 @@ export class ProductService {
             {
               $project: {
                 iso: 1,
-                _id: 0,
+                _id: 0
               }
             }
           ]
+        }
+      },
+      {
+        $addFields: {
+          price: {
+            value: '$price',
+            currency: { $arrayElemAt: ['$currency', 0] }
+          }
+        }
+      },
+      {
+        $set: {
+          price: {
+            value: '$price.value',
+            currency: '$price.currency.iso'
+          }
         }
       },
       {
@@ -89,14 +106,14 @@ export class ProductService {
               $project: {
                 _id: 0,
                 totalScore: {
-                  $sum: "$score"
+                  $sum: '$score'
                 },
                 userScore: {
                   $cond: {
                     if: {
-                      $eq: ["$user", userId]
+                      $eq: ['$user', userId]
                     },
-                    then: "$score",
+                    then: '$score',
                     else: 0
                   }
                 }
@@ -110,14 +127,14 @@ export class ProductService {
         $set: {
           rating: {
             totalRating: {
-              $size: "$computedRating"
+              $size: '$computedRating'
             },
             totalScore: {
-              $avg: "$computedRating.totalScore"
+              $avg: '$computedRating.totalScore'
             },
             userScore: {
               $ceil: {
-                $sum: "$computedRating.userScore"
+                $sum: '$computedRating.userScore'
               }
             }
           }
@@ -126,7 +143,8 @@ export class ProductService {
       {
         $project: {
           __v: 0,
-          computedRating: 0
+          computedRating: 0,
+          currency: 0
         }
       },
       {
@@ -145,8 +163,8 @@ export class ProductService {
           _id: 0,
           total: {
             $cond: {
-              if: {$isArray: "$products"},
-              then: {$size: "$products"},
+              if: { $isArray: '$products' },
+              then: { $size: '$products' },
               else: 0
             }
           },
