@@ -1,13 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from "mongoose";
+import { Document } from 'mongoose';
 
 @Schema({
   autoCreate: true
 })
-export class Rating {
+export class Rating extends Document {
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
     required: true
   })
   user: string;
@@ -21,6 +20,11 @@ export class Rating {
     required: true
   })
   className: string;
+
+  @Prop({
+    required: true
+  })
+  entityId: string;
 }
 
 export const RatingSchema = SchemaFactory.createForClass(Rating);

@@ -1,4 +1,3 @@
-import { ICurrency } from '../currency';
 import { Business } from '../business';
 import { IImage } from '../image';
 import { ProductRating } from './product-rating';
@@ -15,7 +14,7 @@ export interface Product {
   owner?: Business;
   price: {
     value: number;
-    currency: ICurrency;
+    currency: string;
   };
   rooms?: number;
   status: 'pending' | 'published' | 'out-of-stock';
