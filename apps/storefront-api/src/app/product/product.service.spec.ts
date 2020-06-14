@@ -9,7 +9,8 @@ describe('ProductService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductService,
-        { provide: getModelToken('Product'), useValue: {} }
+        { provide: getModelToken('Product'), useValue: {} },
+        { provide: getModelToken('Rating'), useValue: {} }
       ],
       imports: [
       ]
