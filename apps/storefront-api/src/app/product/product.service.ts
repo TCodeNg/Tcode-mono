@@ -9,11 +9,11 @@ import {
   RateProductDto,
   Rating
 } from '@tcode/api-interface';
-import { Model } from 'mongoose';
-import { from, Observable, throwError } from 'rxjs';
-import { ACLUtils } from '@tcode/acl-util';
-import { catchError, map, switchMap } from 'rxjs/operators';
 import * as mongoose from 'mongoose';
+import { Model } from 'mongoose';
+import { from, Observable, of, throwError } from 'rxjs';
+import { ACLUtils } from '@tcode/acl-util';
+import { catchError, exhaustMap, map, pluck, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
@@ -21,6 +21,69 @@ export class ProductService {
     @InjectModel('Product') private readonly productModel: Model<ProductDoc>,
     @InjectModel('Rating') private readonly ratingModel: Model<Rating>
   ) {
+  }
+
+  async createProduct(dto: ProductDto, userId: string) {
+    const acl = ACLUtils.generate(dto.acl, userId, true);
+    return await this.productModel.create({ ...dto, acl, status: 'pending' } as any);
+  }
+
+  getProduct(id: string, userId: string) {
+    const _id = mongoose.Types.ObjectId(id);
+    return from(this.productModel.aggregate(
+      [
+        {
+          $match: {
+            '_id': _id,
+            removed: false,
+            $or: [
+              {
+                'acl.*.read': true
+
+              },
+              {
+                [`acl.${userId}.read`]: true
+
+              },
+              {
+                [`acl.friendsOf_${userId}.read`]: true
+              }
+            ]
+          }
+        },
+        ProductService.getCategoryStage(),
+        ...ProductService.getCurrencyStage(),
+        ...ProductService.getRatingStage(userId),
+        {
+          $project: {
+            "acl.*": 0,
+            [`acl.friendsOf_${userId}`]: 0
+          }
+        }
+      ]
+    )).pipe(
+      map(res => {
+        let response;
+        if (Array.isArray(res)) {
+          response = res.length > 0 ? res[0] : null;
+        } else {
+          response = res;
+        }
+        return response;
+      }),
+      map(res => {
+        if (!res) {
+          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+        }
+        const isOwner = res.acl[userId].create === true;
+        const isPending = res.status === 'pending';
+        if (!isOwner && isPending) {
+          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+        }
+        delete res.acl;
+        return res;
+      })
+    );
   }
 
   getProducts(
@@ -41,15 +104,33 @@ export class ProductService {
     );
   }
 
-  async createProduct(dto: ProductDto, userId: string) {
-    const acl = ACLUtils.generate(dto.acl, userId, true);
-    return await this.productModel.create({ ...dto, acl, status: 'pending' } as any);
+  deleteProduct(userId: string, id: string) {
+    return of({userId, id}).pipe(
+      exhaustMap(params => {
+        return from(this.productModel.findOne({
+          removed: false,
+          _id: params.id
+        })).pipe(
+          switchMap(model => {
+            if (!model) return throwError(new HttpException('Product not found', HttpStatus.NOT_FOUND));
+            const isOwner = model.acl[params.userId] && model.acl[params.userId].delete === true;
+            model.removed = true;
+            model.updated = new Date();
+            const remove = from(model.save()).pipe(
+              pluck('_id')
+            );
+            return isOwner ? remove : throwError(new HttpException('Cannot delete this product', HttpStatus.BAD_REQUEST));
+          })
+        );
+      })
+    )
   }
 
   async getAll(limit: number, page: number, skip: number, userId?: string): Promise<ProductResponse> {
     const aggregationPipeline: any[] = [
       {
         $match: {
+          removed: false,
           $or: [
             {
               'acl.*.read': true
@@ -138,63 +219,6 @@ export class ProductService {
         } else {
           throwError(err);
         }
-      })
-    );
-  }
-
-  getProduct(id: string, userId: string) {
-    const _id = mongoose.Types.ObjectId(id);
-    return from(this.productModel.aggregate(
-      [
-        {
-          $match: {
-            '_id': _id,
-            $or: [
-              {
-                'acl.*.read': true
-
-              },
-              {
-                [`acl.${userId}.read`]: true
-
-              },
-              {
-                [`acl.friendsOf_${userId}.read`]: true
-              }
-            ]
-          }
-        },
-        ProductService.getCategoryStage(),
-        ...ProductService.getCurrencyStage(),
-        ...ProductService.getRatingStage(userId),
-        {
-          $project: {
-            "acl.*": 0,
-            [`acl.friendsOf_${userId}`]: 0
-          }
-        }
-      ]
-    )).pipe(
-      map(res => {
-        let response;
-        if (Array.isArray(res)) {
-          response = res.length > 0 ? res[0] : null;
-        } else {
-          response = res;
-        }
-        return response;
-      }),
-      map(res => {
-        if (!res) {
-          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
-        }
-        const isOwner = res.acl[userId].create === true;
-        const isPending = res.status === 'pending';
-        if (!isOwner && isPending) {
-          throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
-        }
-        delete res.acl;
-        return res;
       })
     );
   }
