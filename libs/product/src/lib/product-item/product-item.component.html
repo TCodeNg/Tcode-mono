@@ -22,7 +22,7 @@
             <p>{{ product?.title | titlecase }}</p>
         </div>
         <div class="price">
-            <p>{{ product?.price.value | currency: (product?.price?.currency?.iso): 'code' }}</p>
+            <p>{{ product?.price.value | currency: (product?.price?.currency): 'code' }}</p>
         </div>
     </div>
 </ng-template>
