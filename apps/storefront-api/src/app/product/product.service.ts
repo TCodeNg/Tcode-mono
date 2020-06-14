@@ -101,7 +101,18 @@ export class ProductService {
       {
         $lookup: {
           from: 'ratings',
+          let: { 'id': '$_id' },
           pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { 'className': 'Product' },
+                    { 'entityId': '$$id' }
+                  ]
+                }
+              }
+            },
             {
               $project: {
                 _id: 0,
@@ -130,7 +141,9 @@ export class ProductService {
               $size: '$computedRating'
             },
             totalScore: {
-              $avg: '$computedRating.totalScore'
+              $floor: {
+                $avg: '$computedRating.totalScore'
+              }
             },
             userScore: {
               $ceil: {

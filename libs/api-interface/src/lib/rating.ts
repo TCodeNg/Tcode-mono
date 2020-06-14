@@ -21,6 +21,11 @@ export class Rating {
     required: true
   })
   className: string;
+
+  @Prop({
+    required: true
+  })
+  entityId: string;
 }
 
 export const RatingSchema = SchemaFactory.createForClass(Rating);
