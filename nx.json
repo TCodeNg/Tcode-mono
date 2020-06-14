@@ -53,6 +53,9 @@
     },
     "auth": {
       "tags": []
+    },
+    "product": {
+      "tags": []
     }
   }
 }
