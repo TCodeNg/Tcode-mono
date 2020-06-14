@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Image } from 'libs/api-interface/src/lib/image';
+import { IImage } from '@tcode/api-interface';
 
 @Component({
   selector: 'tcode-img-thumbnail',
@@ -8,7 +8,7 @@ import { Image } from 'libs/api-interface/src/lib/image';
 })
 export class ImgThumbnailComponent implements OnInit {
 
-  @Input() image: Image;
+  @Input() image: IImage;
   @Input() selected = false;
 
   constructor() { }
