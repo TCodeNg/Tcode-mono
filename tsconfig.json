@@ -23,7 +23,8 @@
       "@tcode/mongo-utils": ["libs/mongo-utils/src/index.ts"],
       "@tcode/acl-util": ["libs/acl-util/src/index.ts"],
       "@tcode/productrating": ["libs/productrating/src/index.ts"],
-      "@tcode/auth": ["libs/auth/src/index.ts"]
+      "@tcode/auth": ["libs/auth/src/index.ts"],
+      "@tcode/product": ["libs/product/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
