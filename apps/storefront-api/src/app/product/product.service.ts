@@ -67,7 +67,7 @@ export class ProductService {
           }
         }
       ]
-    )).pipe(
+    ).exec()).pipe(
       map(res => {
         let response;
         if (Array.isArray(res)) {
@@ -222,29 +222,40 @@ export class ProductService {
         model.score = score;
         return model.save();
       },
-      find: (user, productId): Promise<Rating> => {
-        return this.ratingModel.findOne({
-          user,
-          entityId: productId,
-          className: 'Product'
-        }).exec();
+      find: async (user, productId): Promise<{ rating: Rating; product: any }> => {
+        let product, rating;
+        try {
+          product = await this.getProduct(productId, user).toPromise();
+          if (product) {
+            rating = await this.ratingModel.findOne({
+              user,
+              entityId: product._id,
+              className: 'Product'
+            }).exec();
+          }
+        } catch (err) {}
+        return { rating, product };
       }
     };
 
 
     return from(actions.find(userId, id)).pipe(
-      switchMap(rating => {
-        if (rating) {
-          return from(actions.update(rating, dto.rating));
-        } else {
+      switchMap(res => {
+        if (res.rating) {
+          return from(actions.update(res.rating, dto.rating));
+        } else if (res.product && !res.rating) {
           throw new Error('Rating not found');
+        } else  {
+          throw new Error('Product not found');
         }
       }),
       catchError(err => {
         if (err.message === 'Rating not found') {
           return from(actions.create(userId, id, dto.rating));
+        } else if (err.message === 'Product not found') {
+          return throwError(new HttpException('Product not found', HttpStatus.NOT_FOUND));
         } else {
-          throwError(err);
+          return throwError(err);
         }
       })
     );
