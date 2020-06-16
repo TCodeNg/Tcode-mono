@@ -12,9 +12,7 @@ import { SentryModule } from '@tcode/sentry';
     MongooseModule.forFeatureAsync([
       {
         name: 'Product',
-        useFactory: () => {
-          return ProductSchema;
-        }
+        useFactory: () => ProductSchema
       },
       {
         name: 'Rating',
