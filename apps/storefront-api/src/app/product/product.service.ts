@@ -25,7 +25,13 @@ export class ProductService {
 
   async createProduct(dto: ProductDto, userId: string) {
     const acl = ACLUtils.generate(dto.acl, userId, true);
-    return await this.productModel.create({ ...dto, acl, status: 'pending' } as any);
+    const generateId = (prefix: string) => {
+      const seed = Math.floor(Math.random() * 100000);
+      const date = new Date();
+      const formattedDate = `${date.getDate()}${date.getHours()}${Math.round(Math.ceil(date.getSeconds() + seed) / seed * 2) + Math.floor(Math.random() * 9)}`;
+      return `${prefix.toUpperCase()}-${formattedDate}-${seed}`;
+    }
+    return await this.productModel.create({ ...dto, acl, status: 'pending', productId: generateId('TC') } as any);
   }
 
   getProduct(id: string, userId: string) {
@@ -75,7 +81,7 @@ export class ProductService {
         if (!res) {
           throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
         }
-        const isOwner = res.acl[userId].create === true;
+        const isOwner = res.acl[userId] && res.acl[userId].create === true;
         const isPending = res.status === 'pending';
         if (!isOwner && isPending) {
           throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
@@ -142,6 +148,27 @@ export class ProductService {
             },
             {
               [`acl.friendsOf_${userId}.read`]: true
+            }
+          ]
+        }
+      },
+      {
+        $match: {
+          $or: [
+            {
+              'status': 'published'
+            },
+            {
+              [`acl.${userId}.create`]: true
+            },
+            {
+              [`acl.${userId}.update`]: true
+            },
+            {
+              [`acl.friendsOf_${userId}.create`]: true
+            },
+            {
+              [`acl.friendsOf_${userId}.update`]: true
             }
           ]
         }
