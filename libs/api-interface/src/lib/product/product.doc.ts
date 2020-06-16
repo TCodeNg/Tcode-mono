@@ -21,4 +21,5 @@ export class ProductDoc extends Document {
   created: Date;
   updated: Date;
   removed?: boolean;
+  productId: string;
 }

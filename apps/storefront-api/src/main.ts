@@ -16,7 +16,8 @@ async function bootstrap() {
   Sentry.init({
     dsn: process.env.SENTRY_DNS,
     debug: !environment.production,
-    release: 'tcode@' + process.env.npm_package_version
+    release: 'tcode@' + process.env.npm_package_version,
+    environment: process.env.ENVIRONMENT || 'local'
   })
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port);
