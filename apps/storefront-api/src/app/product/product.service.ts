@@ -7,16 +7,47 @@ import {
   ProductQueryFilter,
   ProductResponse,
   RateProductDto,
-  Rating
+  Rating, UpdateProductDto
 } from '@tcode/api-interface';
 import * as mongoose from 'mongoose';
 import { Model } from 'mongoose';
 import { from, Observable, of, throwError } from 'rxjs';
 import { ACLUtils } from '@tcode/acl-util';
-import { catchError, exhaustMap, map, pluck, switchMap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, pluck, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ProductService {
+
+  actions = {
+    create: (user, productId, score): Promise<any> => {
+      return this.ratingModel.create({
+        user,
+        className: 'Product',
+        score,
+        entityId: productId
+      });
+    },
+    update: (model: Rating, score) => {
+      model.score = score;
+      return model.save();
+    },
+    find: async (user, productId): Promise<{ rating: Rating; product: any }> => {
+      let product, rating;
+      try {
+        product = await this.getProduct(productId, user).toPromise();
+        if (product) {
+          rating = await this.ratingModel.findOne({
+            user,
+            entityId: product._id,
+            className: 'Product'
+          }).exec();
+        }
+      } catch (err) {
+      }
+      return { rating, product };
+    }
+  };
+
   constructor(
     @InjectModel('Product') private readonly productModel: Model<ProductDoc>,
     @InjectModel('Rating') private readonly ratingModel: Model<Rating>
@@ -30,7 +61,7 @@ export class ProductService {
       const date = new Date();
       const formattedDate = `${date.getDate()}${date.getHours()}${Math.round(Math.ceil(date.getSeconds() + seed) / seed * 2) + Math.floor(Math.random() * 9)}`;
       return `${prefix.toUpperCase()}-${formattedDate}-${seed}`;
-    }
+    };
     return await this.productModel.create({ ...dto, acl, status: 'pending', productId: generateId('TC') } as any);
   }
 
@@ -62,7 +93,7 @@ export class ProductService {
         ...ProductService.getRatingStage(userId),
         {
           $project: {
-            "acl.*": 0,
+            'acl.*': 0,
             [`acl.friendsOf_${userId}`]: 0
           }
         }
@@ -81,9 +112,15 @@ export class ProductService {
         if (!res) {
           throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
         }
-        const isOwner = res.acl[userId] && res.acl[userId].create === true;
+        const canCreateOrUpdate =
+          (res.acl['*'] && res.acl['*'].create === true) ||
+          (res.acl['*'] && res.acl['*'].update === true) ||
+          (res.acl[userId] && res.acl[userId].create === true) ||
+          (res.acl[userId] && res.acl[userId].update === true) ||
+          (res.acl[`friendsOf_${userId}`] && res.acl[`friendsOf_${userId}`].create === true) ||
+          (res.acl[`friendsOf_${userId}`] && res.acl[`friendsOf_${userId}`].update === true);
         const isPending = res.status === 'pending';
-        if (!isOwner && isPending) {
+        if (!canCreateOrUpdate && isPending) {
           throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
         }
         delete res.acl;
@@ -110,8 +147,32 @@ export class ProductService {
     );
   }
 
+  updateProduct(id: string, userId: string, data: UpdateProductDto) {
+    return from(this.productModel.updateOne({
+      _id: mongoose.Types.ObjectId(id),
+      removed: false,
+      $or: [
+        {
+          "acl.*.update": true
+        },
+        {
+          [`acl.${userId}.update`]: true
+        },
+        {
+          [`acl.friendsOf_${userId}.update`]: true
+        }
+      ]
+    }, data)).pipe(
+      tap((res: any) => {
+        if (res.n === 0) {
+          throw new HttpException('Product not modified', HttpStatus.BAD_REQUEST);
+        }
+      })
+    );
+  }
+
   deleteProduct(userId: string, id: string) {
-    return of({userId, id}).pipe(
+    return of({ userId, id }).pipe(
       exhaustMap(params => {
         return from(this.productModel.findOne({
           removed: false,
@@ -129,7 +190,7 @@ export class ProductService {
           })
         );
       })
-    )
+    );
   }
 
   async getAll(limit: number, page: number, skip: number, userId?: string): Promise<ProductResponse> {
@@ -209,49 +270,19 @@ export class ProductService {
 
   rateProduct(userId: any, id: any, dto: RateProductDto) {
 
-    const actions = {
-      create: (user, productId, score): Promise<any> => {
-        return this.ratingModel.create({
-          user,
-          className: 'Product',
-          score,
-          entityId: productId
-        });
-      },
-      update: (model: Rating, score) => {
-        model.score = score;
-        return model.save();
-      },
-      find: async (user, productId): Promise<{ rating: Rating; product: any }> => {
-        let product, rating;
-        try {
-          product = await this.getProduct(productId, user).toPromise();
-          if (product) {
-            rating = await this.ratingModel.findOne({
-              user,
-              entityId: product._id,
-              className: 'Product'
-            }).exec();
-          }
-        } catch (err) {}
-        return { rating, product };
-      }
-    };
-
-
-    return from(actions.find(userId, id)).pipe(
+    return from(this.actions.find(userId, id)).pipe(
       switchMap(res => {
         if (res.rating) {
-          return from(actions.update(res.rating, dto.rating));
+          return from(this.actions.update(res.rating, dto.rating));
         } else if (res.product && !res.rating) {
           throw new Error('Rating not found');
-        } else  {
+        } else {
           throw new Error('Product not found');
         }
       }),
       catchError(err => {
         if (err.message === 'Rating not found') {
-          return from(actions.create(userId, id, dto.rating));
+          return from(this.actions.create(userId, id, dto.rating));
         } else if (err.message === 'Product not found') {
           return throwError(new HttpException('Product not found', HttpStatus.NOT_FOUND));
         } else {
@@ -377,6 +408,6 @@ export class ProductService {
           currency: 0
         }
       }
-    ]
+    ];
   }
 }
