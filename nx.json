@@ -59,6 +59,9 @@
     },
     "sentry": {
       "tags": []
+    },
+    "media-api": {
+      "tags": []
     }
   }
 }
