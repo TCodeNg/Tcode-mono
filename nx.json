@@ -60,6 +60,9 @@
     "sentry": {
       "tags": []
     },
+    "card": {
+      "tags": []
+    },
     "input": {
       "tags": []
     }
