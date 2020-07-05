@@ -477,6 +477,32 @@
         }
       }
     },
+    "media-api": {
+      "root": "libs/media-api",
+      "sourceRoot": "libs/media-api/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/media-api/tsconfig.lib.json",
+              "libs/media-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/media-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/media-api/jest.config.js",
+            "tsConfig": "libs/media-api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "card": {
       "projectType": "library",
       "root": "libs/card",
