@@ -1,0 +1,31 @@
+@import '../../../media';
+
+:host {
+  display: block;
+  
+  &::ng-deep {
+    
+  }
+}
+.wrapper {
+  height: 40px;
+  @include media('<desktop'){
+    display: none;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin: 0 auto;
+    height: 100%;
+    align-items: center;
+    .social-media {
+      img {
+        cursor: pointer;
+        &:not(:last-child){
+          margin-right:10px;
+        }
+      }
+    }
+  }
+}
