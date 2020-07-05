@@ -6,7 +6,7 @@ import { ErrorRefDirective } from '../inputError.directive';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss']
 })
-export class InputComponent implements OnInit, AfterContentInit, OnChanges {
+export class InputComponent implements AfterContentInit {
 
   constructor() { }
 
@@ -16,10 +16,6 @@ export class InputComponent implements OnInit, AfterContentInit, OnChanges {
     ErrorRefDirective, {descendants: true, read: ElementRef}
   ) inputError: QueryList<ElementRef>;
 
-  
-  ngOnInit(): void {
-    
-  }
 
   ngAfterContentInit(): void {
     this.inputError.changes.pipe(
@@ -30,10 +26,6 @@ export class InputComponent implements OnInit, AfterContentInit, OnChanges {
       err => console.error(err),
       () => console.log('Done')
     );
-  }
-
-  ngOnChanges(): void {
-    
   }
 
   @HostBinding('class.input-error') get error(): boolean {
