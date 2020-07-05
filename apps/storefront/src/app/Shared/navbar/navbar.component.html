@@ -12,10 +12,10 @@
       </ul>
     </div>
     <ng-content select=".action-section"></ng-content>
-    <img src="../../../assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="beforeMenu">
+    <img src="../../../assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu">
   </div>
 </div>
-<mat-menu class="mobile-menu" #beforeMenu="matMenu">
+<mat-menu class="mobile-menu" #mobileMenu="matMenu" xPosition="before">
   <button mat-menu-item>Home</button>
   <button mat-menu-item>Farm Produce</button>
   <button mat-menu-item>Inverter</button>
