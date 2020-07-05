@@ -20,4 +20,6 @@ export class ProductDoc extends Document {
   status: string;
   created: Date;
   updated: Date;
+  removed?: boolean;
+  productId: string;
 }

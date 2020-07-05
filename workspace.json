@@ -25,9 +25,14 @@
               "apps/storefront/src/favicon.ico",
               "apps/storefront/src/assets",
               {
-                "input": "libs/shared/assets/src/lib",
-                "glob": "*.png",
-                "output": "assets"
+                "input": "libs/shared/assets/src/lib/img",
+                "glob": "**.*",
+                "output": "assets/img"
+              },
+              {
+                "input": "libs/shared/assets/src/lib/fonts",
+                "glob": "**.*",
+                "output": "assets/fonts"
               }
             ],
             "styles": ["apps/storefront/src/styles.scss"],
@@ -442,6 +447,122 @@
             "tsConfig": "libs/product/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/product/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "sentry": {
+      "root": "libs/sentry",
+      "sourceRoot": "libs/sentry/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sentry/tsconfig.lib.json",
+              "libs/sentry/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sentry/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sentry/jest.config.js",
+            "tsConfig": "libs/sentry/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "media-api": {
+      "root": "libs/media-api",
+      "sourceRoot": "libs/media-api/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/media-api/tsconfig.lib.json",
+              "libs/media-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/media-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/media-api/jest.config.js",
+            "tsConfig": "libs/media-api/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "card": {
+      "projectType": "library",
+      "root": "libs/card",
+      "sourceRoot": "libs/card/src",
+      "prefix": "tcode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/card/tsconfig.lib.json",
+              "libs/card/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/card/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/card/jest.config.js",
+            "tsConfig": "libs/card/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/card/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "input": {
+      "projectType": "library",
+      "root": "libs/input",
+      "sourceRoot": "libs/input/src",
+      "prefix": "tcode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/input/tsconfig.lib.json",
+              "libs/input/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/input/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/input/jest.config.js",
+            "tsConfig": "libs/input/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/input/src/test-setup.ts"
           }
         }
       },

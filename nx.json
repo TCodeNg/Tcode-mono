@@ -56,6 +56,18 @@
     },
     "product": {
       "tags": []
+    },
+    "sentry": {
+      "tags": []
+    },
+    "card": {
+      "tags": []
+    },
+    "input": {
+      "tags": []
+    },
+    "media-api": {
+      "tags": []
     }
   }
 }

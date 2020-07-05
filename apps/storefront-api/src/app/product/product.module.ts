@@ -4,6 +4,7 @@ import { ProductSchema, RatingSchema } from '@tcode/api-interface';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { AuthModule } from '@tcode/auth';
+import { SentryModule } from '@tcode/sentry';
 
 @Module({
   imports: [
@@ -11,15 +12,14 @@ import { AuthModule } from '@tcode/auth';
     MongooseModule.forFeatureAsync([
       {
         name: 'Product',
-        useFactory: () => {
-          return ProductSchema;
-        }
+        useFactory: () => ProductSchema
       },
       {
         name: 'Rating',
         useFactory: () => RatingSchema
       }
-    ])
+    ]),
+    SentryModule
   ],
   providers: [ProductService],
   controllers: [ProductController]

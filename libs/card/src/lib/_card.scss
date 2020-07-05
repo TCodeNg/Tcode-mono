@@ -1,0 +1,50 @@
+$tcode-green: #02B075;
+
+@mixin card {
+  .card {
+    display: block;
+    min-height: 233px;
+    background: #F4F8FC;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 25px 35px;
+    margin: 20px;
+  }
+  .card-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .card-acion {
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      font-size: 0.9rem;
+      display: flex;
+      .edit {
+        color: $tcode-green
+      }
+    }
+    .card-title {
+      color: $tcode-green;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .card-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+    .profile-name {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .profile-role {
+      font-size: 0.5rem;
+      margin-top: 8px;
+      padding: 2px 6px;
+      background: rgba(0, 77, 118, 0.1);
+      border-radius: 4px;
+    }
+  }
+}
