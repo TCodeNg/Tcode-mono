@@ -1,7 +1,15 @@
 import * as mongoose from 'mongoose';
 
 export const ProductSchema = new mongoose.Schema({
+  removed: {
+    type: Boolean,
+    default: false
+  },
   title: {
+    type: String,
+    required: true
+  },
+  productId: {
     type: String,
     required: true
   },
@@ -77,5 +85,5 @@ export const ProductSchema = new mongoose.Schema({
     type: Object,
     required: true
   }
-});
+}).index({ productId: 1 }, { unique: true });
 

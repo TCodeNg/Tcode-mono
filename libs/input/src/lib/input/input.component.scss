@@ -1,0 +1,87 @@
+$primary: #4D90FE;
+$tcode-red: #EB5757;
+$shadow: 0 0 0 30px white inset !important;
+$focus-shadow: 0 0 5px $primary;
+$error-focus-shadow: 0 0 5px $tcode-red !important;
+
+:host {
+  display: flex;
+  flex-direction: column;
+
+  &::ng-deep {
+    label, .hint, .error {
+      // font-family: Cera Pro;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      color: #000000;
+      margin: 0 0 3px 0;
+      letter-spacing: 0;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .hint, .error {
+      margin-top: 4px;
+    }
+  }
+  .input-wrap {
+    border: 1px solid #CFDFEF;
+    display: flex;
+    border-radius: 6px;
+    padding: 1px 10px;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    .icon {
+      width: 20px;
+      text-align: center;
+      padding-left: 5px;
+      padding-right: 5px;
+      align-self: center;
+    }
+
+    &::ng-deep {
+      input {
+        border: none;
+        outline: none;
+        height: 100%;
+        margin: 1px 0;
+        padding: 12px 4px;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+        width: 100%;
+        color: #000000;
+        font-weight: normal;
+      }
+      select {
+        width: 100%;
+        min-height: 32px;
+        padding: 12px 0;
+        border: none;
+        background: transparent;
+        outline: 0;
+        font-size: 1.0rem;
+        z-index: 1;
+        -webkit-appearance: none;
+        color: #666;
+    
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+  }
+}
+:host(.input-error) {
+  color: $tcode-red;
+  &::ng-deep {
+    label, .error {
+      color: $tcode-red !important;
+    }
+  }
+  .input-wrap {
+    border: 1px solid $tcode-red !important;
+  }
+}

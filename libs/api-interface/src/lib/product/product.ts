@@ -23,6 +23,7 @@ export interface Product {
   type: 'estate' | 'farm' | 'inverter';
   updated: Date;
   rating?: ProductRating;
+  productId: string;
 }
 
 export interface ProductResponse {

@@ -1,6 +1,6 @@
 {
   "name": "tcode",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
@@ -44,6 +44,7 @@
     "@nestjs/mongoose": "7.0.1",
     "@nestjs/passport": "7.0.0",
     "@nestjs/platform-express": "^6.8.3",
+    "@sentry/node": "5.17.0",
     "bcrypt": "5.0.0",
     "class-transformer": "0.2.3",
     "class-validator": "0.12.2",
@@ -56,6 +57,7 @@
     "passport-local": "1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.4",
+    "shortid": "2.2.15",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {

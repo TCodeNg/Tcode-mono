@@ -56,6 +56,12 @@
     },
     "product": {
       "tags": []
+    },
+    "sentry": {
+      "tags": []
+    },
+    "input": {
+      "tags": []
     }
   }
 }
