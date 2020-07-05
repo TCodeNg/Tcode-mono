@@ -5,7 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
-  Post,
+  Post, Put,
   Query,
   Req,
   UseGuards,
@@ -13,10 +13,17 @@ import {
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Observable } from 'rxjs';
-import { ProductDto, ProductQueryFilter, ProductResponse, RateProductDto } from '@tcode/api-interface';
+import {
+  ProductDto,
+  ProductQueryFilter,
+  ProductResponse,
+  RateProductDto,
+  UpdateProductDto
+} from '@tcode/api-interface';
 import { JwtAuthGuard } from '@tcode/auth';
 import { Request } from 'express';
 import { SentryInterceptor } from '@tcode/sentry';
+import { exhaustMap } from 'rxjs/operators';
 
 @UseInterceptors(SentryInterceptor)
 @Controller('product')
@@ -44,6 +51,16 @@ export class ProductController {
     const { id } = params;
     return this.service.getProduct(id, userId);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  @HttpCode(204)
+  updateProduct(@Req() req: Request, @Param() params, @Body() data: UpdateProductDto) {
+    const { id } = params;
+    const { userId } = req.user as any;
+    return this.service.updateProduct(id, userId, data)
+  }
+
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(204)

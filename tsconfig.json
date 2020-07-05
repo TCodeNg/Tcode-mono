@@ -26,6 +26,8 @@
       "@tcode/auth": ["libs/auth/src/index.ts"],
       "@tcode/product": ["libs/product/src/index.ts"],
       "@tcode/sentry": ["libs/sentry/src/index.ts"],
+      "@tcode/card": ["libs/card/src/index.ts"],
+      "@tcode/input": ["libs/input/src/index.ts"],
       "@tcode/media-api": ["libs/media-api/src/index.ts"]
     }
   },
