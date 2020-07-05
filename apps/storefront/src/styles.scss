@@ -19,9 +19,9 @@ a {
 .mat-menu-panel.mobile-menu {
   max-width: 208px !important;
   margin-left: auto !important;
-  margin-right: 10px !important;
   border-radius: 5px !important;
   box-shadow: 2px 10px 10px rgba(0, 77, 118, 0.1) !important;
+  margin-top: 36px;
   @include media('>tablet'){
     display:none;
   }
