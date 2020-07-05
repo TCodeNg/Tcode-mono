@@ -1,0 +1,84 @@
+@import '../../../media';
+
+:host {
+  display: block;
+  
+  &::ng-deep {
+    .action-section {
+      display: flex;
+      .search, .cart {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+.wrapper {
+  height: 51px;
+  border-top: 1px solid #E5E5E5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  @include media('<tablet'){
+    height: 83px;
+  }
+  @include media('>tablet', '<desktop'){
+    height: 93px;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    height: 100%;
+    align-items: center;
+    @include media('<tablet'){
+      height: 83px;
+      width: 85%;
+    }
+    @include media('>tablet', '<desktop'){
+      height: 83px;
+      width: 95%;
+    }
+    .links-section {
+      flex: 1;
+      justify-content: center;
+      display: flex;
+      ul {
+        list-style: none;
+        display: inline-flex;
+        cursor: pointer;
+        li {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          &:not(:last-child){
+            margin:0 30px;
+          }
+          @include media('>tablet', '<desktop'){
+            &:not(:last-child){
+              margin:0 15px;
+            }
+          }
+        }
+      }
+      @include media('<tablet'){
+        display: none;
+      }
+    }
+    .mobile-menu-icon {
+      @include media('<tablet') {
+        display: block;
+      }
+      @include media('>tablet') {
+        display:none
+      }
+    }
+  }
+}
+
+button.mat-menu-item {
+ background: white !important;
+ height: 40px;
+ text-transform: uppercase;
+}
+
+@include media('>=phone', '<tablet'){
+
+}
