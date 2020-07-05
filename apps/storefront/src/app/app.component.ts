@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Image } from 'libs/api-interface/src/lib/image';
+import { CardConfig } from 'libs/card/src/lib/model';
 
 @Component({
   selector: 'tcode-root',
