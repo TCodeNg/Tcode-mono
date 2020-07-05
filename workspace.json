@@ -25,9 +25,14 @@
               "apps/storefront/src/favicon.ico",
               "apps/storefront/src/assets",
               {
-                "input": "libs/shared/assets/src/lib",
-                "glob": "*.png",
-                "output": "assets"
+                "input": "libs/shared/assets/src/lib/img",
+                "glob": "**.*",
+                "output": "assets/img"
+              },
+              {
+                "input": "libs/shared/assets/src/lib/fonts",
+                "glob": "**.*",
+                "output": "assets/fonts"
               }
             ],
             "styles": ["apps/storefront/src/styles.scss"],
