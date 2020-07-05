@@ -9,5 +9,5 @@ cp tools/docker/storefront/nginx.conf.template dist/apps/storefront/nginx.conf.t
 cp tools/docker/storefront/Dockerfile dist/apps/storefront/Dockerfile
 
 mkdir ./dist/apps/storefront/build
-cp ./dist/apps/tmp/* ./dist/apps/storefront/build/
+cp -r ./dist/apps/tmp/* ./dist/apps/storefront/build/
 rm -rf ./dist/apps/tmp
