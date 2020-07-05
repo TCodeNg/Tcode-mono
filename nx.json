@@ -59,6 +59,15 @@
     },
     "sentry": {
       "tags": []
+    },
+    "card": {
+      "tags": []
+    },
+    "input": {
+      "tags": []
+    },
+    "media-api": {
+      "tags": []
     }
   }
 }
