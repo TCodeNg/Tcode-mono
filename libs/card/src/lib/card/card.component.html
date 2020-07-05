@@ -1,0 +1,42 @@
+<div class="card">
+  <section class="card-header">
+    <div class="card-acion">
+      <span *ngIf="config.state === 'normal' && config.editable" class="edit" (click)="changeToEditState()">Edit</span>
+      <mat-icon 
+        *ngIf="config.state === 'editing'" 
+        class="material-icons color-green" 
+        (click)="handleSave()"
+      >
+        save
+      </mat-icon>
+      <mat-icon 
+        *ngIf="config.state === 'editing'" 
+        (click)="handleCancel()" 
+        class="material-icons color-red"
+      >close
+      </mat-icon>
+    </div>
+    <ng-content select=".card-avatar"></ng-content>
+    <ng-content select=".card-title"></ng-content>
+    <ng-content select=".profile-name"></ng-content>
+    <ng-content select=".profile-role"></ng-content>
+  </section>
+  <section class="card-content">
+    <!-- Normal -->
+    <ng-container *ngIf="config.state === 'normal'">
+      <ng-content></ng-content>
+    </ng-container>
+    <!-- Loading -->
+    <ng-container *ngIf="config.state === 'loading'" [ngTemplateOutlet]="loadingTemplRef">
+
+    </ng-container>
+    <!--  Editing  -->
+    <ng-container *ngIf="config.state === 'editing'" [ngTemplateOutlet]="editTemplRef">
+
+    </ng-container>
+    <!--  Saving  -->
+    <ng-container *ngIf="config.state === 'saving'" [ngTemplateOutlet]="savingTemplRef">
+
+    </ng-container>
+  </section>
+</div>

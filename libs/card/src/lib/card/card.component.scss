@@ -1,0 +1,19 @@
+@import '../card';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  &::ng-deep {
+    @include card;
+  }
+}
+mat-icon {
+  font-size: 15px;
+  cursor: pointer;
+}
+.material-icons.color-red { 
+  color: #E45C5C; 
+}
+.material-icons.color-green { 
+  color: #02B075; 
+}
