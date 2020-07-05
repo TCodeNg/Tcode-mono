@@ -1,4 +1,4 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MediaTransport } from './media-transport';
 import { from } from 'rxjs';
@@ -6,6 +6,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { map, switchMap } from 'rxjs/operators';
 import { ImageService } from './image.service';
+import { JwtAuthGuard } from '@tcode/auth';
 
 @Controller('media')
 export class MediaController {
@@ -13,6 +14,7 @@ export class MediaController {
   constructor(private readonly transport: MediaTransport, private readonly imageService: ImageService) {
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('upload/image')
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
