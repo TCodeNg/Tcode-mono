@@ -14,10 +14,10 @@
     <input id="password" type="password">
   </tcode-input>
   <div class="resetPassword">
-    <a [routerLink]="['auth', 'reset']">Forgot password?</a>
+    <a [routerLink]="['/auth', 'reset']">Forgot password?</a>
   </div>
   <tcode-button type="normal">
     Sign in
   </tcode-button>
-  <p *ngIf="config?.canSignUp">Don’t have an account? <a [routerLink]="['auth', 'signup']">Sign up</a></p>
+  <p *ngIf="config?.canSignUp">Don’t have an account? <a [routerLink]="['/auth', 'signup']">Sign up</a></p>
 </div>

@@ -1,0 +1,69 @@
+@import "../auth.structure";
+
+:host {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+  .wrapper {
+    margin: 2.25rem auto 0;
+  }
+
+  p {
+    &:last-of-type {
+      color: #6D7D93;
+      font-size: 0.875rem;
+      text-align: center;
+      margin-top: 1rem;
+
+      a {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.sign-up-wrap {
+  border-bottom: 1px solid #CFDFEF;
+  margin: 2.813rem 0 1.4rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 1.375rem;
+  }
+
+  a {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    color: $blue;
+    img {
+      margin-right: .35rem;
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  .control {
+    display: flex;
+    margin-bottom: 1rem;
+
+    & > * {
+      flex: 1;
+      margin-right: .5rem !important;
+      &:last-of-type {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  tcode-input {
+    margin: 0 !important;
+  }
+}
