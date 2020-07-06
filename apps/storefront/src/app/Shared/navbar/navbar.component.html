@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="content">
+    <ng-content select=".logo-section"></ng-content>
+    <div class="links-section">
+      <ul>
+        <li>Home</li>
+        <li>Farm Produce</li>
+        <li>Inverter</li>
+        <li>Real Estate</li>
+        <li>Track Delivery</li>
+        <li>Become a Vendor</li>
+      </ul>
+    </div>
+    <ng-content select=".action-section"></ng-content>
+    <img src="assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu">
+  </div>
+</div>
+<mat-menu class="mobile-menu" #mobileMenu="matMenu" xPosition="before">
+  <button mat-menu-item>Home</button>
+  <button mat-menu-item>Farm Produce</button>
+  <button mat-menu-item>Inverter</button>
+  <button mat-menu-item>Real Estate</button>
+  <button mat-menu-item>Track Delivery</button>
+  <button mat-menu-item>Become a Vendor</button>
+</mat-menu>
