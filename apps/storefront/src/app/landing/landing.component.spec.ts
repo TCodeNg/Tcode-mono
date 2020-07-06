@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
+import { SharedModule } from '../Shared/shared.module';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -8,7 +10,11 @@ describe('LandingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingComponent ]
+      declarations: [ LandingComponent ],
+      imports: [
+        SharedModule,
+        MatIconModule
+      ]
     })
     .compileComponents();
   }));
