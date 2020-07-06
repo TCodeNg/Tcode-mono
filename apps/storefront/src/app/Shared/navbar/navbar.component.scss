@@ -37,6 +37,9 @@
       height: 83px;
       width: 95%;
     }
+    @media (max-width: 1200px) and (min-width: 1025px) {
+      width: 80%;
+    }
     .links-section {
       flex: 1;
       justify-content: center;
@@ -45,15 +48,24 @@
         list-style: none;
         display: inline-flex;
         cursor: pointer;
+        align-items: center;
         li {
-          font-size: 0.7rem;
+          font-size: 0.8rem;
           text-transform: uppercase;
-          &:not(:last-child){
+          &:first-of-type{
             margin:0 30px;
+          }
+          &:not(:last-child){
+            margin-right:30px;
           }
           @include media('>tablet', '<desktop'){
             &:not(:last-child){
-              margin:0 15px;
+              margin-right:15px;
+            }
+          }
+          @media (max-width: 1200px) and (min-width: 1025px) {
+            &:not(:last-child){
+              margin-right:15px;
             }
           }
         }
