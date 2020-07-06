@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="logo">
+    <img alt="logo" src="assets/img/logo.png">
+  </div>
+
+  <h1 *ngIf="config?.appTitle">{{config?.appTitle}}</h1>
+  <h2>Sign in</h2>
+  <tcode-input>
+    <label for="email">Email</label>
+    <input id="email" type="email">
+  </tcode-input>
+  <tcode-input>
+    <label for="password">Password</label>
+    <input id="password" type="password">
+  </tcode-input>
+  <div class="resetPassword">
+    <a [routerLink]="['auth', 'reset']">Forgot password?</a>
+  </div>
+  <tcode-button type="normal">
+    Sign in
+  </tcode-button>
+  <p *ngIf="config?.canSignUp">Don’t have an account? <a [routerLink]="['auth', 'signup']">Sign up</a></p>
+</div>
