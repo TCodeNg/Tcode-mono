@@ -1,0 +1,17 @@
+@import "media";
+.wrapper {
+  width: 25rem;
+  margin: 6.25rem auto 0;
+
+  @include media('>=tablet') {
+    width: 30rem;
+  }
+
+  @include media('>=desktop') {
+    width: 32rem;
+  }
+
+  @include media('>=1440px') {
+    width: 35rem;
+  }
+}
