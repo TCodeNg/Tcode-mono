@@ -1,7 +1,54 @@
 @import "media";
+$green: #02B075;
+$blue: #1D66FF;
+$link-color: $green;
+
 .wrapper {
   width: 25rem;
   margin: 6.25rem auto 0;
+
+  tcode-input {
+    &:first-of-type {
+      margin-bottom: 1.25rem;
+    }
+
+    &::ng-deep {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+      }
+    }
+  }
+
+  tcode-button {
+    display: flex;
+    &::ng-deep {
+      .content {
+        margin: 10px 0 !important;
+        display: flex !important;
+        width: 100%;
+
+        button {
+          width: 100%;
+          min-height: 3rem;
+        }
+      }
+    }
+  }
+
+  a {
+    color: $link-color;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
 
   @include media('>=tablet') {
     width: 30rem;

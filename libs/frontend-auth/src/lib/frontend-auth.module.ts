@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
+import { RegisterComponent } from './register/register.component';
 
 // export
 
@@ -24,6 +25,10 @@ import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
       {
         path: 'auth/login',
         component: LoginComponent
+      },
+      {
+        path: 'auth/signup',
+        component: RegisterComponent
       }
     ])
   ],
@@ -35,7 +40,7 @@ import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
     },
     AuthGuard
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, RegisterComponent]
 })
 export class FrontendAuthModule {
   static forRoot(authConfig: AuthConfig): ModuleWithProviders {
