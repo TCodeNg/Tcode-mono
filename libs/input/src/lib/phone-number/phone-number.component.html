@@ -15,7 +15,7 @@
 </div>
 
 <mat-menu #menu="matMenu" class="country-code-menu">
-  <div mat-menu-item class="country-code-menu-item" *ngFor="let country of countries" (click)="selectCode(country)">
+  <div mat-menu-item class="country-code-menu-item" *ngFor="let country of countries;trackBy: trackByFn" (click)="selectCode(country)">
     <span><img [src]="country | countryFlagPath" height="20" width="20"></span>
     <span>{{country.iso}}</span>
   </div>

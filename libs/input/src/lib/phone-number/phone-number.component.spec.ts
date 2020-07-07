@@ -28,5 +28,7 @@ describe('PhoneNumberComponent', () => {
     it('should create', () => {
       expect(component).toBeTruthy();
     });
-  })
-})
+    
+  }));
+
+});

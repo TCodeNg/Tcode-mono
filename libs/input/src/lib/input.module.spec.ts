@@ -6,7 +6,11 @@ import { MatMenuModule } from '@angular/material/menu';
 describe('InputModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [InputModule, MatIconModule, MatMenuModule],
+      imports: [
+        InputModule, 
+        MatIconModule, 
+        MatMenuModule
+      ],
     }).compileComponents();
   }));
 
