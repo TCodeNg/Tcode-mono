@@ -4,19 +4,31 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './Shared/shared.module';
-import { MatIconModule } from '@angular/material/icon';
-import {MatBadgeModule} from '@angular/material/badge';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { AuthConfig, AuthGuard, FrontendAuthModule } from '@tcode/frontend-auth';
+import { NgxsDataPluginModule } from '@ngxs-labs/data';
+
+const authConfig: AuthConfig = {
+  canResetPassword: true,
+  canSignIn: true,
+  canSignUp: true,
+  appType: 'storefront'
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
-    MatIconModule,
-    MatBadgeModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    FrontendAuthModule.forRoot(authConfig),
+    NgxsModule.forRoot([]),
+    NgxsDataPluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    RouterModule.forRoot([{
+      path: '',
+      loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
+    }], { initialNavigation: 'enabled' }),
   ],
   providers: [],
   bootstrap: [AppComponent],
