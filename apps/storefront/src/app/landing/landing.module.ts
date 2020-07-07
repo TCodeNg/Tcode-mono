@@ -5,6 +5,8 @@ import { SharedModule } from '../Shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -15,6 +17,8 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     MatIconModule,
     MatBadgeModule,
+    MatMenuModule,
+    MatTooltipModule,
     RouterModule.forChild([
       {
         path: '',
