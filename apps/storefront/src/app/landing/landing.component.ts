@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
   user: Customer;
-  @ViewChild('authMenuTrigger') authMenuTrigger: MatMenuTrigger;
   constructor(
     _user: User,
     private router: Router
