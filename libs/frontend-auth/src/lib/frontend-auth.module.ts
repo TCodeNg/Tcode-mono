@@ -11,6 +11,7 @@ import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
 import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 // export
 
@@ -29,6 +30,15 @@ import { RegisterComponent } from './register/register.component';
       {
         path: 'auth/signup',
         component: RegisterComponent
+      },
+      {
+        path: 'auth/reset',
+        component: ResetPasswordComponent
+      },
+      {
+        path: 'auth',
+        redirectTo: '/auth/login',
+        pathMatch: 'full'
       }
     ])
   ],
@@ -40,7 +50,7 @@ import { RegisterComponent } from './register/register.component';
     },
     AuthGuard
   ],
-  declarations: [LoginComponent, RegisterComponent]
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent]
 })
 export class FrontendAuthModule {
   static forRoot(authConfig: AuthConfig): ModuleWithProviders {
