@@ -25,9 +25,14 @@
               "apps/storefront/src/favicon.ico",
               "apps/storefront/src/assets",
               {
-                "input": "libs/shared/assets/src/lib",
-                "glob": "*.png",
-                "output": "assets"
+                "input": "libs/shared/assets/src/lib/img",
+                "glob": "**.*",
+                "output": "assets/img"
+              },
+              {
+                "input": "libs/shared/assets/src/lib/fonts",
+                "glob": "**.*",
+                "output": "assets/fonts"
               }
             ],
             "styles": ["apps/storefront/src/styles.scss"],
@@ -558,6 +563,38 @@
             "tsConfig": "libs/input/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/input/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "frontend-auth": {
+      "projectType": "library",
+      "root": "libs/frontend-auth",
+      "sourceRoot": "libs/frontend-auth/src",
+      "prefix": "tcode",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/frontend-auth/tsconfig.lib.json",
+              "libs/frontend-auth/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/frontend-auth/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/frontend-auth/jest.config.js",
+            "tsConfig": "libs/frontend-auth/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/frontend-auth/src/test-setup.ts"
           }
         }
       },

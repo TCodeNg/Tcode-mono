@@ -68,6 +68,10 @@
     },
     "media-api": {
       "tags": []
+    },
+    "frontend-auth": {
+      "tags": [],
+      "implicitDependencies": ["shared-assets"]
     }
   }
 }
