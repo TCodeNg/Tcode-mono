@@ -14,4 +14,12 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
   @DataAction() login(email: string, password: string) {
 
   }
+
+  @DataAction() logOut() {
+    const { patchState } = this.ctx;
+    patchState({
+      accessToken: undefined,
+      refreshToken: undefined
+    });
+  }
 }

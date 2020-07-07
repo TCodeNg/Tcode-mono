@@ -3,6 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LandingComponent } from './landing.component';
 import { SharedModule } from '../Shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
+import { FrontendAuthModule } from '@tcode/frontend-auth';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsDataPluginModule } from '@ngxs-labs/data';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -13,7 +16,15 @@ describe('LandingComponent', () => {
       declarations: [ LandingComponent ],
       imports: [
         SharedModule,
-        MatIconModule
+        MatIconModule,
+        NgxsModule.forRoot([]),
+        NgxsDataPluginModule.forRoot(),
+        FrontendAuthModule.forRoot({
+          canResetPassword: true,
+          canSignIn: true,
+          canSignUp: true,
+          appType: 'storefront'
+        }, 'customer')
       ]
     })
     .compileComponents();
