@@ -6,6 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -19,6 +22,9 @@ describe('LandingComponent', () => {
         MatIconModule,
         NgxsModule.forRoot([]),
         NgxsDataPluginModule.forRoot(),
+        MatMenuModule,
+        MatTooltipModule,
+        RouterTestingModule,
         FrontendAuthModule.forRoot({
           canResetPassword: true,
           canSignIn: true,
