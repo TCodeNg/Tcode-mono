@@ -45,7 +45,7 @@
       Sign up
     </tcode-button>
 
-    <p *ngIf="config?.canSignUp">Don’t have an account? <a [routerLink]="['/auth', 'login']">Sign up</a></p>
+    <p *ngIf="config?.canSignUp">Already have an account? <a [routerLink]="['/auth', 'login']">Sign in</a></p>
 
   </form>
 </div>

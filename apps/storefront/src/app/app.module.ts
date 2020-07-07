@@ -27,8 +27,7 @@ const authConfig: AuthConfig = {
     NgxsReduxDevtoolsPluginModule.forRoot(),
     RouterModule.forRoot([{
       path: '',
-      loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
-      canLoad: [AuthGuard]
+      loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
     }], { initialNavigation: 'enabled' }),
   ],
   providers: [],
