@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <label><ng-content></ng-content></label>
+  <div class="content">
+    <div class="phone-code" [matMenuTriggerFor]="menu">
+      <span class="flag"><img [src]="selectedCountry | countryFlagPath" height="20" width="30"></span>
+      <span>{{selectedCountry.iso}}</span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="number">
+      <tcode-input>
+        <input #input (keyup)="keyUp($event)" type="text" [value]="value">
+      </tcode-input>
+    </div>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu" class="country-code-menu">
+  <div mat-menu-item class="country-code-menu-item" [matTooltip]="country.name" *ngFor="let country of countries;trackBy: trackByFn" (click)="selectCode(country)">
+    <span><img [src]="country | countryFlagPath" height="20" width="20" class="flag-iso"></span>
+    <span>{{country.iso}}</span>
+  </div>
+</mat-menu>
