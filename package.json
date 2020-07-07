@@ -50,6 +50,7 @@
     "class-validator": "0.12.2",
     "cloudinary": "1.22.0",
     "core-js": "^2.5.4",
+    "google-libphonenumber": "^3.2.10",
     "jsonwebtoken": "8.5.1",
     "mongoose": "5.9.16",
     "mongoose-geojson-schema": "2.1.5",

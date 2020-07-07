@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { InputComponent } from './input/input.component';
 import { ErrorRefDirective } from './inputError.directive';
+import { PhoneNumberComponent } from './phone-number/phone-number.component';
+import { CountryFlagPathPipe } from './country-flag-path.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatMenuModule, MatIconModule],
   declarations: [
-    InputComponent, ErrorRefDirective
+    InputComponent, ErrorRefDirective, PhoneNumberComponent, CountryFlagPathPipe
   ],
   exports: [
-    InputComponent, ErrorRefDirective
+    InputComponent, ErrorRefDirective, PhoneNumberComponent
   ],
 })
 export class InputModule {}
