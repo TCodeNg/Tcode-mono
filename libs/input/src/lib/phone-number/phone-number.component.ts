@@ -84,8 +84,8 @@ export class PhoneNumberComponent implements OnInit, ControlValueAccessor {
     return util.formatNumber(value, this.selectedCountry.countryCode);
   }
 
-  trackByFn(index) {
-    return index;
+  trackByFn(index, country: Country) {
+    return country.iso;
   }
 
 }
