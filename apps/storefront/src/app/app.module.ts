@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { AuthConfig, AuthGuard, FrontendAuthModule } from '@tcode/frontend-auth';
+import { AuthConfig, FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
 
 const authConfig: AuthConfig = {
@@ -21,7 +21,7 @@ const authConfig: AuthConfig = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FrontendAuthModule.forRoot(authConfig),
+    FrontendAuthModule.forRoot(authConfig, 'customer'),
     NgxsModule.forRoot([]),
     NgxsDataPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),

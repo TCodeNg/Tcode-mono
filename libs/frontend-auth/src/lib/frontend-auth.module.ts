@@ -12,6 +12,7 @@ import { ButtonsModule } from '@tcode/buttons';
 import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { User, USER_TYPE_TOKEN, userFactory } from './model';
 
 // export
 
@@ -53,13 +54,22 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent]
 })
 export class FrontendAuthModule {
-  static forRoot(authConfig: AuthConfig): ModuleWithProviders {
+  static forRoot(authConfig: AuthConfig, userType?: string): ModuleWithProviders {
     return {
       ngModule: FrontendAuthModule,
       providers: [
         {
+          provide: USER_TYPE_TOKEN,
+          useValue: userType
+        },
+        {
           provide: AUTH_CONFIG_TOKEN,
           useValue: authConfig
+        },
+        {
+          provide: User,
+          useFactory: userFactory,
+          deps: [USER_TYPE_TOKEN, AuthState]
         }
       ]
     }
