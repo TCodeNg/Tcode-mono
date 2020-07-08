@@ -1,1 +1,1 @@
-export * from './lib/shared-assets';
+export * from './lib/api-error';
