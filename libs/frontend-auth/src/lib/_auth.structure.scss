@@ -6,6 +6,12 @@ $link-color: $green;
 .wrapper {
   width: 25rem;
   margin: 6.25rem auto 0;
+  padding: 0 1rem;
+
+
+  @include media('>=tablet') {
+    padding: 0;
+  }
 
   tcode-input {
     &:first-of-type {
