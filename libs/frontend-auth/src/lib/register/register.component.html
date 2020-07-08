@@ -9,7 +9,7 @@
     </a>
   </div>
 
-  <form>
+  <form [formGroup]="signUpFormGroup">
     <div *ngIf="config.appType !== 'storefront'" class="vendor-type"></div>
     <div class="control">
       <tcode-input>

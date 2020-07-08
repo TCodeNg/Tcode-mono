@@ -11,6 +11,7 @@ import { AuthState } from '../+state/auth.state';
 import { AuthService } from '../auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { hot } from 'jest-marbles';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -25,7 +26,8 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         NgxsModule.forRoot([AuthState]),
         NgxsDataPluginModule.forRoot(),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatSnackBarModule
       ],
       providers: [
         {
@@ -52,5 +54,5 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(component).toBeTruthy();
   });
-  
+
 });
