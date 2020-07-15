@@ -120,3 +120,18 @@
     margin-bottom: 40px;
   }
 }
+.advert {
+  color: #1E266D;
+  margin-top: 50px;
+  text-align: center;
+  .title {
+    line-height: 40px;
+  }
+  p {
+    margin: 20px 0;
+  }
+  small {
+    margin: 21px 0 42px 0;
+    line-height: 24px;
+  }
+}
