@@ -9,7 +9,7 @@
     align-items: center;
     cursor: pointer;
     &.solid {
-        background-image: url('../../../../shared/assets/img/Star.svg') ;
+        background-image: url('/assets/img/Star.svg') ;
         height: 15px;
         width: 15px;
         border-radius: 50%;
@@ -17,7 +17,7 @@
         background-repeat: no-repeat;
     }
     &.light {
-        background: url('../../../../shared/assets/img/Star_light.svg') ;;
+        background: url('/assets/img/Star_light.svg') ;;
         height: 15px;
         width: 15px;
         border-radius: 50%;
