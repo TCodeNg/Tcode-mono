@@ -1,0 +1,33 @@
+.wrapper {
+  background: #F4F8FC;
+  padding-top: 40px;
+  .content {
+    width: 70%;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1.5fr 1fr 1fr;
+    .footer-section {
+      .title {
+        color: #1E266D;
+        font-weight: bold;
+      }
+      .text {
+        color: #4F4F4F;
+        font-weight: lighter;
+        line-height: 25px;
+      }
+      &.address {
+        .text {
+          color: #4F4F4F;
+          font-weight: lighter;
+          margin-top: 16px;
+          line-height: 25px;
+        }
+      }
+      &.contact {
+        .text {
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}

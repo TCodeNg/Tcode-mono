@@ -8,6 +8,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AuthConfig, FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { SharedModule } from './Shared/shared.module';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -25,6 +26,7 @@ const authConfig: AuthConfig = {
     NgxsModule.forRoot([]),
     NgxsDataPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
+    SharedModule,
     RouterModule.forRoot([{
       path: '',
       loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
