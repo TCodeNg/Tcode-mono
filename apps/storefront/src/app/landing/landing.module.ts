@@ -13,12 +13,7 @@ import { ProductModule } from '@tcode/product';
 @NgModule({
   declarations: [LandingComponent],
   imports: [
-    CommonModule,
-    SharedModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatMenuModule,
-    MatTooltipModule,
+    CommonModule,    
     ButtonsModule,
     ProductModule,
     RouterModule.forChild([

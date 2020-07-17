@@ -10,25 +10,11 @@ import { products } from './products';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  user: Customer;
   products: Product[];
-  constructor(
-    _user: User,
-    private router: Router
-  ) {
-    this.user = _user as Customer;
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.products = products;
-  }
-
-  handleAuthAction(){
-    this.router.navigate(['/auth/login']);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.user.isLoggedIn()
   }
 
 }

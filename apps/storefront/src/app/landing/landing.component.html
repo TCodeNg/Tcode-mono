@@ -1,27 +1,3 @@
-<tcode-information-bar></tcode-information-bar>
-<tcode-navbar>
-  <div class="logo-section">
-    <img src="../assets/img/logo.png" alt="logo">
-  </div>
-  <div class="action-section">
-    <img src="../assets/img/search.svg" class="search" alt="search">
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
-      [matMenuTriggerFor]="authMenu"
-      *ngIf="isLoggedIn"
-    >
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
-      (click)="handleAuthAction()"
-      matTooltip="Login"
-      *ngIf="!isLoggedIn"
-    >
-    <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
-    <mat-icon matBadge="15" matBadgeColor="warn" class="cart" matBadgeSize="small">local_mall</mat-icon>
-  </div>
-</tcode-navbar>
 <section class="hero">
   <div class="content">
     <h5>Find the best deals on home properties</h5>
@@ -119,9 +95,3 @@
   <small>In case you don't know, an investment is an asset or item acquired <br>with the goal of generating income or appreciation.<br> TCODE INVESTMENT deals with Money Market-Fund, Real Estate and <br>General Merchandise. In an economic sense, an investment is the...</small>
   <tcode-button type="normal">Learn more</tcode-button>
 </section>
-
-<mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
-  <button mat-menu-item>Account Info</button>
-  <button mat-menu-item>Orders</button>
-  <button mat-menu-item>Log out</button>
-</mat-menu>

@@ -1,2 +1,32 @@
+<tcode-information-bar></tcode-information-bar>
+<tcode-navbar>
+  <div class="logo-section">
+    <img src="../assets/img/logo.png" alt="logo">
+  </div>
+  <div class="action-section">
+    <img src="../assets/img/search.svg" class="search" alt="search">
+    <img 
+      src="../assets/img/user.svg" 
+      class="profile cursor-pointer" alt="profile" 
+      [matMenuTriggerFor]="authMenu"
+      *ngIf="isLoggedIn"
+    >
+    <img 
+      src="../assets/img/user.svg" 
+      class="profile cursor-pointer" alt="profile" 
+      (click)="handleAuthAction()"
+      matTooltip="Login"
+      *ngIf="!isLoggedIn"
+    >
+    <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
+    <mat-icon matBadge="15" matBadgeColor="warn" class="cart" matBadgeSize="small">local_mall</mat-icon>
+  </div>
+</tcode-navbar>
 <router-outlet></router-outlet>
 <!-- <tcode-footer></tcode-footer> -->
+
+<mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
+  <button mat-menu-item>Account Info</button>
+  <button mat-menu-item>Orders</button>
+  <button mat-menu-item>Log out</button>
+</mat-menu>
