@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, Customer } from '@tcode/frontend-auth';
-import { Product } from '@tcode/api-interface';
 
 @Component({
   selector: 'tcode-root',

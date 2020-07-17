@@ -1,5 +1,8 @@
 import { FarmproduceComponent } from "./farmproduce.component"
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { InputModule } from '@tcode/input';
+import { ButtonsModule } from '@tcode/buttons';
+import { ProductModule } from '@tcode/product';
 
 
 describe('FarmproduceComponent', () => {
@@ -10,7 +13,9 @@ describe('FarmproduceComponent', () => {
     TestBed.configureTestingModule({
       declarations: [FarmproduceComponent],
       imports: [
-
+        InputModule,
+        ButtonsModule,
+        ProductModule
       ]
     })
     .compileComponents();
