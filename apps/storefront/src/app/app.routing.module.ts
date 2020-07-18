@@ -13,6 +13,10 @@ const routes: Routes = [
  {
   path: 'inverter',
   loadChildren: () => import('./inverter/inverter.module').then(m => m.InverterModule)
+},
+{
+  path: 'real-estate',
+  loadChildren: () => import('./realEstate/realEstate.module').then(m => m.RealEstateModule)
 }
 ];
 
