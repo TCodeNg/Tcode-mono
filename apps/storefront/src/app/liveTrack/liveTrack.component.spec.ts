@@ -1,27 +1,25 @@
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
-import { RealEstateComponent } from './realEstate.component';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
-import { ProductModule } from '@tcode/product';
+import { LiveTrackComponent } from './liveTrack.component';
 
-describe('RealEstateComponent', () => {
-  let component: RealEstateComponent;
-  let fixture: ComponentFixture<RealEstateComponent>;
+describe('LiveTrackComponent', () => {
+  let component: LiveTrackComponent;
+  let fixture: ComponentFixture<LiveTrackComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RealEstateComponent],
+      declarations: [LiveTrackComponent],
       imports: [
         InputModule,
-        ButtonsModule,
-        ProductModule
+        ButtonsModule
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RealEstateComponent);
+    fixture = TestBed.createComponent(LiveTrackComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

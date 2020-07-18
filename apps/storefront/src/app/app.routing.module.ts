@@ -17,6 +17,10 @@ const routes: Routes = [
 {
   path: 'real-estate',
   loadChildren: () => import('./realEstate/realEstate.module').then(m => m.RealEstateModule)
+},
+{
+  path: 'track',
+  loadChildren: () => import('./liveTrack/liveTrack.module').then(m => m.LiveTrackModule)
 }
 ];
 
