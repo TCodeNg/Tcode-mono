@@ -1,0 +1,56 @@
+<section class="hero">
+  <div class="content flex flex-center flex-col">
+    <h1>Power your home without interuption</h1>
+    <h5>Find the best inverter unit for home and office</h5>
+    <!-- <div class="toggle">
+      <input
+        type="radio"
+        name="solarPanel"
+        value="solar"
+        id="solar-panel"
+      />
+      <label for="qr-payment">With Solar Panel</label>
+      <tcode-input class="location">
+        <input id="location" type="text" placeholder="Location">
+      </tcode-input>
+    </div> -->
+    <div class="search flex justify-center">
+      <tcode-input class="checker">
+        <input type="checkbox" id="checkboxOne" value="Rainbow Dash">
+        <span>With Solar Panel</span>
+      </tcode-input>
+      <tcode-input class="query-input">
+        <input id="searchTv" type="text" placeholder="No. of TV">
+      </tcode-input>
+      <tcode-input class="query-input">
+        <input id="seachFan" type="text" placeholder="No. of Fans">
+      </tcode-input>
+      <tcode-input class="query-input">
+        <input id="searchAc" type="text" placeholder="No. of AC">
+      </tcode-input>
+      <tcode-input class="query-input">
+        <input id="searchBulb" type="text" placeholder="No. of Bulbs">
+      </tcode-input>
+      <tcode-input class="query-input">
+        <input id="searchComputer" type="text" placeholder="No. of computers">
+      </tcode-input>
+    </div>
+    <div class="button flex flex-center">
+      <tcode-button type="normal">Get quote</tcode-button>
+    </div>
+  </div>
+</section>
+
+<section class="product-listing flex flex-center flex-col">
+  <div class="header">
+    <h2 class="title">Greatest deals on agro machines and produce</h2>
+    <p class="sub-title">So you will never miss out</p>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+</section>
+
+<div class="button flex flex-center">
+  <tcode-button type="normal">Load More</tcode-button>
+</div>
