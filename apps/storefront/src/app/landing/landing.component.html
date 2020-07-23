@@ -1,30 +1,97 @@
-<tcode-information-bar></tcode-information-bar>
-<tcode-navbar>
-  <div class="logo-section">
-    <img src="../assets/img/logo.png" alt="logo">
+<section class="hero">
+  <div class="content">
+    <h5>Find the best deals on home properties</h5>
+    <h1>We guarantee we'll help <br> you find a place you love</h1>
+    <div class="button">
+      <tcode-button type="normal">Get Started</tcode-button>
+    </div>
+    <ul class="cards">
+      <li class="card">
+        <div class="image">
+          <img src="../../assets/img/power 1.svg" alt="power" class="icon">
+        </div>
+        <div class="text">
+          <p class="header">Inverter & Solar Power</p>
+          <p class="content-text">Power up your home and office with steady power.</p>
+        </div>
+      </li>
+      <li class="card">
+        <div class="image">
+          <img src="../../assets/img/home.svg" alt="power" class="icon">
+        </div>
+        <div class="text">
+          <p class="header">Real Estate</p>
+          <p class="content-text">Find great deals on home properties, both rent and buy.</p>
+        </div>
+      </li>
+      <li class="card">
+        <div class="image">
+          <img src="../../assets/img/feather.svg" alt="power" class="icon">
+        </div>
+        <div class="text">
+          <p class="header">Agro Machine & Produce</p>
+          <p class="content-text">All the agro produce and machinery you can ever want.</p>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="action-section">
-    <img src="../assets/img/search.svg" class="search" alt="search">
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
-      [matMenuTriggerFor]="authMenu"
-      *ngIf="isLoggedIn"
-    >
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
-      (click)="handleAuthAction()"
-      matTooltip="Login"
-      *ngIf="!isLoggedIn"
-    >
-    <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
-    <mat-icon matBadge="15" matBadgeColor="warn" class="cart" matBadgeSize="small">local_mall</mat-icon>
-  </div>
-</tcode-navbar>
+</section>
 
-<mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
-  <button mat-menu-item>Account Info</button>
-  <button mat-menu-item>Orders</button>
-  <button mat-menu-item>Log out</button>
-</mat-menu>
+<section class="product-listing flex flex-center flex-col">
+  <div class="header">
+    <h2 class="title">We have the most listings</h2>
+    <p class="sub-title">So you will never miss out</p>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+</section>
+
+<section class="product-listing flex flex-center flex-col bg-grey">
+  <div class="header">
+    <p class="sub-title">Best selling in</p>
+    <h2 class="title">Real Estate</h2>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+  <div class="button">
+    <tcode-button type="normal">Explore Real Estate</tcode-button>
+  </div>
+</section>
+
+<section class="product-listing flex flex-center flex-col">
+  <div class="header">
+    <p class="sub-title">Best selling in</p>
+    <h2 class="title">Inverter & Solar Power</h2>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+  <div class="button">
+    <tcode-button type="normal">Explore Inverter & Solar Power</tcode-button>
+  </div>
+</section>
+
+<section class="product-listing flex flex-center flex-col bg-grey">
+  <div class="header">
+    <p class="sub-title">Best selling in</p>
+    <h2 class="title">Agro Machinery & Produce</h2>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+  <div class="button">
+    <tcode-button type="normal">Explore Agro Machinery & Produce</tcode-button>
+  </div>
+</section>
+
+<section class="advert flex flex-center flex-col">
+  <div class="title">
+    <h2>Get to know about</h2>
+    <h2 class="text-uppercase">Tcode multiconcept limited</h2>
+  </div>
+  <p>Start building your finances with our well thought out <br> investment plans</p>
+  <small>In case you don't know, an investment is an asset or item acquired <br>with the goal of generating income or appreciation.<br> TCODE INVESTMENT deals with Money Market-Fund, Real Estate and <br>General Merchandise. In an economic sense, an investment is the...</small>
+  <tcode-button type="normal">Learn more</tcode-button>
+</section>

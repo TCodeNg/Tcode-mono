@@ -3,8 +3,8 @@
     <ng-content select=".logo-section"></ng-content>
     <div class="links-section">
       <ul>
-        <li>Home</li>
-        <li>Farm Produce</li>
+        <li [routerLink]="['']" routerLinkActive="router-link-active">Home</li>
+        <li [routerLink]="['/farm-produce']" routerLinkActive="router-link-active" >Farm Produce</li>
         <li>Inverter</li>
         <li>Real Estate</li>
         <li>Track Delivery</li>

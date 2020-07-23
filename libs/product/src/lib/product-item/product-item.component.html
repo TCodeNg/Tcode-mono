@@ -10,7 +10,8 @@
         </div>
         <div class="rating">
             <tcode-product-rating 
-                [score]="productUserScore === 0 ? product?.rating?.userScore : product?.rating?.score"
+                [score]="productUserScore === 0 ? product?.rating?.userScore : product?.rating?.totalScore"
+                [totalRatings]="product?.rating?.totalRatings"
                 (onRate)="rateProduct($event)"
             >
             </tcode-product-rating>

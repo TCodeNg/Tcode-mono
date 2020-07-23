@@ -7,6 +7,23 @@
         margin: 0 !important;
       }
     }
+    tcode-input {
+      .input-wrap {
+        background: white !important;
+      }
+      &.search-input {
+        .input-wrap {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+        }
+      }
+      &.location {
+        .input-wrap {
+          border-top-left-radius: 0 !important;
+          border-bottom-left-radius: 0 !important;
+        }
+      }
+    }
   }
   
 }
@@ -14,7 +31,7 @@
   display: none;
 }
 .hero {
-  background-image: url("/assets/img/houses-building-blue-sky-appartments.png");
+  background-image: url("/assets/img/farmbackground.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,18 +40,16 @@
   position: relative;
   .content {
     height: 100%;
-    display: flex;
-    flex-direction: column;
     width: 70%;
     margin: 0 auto;
-    justify-content: center;
     color: white;
     
     h5 {
-      margin-bottom: 30px;
+      margin-top: 30px;
       letter-spacing: 1.08px;
       font-size: 0.857rem;
       text-transform: uppercase;
+      text-align: center;
       @include media('<tablet'){
         letter-spacing: 1px;
         font-size: 0.7rem;
@@ -47,44 +62,14 @@
         font-size: 2.6rem;
       }
     }
+    .search {
+      margin-top: 32px;
+      width: 50%;
+    }
     .button{
       margin-top: 30px;
-      display: flex;
       @include media('<tablet'){
         justify-content: center;
-      }
-      align-items: center;
-    }
-    .cards {
-      list-style: none;
-      margin-top: 134px;
-      display: grid;
-      grid-gap: 15px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      @include media('>phone', '<tablet'){
-        display: none;
-      }
-      .card {
-        background: white;
-        border-radius: 6px;
-        padding: 1.12rem;
-        display: flex;
-        .image {
-          margin-right: 20px;
-        }
-        .text {
-          .header {
-            color: #000;
-            font-weight: bold;
-            letter-spacing: 0.04rem;
-          }
-          .content-text {
-            color: #7A7A7A;
-            font-weight: lighter;
-            margin-top: 4px;
-            font-size: 0.875rem;
-          }
-        }
       }
     }
   }

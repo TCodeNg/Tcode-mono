@@ -45,6 +45,12 @@ a {
 .flex {
   display: flex;
 }
+.flex-1 {
+  flex: 1;
+}
+.justify-center {
+  justify-content: center;
+}
 .justify-end {
   justify-content: flex-end;
 }
@@ -53,6 +59,10 @@ a {
 }
 .item-center {
   align-items: center;
+}
+.flex-center {
+  align-items: center;
+  justify-content: center;
 }
 .flex-col {
   flex-direction: column;
@@ -96,4 +106,7 @@ a {
   align-items: center;
   justify-content: space-between;
   height: 36px;
+}
+.text-uppercase {
+  text-transform: uppercase;
 }

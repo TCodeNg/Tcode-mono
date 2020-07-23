@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer, User } from '@tcode/frontend-auth';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { Product } from '@tcode/api-interface';
+import { products } from './products';
 
 @Component({
   selector: 'tcode-landing',
@@ -9,23 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  user: Customer;
-  constructor(
-    _user: User,
-    private router: Router
-  ) {
-    this.user = _user as Customer;
-  }
+  products: Product[];
+  constructor() {}
 
   ngOnInit(): void {
-  }
-
-  handleAuthAction(){
-    this.router.navigate(['/auth/login']);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.user.isLoggedIn()
+    this.products = products;
   }
 
 }

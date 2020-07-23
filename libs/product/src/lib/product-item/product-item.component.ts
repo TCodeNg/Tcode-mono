@@ -8,24 +8,28 @@ import { Product } from '@tcode/api-interface';
 })
 export class ProductItemComponent implements OnInit {
 
-  dummyPdt: Product = {
+  dummyPdt: Product =  {
     id: "5ee4c28b55f776579bebcac2",
+    productId: '333',
     category: [
       "5ee4b2530ee45f000dabb459"
     ],
     images: [
       {
-        image: 'https://res.cloudinary.com/horlabyc/image/upload/v1556649509/dcw0stlkpnmm6gnf5llu.jpg',
-        thumb: 'https://res.cloudinary.com/horlabyc/image/upload/c_scale,w_200/v1556649509/dcw0stlkpnmm6gnf5llu.jpg'
+        image: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_vbs2ir.svg',
+        thumb: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_vbs2ir.svg',
+        public_Id: 'x',
+        width: 200,
+        height: 200
       }
     ],
-    title: "Locally made hand sanitizer",
+    title: "4 bedroom duplex - Ikeja GRA",
     price: {
-      value: 200,
+      value: 90000000,
       currency: 'NGN'
     },
-    type: "farm",
-    description: "premium bed machine",
+    type: 'estate',
+    description: "4 bedroom duplex - Ikeja GRA",
     agent:{
       id: '5ee4b2530ee45f000dabb459',
       title: 'Vendor'
@@ -39,9 +43,9 @@ export class ProductItemComponent implements OnInit {
     updated: new Date("2020-06-13T12:11:55.453Z"),
     rating: {
       totalRatings: 1,
-      score: 2,
+      totalScore: 2,
       userScore: 3
-    }
+    },
   }
 
   @Input() product: Product;

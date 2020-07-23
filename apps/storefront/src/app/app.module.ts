@@ -8,6 +8,11 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AuthConfig, FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { SharedModule } from './Shared/shared.module';
+import { AppRoutingModule } from './app.routing.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -21,14 +26,15 @@ const authConfig: AuthConfig = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     FrontendAuthModule.forRoot(authConfig, 'customer'),
     NgxsModule.forRoot([]),
+    MatIconModule,
+    MatBadgeModule,
+    MatMenuModule,
     NgxsDataPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    RouterModule.forRoot([{
-      path: '',
-      loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
-    }], { initialNavigation: 'enabled' }),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
