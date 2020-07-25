@@ -3,6 +3,7 @@ import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('InverterComponent', () => {
   let component: InverterComponent;
@@ -14,6 +15,7 @@ describe('InverterComponent', () => {
       imports: [
         InputModule,
         ButtonsModule,
+        BrowserAnimationsModule,
         ProductModule
       ]
     })

@@ -1,32 +1,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LandingComponent } from './landing.component';
-import { SharedModule } from '../Shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ButtonsModule } from '@tcode/buttons';
-import { ProductModule } from '@tcode/product';
+import { RegisterVendorComponent } from './register-vendor.component';
+import { InputModule } from '@tcode/input';
+import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LandingComponent', () => {
-  let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+  let component: RegisterVendorComponent;
+  let fixture: ComponentFixture<RegisterVendorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LandingComponent ],
+      declarations: [ RegisterVendorComponent ],
       imports: [
-        SharedModule,
         ButtonsModule,
-        ProductModule,
-        BrowserAnimationsModule,
-        RouterTestingModule,
+        InputModule,
+        MatRadioModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(RegisterVendorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

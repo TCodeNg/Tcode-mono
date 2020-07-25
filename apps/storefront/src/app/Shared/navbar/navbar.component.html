@@ -8,11 +8,11 @@
         <li [routerLink]="['/inverter']" routerLinkActive="router-link-active">Inverter</li>
         <li [routerLink]="['/real-estate']" routerLinkActive="router-link-active">Real Estate</li>
         <li [routerLink]="['/track']" routerLinkActive="router-link-active">Track Delivery</li>
-        <li>Become a Vendor</li>
+        <li [routerLink]="['/become-vendor']" routerLinkActive="router-link-active">Become a Vendor</li>
       </ul>
     </div>
     <ng-content select=".action-section"></ng-content>
-    <img src="assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu">
+    <img src="assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu" alt="menu">
   </div>
 </div>
 <mat-menu class="mobile-menu" #mobileMenu="matMenu" xPosition="before">
