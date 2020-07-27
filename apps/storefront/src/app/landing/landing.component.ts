@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Product } from '@tcode/api-interface';
 import { products } from './products';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'tcode-landing',
@@ -24,7 +25,8 @@ export class LandingComponent implements OnInit {
   inverterProducts: Product[];
   farmProducts: Product[];
   constructor(
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -34,8 +36,10 @@ export class LandingComponent implements OnInit {
     this.farmProducts = products.farmProducts;
   }
 
-  gotoProduct(product: Product) {
-    this.router.navigate(['/', 'product', product.id])
+  gotoProduct(e: MouseEvent, product: Product) {
+    if(e.srcElement['tagName'] === 'IMG') {
+      this.router.navigate(['/', 'product', product.id])
+    }
   }
 
   navigateToRealEstate(){
@@ -48,6 +52,10 @@ export class LandingComponent implements OnInit {
 
   navigateToFarmProduce(){
     this.router.navigate(['/farm-produce']);
+  }
+
+  addToCart(e){
+    this.cartService.addItem(e, 1);
   }
 
 }
