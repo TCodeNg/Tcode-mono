@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, Customer } from '@tcode/frontend-auth';
 import { CartService } from './services/cart.service';
+import { Product } from '@tcode/api-interface';
 
 @Component({
   selector: 'tcode-root',
@@ -21,11 +22,13 @@ export class AppComponent implements OnInit {
   }
 
   cartCount$ = this.cartService.cartCount$
+  cartAmount$ = this.cartService.cartTotalAmount$;
+  cartItems$ = this.cartService.cartItems$;
 
   ngOnInit(){
     this.cartService.updateCartItemCount();
-    this.cartItems = this.cartService.getItemsInCart();
-    console.log(this.cartItems)
+    this.cartService.updateCartTotalAmount();
+    this.cartService.updateCartItems();
   }
 
   handleAuthAction(){
@@ -34,6 +37,15 @@ export class AppComponent implements OnInit {
 
   get isLoggedIn(): boolean {
     return this.user.isLoggedIn()
+  }
+
+  gotoProductPage(product: Product){
+    const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
+    this.router.navigate([`/${urlPath}`, 'product', product.id]);
+  }
+
+  removeFromCart(item: Product){
+    this.cartService.removeItem(item)
   }
   
 }

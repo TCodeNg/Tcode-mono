@@ -35,24 +35,24 @@
   <div class="header flex">
     <mat-icon class="cursor-pointer" (click)="showCart = false">close</mat-icon>
     <h2 class="title">Shopping Cart</h2>
-    <p><span class="count bold">{{ cartCount$ | async }} </span> items</p>
+    <p><span class="count bold">{{ cartCount$ | async }} </span> item(s)</p>
   </div>
   <div class="content mt-1 flex flex-col">
-    <div class="cartItem flex" *ngFor="let item of cartItems">
+    <div class="cartItem flex" *ngFor="let item of (cartItems$ | async)">
       <div class="image">
-        <img [src]="item?.item?.images[0]?.image" alt="product-image" height="98" width="128">
+        <img [src]="item?.item?.images[0]?.image" alt="product-image" height="98" width="128" class="cursor-pointer" (click)="gotoProductPage(item.item)">
       </div>
       <div class="price">
         <p class="item-name">{{ item?.item?.title }}</p>
-        <p class="item-price">{{ item?.quantity}} x {{ item?.item?.price.value | currency: (item?.item?.price?.currency): 'code' }}</p>
+        <p class="item-price">{{ item?.quantity }} x {{ item?.item?.price.value | currency: (item?.item?.price?.currency): 'code' }}</p>
       </div>
-      <mat-icon class="cursor-pointer" (click)="removeFromCart()">delete_outline</mat-icon>
+      <mat-icon class="cursor-pointer" (click)="removeFromCart(item.item)">delete_outline</mat-icon>
     </div>
   </div>
   <div class="total">
-    <p class="cart-total">Total: {{ 200000 | currency: 'NGN': 'code' }}</p>
+    <p class="cart-total">Total: {{ (cartAmount$ | async) | currency: 'NGN': 'code' }}</p>
     <div class="button">
-      <tcode-button type="normal">Proceed to checkot</tcode-button>
+      <tcode-button type="normal">Proceed to checkout</tcode-button>
     </div>
   </div>
 </div>
