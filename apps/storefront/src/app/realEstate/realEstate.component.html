@@ -1,0 +1,43 @@
+<header class="hero" @fade>
+  <div class="content flex flex-center flex-col">
+    <h1>Let us find your next home</h1>
+    <h5>Search properties for sale and for rent in Nigeria</h5>
+    <div class="flex justify-center let-option">
+      <div class="options">
+        <input class="checkbox-budget" type="radio" name="budget" id="budget-1" checked>
+        <label class="for-checkbox-budget" for="budget-1">
+          <span data-hover="Buy">Buy</span>
+        </label>
+        <input class="checkbox-budget" type="radio" name="budget" id="budget-2">
+        <label class="for-checkbox-budget" for="budget-2">							
+          <span data-hover="Rent">Rent</span>
+        </label>
+        <input class="checkbox-budget" type="radio" name="budget" id="budget-3">
+        <label class="for-checkbox-budget" for="budget-3">							
+          <span data-hover="Shortlet">Shortlet</span>
+        </label>
+        <input class="checkbox-budget" type="radio" name="budget" id="budget-4">
+        <label class="for-checkbox-budget" for="budget-4">							
+          <span data-hover="Land">Land</span>
+        </label>
+      </div>
+    </div>
+    <div class="button flex flex-center">
+      <tcode-button type="normal">Search properties</tcode-button>
+    </div>
+  </div>
+</header>
+
+<section class="product-listing flex flex-center flex-col">
+  <div class="header">
+    <h2 class="title">Greatest deals on home and offices</h2>
+    <p class="sub-title">So you will never miss out</p>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+</section>
+
+<div class="button flex flex-center">
+  <tcode-button type="normal">Load More</tcode-button>
+</div>

@@ -1,3 +1,140 @@
+@import '../../media';
+
+:host {
+  &::ng-deep {
+    tcode-button {
+      .content {
+        margin: 0 !important;
+      }
+    }
+  }
+  
+}
 .noDisplay {
   display: none;
+}
+.hero {
+  background-image: url("/assets/img/houses-building-blue-sky-appartments.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 99vw;
+  height: 75vh;
+  position: relative;
+  .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: center;
+    color: white;
+    
+    h5 {
+      margin-bottom: 30px;
+      letter-spacing: 1.08px;
+      font-size: 0.857rem;
+      text-transform: uppercase;
+      @include media('<tablet'){
+        letter-spacing: 1px;
+        font-size: 0.7rem;
+      }
+    }
+    h1 {
+      letter-spacing: 1.2px;
+      font-size: 2.875rem;
+      @include media('<tablet'){
+        font-size: 2.6rem;
+      }
+    }
+    .button{
+      margin-top: 30px;
+      display: flex;
+      @include media('<tablet'){
+        justify-content: center;
+      }
+      align-items: center;
+    }
+    .cards {
+      list-style: none;
+      margin-top: 134px;
+      display: grid;
+      grid-gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      @include media('>phone', '<tablet'){
+        display: none;
+      }
+      .card {
+        background: white;
+        border-radius: 6px;
+        padding: 1.12rem;
+        display: flex;
+        .image {
+          margin-right: 20px;
+        }
+        .text {
+          .header {
+            color: #000;
+            font-weight: bold;
+            letter-spacing: 0.04rem;
+          }
+          .content-text {
+            color: #7A7A7A;
+            font-weight: lighter;
+            margin-top: 4px;
+            font-size: 0.875rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.product-listing {
+  width: 99vw;
+  &.bg-grey {
+    background: #f7f7f7;
+  }
+  .header {
+    margin: 50px 0;
+    text-align: center;
+    .title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.04rem;
+    }
+    .sub-title {
+      font-weight: lighter;
+      font-size: 0.9rem;
+    } 
+  }
+  .products {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    margin-bottom: 80px;
+  }
+  .button {
+    margin-bottom: 40px;
+  }
+}
+.advert {
+  color: #1E266D;
+  margin-top: 50px;
+  text-align: center;
+  .title {
+    line-height: 40px;
+  }
+  p {
+    margin: 20px 0;
+  }
+  small {
+    margin: 21px 0 42px 0;
+    line-height: 24px;
+  }
+  tcode-button {
+    margin-bottom: 80px;
+  }
 }

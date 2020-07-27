@@ -1,0 +1,31 @@
+<header class="hero" @fade>
+  <div class="content flex flex-center flex-col">
+    <h1>We also provide agro machinery and produce</h1>
+    <h5>Fresh farm produce straight from the table</h5>
+    <div class="search flex justify-center">
+      <tcode-input class="search-input flex-1">
+        <input id="search" type="text" placeholder="Search farm produce and equipments">
+      </tcode-input>
+      <tcode-input class="location">
+        <input id="location" type="text" placeholder="Location">
+      </tcode-input>
+    </div>
+    <div class="button flex flex-center">
+      <tcode-button type="normal">Search product</tcode-button>
+    </div>
+  </div>
+</header>
+
+<section class="product-listing flex flex-center flex-col">
+  <div class="header">
+    <h2 class="title">Greatest deals on agro machines and produce</h2>
+    <p class="sub-title">So you will never miss out</p>
+  </div>
+  <div class="products">
+    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+  </div>
+</section>
+
+<div class="button flex flex-center">
+  <tcode-button type="normal">Load More</tcode-button>
+</div>

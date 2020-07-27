@@ -7,18 +7,15 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
-
+import { ButtonsModule } from '@tcode/buttons';
+import { ProductModule } from '@tcode/product';
 
 @NgModule({
   declarations: [LandingComponent],
   imports: [
-    CommonModule,
-    SharedModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatMenuModule,
-    MatTooltipModule,
+    CommonModule,    
+    ButtonsModule,
+    ProductModule,
     RouterModule.forChild([
       {
         path: '',

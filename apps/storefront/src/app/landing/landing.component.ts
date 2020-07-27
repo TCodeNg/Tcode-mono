@@ -1,31 +1,29 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer, User } from '@tcode/frontend-auth';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { Product } from '@tcode/api-interface';
+import { products } from './products';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'tcode-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.scss'],
+  animations: [
+    trigger('fade', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(1000, style({opacity: 1}))
+      ]) 
+    ])
+  ]
 })
 export class LandingComponent implements OnInit {
-  user: Customer;
-  constructor(
-    _user: User,
-    private router: Router
-  ) {
-    this.user = _user as Customer;
-  }
+  products: Product[];
+  constructor() {}
 
   ngOnInit(): void {
-  }
-
-  handleAuthAction(){
-    this.router.navigate(['/auth/login']);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.user.isLoggedIn()
+    this.products = products;
   }
 
 }

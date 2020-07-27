@@ -3,16 +3,16 @@
     <ng-content select=".logo-section"></ng-content>
     <div class="links-section">
       <ul>
-        <li>Home</li>
-        <li>Farm Produce</li>
-        <li>Inverter</li>
-        <li>Real Estate</li>
-        <li>Track Delivery</li>
-        <li>Become a Vendor</li>
+        <li [routerLink]="['']" routerLinkActive="router-link-active">Home</li>
+        <li [routerLink]="['/farm-produce']" routerLinkActive="router-link-active" >Farm Produce</li>
+        <li [routerLink]="['/inverter']" routerLinkActive="router-link-active">Inverter</li>
+        <li [routerLink]="['/real-estate']" routerLinkActive="router-link-active">Real Estate</li>
+        <li [routerLink]="['/track']" routerLinkActive="router-link-active">Track Delivery</li>
+        <li [routerLink]="['/become-vendor']" routerLinkActive="router-link-active">Become a Vendor</li>
       </ul>
     </div>
     <ng-content select=".action-section"></ng-content>
-    <img src="assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu">
+    <img src="assets/img/menu.svg" class="mobile-menu-icon" [matMenuTriggerFor]="mobileMenu" alt="menu">
   </div>
 </div>
 <mat-menu class="mobile-menu" #mobileMenu="matMenu" xPosition="before">

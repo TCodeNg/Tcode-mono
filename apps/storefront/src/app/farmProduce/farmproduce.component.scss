@@ -1,0 +1,110 @@
+@import '../../media';
+
+:host {
+  &::ng-deep {
+    tcode-button {
+      .content {
+        margin: 0 !important;
+      }
+    }
+    tcode-input {
+      .input-wrap {
+        background: white !important;
+      }
+      &.search-input {
+        .input-wrap {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+        }
+      }
+      &.location {
+        .input-wrap {
+          border-top-left-radius: 0 !important;
+          border-bottom-left-radius: 0 !important;
+        }
+      }
+    }
+  }
+  
+}
+.noDisplay {
+  display: none;
+}
+.hero {
+  background-image: url("/assets/img/farmbackground.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 99vw;
+  height: 75vh;
+  position: relative;
+  .content {
+    height: 100%;
+    width: 70%;
+    margin: 0 auto;
+    color: white;
+    
+    h5 {
+      margin-top: 30px;
+      letter-spacing: 1.08px;
+      font-size: 0.857rem;
+      text-transform: uppercase;
+      text-align: center;
+      @include media('<tablet'){
+        letter-spacing: 1px;
+        font-size: 0.7rem;
+      }
+    }
+    h1 {
+      letter-spacing: 1.2px;
+      font-size: 2.875rem;
+      @include media('<tablet'){
+        font-size: 2.6rem;
+      }
+    }
+    .search {
+      margin-top: 32px;
+      width: 50%;
+    }
+    .button{
+      margin-top: 30px;
+      @include media('<tablet'){
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.product-listing {
+  width: 99vw;
+  &.bg-grey {
+    background: #f7f7f7;
+  }
+  .header {
+    margin: 50px 0;
+    text-align: center;
+    .title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.04rem;
+    }
+    .sub-title {
+      font-weight: lighter;
+      font-size: 0.9rem;
+    } 
+  }
+  .products {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    margin-bottom: 80px;
+  }
+  .button {
+    margin-bottom: 40px;
+  }
+}
+.button {
+  margin-bottom: 72px;
+}

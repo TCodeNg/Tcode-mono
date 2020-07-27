@@ -5,6 +5,7 @@ import { AUTH_CONFIG_TOKEN } from '@tcode/frontend-auth';
 import { ButtonsModule } from '@tcode/buttons';
 import { InputModule } from '@tcode/input';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -16,6 +17,7 @@ describe('RegisterComponent', () => {
       imports: [
         ButtonsModule,
         InputModule,
+        ReactiveFormsModule,
         RouterTestingModule
       ],
       providers: [
