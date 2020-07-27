@@ -1,18 +1,17 @@
-import { FarmproduceComponent } from "./farmproduce.component"
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { InverterComponent } from "./inverter.component";
+import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-describe('FarmproduceComponent', () => {
-  let component: FarmproduceComponent;
-  let fixture: ComponentFixture<FarmproduceComponent>;
+describe('InverterComponent', () => {
+  let component: InverterComponent;
+  let fixture: ComponentFixture<InverterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FarmproduceComponent],
+      declarations: [InverterComponent],
       imports: [
         InputModule,
         ButtonsModule,
@@ -24,7 +23,7 @@ describe('FarmproduceComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FarmproduceComponent);
+    fixture = TestBed.createComponent(InverterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -32,5 +31,4 @@ describe('FarmproduceComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 })

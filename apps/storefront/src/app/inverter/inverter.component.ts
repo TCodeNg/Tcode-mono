@@ -3,11 +3,10 @@ import { Product } from '@tcode/api-interface';
 import { products } from './product';
 import { trigger, transition, style, animate } from '@angular/animations';
 
-
 @Component({
-  selector: 'tcode-farmproduce',
-  templateUrl: './farmproduce.component.html',
-  styleUrls: ['./farmproduce.component.scss'],
+  selector: 'tcode-inverter',
+  templateUrl: './inverter.component.html',
+  styleUrls: ['./inverter.component.scss'],
   animations: [
     trigger('fade', [ 
       transition('void => *', [
@@ -17,11 +16,11 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class FarmproduceComponent implements OnInit {
+export class InverterComponent implements OnInit {
   products: Product[];
   constructor(){}
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.products = products;
   }
 }

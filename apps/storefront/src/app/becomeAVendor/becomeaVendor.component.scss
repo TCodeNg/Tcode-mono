@@ -1,43 +1,22 @@
 @import '../../media';
 
-:host {
-  &::ng-deep {
-    tcode-button {
-      .content {
-        margin: 0 !important;
-      }
-    }
-    tcode-input {
-      .input-wrap {
-        background: white !important;
-      }
-      &.search-input {
-        .input-wrap {
-          border-top-right-radius: 0 !important;
-          border-bottom-right-radius: 0 !important;
-        }
-      }
-      &.location {
-        .input-wrap {
-          border-top-left-radius: 0 !important;
-          border-bottom-left-radius: 0 !important;
-        }
-      }
-    }
-  }
-  
-}
-.noDisplay {
-  display: none;
-}
 .hero {
-  background-image: url("/assets/img/farmbackground.png");
+  background-image: url("/assets/img/background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 99vw;
   height: 75vh;
   position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
   .content {
     height: 100%;
     width: 70%;
@@ -45,11 +24,11 @@
     color: white;
     
     h5 {
-      margin-top: 30px;
       letter-spacing: 1.08px;
       font-size: 0.857rem;
       text-transform: uppercase;
       text-align: center;
+      z-index: 1;
       @include media('<tablet'){
         letter-spacing: 1px;
         font-size: 0.7rem;
@@ -58,6 +37,11 @@
     h1 {
       letter-spacing: 1.2px;
       font-size: 2.875rem;
+      z-index: 1;
+      margin-top: 30px;
+      width: 57%;
+      text-align: center;
+      line-height: 60px;
       @include media('<tablet'){
         font-size: 2.6rem;
       }
@@ -68,18 +52,14 @@
     }
     .button{
       margin-top: 30px;
+      z-index: 1;
       @include media('<tablet'){
         justify-content: center;
       }
     }
   }
 }
-
-.product-listing {
-  width: 99vw;
-  &.bg-grey {
-    background: #f7f7f7;
-  }
+.info {
   .header {
     margin: 50px 0;
     text-align: center;
@@ -87,24 +67,31 @@
       font-size: 1.5rem;
       margin-bottom: 10px;
       letter-spacing: 0.04rem;
+      color: #1E266D;
     }
     .sub-title {
       font-weight: lighter;
       font-size: 0.9rem;
+      color: #6D7D93
     } 
   }
-  .products {
-    width: 70%;
-    margin: 0 auto;
-    display: grid;
-    grid-gap: 25px;
-    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
-    margin-bottom: 80px;
-  }
-  .button {
-    margin-bottom: 40px;
-  }
 }
-.button {
-  margin-bottom: 72px;
+.info-grid {
+  display: grid;
+  width: 75%;
+  margin: 0 auto 46px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 59px;
+  .info {
+    align-items: flex-start;
+    .title {
+      margin-top: 10px;
+      font-weight: 550;
+    }
+    .sub-text {
+      margin-top: 20px;
+      letter-spacing: 0.4px;
+      font-weight: 300;
+    }
+  }
 }

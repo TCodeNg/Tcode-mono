@@ -5,6 +5,7 @@
     width: 70%;
     margin: 0 auto;
     grid-template-columns: 1fr 1.5fr 1fr 1fr;
+    padding-bottom: 40px;
     .footer-section {
       .title {
         color: #1E266D;
@@ -28,6 +29,51 @@
           margin-top: 16px;
         }
       }
+      &.quicklinks {
+        ul {
+          list-style: none;
+          margin-top: 16px;
+          li>p{
+            color: #4F4F4F;
+            font-weight: lighter;
+            line-height: 25px;
+            cursor: pointer;
+            color: #1D66FF;
+          }
+        }
+      }
+      &.socials {
+        ul {
+          list-style: none;
+          margin-top: 16px;
+          display: inline-flex;
+          li {
+            cursor: pointer;
+            &:not(:last-of-type) {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
     }
+  }
+  .line {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      background: #CFDFEF;
+      bottom: 0;
+      padding: 1px;
+      width: 80vw;
+      left: 139px;
+      margin: 0 auto;
+    }
+  }
+  .copyright {
+    margin-top: 15px;
+    padding-bottom: 17px;
+    color: #4F4F4F;
+    font-weight: lighter;
   }
 }

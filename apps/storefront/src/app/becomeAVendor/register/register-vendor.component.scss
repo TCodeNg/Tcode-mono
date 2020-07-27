@@ -1,0 +1,126 @@
+@import "../../../media";
+$green: #02B075;
+$blue: #1D66FF;
+$link-color: $green;
+
+.wrapper {
+  width: 25rem;
+  margin: 6.25rem auto 3rem;;
+
+  tcode-input {
+    &:first-of-type {
+      margin-bottom: 1.25rem;
+    }
+
+    &::ng-deep {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+      }
+    }
+  }
+
+  tcode-button {
+    display: flex;
+    &::ng-deep {
+      .content {
+        margin: 10px 0 !important;
+        display: flex !important;
+        width: 100%;
+
+        button {
+          width: 100%;
+          min-height: 3rem;
+        }
+      }
+    }
+  }
+
+  a {
+    color: $link-color;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  @include media('>=tablet') {
+    width: 30rem;
+  }
+
+  @include media('>=desktop') {
+    width: 32rem;
+  }
+
+  @include media('>=1440px') {
+    width: 35rem;
+  }
+}
+
+.sign-up-wrap {
+  border-bottom: 1px solid #CFDFEF;
+  margin: 2.813rem 0 1.4rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 1.375rem;
+  }
+
+  a {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    color: $blue;
+    img {
+      margin-right: .35rem;
+    }
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+
+  .control {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+
+    & > * {
+      flex: 1;
+      margin-right: .5rem !important;
+      &:last-of-type {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  tcode-input {
+    margin: 0 !important;
+  }
+}
+.mat-radio-button {
+  margin-right: 20px;
+}
+.absolute {
+  top: 0;
+}
+label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #000000;
+  margin: 0 0 3px 0;
+  letter-spacing: 0;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+}

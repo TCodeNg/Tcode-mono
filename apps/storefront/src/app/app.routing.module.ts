@@ -9,7 +9,23 @@ const routes: Routes = [
  {
    path: 'farm-produce',
    loadChildren: () => import('./farmProduce/farmproduce.module').then(m => m.FarmProduceModule)
- }
+ },
+ {
+    path: 'inverter',
+    loadChildren: () => import('./inverter/inverter.module').then(m => m.InverterModule)
+  },
+  {
+    path: 'real-estate',
+    loadChildren: () => import('./realEstate/realEstate.module').then(m => m.RealEstateModule)
+  },
+  {
+    path: 'track',
+    loadChildren: () => import('./liveTrack/liveTrack.module').then(m => m.LiveTrackModule)
+  },
+  {
+    path: 'become-vendor',
+    loadChildren: () => import('./becomeAVendor/becomeaVendor.module').then(m => m.BecomeAVendorModule)
+  }
 ];
 
 @NgModule({
