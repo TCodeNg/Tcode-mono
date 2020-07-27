@@ -5,14 +5,18 @@ import { ProductModule } from '@tcode/product';
 import { InputModule } from '@tcode/input';
 import { InverterComponent } from './inverter.component';
 import { InverterRoutingModule } from './inverter.routing.module';
+import { InverterProductComponent } from './inverterProduct/inverterProduct.component';
+import { SharedModule } from '../Shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    InverterComponent
+    InverterComponent,
+    InverterProductComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     InverterRoutingModule,
     ButtonsModule,
     ProductModule,

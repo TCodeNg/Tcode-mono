@@ -5,13 +5,16 @@ import { FarmproduceComponent } from './farmproduce.component';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
 import { InputModule } from '@tcode/input';
+import { FarmProductComponent } from './farmProduceProduct/farmProduct.component';
+import { SharedModule } from '../Shared/shared.module';
 
 @NgModule({
   declarations: [
-    FarmproduceComponent
+    FarmproduceComponent, FarmProductComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ButtonsModule,
     ProductModule,
     InputModule,

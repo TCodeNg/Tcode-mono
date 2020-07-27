@@ -19,11 +19,35 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ]
 })
 export class LandingComponent implements OnInit {
-  products: Product[];
-  constructor() {}
+  generalProducts: Product[];
+  realEstateProducts: Product[];
+  inverterProducts: Product[];
+  farmProducts: Product[];
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.products = products;
+    this.generalProducts = products.general;
+    this.realEstateProducts = products.realEstate;
+    this.inverterProducts = products.inverters;
+    this.farmProducts = products.farmProducts;
+  }
+
+  gotoProduct(product: Product) {
+    this.router.navigate(['/', 'product', product.id])
+  }
+
+  navigateToRealEstate(){
+    this.router.navigate(['/real-estate']);
+  }
+
+  navigateToInverters(){
+    this.router.navigate(['/inverters']);
+  }
+
+  navigateToFarmProduce(){
+    this.router.navigate(['/farm-produce']);
   }
 
 }

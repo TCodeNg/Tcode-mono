@@ -4,6 +4,7 @@ import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RealEstateComponent', () => {
   let component: RealEstateComponent;
@@ -16,7 +17,8 @@ describe('RealEstateComponent', () => {
         InputModule,
         ButtonsModule,
         BrowserAnimationsModule,
-        ProductModule
+        ProductModule,
+        RouterTestingModule
       ]
     })
     .compileComponents();
