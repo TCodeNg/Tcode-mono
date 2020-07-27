@@ -13,7 +13,7 @@ export class ImagepreviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.selectedImage = this.images.length > 0 ? this.images[0] : undefined;
+    this.selectedImage = this.images && this.images.length > 0 ? this.images[0] : undefined;
   }
 
   pickImage(image: IImage){

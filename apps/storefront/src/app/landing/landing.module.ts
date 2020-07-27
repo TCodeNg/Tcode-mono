@@ -2,24 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LandingComponent } from './landing.component';
 import { SharedModule } from '../Shared/shared.module';
-import { MatIconModule } from '@angular/material/icon';
-import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule } from '@angular/router';
-import { MatMenuModule } from '@angular/material/menu';
-import {MatTooltipModule} from '@angular/material/tooltip';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
+import { LandingProductComponent } from './landingProduct/landingProduct.component';
 
 @NgModule({
-  declarations: [LandingComponent],
+  declarations: [LandingComponent, LandingProductComponent],
   imports: [
     CommonModule,    
     ButtonsModule,
     ProductModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
         component: LandingComponent
+      },
+      {
+        path: 'product/:id',
+        component: LandingProductComponent
       }
     ])
   ]
