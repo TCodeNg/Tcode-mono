@@ -12,6 +12,7 @@ export class ImgBannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

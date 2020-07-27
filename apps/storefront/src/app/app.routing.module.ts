@@ -11,7 +11,7 @@ const routes: Routes = [
    loadChildren: () => import('./farmProduce/farmproduce.module').then(m => m.FarmProduceModule)
  },
  {
-    path: 'inverter',
+    path: 'inverters',
     loadChildren: () => import('./inverter/inverter.module').then(m => m.InverterModule)
   },
   {

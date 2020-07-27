@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Product } from '@tcode/api-interface';
 import { products } from './product';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,9 +20,15 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class FarmproduceComponent implements OnInit {
   products: Product[];
-  constructor(){}
+  constructor(
+    private router: Router
+  ){}
 
   ngOnInit(): void {
     this.products = products;
+  }
+
+  gotoProduct(product: Product) {
+    this.router.navigate(['/farm-produce', 'product', product.id])
   }
 }

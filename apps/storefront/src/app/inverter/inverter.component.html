@@ -43,11 +43,11 @@
 
 <section class="product-listing flex flex-center flex-col">
   <div class="header">
-    <h2 class="title">Greatest deals on agro machines and produce</h2>
+    <h2 class="title">Greatest deals on alternative power for your homes and offices</h2>
     <p class="sub-title">So you will never miss out</p>
   </div>
   <div class="products">
-    <tcode-product-item *ngFor="let product of products" [product]="product"></tcode-product-item>
+    <tcode-product-item *ngFor="let product of products" [product]="product" (click)="gotoProduct(product)"></tcode-product-item>
   </div>
 </section>
 
