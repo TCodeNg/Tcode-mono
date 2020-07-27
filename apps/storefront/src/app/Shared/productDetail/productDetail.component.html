@@ -18,7 +18,7 @@
         <span> {{ productQuantity }} </span>
         <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="adjustQuantity(1)">
       </div>
-      <tcode-button type="normal">
+      <tcode-button type="normal" (click)="addToCart()">
         Add to cart 
       </tcode-button>
     </div>

@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
+import { ButtonsModule } from '@tcode/buttons';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -32,6 +33,7 @@ const authConfig: AuthConfig = {
     MatIconModule,
     MatBadgeModule,
     MatMenuModule,
+    ButtonsModule,
     NgxsDataPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     SharedModule,
