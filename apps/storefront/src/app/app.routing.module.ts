@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'become-vendor',
     loadChildren: () => import('./becomeAVendor/becomeaVendor.module').then(m => m.BecomeAVendorModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
   }
 ];
 

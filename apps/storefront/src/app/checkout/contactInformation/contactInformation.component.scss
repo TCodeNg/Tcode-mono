@@ -1,0 +1,14 @@
+.wrapper {
+    .headline span {
+        &:first-of-type{
+            color: #6D7D93;
+            font-size: 0.875rem;
+            margin-right: 5px;
+        }
+        &:last-of-type {
+            color: #02B075;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+    }
+}

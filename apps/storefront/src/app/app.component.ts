@@ -47,5 +47,10 @@ export class AppComponent implements OnInit {
   removeFromCart(item: Product){
     this.cartService.removeItem(item)
   }
+
+  navigateToCheckout() {
+    this.showCart = false;
+    this.router.navigate(['/checkout'])
+  }
   
 }
