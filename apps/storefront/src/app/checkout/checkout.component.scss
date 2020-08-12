@@ -1,9 +1,12 @@
 .wrapper {
-    min-height: 80vh;
+    // min-height: 80vh;
+    // overflow-y: scroll;
     .other-info {
       flex-basis: 60%;
       padding-left: 200px;
       padding-top: 35px;
+      padding-right: 111px;
+      margin-bottom: 50px;
     }
     .cartItems {
         flex-basis: 40%;
