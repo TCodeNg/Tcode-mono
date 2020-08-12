@@ -9,6 +9,8 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
 import { ButtonsModule } from '@tcode/buttons';
 import { MatBadgeModule } from '@angular/material/badge';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -30,6 +32,16 @@ describe('AppComponent', () => {
         }, 'customer')
       ],
       declarations: [AppComponent],
+      providers: [
+        {
+          provide: AngularFirestore,
+          useValue: {}
+        },
+        {
+          provide: AngularFireAuth,
+          useValue: {}
+        }
+      ]
     }).compileComponents();
   }));
 

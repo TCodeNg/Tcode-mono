@@ -6,6 +6,8 @@ import { ButtonsModule } from '@tcode/buttons';
 import { InputModule } from '@tcode/input';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -29,6 +31,14 @@ describe('RegisterComponent', () => {
             canSignUp: true,
             appType: 'storefront'
           }
+        },
+        {
+          provide: AngularFirestore,
+          useValue: {}
+        },
+        {
+          provide: AngularFireAuth,
+          useValue: {}
         }
       ]
     })
