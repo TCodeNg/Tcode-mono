@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
-
+  authState = null;
   constructor(
     private client: HttpClient,
     private firebaseAuth: AngularFireAuth, 
   ) {
+    firebaseAuth.authState.subscribe((auth) => {
+      this.authState = auth;
+    })
   }
 
   refreshToken(token: string) {
@@ -20,5 +24,12 @@ export class AuthService {
     return this.firebaseAuth.signInWithEmailAndPassword(email, password);
   }
 
+  async logout() {
+    return this.firebaseAuth.signOut();
+  }
+
+  isLoggedIn = this.firebaseAuth.authState.pipe(
+    map((res) => !!res)
+  );
 
 }

@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).then((user) => {
     localStorage.setItem("__currentUser", JSON.stringify(user));
     this.lState = 'idle'
+    this.authService
     this.router.navigate(["/"]);
     }).catch((error) => {
       this.lState = 'idle'

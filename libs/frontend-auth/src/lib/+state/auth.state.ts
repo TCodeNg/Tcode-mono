@@ -19,19 +19,19 @@ export class AuthState extends NgxsDataRepository<AuthStateModel> {
     super();
   }
 
-  @DataAction() async login(email: string, password: string) {
-    const { dispatch, patchState } = this.ctx;
-    await dispatch(new Login()).toPromise();
-    try {
-      const res: any = await this.service.login(email, password).toPromise();
-      patchState({
-        accessToken: res.accessToken,
-        refreshToken: res.refreshToken
-      });
-    } catch (err) {
-      await dispatch(new LoginFailed(err.error)).toPromise();
-    }
-  }
+  // @DataAction() async login(email: string, password: string) {
+  //   const { dispatch, patchState } = this.ctx;
+  //   await dispatch(new Login()).toPromise();
+  //   try {
+  //     const res: any = await this.service.login(email, password).toPromise();
+  //     patchState({
+  //       accessToken: res.accessToken,
+  //       refreshToken: res.refreshToken
+  //     });
+  //   } catch (err) {
+  //     await dispatch(new LoginFailed(err.error)).toPromise();
+  //   }
+  // }
 
   @DataAction() logOut() {
     const { patchState } = this.ctx;

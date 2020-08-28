@@ -33,7 +33,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RouterModule.forChild([
       {
         path: 'auth/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'auth/signup',
