@@ -9,40 +9,43 @@
     </a>
   </div>
 
-  <form>
+  <form [formGroup]="signUpFormGroup">
     <div *ngIf="config.appType !== 'storefront'" class="vendor-type"></div>
     <div class="control">
       <tcode-input>
-        <label for="username">Username</label><input type="text" id="username">
+        <label for="username">Username</label><input type="text" id="username" formControlName="username">
       </tcode-input>
     </div>
 
     <div class="control">
-      <tcode-input><label for="first-name">First name</label><input type="text" id="first-name"></tcode-input>
-      <tcode-input><label for="last-name">Last name</label><input type="text" id="last-name"></tcode-input>
+      <tcode-input><label for="first-name">First name</label><input type="text" id="first-name" formControlName="firstName"></tcode-input>
+      <tcode-input><label for="last-name">Last name</label><input type="text" id="last-name" formControlName="lastName"></tcode-input>
     </div>
 
     <div class="control">
-      <tcode-input><label for="email">Email</label><input type="email" id="email"></tcode-input>
+      <tcode-input><label for="email">Email</label><input type="email" id="email" formControlName="email"></tcode-input>
     </div>
 
     <div class="control">
-      <tcode-input><label for="phone">Phone</label><input type="tel" id="phone"></tcode-input>
+      <tcode-phone-number formControlName="phoneNumber"></tcode-phone-number>
     </div>
 
     <div class="control">
-      <tcode-input><label for="address">Address</label><input type="text" id="address"></tcode-input>
+      <tcode-input><label for="address">Address</label><input type="text" id="address" formControlName="address"></tcode-input>
     </div>
 
     <div class="control">
-      <tcode-input><label for="password">Password</label><input type="password" id="password"></tcode-input>
+      <tcode-input><label for="password">Password</label><input type="password" id="password" formControlName="password"></tcode-input>
     </div>
     <div class="control">
-      <tcode-input><label for="confirm-password">Confirm password</label><input type="password" id="confirm-password"></tcode-input>
+      <tcode-input><label for="confirm-password">Confirm password</label><input type="password" id="confirm-password" formControlName="confirmPassword"></tcode-input>
     </div>
 
-    <tcode-button type="normal">
-      Sign up
+    <small class="text-danger" *ngIf="isPasswordMatchError">Enter matching passwords</small>
+
+    <tcode-button type="normal" (click)="submit()" [disabled]="signUpFormGroup.invalid || (isLoading | async)">
+      {{ (isLoading$ | async) ? '' : 'Sign up' }}
+      <mat-spinner diameter="25" *ngIf="isLoading$ | async"></mat-spinner>
     </tcode-button>
 
     <p *ngIf="config?.canSignUp">Already have an account? <a [routerLink]="['/auth', 'login']">Sign in</a></p>

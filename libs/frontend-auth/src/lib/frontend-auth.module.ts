@@ -13,8 +13,11 @@ import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { User, USER_TYPE_TOKEN, userFactory } from './model';
-
-// export
+import { AuthService } from './auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -22,11 +25,16 @@ import { User, USER_TYPE_TOKEN, userFactory } from './model';
     CommonModule,
     HttpClientModule,
     InputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    AngularFireAuthModule,
     NgxsModule.forFeature([AuthState]),
     RouterModule.forChild([
       {
         path: 'auth/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'auth/signup',
@@ -58,6 +66,7 @@ export class FrontendAuthModule {
     return {
       ngModule: FrontendAuthModule,
       providers: [
+        AuthService,
         {
           provide: USER_TYPE_TOKEN,
           useValue: userType
@@ -72,6 +81,6 @@ export class FrontendAuthModule {
           deps: [USER_TYPE_TOKEN, AuthState]
         }
       ]
-    }
+    };
   }
 }

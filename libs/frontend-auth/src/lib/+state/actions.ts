@@ -1,16 +1,14 @@
 export class Login {
-  static readonly type = '[AUTH] Login';
-  constructor(public payload: {email: string; password: string}) {}
+  type = '[AUTH] Login';
 }
 
 export class LoginSuccessful {
-  static readonly type = '[AUTH] LoginSuccessful';
-  constructor(public payload: {accessToken: string; refreshToken: string}) {}
+  type = '[AUTH] LoginSuccessful';
 }
 
 export class LoginFailed {
-  static readonly type = '[AUTH] LoginFailed';
-  constructor(public payload: Error) {}
+  type = '[AUTH] LoginFailed';
+  constructor(public error: Error) {}
 }
 
 export class RefreshToken {
@@ -22,3 +20,13 @@ export class RefreshTokenSuccessful {
   static readonly type = '[AUTH] RefreshTokenSuccessful';
   constructor(public payload: {accessToken: string; refreshToken: string}) {}
 }
+
+export class SignUp {
+  type = '[AUTH] SignUp';
+}
+
+export class SignUpFailed {
+  type = '[AUTH] SignUpFailed';
+  constructor(public error: Error) {}
+}
+
