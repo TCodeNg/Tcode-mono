@@ -16,7 +16,7 @@
   <div class="resetPassword">
     <a [routerLink]="['/auth', 'reset']">Forgot password?</a>
   </div>
-  <tcode-button [disabled]="isValid" [state]="lState" (handleClick)="onSubmit()" type="normal">
+  <tcode-button [disabled]="isValid || lState === 'loading'" [state]="lState" (handleClick)="onSubmit()" type="normal">
     Sign in
   </tcode-button>
   <p *ngIf="config?.canSignUp">Don’t have an account? <a [routerLink]="['/auth', 'signup']">Sign up</a></p>

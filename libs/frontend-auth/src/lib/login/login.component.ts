@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 import { distinctUntilKeyChanged, filter, map, pluck, startWith, tap } from 'rxjs/operators';
 import { API_ERROR } from '@tcode/shared/assets';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tcode-login',
@@ -40,7 +43,9 @@ export class LoginComponent implements OnInit {
     fb: FormBuilder,
     private state: AuthState,
     private actions: Actions,
-    public _snackBar: MatSnackBar
+    private authService: AuthService,
+    public _snackBar: MatSnackBar,
+    public router: Router
   ) {
     this.config = config;
     this.loginFormGroup = fb.group({
@@ -55,9 +60,25 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  onSubmit() {
+  async onSubmit() {
     const { email, password } = this.loginFormGroup.value;
-    this.state.login(email, password).then();
+    this.lState = 'loading';
+    this.authService.login(email, password).then((user) => {
+    localStorage.setItem("__currentUser", JSON.stringify(user));
+    this.lState = 'idle'
+    this.router.navigate(["/"]);
+    }).catch((error) => {
+      this.lState = 'idle'
+      if(error.code.includes("auth/user-not-found")){
+        this._snackBar.open("Invalid email/password", null, {
+          duration: 5000
+        });
+      } else {
+        this._snackBar.open(error.message, null, {
+          duration: 5000
+        });
+      }
+    })
   }
 
   private handleLoginAction(action: any) {
