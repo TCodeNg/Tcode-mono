@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tcode-register',
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     fb: FormBuilder, private auth: AuthState, 
     private firebaseAuth: AngularFireAuth, 
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    public _snackBar: MatSnackBar
     ) {
     this.config = config;
     this.isAlive = true;
@@ -72,15 +74,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const newUser = await this.firebaseAuth.createUserWithEmailAndPassword(email, password);
      try {
        const userId = newUser.user.uid;
-       await this.firestore.collection("profiles").doc(userId).set(payload);
+       await this.firestore.collection("profiles").doc(userId).set(payload, {merge: true});
        this.isLoading.next(false);
        this.router.navigate(['/auth', 'login']);
      } catch (error) {
-      console.error(error)
+      this._snackBar.open(error.message, null, {
+        duration: 2000
+      })
       this.isLoading.next(false);
      }
     } catch (error) {
-      console.error(error);
+      this._snackBar.open(error.message, null, {
+        duration: 2000
+      })
       this.isLoading.next(false);
     } 
   }
