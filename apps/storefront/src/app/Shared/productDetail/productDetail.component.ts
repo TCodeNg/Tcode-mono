@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Product } from '@tcode/api-interface';
 import { PageProducts } from '../../PageProducts';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'tcode-product-detail',
@@ -11,7 +12,9 @@ export class ProductDetailComponent implements OnInit {
   @Input() productId: string;
   product: Product;
   productQuantity = 1;
-  constructor(){}
+  constructor(
+    private cartService: CartService
+  ){}
 
   ngOnInit(): void {
     this.product = PageProducts.find((product) => product.id === this.productId);
@@ -32,5 +35,9 @@ export class ProductDetailComponent implements OnInit {
     } else {
       this.productQuantity = newQuantity
     }
+  }
+
+  addToCart(){
+    this.cartService.addItem(this.product, this.productQuantity)
   }
 }

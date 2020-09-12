@@ -7,6 +7,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { ButtonsModule } from '@tcode/buttons';
+import { MatBadgeModule } from '@angular/material/badge';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,6 +18,8 @@ describe('AppComponent', () => {
         SharedModule,
         MatIconModule,
         MatMenuModule,
+        ButtonsModule,
+        MatBadgeModule,
         NgxsModule.forRoot([]),
         NgxsDataPluginModule.forRoot(),
         FrontendAuthModule.forRoot({

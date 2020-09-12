@@ -34,7 +34,7 @@
     <p class="sub-title">So you will never miss out</p>
   </div>
   <div class="products">
-    <tcode-product-item *ngFor="let product of products" [product]="product" (click)="gotoProduct(product)"></tcode-product-item>
+    <tcode-product-item *ngFor="let product of products" [product]="product" (onAddToCart)="addToCart($event)" (click)="gotoProduct($event, product)"></tcode-product-item>
   </div>
 </section>
 
