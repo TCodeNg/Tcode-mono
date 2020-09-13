@@ -8,6 +8,9 @@ import { CheckoutContactInformationComponent } from './contactInformation/contac
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ShippingContactComponent } from './shippingContact/shippingContact.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -16,10 +19,15 @@ import { ShippingContactComponent } from './shippingContact/shippingContact.comp
         ShippingContactComponent
     ],
     imports: [
-        CommonModule,SharedModule,
+        CommonModule,
+        SharedModule,
         MatIconModule,
         CheckoutRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
         InputModule,
+        MatCheckboxModule,
+        MatRadioModule,
         ButtonsModule
     ],
     exports: []

@@ -1,13 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Product } from '@tcode/api-interface';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'libs/frontend-auth/src/lib/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
   providedIn: "root"
 })
 export class CartService {
-  constructor() {
+  constructor(
+    private fireStore: AngularFirestore,
+    private firebaseAuth: AngularFireAuth,
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
+  ) {
   }
 
   private cartCount = new BehaviorSubject(0);
@@ -38,6 +47,7 @@ export class CartService {
         this.updateCartItemCount();
         this.updateCartTotalAmount();
         this.updateCartItems();
+        this.uploadCartItems();
       } else {
         localStorage.setItem('Mycart', JSON.stringify({
           products: {
@@ -52,6 +62,7 @@ export class CartService {
         this.updateCartItemCount();
         this.updateCartTotalAmount();
         this.updateCartItems();
+        this.uploadCartItems();
       }
     } else {
       localStorage.setItem('Mycart', JSON.stringify({
@@ -66,14 +77,13 @@ export class CartService {
       this.updateCartItemCount();
       this.updateCartTotalAmount();
       this.updateCartItems();
+      this.uploadCartItems();
     }
   }
 
   removeItem(product: Product){
     const cartItems = JSON.parse(localStorage.getItem('Mycart')).products;
-    console.log(cartItems)
     const p = cartItems[product.id]
-    console.log(p)
     if(p){
       delete cartItems[product.id];
       localStorage.setItem('Mycart', JSON.stringify({
@@ -85,6 +95,7 @@ export class CartService {
     this.updateCartItemCount();
     this.updateCartTotalAmount();
     this.updateCartItems();
+    this.uploadCartItems();
   }
 
   getItemsInCart(){
@@ -120,5 +131,37 @@ export class CartService {
 
   updateCartItems(){
     this.cartItems.next(this.getItemsInCart());
+  }
+
+  clearCart(){
+    console.log('here mehn')
+    localStorage.removeItem("Mycart");
+    this.uploadCartItems();
+    this.updateCartTotalAmount();
+    this.updateCartItemCount();
+  }
+
+  async uploadCartItems(){
+    const itemsInCart = this.getItemsInCart();
+    const user = await this.firebaseAuth.currentUser;
+    if(user.uid) {
+      this.fireStore.collection('carts').doc(user.uid).collection('items').get().toPromise().then((doc) => {
+        doc.forEach(el => {
+          el.ref.delete();
+        })
+        itemsInCart.forEach(async (item) => {
+          try {
+            await this.fireStore.collection("carts").doc(user.uid).collection("items").doc(item["item"].id).set({
+              price: item["item"].price.value,
+              quantity: item["quantity"],
+              description: item["item"].description
+            })
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      })
+      
+    }
   }
 }

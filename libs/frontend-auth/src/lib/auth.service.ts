@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -31,5 +32,9 @@ export class AuthService {
   isLoggedIn = this.firebaseAuth.authState.pipe(
     map((res) => !!res)
   );
+
+  get user(): Observable<firebase.User> {
+    return this.firebaseAuth.user;
+  }
 
 }

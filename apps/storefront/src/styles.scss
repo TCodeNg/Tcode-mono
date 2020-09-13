@@ -150,3 +150,9 @@ a {
 .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle{
   border-color:rgb(2, 176, 117); 
 }
+.mat-checkbox.mat-primary .mat-checkbox-inner-container {
+  border-color:rgb(2, 176, 117); 
+}
+.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: rgb(2, 176, 117);
+}

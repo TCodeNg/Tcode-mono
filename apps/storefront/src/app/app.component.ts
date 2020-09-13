@@ -31,10 +31,6 @@ export class AppComponent implements OnInit {
     this.cartService.updateCartItemCount();
     this.cartService.updateCartTotalAmount();
     this.cartService.updateCartItems();
-
-    this.authService.isLoggedIn.subscribe((res) => {
-      console.log(res);
-    })
   }
 
   handleAuthAction(){
@@ -61,7 +57,12 @@ export class AppComponent implements OnInit {
 
   async logOut() {
     await this.authService.logout();
+
     localStorage.clear();
+    this.cartService.updateCartItemCount();
+    this.cartService.updateCartItems();
+    this.cartService.updateCartTotalAmount();
+    this.router.navigate(['/'])
   }
   
 }

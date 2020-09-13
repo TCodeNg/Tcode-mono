@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { CartService } from '../../../../../apps/storefront/src/app/services/cart.service';
 
 @Component({
   selector: 'tcode-login',
@@ -45,7 +46,8 @@ export class LoginComponent implements OnInit {
     private actions: Actions,
     private authService: AuthService,
     public _snackBar: MatSnackBar,
-    public router: Router
+    public router: Router,
+    private cartService: CartService
   ) {
     this.config = config;
     this.loginFormGroup = fb.group({
@@ -64,10 +66,9 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginFormGroup.value;
     this.lState = 'loading';
     this.authService.login(email, password).then((user) => {
-    localStorage.setItem("__currentUser", JSON.stringify(user));
-    this.lState = 'idle'
-    this.authService
-    this.router.navigate(["/"]);
+      this.lState = 'idle'
+      this.cartService.uploadCartItems();
+      this.router.navigate(["/"]);
     }).catch((error) => {
       this.lState = 'idle'
       if(error.code.includes("auth/user-not-found")){
