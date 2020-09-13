@@ -79,6 +79,13 @@
     "admin-e2e": {
       "tags": [],
       "implicitDependencies": ["admin"]
+    },
+    "vendor": {
+      "tags": []
+    },
+    "vendor-e2e": {
+      "tags": [],
+      "implicitDependencies": ["vendor"]
     }
   }
 }
