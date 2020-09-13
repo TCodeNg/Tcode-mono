@@ -3,6 +3,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProductDetailComponent } from './productDetail.component';
 import { SharedModule } from '../shared.module';
+import { CartService } from '../../services/cart.service';
 
 
 describe('ProductDetailComponent', () => {
@@ -14,6 +15,12 @@ describe('ProductDetailComponent', () => {
       declarations: [ ],
       imports: [
         SharedModule
+      ],
+      providers: [
+        {
+          provide: CartService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();

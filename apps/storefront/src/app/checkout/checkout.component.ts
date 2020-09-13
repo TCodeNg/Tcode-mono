@@ -14,7 +14,5 @@ export class CheckoutComponent implements OnInit {
     cartItems$ = this.cartService.cartItems$
     cartAmount$ = this.cartService.cartTotalAmount$;
     
-    ngOnInit(): void {
-        this.cartService.updateCartItems()
-    }
+    ngOnInit(): void {}
 }

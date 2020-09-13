@@ -37,7 +37,7 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     authFormGroup: FormGroup;
 
     ngOnInit(){
-        this.authService.user.pipe(
+        this.authService.user && this.authService.user.pipe(
             takeWhile(() => this.isAlive),
             filter(res => !!res)
         ).subscribe((user) => {

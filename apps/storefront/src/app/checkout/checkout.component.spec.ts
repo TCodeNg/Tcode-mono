@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CartService } from '../services/cart.service';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -11,6 +12,12 @@ describe('CheckoutComponent', () => {
       declarations: [ CheckoutComponent ],
       imports: [
           RouterTestingModule
+      ],
+      providers: [
+        {
+          provide: CartService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();

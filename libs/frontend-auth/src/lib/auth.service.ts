@@ -29,7 +29,7 @@ export class AuthService {
     return this.firebaseAuth.signOut();
   }
 
-  isLoggedIn = this.firebaseAuth.authState.pipe(
+  isLoggedIn = this.firebaseAuth.authState && this.firebaseAuth.authState.pipe(
     map((res) => !!res)
   );
 
