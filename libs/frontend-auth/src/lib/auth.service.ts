@@ -11,9 +11,6 @@ export class AuthService {
     private client: HttpClient,
     private firebaseAuth: AngularFireAuth, 
   ) {
-    firebaseAuth.authState.subscribe((auth) => {
-      this.authState = auth;
-    })
   }
 
   refreshToken(token: string) {
