@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingProductComponent } from './landingProduct.component';
 import { SharedModule } from '../../Shared/shared.module';
+import { CartService } from '../../services/cart.service';
 
 describe('LandingProductComponent', () => {
   let component: LandingProductComponent;
@@ -15,6 +16,12 @@ describe('LandingProductComponent', () => {
         SharedModule,
         BrowserAnimationsModule,
         RouterTestingModule,
+      ],
+      providers: [
+        {
+          provide: CartService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();

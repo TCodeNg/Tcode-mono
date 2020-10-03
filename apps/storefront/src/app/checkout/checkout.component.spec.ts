@@ -1,20 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatMenuModule } from '@angular/material/menu';
+import { CheckoutComponent } from './checkout.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ProductDetailComponent } from './productDetail.component';
-import { SharedModule } from '../shared.module';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../services/cart.service';
 
-
-describe('ProductDetailComponent', () => {
-  let component: ProductDetailComponent;
-  let fixture: ComponentFixture<ProductDetailComponent>;
+describe('CheckoutComponent', () => {
+  let component: CheckoutComponent;
+  let fixture: ComponentFixture<CheckoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ],
+      declarations: [ CheckoutComponent ],
       imports: [
-        SharedModule
+          RouterTestingModule
       ],
       providers: [
         {
@@ -27,7 +24,7 @@ describe('ProductDetailComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductDetailComponent);
+    fixture = TestBed.createComponent(CheckoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

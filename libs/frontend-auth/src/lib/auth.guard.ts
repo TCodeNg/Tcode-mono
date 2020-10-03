@@ -13,11 +13,12 @@ import {
 import { from, Observable, of } from 'rxjs';
 import { AuthState } from './+state/auth.state';
 import { mapTo } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private state: AuthState, private router: Router) {
+  constructor(private state: AuthState, private router: Router, private authService: AuthService) {
   }
 
   canActivate(
@@ -25,8 +26,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const { snapshot } = this.state;
     const hasToken = !!snapshot.accessToken;
-    return this.checkToken(hasToken);
+    const currentUser = localStorage.getItem('__currentUser');
+    if(currentUser) {
+      this.router.navigate(['/'])
+      return false;
+    }
+    return true;
   }
+
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

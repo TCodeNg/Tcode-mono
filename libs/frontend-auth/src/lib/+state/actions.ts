@@ -21,3 +21,12 @@ export class RefreshTokenSuccessful {
   constructor(public payload: {accessToken: string; refreshToken: string}) {}
 }
 
+export class SignUp {
+  type = '[AUTH] SignUp';
+}
+
+export class SignUpFailed {
+  type = '[AUTH] SignUpFailed';
+  constructor(public error: Error) {}
+}
+

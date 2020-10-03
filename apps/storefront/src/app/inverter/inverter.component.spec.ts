@@ -5,6 +5,7 @@ import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CartService } from '../services/cart.service';
 
 describe('InverterComponent', () => {
   let component: InverterComponent;
@@ -19,6 +20,12 @@ describe('InverterComponent', () => {
         BrowserAnimationsModule,
         ProductModule,
         RouterTestingModule
+      ],
+      providers: [
+        {
+          provide: CartService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();
