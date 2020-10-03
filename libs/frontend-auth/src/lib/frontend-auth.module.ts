@@ -16,6 +16,8 @@ import { User, USER_TYPE_TOKEN, userFactory } from './model';
 import { AuthService } from './auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -25,11 +27,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     InputModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
+    AngularFireAuthModule,
     NgxsModule.forFeature([AuthState]),
     RouterModule.forChild([
       {
         path: 'auth/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'auth/signup',

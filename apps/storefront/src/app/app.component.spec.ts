@@ -7,6 +7,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { ButtonsModule } from '@tcode/buttons';
+import { MatBadgeModule } from '@angular/material/badge';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,6 +20,8 @@ describe('AppComponent', () => {
         SharedModule,
         MatIconModule,
         MatMenuModule,
+        ButtonsModule,
+        MatBadgeModule,
         NgxsModule.forRoot([]),
         NgxsDataPluginModule.forRoot(),
         FrontendAuthModule.forRoot({
@@ -26,6 +32,16 @@ describe('AppComponent', () => {
         }, 'customer')
       ],
       declarations: [AppComponent],
+      providers: [
+        {
+          provide: AngularFirestore,
+          useValue: {}
+        },
+        {
+          provide: AngularFireAuth,
+          useValue: {}
+        }
+      ]
     }).compileComponents();
   }));
 
