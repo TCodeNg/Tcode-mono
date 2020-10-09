@@ -16,10 +16,10 @@
   </div>
 </div>
 <mat-menu class="mobile-menu" #mobileMenu="matMenu" xPosition="before">
-  <button mat-menu-item>Home</button>
-  <button mat-menu-item>Farm Produce</button>
-  <button mat-menu-item>Inverter</button>
-  <button mat-menu-item>Real Estate</button>
-  <button mat-menu-item>Track Delivery</button>
-  <button mat-menu-item>Become a Vendor</button>
+  <button mat-menu-item><span [routerLink]="['']" routerLinkActive="router-link-active">Home</span></button>
+  <button mat-menu-item><span [routerLink]="['/farm-produce']" routerLinkActive="router-link-active" >Farm Produce</span></button>
+  <button mat-menu-item> <span [routerLink]="['/inverters']" routerLinkActive="router-link-active">Inverter</span></button>
+  <button mat-menu-item><span [routerLink]="['/real-estate']" routerLinkActive="router-link-active">Real Estate</span></button>
+  <button mat-menu-item><span [routerLink]="['/track']" routerLinkActive="router-link-active">Track Delivery</span></button>
+  <button mat-menu-item><span [routerLink]="['/become-vendor']" routerLinkActive="router-link-active">Become a Vendor</span></button>
 </mat-menu>

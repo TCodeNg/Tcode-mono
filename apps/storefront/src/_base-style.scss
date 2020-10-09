@@ -1,0 +1,63 @@
+@import './media';
+
+:host {
+     &::ng-deep {
+       tcode-button {
+         .content {
+           margin: 0 !important;
+         }
+       }
+       tcode-product-item {
+         cursor: pointer;
+         @include media('<tablet') {
+           margin-bottom: 1rem !important;
+         }
+       }
+       tcode-product-image {
+         .image {
+           .pdt-img {
+             @include media('<tablet'){
+               height: auto !important;
+               width: 177px !important;
+             }
+           }
+         }
+       }
+     }    
+}
+
+.hero {
+     .content {
+          @include media('<tablet'){
+               width: 90%;
+          }
+          h1 {
+               @include media('<tablet'){
+                    font-size: 1.7rem;
+                    padding: 0 1rem;
+                    text-align: center;
+               }
+          }
+     }
+}
+
+.product-listing {
+     .header {
+          margin: 50px 0;
+          text-align: center;
+          .title {
+               @include media('<tablet') {
+                    font-size: 1rem;
+                    }
+          } 
+     }
+     .products {
+       @include media('<tablet'){
+         width: 100% !important;
+         grid-gap: 15px !important;
+         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+         padding: 0 17px !important;
+         margin-bottom: 40px !important;
+       } 
+     }
+}
