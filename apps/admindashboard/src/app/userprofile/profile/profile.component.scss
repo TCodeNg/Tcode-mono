@@ -1,0 +1,15 @@
+@import "../../../color";
+
+:host {
+  &::ng-deep {
+    tcode-card {
+      width: 500px
+    }
+  }
+}
+header {
+  color: $text;
+  height: 90px;
+  padding: 0 0 0 50px;
+  font-size: 22px;
+}

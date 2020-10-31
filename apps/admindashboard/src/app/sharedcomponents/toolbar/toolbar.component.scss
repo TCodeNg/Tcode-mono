@@ -1,13 +1,10 @@
+@import "../../../color";
+
 main {
   height: 90px;
   background-color: #F4F8FC;
-  display: flex;
-  justify-content: flex-end;
   padding-right: 23px;
   .user-meta {
-    position: relative;
-    display: flex;
-    align-items: center;
     .avatar {
       margin-right: 13px;
     }
@@ -22,7 +19,7 @@ main {
         &:last-of-type {
           font-weight: 500;
           font-size: 1rem;
-          color: #1E266D;
+          color: $text;
         }
       }
     }
@@ -36,8 +33,6 @@ main {
     }
   }
   .action-center {
-    display: flex;
-    align-items: center;
     margin-left: 33px;
   }
 }

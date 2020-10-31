@@ -8,3 +8,35 @@ p, ul, li {
   padding: 0;
   margin: 0;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.pointer {
+  cursor: pointer;
+}

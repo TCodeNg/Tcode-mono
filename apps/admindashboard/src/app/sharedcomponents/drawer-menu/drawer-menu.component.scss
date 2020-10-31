@@ -1,35 +1,27 @@
 @import '../../../color';
 
 header {
-  display: flex;
   height: 90px;
-  justify-content: center;
 }
 section.menu {
   padding: 0 15px 38px 33px;
   height: calc(100% - 128px);
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   ul.menu-items {
     list-style: none;
     li.menu-item {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 0;  
-      margin: 5px 0;
-      font-size: 0.875rem;
-      cursor: pointer;
-      .icon {
-        margin-right: 13px;
+      a {
+        padding: 0.5rem 0;  
+        margin: 5px 0;
+        font-size: 0.875rem;
+        .icon {
+          margin-right: 13px;
+        }
       }
     }
   }
   .logout {
-    display: flex;
-    align-items: center;
     color: $red;
-    cursor: pointer;
     img {
       margin-right: 13px;
     }

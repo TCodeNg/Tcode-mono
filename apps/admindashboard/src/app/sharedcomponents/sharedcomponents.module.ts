@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { RouterModule } from '@angular/router';
 import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
@@ -7,7 +8,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     DrawerMenuComponent,
     ToolbarComponent
   ],
-  imports: [],
+  imports: [
+    RouterModule
+  ],
   exports: [
     DrawerMenuComponent,
     ToolbarComponent
