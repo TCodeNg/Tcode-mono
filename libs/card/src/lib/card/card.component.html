@@ -25,6 +25,7 @@
     <!-- Normal -->
     <ng-container *ngIf="config.state === 'normal'">
       <ng-content></ng-content>
+      <h4>Hello card</h4>
     </ng-container>
     <!-- Loading -->
     <ng-container *ngIf="config.state === 'loading'" [ngTemplateOutlet]="loadingTemplRef">

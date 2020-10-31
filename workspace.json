@@ -626,7 +626,12 @@
             "aot": true,
             "assets": [
               "apps/admindashboard/src/favicon.ico",
-              "apps/admindashboard/src/assets"
+              "apps/admindashboard/src/assets",
+              {
+                "input": "libs/shared/assets/src/lib/img",
+                "glob": "**.*",
+                "output": "assets/img"
+              }
             ],
             "styles": ["apps/admindashboard/src/styles.scss"],
             "scripts": []
