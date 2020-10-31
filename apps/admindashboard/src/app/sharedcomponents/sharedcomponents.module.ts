@@ -1,13 +1,16 @@
 import { NgModule } from "@angular/core";
 import { DrawerMenuComponent } from './drawer-menu/drawer-menu.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
-    DrawerMenuComponent
+    DrawerMenuComponent,
+    ToolbarComponent
   ],
   imports: [],
   exports: [
-    DrawerMenuComponent
+    DrawerMenuComponent,
+    ToolbarComponent
   ]
 })
 export class SharedComponentsModule{}
