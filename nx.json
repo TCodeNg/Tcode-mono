@@ -72,6 +72,13 @@
     "frontend-auth": {
       "tags": [],
       "implicitDependencies": ["shared-assets"]
+    },
+    "admindashboard": {
+      "tags": []
+    },
+    "admindashboard-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admindashboard"]
     }
   }
 }
