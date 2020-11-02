@@ -1,8 +1,15 @@
+@import '../../media';
+
 .wrapper {
   height: 70vh;
   h1 {
     letter-spacing: 1.2px;
     font-size: 2.875rem;
+    @include media('<tablet') { 
+      width: 80%;
+      text-align: center;
+      font-size: 1.7rem;
+    }
   }
   h5 {
     margin-top: 15px;
@@ -10,10 +17,17 @@
     font-size: 0.857rem;
     text-transform: uppercase;
     text-align: center;
+    @include media('<tablet') { 
+      font-size: 0.8rem;
+    }
   }
   .order-number {
     margin-top: 63px;
     width: 50%;
+    @include media('<tablet') { 
+      width: 80%;
+      margin-top: 25px;
+    }
   }
   .button {
     margin-top: 20px;

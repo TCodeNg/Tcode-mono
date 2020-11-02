@@ -1,3 +1,4 @@
+@import '../media';
 /*
  * Remove template code below
  */
@@ -135,6 +136,9 @@ summary {
   top:0;
   right: 0;
   padding: 30px 20px;
+  @include media('<tablet') {
+    width: 100vw;
+  }
   .header {
     justify-content: space-between;
     align-items: flex-end;

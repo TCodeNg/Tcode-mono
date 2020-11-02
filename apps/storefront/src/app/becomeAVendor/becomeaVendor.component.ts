@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'tcode-become-a-vendor',
   templateUrl: './becomeaVendor.component.html',
-  styleUrls: ['./becomeaVendor.component.scss'],
+  styleUrls: ['./becomeaVendor.component.scss', '../../_base-style.scss'],
   animations: [
     trigger('fade', [ 
       transition('void => *', [
