@@ -1,4 +1,9 @@
+@import '../../../media';
+
 .wrapper {
+    @include media('<tablet') {
+      padding: 1rem 2rem;
+    }
      .title {
           margin-top: 20px;
           margin-bottom: 20px;

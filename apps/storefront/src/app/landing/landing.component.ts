@@ -9,7 +9,7 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'tcode-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss'],
+  styleUrls: ['./landing.component.scss', '../../_base-style.scss'],
   animations: [
     trigger('fade', [ 
       transition('void => *', [
