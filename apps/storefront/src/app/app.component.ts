@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User, Customer } from '@tcode/frontend-auth';
 import { CartService } from './services/cart.service';
 import { Product } from '@tcode/api-interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tcode-root',
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
-  get isLoggedIn(): boolean {
+  get isLoggedIn(): Observable<boolean> {
     return this.user.isLoggedIn()
   }
 
@@ -47,5 +48,5 @@ export class AppComponent implements OnInit {
   removeFromCart(item: Product){
     this.cartService.removeItem(item)
   }
-  
+
 }

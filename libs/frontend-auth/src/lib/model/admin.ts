@@ -1,5 +1,5 @@
 import { User } from './user';
-import { AuthState } from '@tcode/frontend-auth';
+import { AuthService } from '../auth.service';
 
 export class Admin extends User {
   readonly email: string;
@@ -8,7 +8,7 @@ export class Admin extends User {
   readonly otherName: string;
   readonly phoneNumber: string;
 
-  constructor(state: AuthState) {
+  constructor(state: AuthService) {
     super(state);
   }
 }

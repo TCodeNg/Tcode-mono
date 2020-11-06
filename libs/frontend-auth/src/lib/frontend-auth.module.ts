@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './+state/auth.state';
 import { RouterModule } from '@angular/router';
@@ -13,9 +12,10 @@ import { AUTH_CONFIG_TOKEN, AuthConfig } from './auth.config';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { User, USER_TYPE_TOKEN, userFactory } from './model';
-import { AuthService } from './auth.service';
+import { AUTH_SERVICE_TOKEN } from './auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ParseAuthService } from './parse.auth.service';
 
 @NgModule({
   imports: [
@@ -47,11 +47,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ])
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
     AuthGuard
   ],
   declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent]
@@ -61,7 +56,10 @@ export class FrontendAuthModule {
     return {
       ngModule: FrontendAuthModule,
       providers: [
-        AuthService,
+        {
+          provide: AUTH_SERVICE_TOKEN,
+          useClass: ParseAuthService
+        },
         {
           provide: USER_TYPE_TOKEN,
           useValue: userType
@@ -73,7 +71,7 @@ export class FrontendAuthModule {
         {
           provide: User,
           useFactory: userFactory,
-          deps: [USER_TYPE_TOKEN, AuthState]
+          deps: [USER_TYPE_TOKEN, AUTH_SERVICE_TOKEN]
         }
       ]
     };

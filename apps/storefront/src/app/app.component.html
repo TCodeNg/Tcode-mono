@@ -5,15 +5,15 @@
   </div>
   <div class="action-section">
     <img src="../assets/img/search.svg" class="search" alt="search">
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
+    <img
+      src="../assets/img/user.svg"
+      class="profile cursor-pointer" alt="profile"
       [matMenuTriggerFor]="authMenu"
-      *ngIf="isLoggedIn"
+      *ngIf="isLoggedIn | async"
     >
-    <img 
-      src="../assets/img/user.svg" 
-      class="profile cursor-pointer" alt="profile" 
+    <img
+      src="../assets/img/user.svg"
+      class="profile cursor-pointer" alt="profile"
       (click)="handleAuthAction()"
       matTooltip="Login"
       *ngIf="!isLoggedIn"

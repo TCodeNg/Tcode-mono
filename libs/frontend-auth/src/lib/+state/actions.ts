@@ -11,13 +11,7 @@ export class LoginFailed {
   constructor(public error: Error) {}
 }
 
-export class RefreshToken {
-  static readonly type = '[AUTH] RefreshToken';
-  constructor(public refreshToken: string) {}
+export class LogoutFailed {
+  type = '[AUTH] LogoutFailed';
+  constructor(public error: Error) {}
 }
-
-export class RefreshTokenSuccessful {
-  static readonly type = '[AUTH] RefreshTokenSuccessful';
-  constructor(public payload: {accessToken: string; refreshToken: string}) {}
-}
-

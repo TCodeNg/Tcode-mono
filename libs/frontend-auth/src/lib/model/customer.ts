@@ -1,5 +1,5 @@
 import { User } from './user';
-import { AuthState } from '../+state/auth.state';
+import { AuthService } from '../auth.service';
 
 export class Customer extends User {
   readonly email: string;
@@ -8,7 +8,7 @@ export class Customer extends User {
   readonly otherName: string;
   readonly phoneNumber: string;
 
-  constructor(state: AuthState) {
+  constructor(state: AuthService) {
     super(state);
   }
 

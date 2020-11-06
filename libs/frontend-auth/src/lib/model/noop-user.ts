@@ -6,12 +6,4 @@ export class NoopUser extends User {
   lastName: string;
   otherName: string;
   phoneNumber: string;
-
-  isLoggedIn(): boolean {
-    return false;
-  }
-
-  logOut(): void {
-  }
-
 }

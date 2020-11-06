@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AuthStateModel } from './auth.state.model';
 import { State } from '@ngxs/store';
 import { DataAction, StateRepository } from '@ngxs-labs/data/decorators';
 import { NgxsDataRepository } from '@ngxs-labs/data/repositories';
-import { AuthService } from '../auth.service';
-import { Login, LoginFailed } from './actions';
+import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
+import { Login, LoginFailed, LogoutFailed } from './actions';
 
 @StateRepository()
 @Injectable()
@@ -13,29 +13,26 @@ import { Login, LoginFailed } from './actions';
 })
 export class AuthState extends NgxsDataRepository<AuthStateModel> {
 
-  constructor(private service: AuthService) {
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private service: AuthService) {
     super();
   }
 
   @DataAction() async login(email: string, password: string) {
-    const { dispatch, patchState } = this.ctx;
+    const { dispatch } = this.ctx;
     await dispatch(new Login()).toPromise();
     try {
-      const res: any = await this.service.login(email, password).toPromise();
-      patchState({
-        accessToken: res.accessToken,
-        refreshToken: res.refreshToken
-      });
+      await this.service.login(email, password).toPromise();
     } catch (err) {
       await dispatch(new LoginFailed(err.error)).toPromise();
     }
   }
 
-  @DataAction() logOut() {
-    const { patchState } = this.ctx;
-    patchState({
-      accessToken: undefined,
-      refreshToken: undefined
-    });
+  @DataAction() async logOut() {
+    const { dispatch } = this.ctx;
+    try {
+      await this.service.logout().toPromise();
+    } catch (e) {
+      await dispatch(new LogoutFailed(e));
+    }
   }
 }
