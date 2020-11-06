@@ -24,7 +24,7 @@
   <section class="card-content">
     <!-- Normal -->
     <ng-container *ngIf="config.state === 'normal'">
-      <ng-content></ng-content>
+      <ng-content select=".card-body"></ng-content>
     </ng-container>
     <!-- Loading -->
     <ng-container *ngIf="config.state === 'loading'" [ngTemplateOutlet]="loadingTemplRef">

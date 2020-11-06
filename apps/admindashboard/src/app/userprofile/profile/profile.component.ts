@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
+import { CardConfig } from 'libs/card/src/lib/model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   pageTitle: string
+  profileCardConfig: CardConfig;
   constructor(
     private activatedRoute: ActivatedRoute
   ){
@@ -16,6 +18,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit():void {
-    
+    this.profileCardConfig = {
+      state: 'normal',
+      editable: true
+    }
   }
 }

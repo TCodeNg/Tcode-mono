@@ -13,3 +13,23 @@ header {
   padding: 0 0 0 50px;
   font-size: 22px;
 }
+.card-body {
+  ul {
+    grid-gap: 0.9rem;
+    justify-content: center;
+    margin-top: 20px;
+    li {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 19px;
+      .label {
+        text-align: end;
+        color: $text;
+        font-weight: lighter;
+      }
+      .value {
+        color: $text;
+        font-weight: 500;
+      }
+    }
+  }
+}
