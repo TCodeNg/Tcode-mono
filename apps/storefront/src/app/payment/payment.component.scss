@@ -1,0 +1,26 @@
+@import '../../media';
+
+.wrapper {
+     height: 80vh;
+     ul {
+          list-style: none;
+          width: 470px;
+          @include media('<tablet') {
+               padding: 0 2rem;
+          }
+          
+          li {
+               background: #f4f8fc;
+               padding: 20px 10px;
+               display: flex;
+               border-radius: 6px;
+               margin: 15px 0;
+               align-items: flex-start;
+               flex-direction: column;
+               .amount {
+                    color: #02B075;
+                    line-height: 22px;
+               }
+          }
+     }
+}

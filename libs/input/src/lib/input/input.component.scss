@@ -8,6 +8,7 @@ $error-focus-shadow: 0 0 5px $tcode-red !important;
   display: flex;
   flex-direction: column;
 
+
   &::ng-deep {
     label, .hint, .error {
       font-family: Cera Pro;
@@ -54,6 +55,12 @@ $error-focus-shadow: 0 0 5px $tcode-red !important;
         width: 100%;
         color: #000000;
         font-weight: normal;
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active  {
+          -webkit-box-shadow: 0 0 0 30px white inset !important;
+        }
       }
       select {
         width: 100%;

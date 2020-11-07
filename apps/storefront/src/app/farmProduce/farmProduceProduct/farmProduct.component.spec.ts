@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../../Shared/shared.module';
 import { FarmProductComponent } from './farmProduct.component';
+import { CartService } from '../../services/cart.service';
 
 describe('FarmProductComponent', () => {
   let component: FarmProductComponent;
@@ -15,6 +16,12 @@ describe('FarmProductComponent', () => {
         SharedModule,
         BrowserAnimationsModule,
         RouterTestingModule,
+      ],
+      providers: [
+        {
+          provide: CartService,
+          useValue: {}
+        }
       ]
     })
     .compileComponents();

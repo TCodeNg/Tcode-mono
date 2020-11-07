@@ -8,7 +8,7 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'tcode-real-estate',
   templateUrl: './realEstate.component.html',
-  styleUrls: ['./realEstate.component.scss'],
+  styleUrls: ['./realEstate.component.scss',  '../../_base-style.scss'],
   animations: [
     trigger('fade', [
       transition('void => *', [

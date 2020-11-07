@@ -2,7 +2,7 @@
 
 :host {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 
   .wrapper {
@@ -46,10 +46,14 @@
   }
 }
 
+.text-danger {
+  color: red;
+}
+
 form {
   display: flex;
   flex-direction: column;
-
+  margin-bottom: 1rem;
   .control {
     display: flex;
     margin-bottom: 1rem;

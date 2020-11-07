@@ -49,4 +49,19 @@ export class AppComponent implements OnInit {
     this.cartService.removeItem(item)
   }
 
+  navigateToCheckout() {
+    this.showCart = false;
+    this.router.navigate(['/checkout'])
+  }
+
+  async logOut() {
+    await this.authService.logout();
+
+    localStorage.clear();
+    this.cartService.updateCartItemCount();
+    this.cartService.updateCartItems();
+    this.cartService.updateCartTotalAmount();
+    this.router.navigate(['/'])
+  }
+
 }

@@ -16,8 +16,8 @@
       class="profile cursor-pointer" alt="profile"
       (click)="handleAuthAction()"
       matTooltip="Login"
-      *ngIf="!isLoggedIn"
-    >
+      *ngIf="!(isLoggedIn | async)"
+      >
     <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
     <mat-icon [matBadge]="cartCount$ | async" matBadgeColor="warn" class="cart cursor-pointer" matBadgeSize="small" (click)="showCart = true">local_mall</mat-icon>
   </div>
@@ -28,7 +28,7 @@
 <mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
   <button mat-menu-item>Account Info</button>
   <button mat-menu-item>Orders</button>
-  <button mat-menu-item>Log out</button>
+  <button mat-menu-item (click)="logOut()">Log out</button>
 </mat-menu>
 
 <div class="cart-wrapper" *ngIf="showCart">
@@ -52,7 +52,7 @@
   <div class="total">
     <p class="cart-total">Total: {{ (cartAmount$ | async) | currency: 'NGN': 'code' }}</p>
     <div class="button">
-      <tcode-button type="normal">Proceed to checkout</tcode-button>
+      <tcode-button type="normal" (click)="navigateToCheckout()">Proceed to checkout</tcode-button>
     </div>
   </div>
 </div>
