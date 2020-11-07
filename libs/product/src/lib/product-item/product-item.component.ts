@@ -9,7 +9,7 @@ import { Product } from '@tcode/api-interface';
 export class ProductItemComponent implements OnInit {
 
   dummyPdt: Product =  {
-    id: "5ee4c28b55f776579bebcac2",
+    objectId: "5ee4c28b55f776579bebcac2",
     productId: '333',
     category: [
       "5ee4b2530ee45f000dabb459"

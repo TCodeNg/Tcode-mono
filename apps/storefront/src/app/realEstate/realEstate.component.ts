@@ -10,11 +10,11 @@ import { CartService } from '../services/cart.service';
   templateUrl: './realEstate.component.html',
   styleUrls: ['./realEstate.component.scss'],
   animations: [
-    trigger('fade', [ 
+    trigger('fade', [
       transition('void => *', [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate(1000, style({opacity: 1}))
-      ]) 
+      ])
     ])
   ]
 })
@@ -31,10 +31,10 @@ export class RealEstateComponent implements OnInit {
 
   gotoProduct(e:MouseEvent, product: Product) {
     if(e.srcElement['tagName'] === 'IMG') {
-      this.router.navigate(['/real-estate', 'product', product.id])
+      this.router.navigate(['/real-estate', 'product', product.objectId])
     }
   }
-  
+
   addToCart(e){
     this.cartService.addItem(e, 1);
   }

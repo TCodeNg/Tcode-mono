@@ -23,12 +23,12 @@ export class CartService {
     const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
     const amount: number = count * product.price.value;
     if(itemsInCart){
-      const existingProductInCart = itemsInCart.products[product.id];
+      const existingProductInCart = itemsInCart.products[product.objectId];
       if(existingProductInCart){
         localStorage.setItem('Mycart', JSON.stringify({
           products: {
             ...itemsInCart.products,
-            [product.id]: {
+            [product.objectId]: {
               item: product,
               quantity: existingProductInCart.quantity += count,
               amount: existingProductInCart.amount += amount
@@ -42,7 +42,7 @@ export class CartService {
         localStorage.setItem('Mycart', JSON.stringify({
           products: {
             ...itemsInCart.products,
-            [product.id]: {
+            [product.objectId]: {
               item: product,
               quantity: count,
               amount
@@ -56,7 +56,7 @@ export class CartService {
     } else {
       localStorage.setItem('Mycart', JSON.stringify({
         products: {
-          [product.id]: {
+          [product.objectId]: {
             item: product,
             quantity: count,
             amount
@@ -72,10 +72,10 @@ export class CartService {
   removeItem(product: Product){
     const cartItems = JSON.parse(localStorage.getItem('Mycart')).products;
     console.log(cartItems)
-    const p = cartItems[product.id]
+    const p = cartItems[product.objectId]
     console.log(p)
     if(p){
-      delete cartItems[product.id];
+      delete cartItems[product.objectId];
       localStorage.setItem('Mycart', JSON.stringify({
         products: {
           ...cartItems

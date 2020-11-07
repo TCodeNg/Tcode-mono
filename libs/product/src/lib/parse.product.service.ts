@@ -47,4 +47,17 @@ export class ParseProductService implements ProductServiceInterface {
     _product.id = id;
     return from(_product.destroy());
   }
+
+  createProduct(product: Partial<Product>): Observable<Product> {
+    const _product = new Parse.Object(PRODUCT);
+    Object.keys(product).forEach(key => {
+      _product.set(key, product[key]);
+    });
+    return from(_product.save()).pipe(
+      map((obj: Parse.Object) => {
+        const product = ParseProductService.parseProduct(obj);
+        return product as Product;
+      }),
+    );
+  }
 }

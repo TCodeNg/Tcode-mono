@@ -2,7 +2,7 @@ import { Product } from '@tcode/api-interface';
 
 export const products: Product[] = [
   {
-    id: "5ee4c28b55f776579bebcace4",
+    objectId: "5ee4c28b55f776579bebcace4",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -41,7 +41,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace1",
+    objectId: "5ee4c28b55f776579bebcace1",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -80,7 +80,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace2",
+    objectId: "5ee4c28b55f776579bebcace2",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -119,7 +119,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace1",
+    objectId: "5ee4c28b55f776579bebcace1",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -158,7 +158,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace3",
+    objectId: "5ee4c28b55f776579bebcace3",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -197,7 +197,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace4",
+    objectId: "5ee4c28b55f776579bebcace4",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"
@@ -236,7 +236,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: "5ee4c28b55f776579bebcace3",
+    objectId: "5ee4c28b55f776579bebcace3",
     productId: '33334',
     category: [
       "5ee4b2530ee45f000dabb459"

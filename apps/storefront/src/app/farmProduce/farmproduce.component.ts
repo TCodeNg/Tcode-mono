@@ -11,11 +11,11 @@ import { CartService } from '../services/cart.service';
   templateUrl: './farmproduce.component.html',
   styleUrls: ['./farmproduce.component.scss'],
   animations: [
-    trigger('fade', [ 
+    trigger('fade', [
       transition('void => *', [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate(1000, style({opacity: 1}))
-      ]) 
+      ])
     ])
   ]
 })
@@ -32,7 +32,7 @@ export class FarmproduceComponent implements OnInit {
 
   gotoProduct(e: MouseEvent, product: Product) {
     if(e.srcElement['tagName'] === 'IMG') {
-      this.router.navigate(['/farm-produce', 'product', product.id])
+      this.router.navigate(['/farm-produce', 'product', product.objectId])
     }
   }
 

@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   gotoProductPage(product: Product){
     const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    this.router.navigate([`/${urlPath}`, 'product', product.id]);
+    this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
   }
 
   removeFromCart(item: Product){

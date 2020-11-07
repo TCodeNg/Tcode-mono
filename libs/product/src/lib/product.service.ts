@@ -15,6 +15,7 @@ export interface ProductServiceInterface {
   getProduct(id: string): Observable<Product>;
   updateProduct(id: string, product: Partial<Product>): Observable<any>;
   deleteProduct(id: string): Observable<any>;
+  createProduct(product: Partial<Product>): Observable<Product>;
 }
 export type ProductService = ProductServiceInterface;
 export const PRODUCT_SERVICE_TOKEN = new InjectionToken('PRODUCT_SERVICE_TOKEN');
