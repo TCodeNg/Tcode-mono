@@ -1,0 +1,36 @@
+<section class="container">
+  <ng-container
+    [ngTemplateOutlet]="dataSource && dataSource?.data ? hasDataSource : noDataSource"
+  ></ng-container>
+</section>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize"></mat-paginator>
+
+<ng-template #hasDataSource>
+  <ng-container 
+    [ngTemplateOutlet]="tableColumns && tableColumns?.length ? hasTableColumns : noTableColumns"
+  ></ng-container>
+</ng-template>
+
+<ng-template #noDataSource>
+  <p>Please provide data source...</p>
+</ng-template>
+
+<ng-template #hasTableColumns>
+  <ng-container *ngIf="!dataSource?.data?.length; else noEmptyData">
+    <h3 class="nodata">No Data</h3>
+  </ng-container>
+  <table mat-table [dataSource]="dataSource" #noEmptyData>
+    <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+      <th mat-header-cell *matHeaderCellDef>
+        {{tableColumn.name | titlecase}}
+      </th>
+      <td mat-cell *matCellDef="let data" (click)="handleClick(data)" > {{data | dataGetter: tableColumn.key}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="dataColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: dataColumns;"></tr>
+  </table>
+</ng-template>
+
+<ng-template #noTableColumns>
+  <p>Please provide valid table column data</p>
+</ng-template>
