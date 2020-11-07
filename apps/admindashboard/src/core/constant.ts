@@ -1,6 +1,7 @@
 export const ROUTES = {
   adminDashboard: {
     home: '',
-    profile: 'user-profile'
+    profile: 'user-profile',
+    orders: 'orders'
   }
 }

@@ -1,0 +1,9 @@
+<header class="flex align-center">
+  <p>{{ pageTitle }}</p>
+</header>
+<tcode-table 
+  [dataSource]="tableData"
+  [tableColumns]="tableColumns"
+  [pageSize]="5"
+  (onRowClick)="handleClick($event)"
+></tcode-table>

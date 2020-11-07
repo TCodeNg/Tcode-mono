@@ -65,13 +65,13 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     const { email, password } = this.loginFormGroup.value;
     this.lState = 'loading';
-    this.authService.login(email, password).then((user) => {
+    this.authService.login(email, password).toPromise().then((user) => {
       this.lState = 'idle'
       this.cartService.uploadCartItems();
       this.router.navigate(["/"]);
     }).catch((error) => {
       this.lState = 'idle'
-      if(error.code.includes("auth/user-not-found")){
+      if (error.code.includes("auth/user-not-found")) {
         this._snackBar.open("Invalid email/password", null, {
           duration: 5000
         });
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
   }
 
   private handleLoginAction(action: any) {
-    if(!!action.error) {
+    if (!!action.error) {
       const error = API_ERROR[action.error.statusCode];
       const { _snackBar } = this;
       _snackBar.open(error, null, {

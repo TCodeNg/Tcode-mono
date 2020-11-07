@@ -29,7 +29,8 @@
       "@tcode/card": ["libs/card/src/index.ts"],
       "@tcode/input": ["libs/input/src/index.ts"],
       "@tcode/media-api": ["libs/media-api/src/index.ts"],
-      "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"]
+      "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"],
+      "@tcode/table": ["libs/table/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

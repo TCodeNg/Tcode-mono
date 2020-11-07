@@ -12,7 +12,14 @@ const routes: Routes = [
     loadChildren: async () => {
       const m = await import('./userprofile/userprofile.module')
       return m.UserProfileModule
-    } 
+    }
+  },
+  {
+    path: ROUTES.adminDashboard.orders,
+    loadChildren: async () => {
+      const m = await import('./orders/orders.module')
+      return m.OrdersModule
+    }
   }
 ]
 @NgModule({
@@ -23,4 +30,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class AppRoutingModule{}
+export class AppRoutingModule { }
