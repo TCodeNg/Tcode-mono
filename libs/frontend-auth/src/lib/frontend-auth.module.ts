@@ -32,7 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       {
         path: 'auth/login',
         component: LoginComponent,
-        canActivate: [AuthGuard]
+        canActivate: []
       },
       {
         path: 'auth/signup',

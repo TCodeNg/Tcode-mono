@@ -135,63 +135,6 @@
         }
       }
     },
-    "storefront-api": {
-      "root": "apps/storefront-api",
-      "sourceRoot": "apps/storefront-api/src",
-      "projectType": "application",
-      "prefix": "storefront-api",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/storefront-api",
-            "main": "apps/storefront-api/src/main.ts",
-            "tsConfig": "apps/storefront-api/tsconfig.app.json",
-            "assets": ["apps/storefront-api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/storefront-api/src/environments/environment.ts",
-                  "with": "apps/storefront-api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "storefront-api:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "config": "apps/storefront-api/.eslintrc",
-            "tsConfig": [
-              "apps/storefront-api/tsconfig.app.json",
-              "apps/storefront-api/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/storefront-api/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/storefront-api/jest.config.js",
-            "tsConfig": "apps/storefront-api/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "api-interface": {
       "root": "libs/api-interface",
       "sourceRoot": "libs/api-interface/src",
@@ -841,6 +784,38 @@
             "tsConfig": ["apps/vendor-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/vendor-e2e/**"]
           }
+        }
+      }
+    },
+    "cart": {
+      "projectType": "library",
+      "root": "libs/cart",
+      "sourceRoot": "libs/cart/src",
+      "prefix": "tc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/cart/tsconfig.lib.json",
+              "libs/cart/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/cart/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/cart/jest.config.js",
+            "tsConfig": "libs/cart/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/cart/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }

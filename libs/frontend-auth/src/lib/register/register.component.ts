@@ -1,13 +1,11 @@
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { AUTH_CONFIG_TOKEN, AuthConfig } from '../auth.config';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthState } from '../+state/auth.state';
 import { validatePassword } from './validator';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
 
 @Component({
   selector: 'tcode-register',
@@ -22,12 +20,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   isLoading$ = this.isLoading.asObservable();
 
   constructor(
-    @Inject(AUTH_CONFIG_TOKEN) config: AuthConfig, 
-    fb: FormBuilder, private auth: AuthState, 
-    private firebaseAuth: AngularFireAuth, 
-    private firestore: AngularFirestore,
+    @Inject(AUTH_CONFIG_TOKEN) config: AuthConfig,
+    fb: FormBuilder,
     private router: Router,
-    public _snackBar: MatSnackBar
+    public _snackBar: MatSnackBar,
+    @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService
     ) {
     this.config = config;
     this.isAlive = true;
@@ -44,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnDestroy() {
@@ -63,32 +60,25 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.isLoading.next(true);
     const { email, password, username, phoneNumber, lastName, firstName, address } = this.signUpFormGroup.value;
     const payload = {
-      Email: email,
-      Username: username,
-      Phone: phoneNumber,
-      Lastname: lastName,
-      Firstname: firstName,
-      Address: address
+      email,
+      username,
+      phoneNumber,
+      lastName,
+      firstName,
+      address,
+      password
     }
+
     try {
-      const newUser = await this.firebaseAuth.createUserWithEmailAndPassword(email, password);
-     try {
-       const userId = newUser.user.uid;
-       await this.firestore.collection("profiles").doc(userId).set(payload, {merge: true});
-       this.isLoading.next(false);
-       this.router.navigate(['/auth', 'login']);
-     } catch (error) {
-      this._snackBar.open(error.message, null, {
-        duration: 2000
-      })
-      this.isLoading.next(false);
-     }
+      await this.authService.signUp(payload).toPromise();
+      await this.router.navigate(['/auth', 'login']);
     } catch (error) {
       this._snackBar.open(error.message, null, {
         duration: 2000
       })
+    } finally {
       this.isLoading.next(false);
-    } 
+    }
   }
 
 }

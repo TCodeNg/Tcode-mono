@@ -27,9 +27,6 @@
       "tags": [],
       "implicitDependencies": ["storefront"]
     },
-    "storefront-api": {
-      "tags": []
-    },
     "api-interface": {
       "tags": []
     },
@@ -86,6 +83,9 @@
     "vendor-e2e": {
       "tags": [],
       "implicitDependencies": ["vendor"]
+    },
+    "cart": {
+      "tags": ["ui"]
     }
   }
 }
