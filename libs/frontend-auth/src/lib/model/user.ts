@@ -1,6 +1,7 @@
 import { IUser } from './iuser';
-import { AuthState } from '../+state/auth.state';
-import { AuthStateModel } from '../+state/auth.state.model';
+import { Inject } from '@angular/core';
+import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 export abstract class User implements IUser {
   abstract email: string;
@@ -8,19 +9,15 @@ export abstract class User implements IUser {
   abstract lastName: string;
   abstract otherName: string;
   abstract phoneNumber: string;
-  private snapshot: AuthStateModel;
 
-  constructor(private state: AuthState) {
-    const { snapshot } = state;
-    this.snapshot = snapshot;
-  }
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private service: AuthService) {}
 
-  isLoggedIn(): boolean {
-    return !!this.snapshot.accessToken;
+  isLoggedIn(): Observable<boolean> {
+    return this.service.isLoggedIn()
   }
 
 
-  logOut() {
-    this.state.logOut();
+  logOut(): Observable<any> {
+    return this.service.logout();
   }
 }

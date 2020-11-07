@@ -4,6 +4,7 @@ import { User, Customer } from '@tcode/frontend-auth';
 import { CartService } from './services/cart.service';
 import { Product } from '@tcode/api-interface';
 import { AuthService } from 'libs/frontend-auth/src/lib/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tcode-root',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private authService: AuthService
-  ){
+  ) {
     this.user = _user as Customer;
   }
 
@@ -27,13 +28,13 @@ export class AppComponent implements OnInit {
   cartAmount$ = this.cartService.cartTotalAmount$;
   cartItems$ = this.cartService.cartItems$;
 
-  ngOnInit(){
+  ngOnInit() {
     this.cartService.updateCartItemCount();
     this.cartService.updateCartTotalAmount();
     this.cartService.updateCartItems();
   }
 
-  handleAuthAction(){
+  handleAuthAction() {
     this.router.navigate(['/auth/login']);
   }
 
@@ -41,12 +42,12 @@ export class AppComponent implements OnInit {
     return this.authService.isLoggedIn;
   }
 
-  gotoProductPage(product: Product){
+  gotoProductPage(product: Product) {
     const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    this.router.navigate([`/${urlPath}`, 'product', product.id]);
+    this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
   }
 
-  removeFromCart(item: Product){
+  removeFromCart(item: Product) {
     this.cartService.removeItem(item)
   }
 
@@ -64,5 +65,5 @@ export class AppComponent implements OnInit {
     this.cartService.updateCartTotalAmount();
     this.router.navigate(['/'])
   }
-  
+
 }

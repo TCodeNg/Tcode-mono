@@ -10,11 +10,11 @@ import { CartService } from '../services/cart.service';
   templateUrl: './inverter.component.html',
   styleUrls: ['./inverter.component.scss'],
   animations: [
-    trigger('fade', [ 
+    trigger('fade', [
       transition('void => *', [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate(1000, style({opacity: 1}))
-      ]) 
+      ])
     ])
   ]
 })
@@ -31,7 +31,7 @@ export class InverterComponent implements OnInit {
 
   gotoProduct(e:MouseEvent, product: Product) {
     if(e.srcElement['tagName'] === 'IMG') {
-      this.router.navigate(['/inverters', 'product', product.id])
+      this.router.navigate(['/inverters', 'product', product.objectId])
     }
   }
 

@@ -31,13 +31,13 @@ export class CartService {
   addItem(product: Product, count: number) {
     const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
     const amount: number = count * product.price.value;
-    if(itemsInCart){
-      const existingProductInCart = itemsInCart.products[product.id];
-      if(existingProductInCart){
+    if (itemsInCart) {
+      const existingProductInCart = itemsInCart.products[product.objectId];
+      if (existingProductInCart) {
         localStorage.setItem('Mycart', JSON.stringify({
           products: {
             ...itemsInCart.products,
-            [product.id]: {
+            [product.objectId]: {
               item: product,
               quantity: existingProductInCart.quantity += count,
               amount: existingProductInCart.amount += amount
@@ -52,7 +52,7 @@ export class CartService {
         localStorage.setItem('Mycart', JSON.stringify({
           products: {
             ...itemsInCart.products,
-            [product.id]: {
+            [product.objectId]: {
               item: product,
               quantity: count,
               amount
@@ -67,7 +67,7 @@ export class CartService {
     } else {
       localStorage.setItem('Mycart', JSON.stringify({
         products: {
-          [product.id]: {
+          [product.objectId]: {
             item: product,
             quantity: count,
             amount
@@ -81,11 +81,11 @@ export class CartService {
     }
   }
 
-  removeItem(product: Product){
+  removeItem(product: Product) {
     const cartItems = JSON.parse(localStorage.getItem('Mycart')).products;
-    const p = cartItems[product.id]
-    if(p){
-      delete cartItems[product.id];
+    const p = cartItems[product.objectId]
+    if (p) {
+      delete cartItems[product.objectId];
       localStorage.setItem('Mycart', JSON.stringify({
         products: {
           ...cartItems
@@ -98,42 +98,42 @@ export class CartService {
     this.uploadCartItems();
   }
 
-  getItemsInCart(){
+  getItemsInCart() {
     const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
-    return itemsInCart ? Object.values(itemsInCart.products): [];
+    return itemsInCart ? Object.values(itemsInCart.products) : [];
   }
 
-  getCartItemCount(): number{
+  getCartItemCount(): number {
     const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
     return itemsInCart ? Object.values(itemsInCart.products).length : 0;
   }
 
   getTotalCartAmount(): number {
     const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
-    if(!itemsInCart) {
+    if (!itemsInCart) {
       return 0
-    }else {
+    } else {
       const productsInCart = Object.values(itemsInCart.products);
       const totalAmount = productsInCart.reduce((acc, curr) => {
         return acc + curr['amount']
       }, 0);
-     return +totalAmount;
+      return +totalAmount;
     }
   }
 
-  updateCartItemCount(){
+  updateCartItemCount() {
     this.cartCount.next(this.getCartItemCount())
   }
 
-  updateCartTotalAmount(){
+  updateCartTotalAmount() {
     this.cartTotalAmount.next(this.getTotalCartAmount());
   }
 
-  updateCartItems(){
+  updateCartItems() {
     this.cartItems.next(this.getItemsInCart());
   }
 
-  clearCart(){
+  clearCart() {
     console.log('here mehn')
     localStorage.removeItem("Mycart");
     this.uploadCartItems();
@@ -141,10 +141,10 @@ export class CartService {
     this.updateCartItemCount();
   }
 
-  async uploadCartItems(){
+  async uploadCartItems() {
     const itemsInCart = this.getItemsInCart();
     const user = await this.firebaseAuth.currentUser;
-    if(user.uid) {
+    if (user.uid) {
       this.fireStore.collection('carts').doc(user.uid).collection('items').get().toPromise().then((doc) => {
         doc.forEach(el => {
           el.ref.delete();
@@ -161,7 +161,7 @@ export class CartService {
           }
         });
       })
-      
+
     }
   }
 }

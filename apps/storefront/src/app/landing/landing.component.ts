@@ -11,11 +11,11 @@ import { CartService } from '../services/cart.service';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
   animations: [
-    trigger('fade', [ 
+    trigger('fade', [
       transition('void => *', [
-        style({ opacity: 0 }), 
+        style({ opacity: 0 }),
         animate(1000, style({opacity: 1}))
-      ]) 
+      ])
     ])
   ]
 })
@@ -38,7 +38,7 @@ export class LandingComponent implements OnInit {
 
   gotoProduct(e: MouseEvent, product: Product) {
     if(e.srcElement['tagName'] === 'IMG') {
-      this.router.navigate(['/', 'product', product.id])
+      this.router.navigate(['/', 'product', product.objectId])
     }
   }
 

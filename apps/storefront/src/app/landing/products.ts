@@ -3,7 +3,7 @@ import { Product } from '@tcode/api-interface';
 export const products: { [key: string]: Product[]} = {
   general: [
     {
-      id: "5ee4c28b55f776579bebcac2",
+      objectId: "5ee4c28b55f776579bebcac2",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -49,7 +49,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcac3",
+      objectId: "5ee4c28b55f776579bebcac3",
       productId: '333',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -88,7 +88,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcac4",
+      objectId: "5ee4c28b55f776579bebcac4",
       productId: '3333',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -127,7 +127,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcac5",
+      objectId: "5ee4c28b55f776579bebcac5",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -168,7 +168,7 @@ export const products: { [key: string]: Product[]} = {
   ],
   realEstate: [
     {
-      id: "5ee4c28b55f776579bebcad2",
+      objectId: "5ee4c28b55f776579bebcad2",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -214,7 +214,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcad3",
+      objectId: "5ee4c28b55f776579bebcad3",
       productId: '333',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -253,7 +253,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcad1",
+      objectId: "5ee4c28b55f776579bebcad1",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -292,7 +292,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcad4",
+      objectId: "5ee4c28b55f776579bebcad4",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -333,7 +333,7 @@ export const products: { [key: string]: Product[]} = {
   ],
   inverters: [
     {
-      id: "5ee4c28b55f776579bebcacb1",
+      objectId: "5ee4c28b55f776579bebcacb1",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -372,7 +372,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcacb2",
+      objectId: "5ee4c28b55f776579bebcacb2",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -411,7 +411,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcacb3",
+      objectId: "5ee4c28b55f776579bebcacb3",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -450,7 +450,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcacb4",
+      objectId: "5ee4c28b55f776579bebcacb4",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -491,7 +491,7 @@ export const products: { [key: string]: Product[]} = {
   ],
   farmProducts: [
     {
-      id: "5ee4c28b55f776579bebcace1",
+      objectId: "5ee4c28b55f776579bebcace1",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -530,7 +530,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcace2",
+      objectId: "5ee4c28b55f776579bebcace2",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -569,7 +569,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcace3",
+      objectId: "5ee4c28b55f776579bebcace3",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -608,7 +608,7 @@ export const products: { [key: string]: Product[]} = {
       },
     },
     {
-      id: "5ee4c28b55f776579bebcace4",
+      objectId: "5ee4c28b55f776579bebcace4",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"

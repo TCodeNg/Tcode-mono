@@ -1,37 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
+  ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
   CanLoad,
   Route,
-  UrlSegment,
-  ActivatedRouteSnapshot,
+  Router,
   RouterStateSnapshot,
-  UrlTree,
-  Router
+  UrlSegment,
+  UrlTree
 } from '@angular/router';
 import { from, Observable, of } from 'rxjs';
-import { AuthState } from './+state/auth.state';
-import { mapTo } from 'rxjs/operators';
-import { AuthService } from './auth.service';
+import { mapTo, switchMap } from 'rxjs/operators';
+import { AUTH_SERVICE_TOKEN, AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private state: AuthState, private router: Router, private authService: AuthService) {
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private authService: AuthService, private router: Router) {
   }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const { snapshot } = this.state;
-    const hasToken = !!snapshot.accessToken;
-    const currentUser = localStorage.getItem('__currentUser');
-    if(currentUser) {
-      this.router.navigate(['/'])
-      return false;
-    }
-    return true;
+    return this.authService.isLoggedIn().pipe(
+      switchMap(loggedIn => this.checkLogin(loggedIn))
+    );
   }
 
   canActivateChild(
@@ -42,14 +36,14 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    const { snapshot } = this.state;
-    const hasToken = !!snapshot.accessToken;
-    return this.checkToken(hasToken);
+    return this.authService.isLoggedIn().pipe(
+      switchMap(loggedIn => this.checkLogin(loggedIn))
+    );
   }
 
-  private checkToken(hasToken: boolean) {
-    if (hasToken) {
-      return true;
+  private checkLogin(isLoggedIn: boolean): Observable<boolean> {
+    if (isLoggedIn) {
+      return of(true);
     } else {
       return from(this.router.navigate(['auth', 'login'])).pipe(
         mapTo(false)
