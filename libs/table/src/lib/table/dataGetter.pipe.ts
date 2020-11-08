@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: "dataGetter"
+  name: "dataGetter",
+  pure: true
 })
 export class DataGetterPipe implements PipeTransform {
   transform(data: any, key: string, ...args: unknown[]): unknown {

@@ -8,7 +8,7 @@
 
 .mat-drawer.mat-drawer-side {
   width: 220px !important;
-  overflow-y: scroll !important;
+  overflow: hidden !important;
   background: $primary;
   color: white;
 }

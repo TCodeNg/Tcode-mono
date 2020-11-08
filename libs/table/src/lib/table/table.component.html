@@ -1,36 +1,100 @@
-<section class="container">
-  <ng-container
-    [ngTemplateOutlet]="dataSource && dataSource?.data ? hasDataSource : noDataSource"
-  ></ng-container>
+<section class="wrapper">
+  <div class="search">
+    <tcode-input>
+      <img src="assets/img/search 1.svg" alt="search">
+      <input id="email" type="email" placeholder="Search" [formControl]="search">
+    </tcode-input>
+  </div>
+  <section class="container">
+    <ng-container
+      [ngTemplateOutlet]="dataSource && dataSource?.data ? hasDataSource : noDataSource"
+    ></ng-container>
+  </section>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="length"></mat-paginator>
 </section>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize"></mat-paginator>
 
+<!-- HAS DATASOURCE -->
 <ng-template #hasDataSource>
   <ng-container 
     [ngTemplateOutlet]="tableColumns && tableColumns?.length ? hasTableColumns : noTableColumns"
   ></ng-container>
 </ng-template>
 
+<!-- NO DATASOURCE -->
 <ng-template #noDataSource>
   <p>Please provide data source...</p>
 </ng-template>
 
+<!-- HAS TABLE COLUMNS -->
 <ng-template #hasTableColumns>
   <ng-container *ngIf="!dataSource?.data?.length; else noEmptyData">
     <h3 class="nodata">No Data</h3>
   </ng-container>
-  <table mat-table [dataSource]="dataSource" #noEmptyData>
-    <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
-      <th mat-header-cell *matHeaderCellDef>
-        {{tableColumn.name | titlecase}}
-      </th>
-      <td mat-cell *matCellDef="let data" (click)="handleClick(data)" > {{data | dataGetter: tableColumn.key}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="dataColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: dataColumns;"></tr>
-  </table>
+  <ng-template #noEmptyData>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+        <th mat-header-cell *matHeaderCellDef>
+          {{tableColumn.name | titlecase}}
+        </th>
+
+        <!-- COLUMN WITHOUT ACTIONS (NORMAL COLUMN) -->
+        <ng-container *ngIf="!tableColumn.columnType || tableColumn.columnType === 'normal'; else actionColumn">
+          <!-- ON CLICK HANDLER -->
+          <ng-container *ngIf="tableColumn.onClick; else noClickHandler">
+            <!-- NORMAL TEXT DATA TYPE -->
+            <ng-container *ngIf="!tableColumn.dataType || tableColumn.dataType === 'normalText'">
+              <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ data | dataGetter: tableColumn.key }} </td>
+            </ng-container>
+            <!-- DATE DATA TYPE -->
+            <ng-container  *ngIf="tableColumn.dataType === 'date'">
+              <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ (data | dataGetter: tableColumn.key) | date: "medium" }} </td>
+            </ng-container>
+            <!-- CURRENCY DATA TYPE -->
+            <ng-container  *ngIf="tableColumn.dataType === 'currency'">
+              <ng-container *ngIf="tableColumn.currencyCode">
+                <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ (data | dataGetter: tableColumn.key) | currency:tableColumn.currencyCode:"symbol-narrow"  }} </td>
+              </ng-container>
+              <ng-container *ngIf="!tableColumn.currencyCode">
+                <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ (data | dataGetter: tableColumn.key) | currency:'NGN':"symbol-narrow"  }} </td>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <!-- NO ONCLICK HANLDER -->
+          <ng-template #noClickHandler>
+            <!-- NORMAL TEXT DATA TYPE -->
+            <ng-container *ngIf="!tableColumn.dataType || tableColumn.dataType === 'normalText'">
+              <td mat-cell *matCellDef="let data"> {{ data | dataGetter: tableColumn.key }} </td>
+            </ng-container>
+            <!-- DATE DATA TYPE -->
+            <ng-container  *ngIf="tableColumn.dataType === 'date'">
+              <td mat-cell *matCellDef="let data"> {{ (data | dataGetter: tableColumn.key) | date:"medium" }} </td>
+            </ng-container>
+            <!-- CURRENCY DATA TYPE -->
+            <ng-container  *ngIf="tableColumn.dataType === 'currency'">
+              <ng-container *ngIf="tableColumn.currencyCode">
+                <td mat-cell *matCellDef="let data"> {{ (data | dataGetter: tableColumn.key) | currency:tableColumn.currencyCode:"symbol-narrow" }} </td>
+              </ng-container>
+              <ng-container *ngIf="!tableColumn.currencyCode">
+                <td mat-cell *matCellDef="let data"> {{ (data | dataGetter: tableColumn.key) | currency:'NGN':"symbol-narrow" }} </td>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+        </ng-container>
+
+        <!-- COLUMN WITH ACTIONS(ACTION COLUMN) -->
+        <ng-template #actionColumn>
+          <td mat-cell *matCellDef="let data">Actions</td>
+        </ng-template>
+
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="dataColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: dataColumns;"></tr>
+    </table>
+  </ng-template>
 </ng-template>
 
+<!-- NO TABLE COLUMNS -->
 <ng-template #noTableColumns>
   <p>Please provide valid table column data</p>
 </ng-template>

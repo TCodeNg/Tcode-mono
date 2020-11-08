@@ -4,6 +4,8 @@
 <tcode-table 
   [dataSource]="tableData"
   [tableColumns]="tableColumns"
-  [pageSize]="5"
+  [pageSize]="10"
+  [length]="tableData.data.length"
   (onRowClick)="handleClick($event)"
+  (onSearch)="handleClick($event)"
 ></tcode-table>
