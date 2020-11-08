@@ -4,6 +4,9 @@ export const ROUTES = {
     profile: 'user-profile',
     orders: {
       home: 'orders',
+    },
+    products: {
+      home: 'products'
     }
   }
 }
