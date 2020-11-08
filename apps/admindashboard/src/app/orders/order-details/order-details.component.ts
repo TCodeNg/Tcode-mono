@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { CardConfig } from 'libs/card/src/lib/model';
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { TableColumn } from 'libs/table/src/lib/table/model';
 
 @Component({
@@ -19,7 +20,8 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   tableData: MatTableDataSource<any>;
   tableColumns: TableColumn[];
   constructor(
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private modalService: MatDialog
   ) {
     this.orderId = this.activateRoute.snapshot.params.id
   }

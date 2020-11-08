@@ -1,9 +1,9 @@
 import { Product } from '@tcode/api-interface';
 
-export const products: { [key: string]: Product[]} = {
+export const products: { [key: string]: Product[] } = {
   general: [
     {
-      objectId: "5ee4c28b55f776579bebcac2",
+      objectId: "4nxtnWtiPG",
       productId: '33334',
       category: [
         "5ee4b2530ee45f000dabb459"
@@ -26,12 +26,12 @@ export const products: { [key: string]: Product[]} = {
       ],
       title: "4 bedroom bungalow, Ikoyi",
       price: {
-        value: 100000000,
+        value: 800000,
         currency: 'NGN'
       },
       type: "estate",
       description: "4 bedroom bungalow, Ikoyi",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -70,7 +70,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: 'estate',
       description: "4 bedroom duplex - Ikeja GRA",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -109,7 +109,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: 'farm',
       description: "Compact Utility Tractor",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -148,7 +148,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "estate",
       description: "4 bedroom bungalow, Ikoyi",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -196,7 +196,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "estate",
       description: "Beautiful 4 bedroom, 4 bathroom, 2-story home on a golf-course lot featuring a 3-car attached garage! Interior features include updated paint, high ceilings, and recessed lighting while the 1st floor offers wood flooring throughout, archways, a fireplace in the living room, formal dining, a study, full bathroom, and mud",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -235,7 +235,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: 'estate',
       description: "Beautiful 4 bedroom, 4 bathroom, 2-story home on a golf-course lot featuring a 3-car attached garage! Interior features include updated paint, high ceilings, and recessed lighting while the 1st floor offers wood flooring throughout, archways, a fireplace in the living room, formal dining, a study, full bathroom, and mud",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -274,7 +274,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "estate",
       description: "Beautiful 4 bedroom, 4 bathroom, 2-story home on a golf-course lot featuring a 3-car attached garage! Interior features include updated paint, high ceilings, and recessed lighting while the 1st floor offers wood flooring throughout, archways, a fireplace in the living room, formal dining, a study, full bathroom, and mud",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -313,7 +313,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "estate",
       description: "Beautiful 4 bedroom, 4 bathroom, 2-story home on a golf-course lot featuring a 3-car attached garage! Interior features include updated paint, high ceilings, and recessed lighting while the 1st floor offers wood flooring throughout, archways, a fireplace in the living room, formal dining, a study, full bathroom, and mud",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -354,7 +354,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "inverter",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -393,7 +393,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "inverter",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -432,7 +432,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "inverter",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -471,7 +471,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "inverter",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -512,7 +512,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "farm",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -551,7 +551,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "farm",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -590,7 +590,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "farm",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },
@@ -629,7 +629,7 @@ export const products: { [key: string]: Product[]} = {
       },
       type: "farm",
       description: "SmartPOWERFIX is an engineering firm that undertakes the design, supply, installation and maintenance of renewable energy,Since 2002 with proven track records. For safe, efficient and professional SOLAR & INVERTER installations",
-      agent:{
+      agent: {
         id: '5ee4b2530ee45f000dabb459',
         title: 'Vendor'
       },

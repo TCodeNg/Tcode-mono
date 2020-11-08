@@ -10,6 +10,7 @@ import { ProcessingOrdersComponent } from './processing-orders/processing-orders
 import { CompletedOrdersComponent } from './completed-orders/completed-orders.component';
 import { FailedOrdersComponent } from './failed-orders/failed-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     ProcessingOrdersComponent,
     CompletedOrdersComponent,
     FailedOrdersComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    DisptachOrderComponent
   ],
   imports: [
     CommonModule,

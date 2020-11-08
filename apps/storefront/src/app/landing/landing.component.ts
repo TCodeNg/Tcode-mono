@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Customer, User } from '@tcode/frontend-auth';
 import { Router } from '@angular/router';
 import { Product } from '@tcode/api-interface';
 import { products } from './products';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { CartService } from '../services/cart.service';
+import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart';
 
 @Component({
   selector: 'tcode-landing',
@@ -14,7 +14,7 @@ import { CartService } from '../services/cart.service';
     trigger('fade', [
       transition('void => *', [
         style({ opacity: 0 }),
-        animate(1000, style({opacity: 1}))
+        animate(1000, style({ opacity: 1 }))
       ])
     ])
   ]
@@ -26,8 +26,8 @@ export class LandingComponent implements OnInit {
   farmProducts: Product[];
   constructor(
     private router: Router,
-    private cartService: CartService
-  ) {}
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.generalProducts = products.general;
@@ -37,25 +37,28 @@ export class LandingComponent implements OnInit {
   }
 
   gotoProduct(e: MouseEvent, product: Product) {
-    if(e.srcElement['tagName'] === 'IMG') {
+    if (e.srcElement['tagName'] === 'IMG') {
       this.router.navigate(['/', 'product', product.objectId])
     }
   }
 
-  navigateToRealEstate(){
+  navigateToRealEstate() {
     this.router.navigate(['/real-estate']);
   }
 
-  navigateToInverters(){
+  navigateToInverters() {
     this.router.navigate(['/inverters']);
   }
 
-  navigateToFarmProduce(){
+  navigateToFarmProduce() {
     this.router.navigate(['/farm-produce']);
   }
 
-  addToCart(e){
-    this.cartService.addItem(e, 1);
+  addToCart(product: Product) {
+    const { objectId: productId } = product
+    this.cartService.addToCart(productId).subscribe((res) => {
+      console.log(res)
+    })
   }
 
 }
