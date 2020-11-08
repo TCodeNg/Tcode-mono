@@ -11,7 +11,7 @@ export class ParseCartService implements CartServiceInterface {
   constructor(@Inject(STORAGE_TOKEN) private storage: Storage) {}
 
   addToCart(productId: string, userId?: string): Observable<void> {
-    return from(Parse.Cloud.run('addProductToCart', { productId, userId: userId ?? this.userId }));
+    return from(Parse.Cloud.run('addToCart', { productId, userId: userId ?? this.userId }));
   }
 
   clearCart(userId?: string): Observable<Cart> {
@@ -36,7 +36,7 @@ export class ParseCartService implements CartServiceInterface {
   }
 
   removeFromCart(productId: string, userId?: string): Observable<void> {
-    return from(Parse.Cloud.run('removeProductFromCart', { productId, userId: userId ?? this.userId }));
+    return from(Parse.Cloud.run('removeFromCart', { productId, userId: userId ?? this.userId }));
   }
 
   checkout(userId?: string): Observable<void> {
