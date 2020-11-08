@@ -1,69 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, Customer } from '@tcode/frontend-auth';
-import { CartService } from './services/cart.service';
+import { Customer, User } from '@tcode/frontend-auth';
 import { Product } from '@tcode/api-interface';
-import { AuthService } from 'libs/frontend-auth/src/lib/auth.service';
 import { Observable } from 'rxjs';
+import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
+import { map, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tcode-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   user: Customer;
   showCart = false;
   cartItems: any;
+  cart$: Observable<Cart> = this.cartService.getCart().pipe(tap(console.log));
+  cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
+  cartAmount$ = this.cart$.pipe(map(cart => cart.totalAmount), startWith(0));
+  cartItems$: Observable<any> = this.cart$.pipe(map(cart => cart.products), startWith([]));
+
   constructor(
     _user: User,
     private router: Router,
-    private cartService: CartService,
-    private authService: AuthService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
   ) {
     this.user = _user as Customer;
   }
 
-  cartCount$ = this.cartService.cartCount$
-  cartAmount$ = this.cartService.cartTotalAmount$;
-  cartItems$ = this.cartService.cartItems$;
-
-  ngOnInit() {
-    this.cartService.updateCartItemCount();
-    this.cartService.updateCartTotalAmount();
-    this.cartService.updateCartItems();
+  get isLoggedIn(): Observable<boolean> {
+    return this.user.isLoggedIn();
   }
 
-  handleAuthAction() {
-    this.router.navigate(['/auth/login']);
+  ngOnInit() { }
+
+  async handleAuthAction() {
+    await this.router.navigate(['/auth/login']);
   }
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn;
-  }
-
-  gotoProductPage(product: Product) {
+  async gotoProductPage(product: Product) {
     const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
+    await this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
   }
 
   removeFromCart(item: Product) {
-    this.cartService.removeItem(item)
+    this.cartService.removeFromCart(item.objectId).subscribe();
   }
 
-  navigateToCheckout() {
+  async navigateToCheckout() {
     this.showCart = false;
-    this.router.navigate(['/checkout'])
+    await this.router.navigate(['/checkout']);
   }
 
   async logOut() {
-    await this.authService.logout();
-
-    localStorage.clear();
-    this.cartService.updateCartItemCount();
-    this.cartService.updateCartItems();
-    this.cartService.updateCartTotalAmount();
-    this.router.navigate(['/'])
+    await this.user.logOut();
+    await this.router.navigate(['/']);
   }
 
 }

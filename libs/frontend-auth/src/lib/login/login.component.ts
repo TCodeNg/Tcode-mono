@@ -7,10 +7,9 @@ import { Observable } from 'rxjs';
 import { distinctUntilKeyChanged, filter, map, pluck, startWith, tap } from 'rxjs/operators';
 import { API_ERROR } from '@tcode/shared/assets';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AuthService } from '../auth.service';
+import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { CartService } from '../../../../../apps/storefront/src/app/services/cart.service';
+import { CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 
 @Component({
   selector: 'tcode-login',
@@ -44,10 +43,10 @@ export class LoginComponent implements OnInit {
     fb: FormBuilder,
     private state: AuthState,
     private actions: Actions,
-    private authService: AuthService,
+    @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
     public _snackBar: MatSnackBar,
     public router: Router,
-    private cartService: CartService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
   ) {
     this.config = config;
     this.loginFormGroup = fb.group({
@@ -65,21 +64,14 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     const { email, password } = this.loginFormGroup.value;
     this.lState = 'loading';
-    this.authService.login(email, password).toPromise().then((user) => {
+    this.authService.login(email, password).toPromise().then((_) => {
       this.lState = 'idle'
-      this.cartService.uploadCartItems();
       this.router.navigate(["/"]);
-    }).catch((error) => {
+    }).catch((error: Parse.Error) => {
       this.lState = 'idle'
-      if (error.code.includes("auth/user-not-found")) {
-        this._snackBar.open("Invalid email/password", null, {
-          duration: 5000
-        });
-      } else {
-        this._snackBar.open(error.message, null, {
-          duration: 5000
-        });
-      }
+      this._snackBar.open(error.message, null, {
+        duration: 5000
+      });
     })
   }
 

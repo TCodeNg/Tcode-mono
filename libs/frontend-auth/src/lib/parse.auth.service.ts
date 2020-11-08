@@ -14,4 +14,19 @@ export class ParseAuthService implements AuthServiceInterface {
   logout(): Observable<any> {
     return from(Parse.User.logOut());
   }
+
+  get currentUser(): any {
+    return Parse.User.current();
+  }
+
+  signUp(payload: { lastName: string; firstName: string; password: string; phoneNumber: string; address: string; email: string; username: string }): Observable<any> {
+    const user = new Parse.User();
+    user.setUsername(payload.username);
+    user.setPassword(payload.password);
+    user.setEmail(payload.email);
+    user.set('address', payload.address);
+    user.set('firstName', payload.firstName);
+    user.set('lastName', payload.lastName);
+    return from(user.signUp());
+  }
 }

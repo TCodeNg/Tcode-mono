@@ -14,21 +14,27 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },
   "projects": {
     "storefront": {
       "tags": [],
-      "implicitDependencies": ["shared-assets"]
+      "implicitDependencies": [
+        "shared-assets"
+      ]
     },
     "storefront-e2e": {
       "tags": [],
-      "implicitDependencies": ["storefront"]
-    },
-    "storefront-api": {
-      "tags": []
+      "implicitDependencies": [
+        "storefront"
+      ]
     },
     "api-interface": {
       "tags": []
@@ -71,31 +77,44 @@
     },
     "frontend-auth": {
       "tags": [],
-      "implicitDependencies": ["shared-assets"]
+      "implicitDependencies": [
+        "shared-assets"
+      ]
     },
     "admindashboard": {
       "tags": []
     },
     "admindashboard-e2e": {
       "tags": [],
-      "implicitDependencies": ["admindashboard"]
+      "implicitDependencies": [
+        "admindashboard"
+      ]
     },
     "admin": {
       "tags": []
     },
     "admin-e2e": {
       "tags": [],
-      "implicitDependencies": ["admin"]
+      "implicitDependencies": [
+        "admin"
+      ]
     },
     "vendor": {
       "tags": []
     },
     "vendor-e2e": {
       "tags": [],
-      "implicitDependencies": ["vendor"]
+      "implicitDependencies": [
+        "vendor"
+      ]
     },
     "table": {
       "tags": []
+    },
+    "cart": {
+      "tags": [
+        "ui"
+      ]
     }
   }
 }

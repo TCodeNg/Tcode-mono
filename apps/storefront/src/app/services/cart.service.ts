@@ -1,10 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Product } from '@tcode/api-interface';
-import { BehaviorSubject, of } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from 'libs/frontend-auth/src/lib/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -12,10 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class CartService {
   constructor(
-    private fireStore: AngularFirestore,
-    private firebaseAuth: AngularFireAuth,
-    private _snackBar: MatSnackBar,
-    private authService: AuthService
+    private _snackBar: MatSnackBar
   ) {
   }
 
@@ -29,73 +23,75 @@ export class CartService {
   public cartItems$ = this.cartItems.asObservable();
 
   addItem(product: Product, count: number) {
-    const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
-    const amount: number = count * product.price.value;
-    if (itemsInCart) {
-      const existingProductInCart = itemsInCart.products[product.objectId];
-      if (existingProductInCart) {
-        localStorage.setItem('Mycart', JSON.stringify({
-          products: {
-            ...itemsInCart.products,
-            [product.objectId]: {
-              item: product,
-              quantity: existingProductInCart.quantity += count,
-              amount: existingProductInCart.amount += amount
-            }
-          }
-        }));
-        this.updateCartItemCount();
-        this.updateCartTotalAmount();
-        this.updateCartItems();
-        this.uploadCartItems();
-      } else {
-        localStorage.setItem('Mycart', JSON.stringify({
-          products: {
-            ...itemsInCart.products,
-            [product.objectId]: {
-              item: product,
-              quantity: count,
-              amount
-            }
-          }
-        }));
-        this.updateCartItemCount();
-        this.updateCartTotalAmount();
-        this.updateCartItems();
-        this.uploadCartItems();
-      }
-    } else {
-      localStorage.setItem('Mycart', JSON.stringify({
-        products: {
-          [product.objectId]: {
-            item: product,
-            quantity: count,
-            amount
-          }
-        }
-      }));
-      this.updateCartItemCount();
-      this.updateCartTotalAmount();
-      this.updateCartItems();
-      this.uploadCartItems();
-    }
+    // const itemsInCart = JSON.parse(localStorage.getItem('Mycart'));
+    // const amount: number = count * product.price.value;
+    // if(itemsInCart){
+    //   const existingProductInCart = itemsInCart.products[product.objectId];
+    //   if(existingProductInCart){
+    //     localStorage.setItem('Mycart', JSON.stringify({
+    //       products: {
+    //         ...itemsInCart.products,
+    //         [product.objectId]: {
+    //           item: product,
+    //           quantity: existingProductInCart.quantity += count,
+    //           amount: existingProductInCart.amount += amount
+    //         }
+    //       }
+    //     }));
+    //     this.updateCartItemCount();
+    //     this.updateCartTotalAmount();
+    //     this.updateCartItems();
+    //     this.uploadCartItems();
+    //   } else {
+    //     localStorage.setItem('Mycart', JSON.stringify({
+    //       products: {
+    //         ...itemsInCart.products,
+    //         [product.objectId]: {
+    //           item: product,
+    //           quantity: count,
+    //           amount
+    //         }
+    //       }
+    //     }));
+    //     this.updateCartItemCount();
+    //     this.updateCartTotalAmount();
+    //     this.updateCartItems();
+    //     this.uploadCartItems();
+    //   }
+    // } else {
+    //   localStorage.setItem('Mycart', JSON.stringify({
+    //     products: {
+    //       [product.objectId]: {
+    //         item: product,
+    //         quantity: count,
+    //         amount
+    //       }
+    //     }
+    //   }));
+    //   this.updateCartItemCount();
+    //   this.updateCartTotalAmount();
+    //   this.updateCartItems();
+    //   this.uploadCartItems();
+    // }
   }
 
   removeItem(product: Product) {
-    const cartItems = JSON.parse(localStorage.getItem('Mycart')).products;
-    const p = cartItems[product.objectId]
-    if (p) {
-      delete cartItems[product.objectId];
-      localStorage.setItem('Mycart', JSON.stringify({
-        products: {
-          ...cartItems
-        }
-      }));
-    }
-    this.updateCartItemCount();
-    this.updateCartTotalAmount();
-    this.updateCartItems();
-    this.uploadCartItems();
+    // const cartItems = JSON.parse(localStorage.getItem('Mycart')).products;
+    // console.log(cartItems)
+    // const p = cartItems[product.objectId]
+    // console.log(p)
+    // if(p){
+    //   delete cartItems[product.objectId];
+    //   localStorage.setItem('Mycart', JSON.stringify({
+    //     products: {
+    //       ...cartItems
+    //     }
+    //   }));
+    // }
+    // this.updateCartItemCount();
+    // this.updateCartTotalAmount();
+    // this.updateCartItems();
+    // this.uploadCartItems();
   }
 
   getItemsInCart() {
@@ -143,25 +139,24 @@ export class CartService {
 
   async uploadCartItems() {
     const itemsInCart = this.getItemsInCart();
-    const user = await this.firebaseAuth.currentUser;
-    if (user.uid) {
-      this.fireStore.collection('carts').doc(user.uid).collection('items').get().toPromise().then((doc) => {
-        doc.forEach(el => {
-          el.ref.delete();
-        })
-        itemsInCart.forEach(async (item) => {
-          try {
-            await this.fireStore.collection("carts").doc(user.uid).collection("items").doc(item["item"].id).set({
-              price: item["item"].price.value,
-              quantity: item["quantity"],
-              description: item["item"].description
-            })
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      })
-
-    }
+    // if(user.uid) {
+    //   this.fireStore.collection('carts').doc(user.uid).collection('items').get().toPromise().then((doc) => {
+    //     doc.forEach(el => {
+    //       el.ref.delete();
+    //     })
+    //     itemsInCart.forEach(async (item) => {
+    //       try {
+    //         await this.fireStore.collection("carts").doc(user.uid).collection("items").doc(item["item"].id).set({
+    //           price: item["item"].price.value,
+    //           quantity: item["quantity"],
+    //           description: item["item"].description
+    //         })
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    //     });
+    //   })
+    //
+    // }
   }
 }

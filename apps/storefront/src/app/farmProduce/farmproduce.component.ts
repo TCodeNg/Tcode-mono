@@ -9,7 +9,7 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'tcode-farmproduce',
   templateUrl: './farmproduce.component.html',
-  styleUrls: ['./farmproduce.component.scss'],
+  styleUrls: ['./farmproduce.component.scss', '../../_base-style.scss'],
   animations: [
     trigger('fade', [
       transition('void => *', [
