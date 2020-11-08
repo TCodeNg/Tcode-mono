@@ -17,6 +17,25 @@ Parse.enableLocalDatastore();
 
 Parse.Object.registerSubclass('Cart', ParseCart);
 
+if (!Parse.User.current()) {
+  const anonymousCart = new ParseCart();
+  const user = localStorage.getItem(`Parse/${environment.appId}/installationId`);
+  const cartQuery = new Parse.Query(ParseCart);
+  cartQuery.equalTo('userId', user);
+  setTimeout(async () => {
+    try {
+      const cart = await cartQuery.first();
+      if (!cart) {
+        anonymousCart.set('userId', user);
+        anonymousCart.set('type', 'anonymous');
+        await anonymousCart.save();
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  }, 1000)
+}
+
 Parse.LiveQuery.on('open', () => {
   console.log('socket connection established');
 });

@@ -4,7 +4,7 @@ import { Customer, User } from '@tcode/frontend-auth';
 import { Product } from '@tcode/api-interface';
 import { Observable } from 'rxjs';
 import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
-import { map } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'tcode-root',
@@ -15,10 +15,10 @@ export class AppComponent implements OnInit {
   user: Customer;
   showCart = false;
   cartItems: any;
-  cart$: Observable<Cart> = this.cartService.getCart();
-  cartCount$ = this.cart$.pipe(map(cart => cart.itemCount));
-  cartAmount$ = this.cart$.pipe(map(cart => cart.totalAmount));
-  cartItems$: Observable<any> = this.cart$.pipe(map(cart => cart.products));
+  cart$: Observable<Cart> = this.cartService.getCart().pipe(tap(console.log));
+  cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
+  cartAmount$ = this.cart$.pipe(map(cart => cart.totalAmount), startWith(0));
+  cartItems$: Observable<any> = this.cart$.pipe(map(cart => cart.products), startWith([]));
 
   constructor(
     _user: User,
