@@ -27,7 +27,7 @@ export class ParseCart extends Parse.Object implements CartInterface {
   get totalAmount() {
     const products = this.products;
     return Object.keys(products).reduce((acc, key) => {
-      return acc + products[key].amount;
+      return acc + products[key].price.value;
     }, 0);
   }
   get itemCount() {

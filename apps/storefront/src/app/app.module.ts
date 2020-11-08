@@ -7,6 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AuthConfig, FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { SharedModule } from './Shared/shared.module';
 import { AppRoutingModule } from './app.routing.module';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,10 +37,11 @@ const authConfig: AuthConfig = {
     MatMenuModule,
     ButtonsModule,
     NgxsDataPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

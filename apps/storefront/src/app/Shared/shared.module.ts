@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ImagepreviewModule } from '@tcode/imagepreview';
@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { InformationBarComponent } from './Information-bar/information-bar.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductDetailComponent } from './productDetail/productDetail.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductDetailComponent } from './productDetail/productDetail.component'
     ImagepreviewModule,
     ProductratingModule,
     RouterModule,
-    ButtonsModule
+    ButtonsModule,
+    MatSnackBarModule
   ],
   exports: [
     NavbarComponent,
@@ -34,4 +36,4 @@ import { ProductDetailComponent } from './productDetail/productDetail.component'
     ProductDetailComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

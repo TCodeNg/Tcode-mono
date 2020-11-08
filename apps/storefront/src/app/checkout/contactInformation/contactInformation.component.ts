@@ -1,9 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { filter, takeWhile } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, take, takeWhile, tap } from 'rxjs/operators';
 import { CheckoutService } from '../../services/checkout.service';
 import { AUTH_SERVICE_TOKEN, AuthService } from '@tcode/frontend-auth';
+import { CheckoutFormState } from '../++state/checkout-form.state';
+import { Select, Selector } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tcode-checkout-contact-information',
@@ -13,12 +17,13 @@ import { AUTH_SERVICE_TOKEN, AuthService } from '@tcode/frontend-auth';
 export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
   isAlive: boolean;
   authFormGroup: FormGroup;
-
+  @Select(CheckoutFormState.getState) checkoutFormValue$: Observable<any>
   constructor(
     private router: Router,
     @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
     private fb: FormBuilder,
-    private checkoutService: CheckoutService
+    private checkoutformState: CheckoutFormState,
+    private _snackBar: MatSnackBar
   ) {
     this.isAlive = true;
     this.authFormGroup = fb.group({
@@ -35,25 +40,42 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     });
   }
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn;
+  get isLoggedIn(): Observable<boolean> {
+    return this.authService.isLoggedIn();
   }
 
   ngOnInit() {
     this.authFormGroup.patchValue({
       email: this.authService.currentUser?.getEmail()
     });
+    this.checkoutFormValue$.pipe(
+      take(1),
+      tap((formValues) => {
+        const { contactInformation, shippingInformation } = formValues;
+        this.authFormGroup.patchValue({
+          ...contactInformation, ...shippingInformation
+        }, { emitEvent: false });
+      })
+    ).subscribe();
 
-    this.checkoutService.contactInfo$.pipe(
-      takeWhile(() => this.isAlive),
-      filter(res => res)
-    ).subscribe((data) => {
-      const { address, city, email, firstName, lastName, phone, shippingCountry, shippingPhone, shippingPostalCode, shippingState } = data;
-      this.authFormGroup.patchValue({
-        email, address, city, firstName, lastName, phone,
-        shippingCountry, shippingPhone, shippingPostalCode, shippingState
-      });
-    });
+    this.authFormGroup.valueChanges.pipe(
+      distinctUntilChanged(),
+      debounceTime(400),
+      map((info) => {
+        const { address, city, email, firstName, lastName, phone, shippingCountry, shippingPhone, shippingPostalCode, shippingState } = info;
+        return {
+          contactInformation: {
+            phone, email
+          },
+          shippingInformation: {
+            address, city, firstName, lastName, shippingCountry, shippingPhone, shippingPostalCode, shippingState
+          }
+        }
+      }),
+      tap((data) => {
+        this.checkoutformState.saveForm(data);
+      })
+    ).subscribe()
   }
 
   ngOnDestroy() {
@@ -61,7 +83,13 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
   }
 
   async submit() {
-    this.checkoutService.contactInfo.next(this.authFormGroup.value);
-    await this.router.navigate(['checkout', 'shipping-contact']);
+    const isLoggedIn = await this.isLoggedIn.toPromise();
+    if (!isLoggedIn) {
+      const snackBarRef = this._snackBar.open('You need to login to proceed', 'Ok');
+      snackBarRef.onAction().subscribe(() => {
+        this.router.navigate(['/auth', 'login'])
+      })
+    }
+    // await this.router.navigate(['checkout', 'shipping-contact']);
   }
 }

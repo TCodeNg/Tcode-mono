@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart> = this.cartService.getCart().pipe(tap(console.log));
   cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
   cartAmount$ = this.cart$.pipe(map(cart => cart.totalAmount), startWith(0));
-  cartItems$: Observable<any> = this.cart$.pipe(map(cart => cart.products), startWith([]));
+  cartItems$: Observable<any> = this.cart$.pipe(map(cart => Object.values(cart.products)), startWith([]));
   cartCount = 0;
   cartAmount = 0;
   constructor(
@@ -42,7 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.cartCount = cart.itemCount;
       this.cartItems = Object.values(cart.products);
       this.cartAmount = cart.totalAmount;
-      console.log({ cart })
     })
   }
 

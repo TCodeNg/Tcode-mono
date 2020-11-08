@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="total">
-    <p class="cart-total">Total: {{ (cartAmount$ | async) | currency: 'NGN': 'code' }}</p>
+    <p class="cart-total">Total: {{ cartAmount | currency: 'NGN': 'symbol-narrow' }}</p>
     <div class="button">
       <tcode-button type="normal" (click)="navigateToCheckout()">Proceed to checkout</tcode-button>
     </div>
