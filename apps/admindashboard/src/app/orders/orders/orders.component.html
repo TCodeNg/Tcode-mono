@@ -1,11 +1,15 @@
 <header class="flex align-center">
   <p>{{ pageTitle }}</p>
 </header>
-<tcode-table 
-  [dataSource]="tableData"
-  [tableColumns]="tableColumns"
-  [pageSize]="10"
-  [length]="tableData.data.length"
-  (onRowClick)="handleClick($event)"
-  (onSearch)="handleClick($event)"
-></tcode-table>
+<mat-tab-group>
+  <mat-tab label="Processing">
+    <ng-template matTabContent>
+      <tcode-orders-processing></tcode-orders-processing>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Completed">
+    <ng-template matTabContent>
+      <tcode-orders-processing></tcode-orders-processing>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
