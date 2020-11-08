@@ -50,4 +50,24 @@ $tcode-green: #02B075;
       color: #0071BB;
     }
   }
+  .card-body {
+    ul {
+      grid-gap: 0.9rem;
+      justify-content: center;
+      margin-top: 20px;
+      li {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 19px;
+        .label {
+          text-align: end;
+          color: #1E266D;
+          font-weight: lighter;
+        }
+        .value {
+          color: #1E266D;
+          font-weight: 500;
+        }
+      }
+    }
+  }
 }

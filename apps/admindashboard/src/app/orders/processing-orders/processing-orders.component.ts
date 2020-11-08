@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ROUTES } from 'apps/admindashboard/src/core/constant';
 import { TableColumn } from 'libs/table/src/lib/table/model';
 
 @Component({
@@ -10,7 +12,9 @@ import { TableColumn } from 'libs/table/src/lib/table/model';
 export class ProcessingOrdersComponent implements OnInit, OnDestroy {
   tableData: MatTableDataSource<any>;
   tableColumns: TableColumn[];
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.tableData = new MatTableDataSource(
@@ -59,7 +63,7 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy {
 
   }
 
-  handleClick(data?): any {
-    console.log({ data })
+  handleClick = (data?): any => {
+    this.router.navigate([`${ROUTES.adminDashboard.orders.home}`, 2])
   }
 }

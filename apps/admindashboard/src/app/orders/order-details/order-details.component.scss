@@ -1,0 +1,18 @@
+@import '../../../color';
+
+.wrapper {
+  width: 92%;
+  margin: auto;
+  header {
+    color: $text;
+    height: 50px;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .metadata {
+    width: 80%;
+    tcode-card {
+      flex:1;
+    }
+  }
+}

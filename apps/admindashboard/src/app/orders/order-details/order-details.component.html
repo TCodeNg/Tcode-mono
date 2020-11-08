@@ -1,0 +1,59 @@
+<section class="wrapper">
+  <header class="flex align-center">
+    <p>Order #{{orderId}}</p>
+  </header>
+  <section class="metadata flex">
+    <tcode-card
+      [config]="initialCardConfig"
+    >
+      <section class="card-body">
+        <ul class="grid">
+          <li class="grid point">
+            <p class="label">Date created</p>
+            <p class="value">{{ date | date:"medium"}}</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Status</p>
+            <p class="value">Pending</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Customer</p>
+            <p class="value">Opeyemi Adebayo</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Payment option</p>
+            <p class="value">Pay on delivery</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Delivery option</p>
+            <p class="value">Deliver to shipping address</p>
+          </li>
+        </ul>
+      </section>
+    </tcode-card>
+    <tcode-card [config]="initialCardConfig">
+      <section class="card-body">
+        <ul class="grid">
+          <li class="grid point">
+            <p class="label">Shipping address</p>
+            <p class="value">Opeyemi Ajagbe, No 24 Alonge street, Oworonshoki, Lagos</p>
+          </li>
+          <li class="grid point">
+            <p class="label">State</p>
+            <p class="value">Lagos, Nigeria</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Email address</p>
+            <p class="value">opeyemi@gmail.com</p>
+          </li>
+          <li class="grid point">
+            <p class="label">Phone number</p>
+            <p class="value">+23478990098</p>
+          </li>
+        </ul>
+      </section>
+    </tcode-card>
+  </section>
+  <section class="iteminfo"></section>
+  <section class="actions"></section>
+</section>

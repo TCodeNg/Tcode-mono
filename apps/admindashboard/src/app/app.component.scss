@@ -4,6 +4,11 @@
   display: block;
   font-family: sans-serif;
   min-height: 100vh;
+  &::ng-deep {
+    .mat-drawer-inner-container {
+      overflow: hidden !important;
+    }
+  }
 }
 
 .mat-drawer.mat-drawer-side {
