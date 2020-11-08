@@ -1,5 +1,5 @@
 <section class="wrapper">
-  <div class="search">
+  <div class="search" *ngIf="isSearchable">
     <tcode-input>
       <img src="assets/img/search 1.svg" alt="search">
       <input id="email" type="email" placeholder="Search" [formControl]="search">

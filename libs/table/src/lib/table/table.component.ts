@@ -18,8 +18,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() dataSource: MatTableDataSource<any>;
   @Input() tableColumns: TableColumn[];
   dataColumns: string[];
-  @Input() pageSize: number = 10;
+  @Input() pageSize: number = 5;
   @Input() length: number = 10;
+  @Input() isSearchable: boolean = true;
+  @Input() hasPagination: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   search = new FormControl('');
 

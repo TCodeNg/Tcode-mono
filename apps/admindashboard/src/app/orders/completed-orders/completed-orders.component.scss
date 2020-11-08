@@ -1,0 +1,11 @@
+:host {
+  &::ng-deep {
+    tcode-table {
+      table {
+        width: 92%;
+        height: 450px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

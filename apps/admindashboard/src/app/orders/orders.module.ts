@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TableModule } from '@tcode/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CardModule } from '@tcode/card';
+import { ButtonsModule } from '@tcode/buttons'
 import { OrdersComponent } from './orders/orders.component';
 import { ProcessingOrdersComponent } from './processing-orders/processing-orders.component';
 import { CompletedOrdersComponent } from './completed-orders/completed-orders.component';
@@ -23,6 +24,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     TableModule,
     MatTabsModule,
     CardModule,
+    ButtonsModule,
     RouterModule.forChild([
       {
         path: '',

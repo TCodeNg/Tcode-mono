@@ -1,5 +1,19 @@
 @import '../../../color';
+@import '../../../button';
 
+:host {
+  &::ng-deep {
+    tcode-table {
+      table {
+        width: 100%;
+      }
+      mat-paginator {
+        display: none !important;
+      }
+    }
+    @include button;
+  }
+}
 .wrapper {
   width: 92%;
   margin: auto;
@@ -14,5 +28,25 @@
     tcode-card {
       flex:1;
     }
+  }
+  .iteminfo {
+    margin-top: 1.5rem;
+  }
+  .total {
+    ul {
+      list-style: none;
+      li {
+        padding: 1rem 0;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 19px;
+        &.total {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .actions {
+    margin-bottom: 7rem;
+    justify-content: space-between;
   }
 }

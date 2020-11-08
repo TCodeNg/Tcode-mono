@@ -54,6 +54,44 @@
       </section>
     </tcode-card>
   </section>
-  <section class="iteminfo"></section>
-  <section class="actions"></section>
+  <section class="iteminfo">
+    <tcode-table 
+      [dataSource]="tableData"
+      [tableColumns]="tableColumns"
+      [pageSize]="10"
+      [length]="tableData.data.length"
+      [hasPagination]="false"
+      [isSearchable]="false"
+    ></tcode-table>
+    <section class="total">
+      <ul class="flex align-end flex-column">
+        <li class="grid point">
+          <p class="label">Standard shipping</p>
+          <p class="value">{{ '30000' | currency:'NGN':"symbol-narrow" }}</p>
+        </li>
+        <li class="grid point total">
+          <p class="label">Total</p>
+          <p class="value">{{ '4000' | currency:'NGN':"symbol-narrow" }}</p>
+        </li>
+        <li></li>
+      </ul>
+    </section>
+  </section>
+  <section class="actions flex ">
+    <tcode-button [disabled]="false" type="outline" class="secondary">
+      Ship order
+    </tcode-button>
+    <tcode-button [disabled]="false" type="outline" class="secondary">
+      Message customer
+    </tcode-button>
+    <tcode-button [disabled]="false" type="outline" class="secondary">
+      Order invoice
+    </tcode-button>
+    <tcode-button [disabled]="false" type="outline" class="danger">
+      Cancel order
+    </tcode-button>
+    <tcode-button [disabled]="false" type="outline" class="primary">
+      Complete order
+    </tcode-button>
+  </section>
 </section>

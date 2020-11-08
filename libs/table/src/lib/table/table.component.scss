@@ -2,12 +2,13 @@
   display: block;
 }
 .wrapper {
+  margin-bottom: 1rem;
   .search {
     width: 250px;
     margin: 1rem 2.5rem 1rem auto;
   }
   .container {
-    height: 450px;;
+    // height: 450px;
     overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -26,8 +27,8 @@
       display: none;
     }
     table {
-      width: 92%;
-      margin: 0 auto;
+      // width: 92%;
+      // margin: 0 auto;
       background: #F4F8FC;
       border-radius: 10px;
       .mat-header-row {
