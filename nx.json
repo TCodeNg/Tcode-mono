@@ -86,6 +86,9 @@
     },
     "cart": {
       "tags": ["ui"]
+    },
+    "contact": {
+      "tags": ["ui"]
     }
   }
 }
