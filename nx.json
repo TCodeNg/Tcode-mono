@@ -117,9 +117,10 @@
       ]
     },
     "contact": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
+    },
+    "order": {
+      "tags": ["ui"]
     }
   }
 }

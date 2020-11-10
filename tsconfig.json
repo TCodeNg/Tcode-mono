@@ -21,54 +21,23 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tcode/api-interface": [
-        "libs/api-interface/src/index.ts"
-      ],
-      "@tcode/shared/assets": [
-        "libs/shared/assets/src/index.ts"
-      ],
-      "@tcode/buttons": [
-        "libs/buttons/src/index.ts"
-      ],
-      "@tcode/imagepreview": [
-        "libs/imagepreview/src/index.ts"
-      ],
-      "@tcode/mongo-utils": [
-        "libs/mongo-utils/src/index.ts"
-      ],
-      "@tcode/acl-util": [
-        "libs/acl-util/src/index.ts"
-      ],
-      "@tcode/productrating": [
-        "libs/productrating/src/index.ts"
-      ],
-      "@tcode/auth": [
-        "libs/auth/src/index.ts"
-      ],
-      "@tcode/product": [
-        "libs/product/src/index.ts"
-      ],
-      "@tcode/sentry": [
-        "libs/sentry/src/index.ts"
-      ],
-      "@tcode/card": [
-        "libs/card/src/index.ts"
-      ],
-      "@tcode/input": [
-        "libs/input/src/index.ts"
-      ],
-      "@tcode/media-api": [
-        "libs/media-api/src/index.ts"
-      ],
-      "@tcode/frontend-auth": [
-        "libs/frontend-auth/src/index.ts"
-      ],
-      "@tcode/cart": [
-        "libs/cart/src/index.ts"
-      ],
-      "@tcode/contact": [
-        "libs/contact/src/index.ts"
-      ]
+      "@tcode/api-interface": ["libs/api-interface/src/index.ts"],
+      "@tcode/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@tcode/buttons": ["libs/buttons/src/index.ts"],
+      "@tcode/imagepreview": ["libs/imagepreview/src/index.ts"],
+      "@tcode/mongo-utils": ["libs/mongo-utils/src/index.ts"],
+      "@tcode/acl-util": ["libs/acl-util/src/index.ts"],
+      "@tcode/productrating": ["libs/productrating/src/index.ts"],
+      "@tcode/auth": ["libs/auth/src/index.ts"],
+      "@tcode/product": ["libs/product/src/index.ts"],
+      "@tcode/sentry": ["libs/sentry/src/index.ts"],
+      "@tcode/card": ["libs/card/src/index.ts"],
+      "@tcode/input": ["libs/input/src/index.ts"],
+      "@tcode/media-api": ["libs/media-api/src/index.ts"],
+      "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"],
+      "@tcode/cart": ["libs/cart/src/index.ts"],
+      "@tcode/contact": ["libs/contact/src/index.ts"],
+      "@tcode/order": ["libs/order/src/index.ts"]
     }
   },
   "exclude": [
