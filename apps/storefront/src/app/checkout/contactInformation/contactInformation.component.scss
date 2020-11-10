@@ -1,17 +1,20 @@
 .wrapper {
     width: 80%;
     margin: 0 auto;
-    .headline span {
+    .headline {
+      color: #6D7D93;
+      span {
+        color: #6D7D93;
+        font-size: 0.875rem;
         &:first-of-type{
-            color: #6D7D93;
-            font-size: 0.875rem;
-            margin-right: 5px;
+          margin-right: 5px;
         }
-        &:last-of-type {
-            color: #02B075;
-            font-size: 0.875rem;
-            cursor: pointer;
+        &.link{
+          color: #02B075;
+          font-size: 0.875rem;
+          cursor: pointer;
         }
+      }
     }
     .title {
         margin-top: 40px;

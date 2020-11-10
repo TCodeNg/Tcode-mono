@@ -2,10 +2,9 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map, take, takeWhile, tap } from 'rxjs/operators';
-import { CheckoutService } from '../../services/checkout.service';
-import { AUTH_SERVICE_TOKEN, AuthService, validatePassword } from '@tcode/frontend-auth';
+import { AUTH_SERVICE_TOKEN, AuthService } from '@tcode/frontend-auth';
 import { CheckoutFormState } from '../++state/checkout-form.state';
-import { Select, Selector } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContactService, CONTACT_SERVICE_TOKEN } from '@tcode/contact';
@@ -31,8 +30,8 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup = fb.group({
       phone: ['', Validators.required],
       email: ['', Validators.email],
-      password: [''],
-      confirmPassword: [''],
+      // password: [''],
+      // confirmPassword: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
@@ -41,8 +40,6 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
       shippingState: ['', Validators.required],
       shippingPostalCode: ['', Validators.required],
       shippingCountry: ['', Validators.required]
-    }, {
-      validators: [validatePassword]
     });
   }
 
@@ -102,6 +99,15 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
 
   async submit() {
     const isLoggedIn = await this.isLoggedIn.toPromise();
+    // NO PASSSWORD OR CONFIRM PASSWORD -- SIGN UP AND CONTINUE
+
+
+
+    // PASSWORD
+
+
+
+    //LOGGED IN
     if (!isLoggedIn) {
       const snackBarRef = this._snackBar.open('You need to login to proceed', 'Ok');
       snackBarRef.onAction().subscribe(() => {
