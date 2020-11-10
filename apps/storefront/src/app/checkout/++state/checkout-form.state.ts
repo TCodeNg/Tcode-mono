@@ -37,7 +37,6 @@ export class CheckoutFormState extends NgxsDataRepository<CheckoutFormModel> imp
       contactInformation: payload.contactInformation
     });
     if (isLoggedIn) {
-      console.log('here')
       // CALL CONTACT SERVICE TO SAVE CONTACT INFORMATION
       const save = await this.contactService.updateContact(payload).toPromise();
       console.log({ save });

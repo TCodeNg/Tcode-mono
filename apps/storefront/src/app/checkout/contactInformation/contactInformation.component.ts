@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map, take, takeWhile, tap } from 'rxjs/operators';
 import { CheckoutService } from '../../services/checkout.service';
-import { AUTH_SERVICE_TOKEN, AuthService } from '@tcode/frontend-auth';
+import { AUTH_SERVICE_TOKEN, AuthService, validatePassword } from '@tcode/frontend-auth';
 import { CheckoutFormState } from '../++state/checkout-form.state';
 import { Select, Selector } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -31,6 +31,8 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup = fb.group({
       phone: ['', Validators.required],
       email: ['', Validators.email],
+      password: [''],
+      confirmPassword: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
@@ -39,6 +41,8 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
       shippingState: ['', Validators.required],
       shippingPostalCode: ['', Validators.required],
       shippingCountry: ['', Validators.required]
+    }, {
+      validators: [validatePassword]
     });
   }
 
@@ -70,6 +74,7 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup.valueChanges.pipe(
       distinctUntilChanged(),
       debounceTime(400),
+      tap(() => console.log(this.authFormGroup)),
       map((info) => {
         const { address, city, email, firstName, lastName, phone, shippingCountry, shippingPhone, shippingPostalCode, shippingState } = info;
         return {
@@ -89,6 +94,10 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.isAlive = false;
+  }
+
+  get authFormControlsError() {
+    return this.authFormGroup.errors;
   }
 
   async submit() {

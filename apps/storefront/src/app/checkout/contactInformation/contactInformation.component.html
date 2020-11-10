@@ -16,12 +16,15 @@
         <div class="control" *ngIf="!(isLoggedIn | async)">
             <tcode-input>
                 <label for="password">Password</label>
-                <input type="password" id="password" autocomplete="off">
+                <input type="password" id="password" autocomplete="off" formControlName="password">
             </tcode-input>
             <tcode-input>
                 <label for="confirm-password">Confirm password</label>
-                <input type="password" id="confirm-password" autocomplete="off">
+                <input type="password" id="confirm-password" autocomplete="off" formControlName="confirmPassword">
             </tcode-input>
+        </div>
+        <div class="error" *ngIf="authFormControlsError?.passwordMatch">
+            <span>Enter matching passwords</span>
         </div>
     </form>
     <p class="title">Shipping Information</p>
