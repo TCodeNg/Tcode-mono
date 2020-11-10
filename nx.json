@@ -89,6 +89,9 @@
     },
     "contact": {
       "tags": ["ui"]
+    },
+    "order": {
+      "tags": ["ui"]
     }
   }
 }

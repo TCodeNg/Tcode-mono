@@ -31,7 +31,8 @@
       "@tcode/media-api": ["libs/media-api/src/index.ts"],
       "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"],
       "@tcode/cart": ["libs/cart/src/index.ts"],
-      "@tcode/contact": ["libs/contact/src/index.ts"]
+      "@tcode/contact": ["libs/contact/src/index.ts"],
+      "@tcode/order": ["libs/order/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
