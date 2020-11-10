@@ -19,7 +19,7 @@ export class ParseContactService implements ContactServiceInterface {
     const query = new Parse.Query('Contact');
     query.equalTo('userId', userId);
     const contact: Parse.Object = await query.first();
-    return contact?.get('payload');
+    return contact;
   }
 
   private async _updateContact(payload: any, userId?: string): Promise<boolean> {

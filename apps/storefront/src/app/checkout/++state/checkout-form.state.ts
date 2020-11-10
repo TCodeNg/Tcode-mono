@@ -31,18 +31,21 @@ export class CheckoutFormState extends NgxsDataRepository<CheckoutFormModel> imp
   @DataAction() async saveForm(payload: any) {
     const { patchState } = this.ctx;
     const isLoggedIn = await this.authService.isLoggedIn().toPromise();
-    console.log({ isLoggedIn })
     patchState({
       shippingInformation: payload.shippingInformation,
       contactInformation: payload.contactInformation
     });
     if (isLoggedIn) {
       // CALL CONTACT SERVICE TO SAVE CONTACT INFORMATION
-      const save = await this.contactService.updateContact(payload).toPromise();
-      console.log({ save });
-      patchState({
-        updatedAt: new Date(Date.now())
-      })
+      this.updateContact(payload);
     }
+  }
+
+  @DataAction() async updateContact(payload: any) {
+    const { patchState } = this.ctx;
+    const save = await this.contactService.updateContact(payload).toPromise();
+    patchState({
+      updatedAt: new Date(Date.now())
+    })
   }
 }

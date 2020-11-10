@@ -1,8 +1,10 @@
 <div class="wrapper" [formGroup]="shippingInfoFormGroup">
      <p class="title">Shipping method</p>
-     <div class="flex shipping-type">
-          <mat-checkbox value="1" color="primary" formControlName="standardShipping">Standard Shipping</mat-checkbox>
-          <span>{{ "1000" | currency: "NGN":"symbol-narrow"}}</span>
+     <div class="shipping-type">
+        <mat-radio-group aria-label="Select an option" formControlName="shippingMethod">
+            <mat-radio-button value="standard" color="primary" class="flex standard">Standard shipping <span>{{ "1000" | currency: "NGN":"symbol-narrow"}}</span></mat-radio-button>
+            <mat-radio-button value="express" color="primary" checked>Express shipping</mat-radio-button>
+        </mat-radio-group>
      </div>
 
       <p class="title">Payment method</p>
@@ -15,9 +17,9 @@
 
      <div class="action flex">
           <a [routerLink]="['../']" class="back-btn flex item-center">
-              <img src="assets/img/arrow-left2.svg" alt="back"> Back to information
+              <img src="assets/img/arrow-left 2.svg" alt="back"> Back to information
           </a>
-          <tcode-button type="normal" (click)="submit()" [state]="lState" [disabled]="shippingInfoFormGroup.invalid">
+          <tcode-button type="normal" (click)="submit()" [state]="lState" [disabled]="shippingInfoFormGroup.invalid || lState === 'loading'">
               Continue
           </tcode-button>
       </div>

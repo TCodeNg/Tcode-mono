@@ -26,44 +26,36 @@ export class ShippingContactComponent implements OnInit, OnDestroy {
     this.isAlive = true;
     this.shippingInfoFormGroup = this.fb.group({
       paymentMethod: ['card', Validators.required],
-      standardShipping: [false, Validators.required]
+      shippingMethod: ['standard', Validators.required]
     });
   }
 
-  ngOnInit(): void {
-    this.checkoutService.shippingInfo$.pipe(
-      filter(res => res),
-      takeWhile(() => this.isAlive)
-    ).subscribe((data) => {
-      const { paymentMethod, standardShipping } = data;
-      this.shippingInfoFormGroup.patchValue({
-        paymentMethod, standardShipping
-      });
-    });
-    this.checkoutService.contactInfo$.pipe(
-      takeWhile(() => this.isAlive)
-    ).subscribe((res) => {
-      this.contactInfo = res;
-    });
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy() {
     this.isAlive = false;
   }
 
   async submit() {
-    if (!this.contactInfo) {
-      await this.router.navigate(['checkout']);
-    }
     this.lState = 'loading';
-
-    try {
-      await this.cartService.checkout().toPromise();
-      await this.router.navigate(['/payment']);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.lState = 'idle';
+    const { shippingMethod, paymentMethod } = this.shippingInfoFormGroup.value
+    const payload = {
+      shippingMethod: {
+        type: shippingMethod
+      },
+      paymentMethod: {
+        type: paymentMethod
+      }
     }
+    console.log(payload);
+    // try {
+    //   // await this.cartService.checkout().toPromise();
+
+    //   await this.router.navigate(['/payment']);
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   this.lState = 'idle';
+    // }
   }
 }

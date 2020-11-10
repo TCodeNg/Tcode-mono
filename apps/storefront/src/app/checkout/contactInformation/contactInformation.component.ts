@@ -17,6 +17,7 @@ import { ContactService, CONTACT_SERVICE_TOKEN } from '@tcode/contact';
 export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
   isAlive: boolean;
   authFormGroup: FormGroup;
+  btnState = 'idle';
   @Select(CheckoutFormState.getState) checkoutFormValue$: Observable<any>
   constructor(
     private router: Router,
@@ -51,13 +52,13 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup.patchValue({
       email: this.authService.currentUser?.getEmail()
     });
-    this.isLoggedIn.pipe(
-      takeWhile(() => this.isAlive),
-      filter((isLoggedIn) => isLoggedIn)
-    ).subscribe(() => {
-      const userContactInformation = this.contactService.getContact();
-      console.log({ userContactInformation })
-    })
+    // this.isLoggedIn.pipe(
+    //   takeWhile(() => this.isAlive),
+    //   filter((isLoggedIn) => isLoggedIn)
+    // ).subscribe(() => {
+    //   const userContactInformation = this.contactService.getContact();
+    //   console.log({ userContactInformation })
+    // })
     this.checkoutFormValue$.pipe(
       take(1),
       tap((formValues) => {
@@ -71,18 +72,7 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup.valueChanges.pipe(
       distinctUntilChanged(),
       debounceTime(400),
-      tap(() => console.log(this.authFormGroup)),
-      map((info) => {
-        const { address, city, email, firstName, lastName, phone, shippingCountry, shippingPhone, shippingPostalCode, shippingState } = info;
-        return {
-          contactInformation: {
-            phone, email
-          },
-          shippingInformation: {
-            address, city, firstName, lastName, shippingCountry, shippingPhone, shippingPostalCode, shippingState
-          }
-        }
-      }),
+      map(() => this.formValueFactory(this.authFormGroup)),
       tap((data) => {
         this.checkoutformState.saveForm(data);
       })
@@ -97,24 +87,35 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     return this.authFormGroup.errors;
   }
 
+  formValueFactory(formGroup: FormGroup) {
+    const { address, city, email, firstName, lastName, phone, shippingCountry, shippingPhone, shippingPostalCode, shippingState } = formGroup.value;
+    return {
+      contactInformation: {
+        phone, email
+      },
+      shippingInformation: {
+        address, city, firstName, lastName, shippingCountry, shippingPhone, shippingPostalCode, shippingState
+      }
+    }
+  }
+
   async submit() {
+    this.btnState = 'loading';
     const isLoggedIn = await this.isLoggedIn.toPromise();
     // NO PASSSWORD OR CONFIRM PASSWORD -- SIGN UP AND CONTINUE
-
-
-
     // PASSWORD
-
-
-
     //LOGGED IN
     if (!isLoggedIn) {
+      this.btnState = 'idle';
       const snackBarRef = this._snackBar.open('You need to login to proceed', 'Ok');
       snackBarRef.onAction().subscribe(() => {
         this.router.navigate(['/auth', 'login'])
       })
       return
     }
+    const payload = this.formValueFactory(this.authFormGroup);
+    await this.checkoutformState.updateContact(payload);
+    this.btnState = 'idle';
     await this.router.navigate(['checkout', 'shipping-contact']);
   }
 }
