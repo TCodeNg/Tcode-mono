@@ -1,11 +1,14 @@
 import { OrderServiceInterface } from './order.service';
 import { from, Observable } from 'rxjs';
 import * as Parse from 'parse';
+import { map } from 'rxjs/operators';
 
 export class ParseOrderService implements OrderServiceInterface {
-  createOrder(payload: any): Observable<any> {
+  createOrder(payload: any): Observable<string> {
     const order = new Parse.Object('Order');
-    return from(order.save());
+    return from(order.save()).pipe(
+      map(order => order.id)
+    );
   }
 
   getOrder(orderId: string): Observable<any> {
