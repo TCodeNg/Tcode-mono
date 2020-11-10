@@ -1072,6 +1072,38 @@
           "style": "scss"
         }
       }
+    },
+    "contact": {
+      "projectType": "library",
+      "root": "libs/contact",
+      "sourceRoot": "libs/contact/src",
+      "prefix": "tc",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/contact/tsconfig.lib.json",
+              "libs/contact/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/contact/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/contact/jest.config.js",
+            "tsConfig": "libs/contact/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/contact/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

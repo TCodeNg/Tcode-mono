@@ -5,6 +5,7 @@ import { Product } from '@tcode/api-interface';
 import { products } from './products';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tcode-landing',
@@ -26,7 +27,8 @@ export class LandingComponent implements OnInit {
   farmProducts: Product[];
   constructor(
     private router: Router,
-    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    private _snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -57,7 +59,9 @@ export class LandingComponent implements OnInit {
   addToCart(product: Product) {
     const { objectId: productId } = product
     this.cartService.addToCart(productId).subscribe((res) => {
-      console.log(res)
+      this._snackbar.open('Product added to cart', '', {
+        duration: 2000
+      });
     })
   }
 

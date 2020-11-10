@@ -3,6 +3,7 @@ import { DataAction, StateRepository } from '@ngxs-labs/data/decorators';
 import { NgxsDataRepository } from '@ngxs-labs/data/repositories';
 import { NgxsOnInit, Selector, State } from '@ngxs/store';
 import { AuthService, AUTH_SERVICE_TOKEN } from '@tcode/frontend-auth';
+import { ContactService, CONTACT_SERVICE_TOKEN } from '@tcode/contact';
 import { CheckoutFormModel } from './checkout-form.state.model';
 
 @StateRepository()
@@ -11,12 +12,11 @@ import { CheckoutFormModel } from './checkout-form.state.model';
   name: 'checkoutForm'
 })
 export class CheckoutFormState extends NgxsDataRepository<CheckoutFormModel> implements NgxsOnInit {
-  constructor(@Inject(AUTH_SERVICE_TOKEN) private authService: AuthService) {
+  constructor(
+    @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
+    @Inject(CONTACT_SERVICE_TOKEN) private contactService: ContactService
+  ) {
     super()
-  }
-
-  ngxsOnInit() {
-
   }
 
   @Selector()
@@ -24,15 +24,26 @@ export class CheckoutFormState extends NgxsDataRepository<CheckoutFormModel> imp
     return state;
   }
 
+  ngxsOnInit() {
+
+  }
+
   @DataAction() async saveForm(payload: any) {
     const { patchState } = this.ctx;
-    const isLoggedIn = this.authService.isLoggedIn().toPromise();
+    const isLoggedIn = await this.authService.isLoggedIn().toPromise();
+    console.log({ isLoggedIn })
     patchState({
       shippingInformation: payload.shippingInformation,
       contactInformation: payload.contactInformation
     });
     if (isLoggedIn) {
-      // CALL CHECKOUT SERVICE TO SAVE INFORMATION
+      console.log('here')
+      // CALL CONTACT SERVICE TO SAVE CONTACT INFORMATION
+      const save = await this.contactService.updateContact(payload).toPromise();
+      console.log({ save });
+      patchState({
+        updatedAt: new Date(Date.now())
+      })
     }
   }
 }

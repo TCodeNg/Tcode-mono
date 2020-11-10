@@ -8,6 +8,7 @@ import { CheckoutFormState } from '../++state/checkout-form.state';
 import { Select, Selector } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ContactService, CONTACT_SERVICE_TOKEN } from '@tcode/contact';
 
 @Component({
   selector: 'tcode-checkout-contact-information',
@@ -21,6 +22,7 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
+    @Inject(CONTACT_SERVICE_TOKEN) private contactService: ContactService,
     private fb: FormBuilder,
     private checkoutformState: CheckoutFormState,
     private _snackBar: MatSnackBar
@@ -48,6 +50,13 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
     this.authFormGroup.patchValue({
       email: this.authService.currentUser?.getEmail()
     });
+    this.isLoggedIn.pipe(
+      takeWhile(() => this.isAlive),
+      filter((isLoggedIn) => isLoggedIn)
+    ).subscribe(() => {
+      const userContactInformation = this.contactService.getContact();
+      console.log({ userContactInformation })
+    })
     this.checkoutFormValue$.pipe(
       take(1),
       tap((formValues) => {
@@ -89,7 +98,8 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
       snackBarRef.onAction().subscribe(() => {
         this.router.navigate(['/auth', 'login'])
       })
+      return
     }
-    // await this.router.navigate(['checkout', 'shipping-contact']);
+    await this.router.navigate(['checkout', 'shipping-contact']);
   }
 }
