@@ -2,8 +2,8 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
-import { filter, takeWhile } from 'rxjs/operators';
 import { CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
+import { ORDER_SERVICE_TOKEN, OrderService } from '@tcode/order';
 
 @Component({
   selector: 'tcode-shipping-contact',
@@ -21,7 +21,8 @@ export class ShippingContactComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private checkoutService: CheckoutService,
-    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    @Inject(ORDER_SERVICE_TOKEN) private orderService: OrderService
   ) {
     this.isAlive = true;
     this.shippingInfoFormGroup = this.fb.group({
@@ -48,14 +49,14 @@ export class ShippingContactComponent implements OnInit, OnDestroy {
       }
     }
     console.log(payload);
-    // try {
-    //   // await this.cartService.checkout().toPromise();
-
-    //   await this.router.navigate(['/payment']);
-    // } catch (error) {
-    //   console.log(error);
-    // } finally {
-    //   this.lState = 'idle';
-    // }
+    try {
+      // await this.cartService.checkout().toPromise();
+      const orderId = await this.orderService.createOrder(payload).toPromise();
+      await this.router.navigate(['/payment'], {queryParams: {orderId}});
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.lState = 'idle';
+    }
   }
 }
