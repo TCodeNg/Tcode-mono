@@ -23,6 +23,7 @@ export class ParseOrderService implements OrderServiceInterface {
     const query = new Parse.Query('Order');
     query.skip(skip).limit(limit);
     Object.keys(filters).forEach(key => query.equalTo(key, filters[key]));
+    query.include('user');
     return from(query.find()).pipe(
       map(orders => orders.map(order => Order.generate(order.toJSON() as any)))
     );
