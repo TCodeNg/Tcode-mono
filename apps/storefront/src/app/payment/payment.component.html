@@ -1,10 +1,15 @@
 <section class="wrapper flex flex-center">
      <ul>
           <li>
-               <p class="amount">Order amount</p>
-               <p>{{ "1000" }}</p>
+               <p class="amount-text">Order amount</p>
+               <p class="amount">{{ 1000 | currency:'NGN':"symbol-narrow" }}</p>
           </li>
-          <li>
+          <li class="btn">
+               <tcode-button type="normal" (click)="pay()">
+                    Complete Payment
+                </tcode-button>
+          </li>
+          <!-- <li>
                <img src="assets/img/paystack.svg" alt="paystack" />
           </li>
           <li>
@@ -12,6 +17,6 @@
           </li>
           <li>
                <img src="assets/img/paypal.svg" alt="paystack" />
-          </li>
+          </li> -->
      </ul>
 </section>
