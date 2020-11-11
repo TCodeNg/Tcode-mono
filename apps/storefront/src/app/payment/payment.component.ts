@@ -19,6 +19,7 @@ export class PaymentComponent implements OnInit {
 
      ngOnInit(): void {
           this.getOrder(this.orderId);
+          this.orderService.watchOrder(this.orderId).subscribe(console.log);
      }
 
      async getOrder(orderId: string): Promise<any> {
