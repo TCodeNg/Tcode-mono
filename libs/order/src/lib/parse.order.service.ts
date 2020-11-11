@@ -2,6 +2,7 @@ import { OrderServiceInterface } from './order.service';
 import { from, Observable, Subject } from 'rxjs';
 import * as Parse from 'parse';
 import { map } from 'rxjs/operators';
+import { Order } from './order';
 
 export class ParseOrderService implements OrderServiceInterface {
   createOrder(payload: any): Observable<string> {
@@ -18,11 +19,12 @@ export class ParseOrderService implements OrderServiceInterface {
     );
   }
 
-  getOrders(skip = 0, limit = 30): Observable<any[]> {
+  getOrders(skip = 0, limit = 30, filters = {}): Observable<Order[]> {
     const query = new Parse.Query('Order');
     query.skip(skip).limit(limit);
+    Object.keys(filters).forEach(key => query.equalTo(key, filters[key]));
     return from(query.find()).pipe(
-      map(orders => orders.map(order => order.toJSON()))
+      map(orders => orders.map(order => Order.generate(order.toJSON() as any)))
     );
   }
 
