@@ -5,6 +5,7 @@ export interface OrderServiceInterface {
   getOrders(skip: number, limit?: number): Observable<any[]>;
   getOrder(orderId: string): Observable<any>;
   createOrder(payload: any): Observable<string>;
+  watchOrder(orderId: string): Observable<any>;
 }
 
 export type OrderService = OrderServiceInterface;
