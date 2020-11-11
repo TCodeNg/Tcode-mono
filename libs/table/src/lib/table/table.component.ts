@@ -44,6 +44,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    console.log('here',this.dataSource.data.length)
     if (this.dataSource) {
       this.dataSource.paginator = this.paginator;
     }

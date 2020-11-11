@@ -1,8 +1,7 @@
 <tcode-table 
-  [dataSource]="tableData"
+  [dataSource]="tableData$ | async"
   [tableColumns]="tableColumns"
   [pageSize]="7"
-  [length]="tableData.data.length"
-  (onRowClick)="handleClick($event)"
-  (onSearch)="handleClick($event)"
+  [length]="tableData?.data?.length"
+  (onSearch)="navigateToDetailPage($event)"
 ></tcode-table>

@@ -2,6 +2,11 @@
   <p>{{ pageTitle }}</p>
 </header>
 <mat-tab-group>
+  <mat-tab label="Pending">
+    <ng-template matTabContent>
+      <tc-pending-orders></tc-pending-orders>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="Processing">
     <ng-template matTabContent>
       <tcode-orders-processing></tcode-orders-processing>
