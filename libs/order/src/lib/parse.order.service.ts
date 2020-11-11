@@ -21,7 +21,9 @@ export class ParseOrderService implements OrderServiceInterface {
   getOrders(skip = 0, limit = 30): Observable<any[]> {
     const query = new Parse.Query('Order');
     query.skip(skip).limit(limit);
-    return from(query.find());
+    return from(query.find()).pipe(
+      map(orders => orders.map(order => order.toJSON()))
+    );
   }
 
   watchOrder(orderId: string): Observable<any> {
