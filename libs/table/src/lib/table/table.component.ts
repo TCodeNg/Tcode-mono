@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +10,8 @@ import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators'
 @Component({
   selector: 'tcode-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -44,7 +45,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    console.log('here',this.dataSource.data.length)
     if (this.dataSource) {
       this.dataSource.paginator = this.paginator;
     }

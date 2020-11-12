@@ -29,29 +29,15 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
     toArray(),
     map((orders) => new MatTableDataSource(orders)),
     // startWith(new MatTableDataSource([]))
-    // tap((orders) => {
-    //   console.log(orders)
-    //   this.tableData = new MatTableDataSource(orders);
-    // })
+    tap((orders) => {
+      console.log(orders)
+      this.tableData = orders;
+    })
   )
 
   ngOnInit(): void {
     
     this.tableColumns = [
-      {
-        name: 'Order Id',
-        key: 'objectId',
-        onClick: this.navigateToDetailPage
-      },
-      // {
-      //   name: 'Ship to',
-      //   key: 'name',
-      // },
-      {
-        name: 'Date',
-        key: 'createdAt',
-        dataType: 'date'
-      },
       {
         name: 'Order Id',
         key: 'objectId',

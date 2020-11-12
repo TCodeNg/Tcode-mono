@@ -22,12 +22,14 @@
 
 <!-- NO DATASOURCE -->
 <ng-template #noDataSource>
-  <p>Please provide data source...</p>
+  <div class="spinner">
+    <div class="spin"></div>
+  </div>
 </ng-template>
 
 <!-- HAS TABLE COLUMNS -->
 <ng-template #hasTableColumns>
-  <ng-container *ngIf="!dataSource?.data?.length; else noEmptyData">
+  <ng-container *ngIf="dataSource?.data?.length == 0; else noEmptyData">
     <h3 class="nodata">No Data</h3>
   </ng-container>
   <ng-template #noEmptyData>
