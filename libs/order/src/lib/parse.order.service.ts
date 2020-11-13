@@ -36,7 +36,8 @@ export class ParseOrderService implements OrderServiceInterface {
     query.subscribe().then(sub => {
       sub.on('update', (order) => {
         subject.next(order.toJSON());
-      })
+      });
+      sub.on('close', () => subject.complete());
     }).catch(err => subject.error(err));
     return subject.asObservable();
   }
