@@ -1,5 +1,6 @@
 <tcode-table 
   [dataSource]="tableData$ | async"
+  [loadingState]="isloading"
   [tableColumns]="tableColumns"
   [pageSize]="7"
   [length]="tableData?.data?.length"

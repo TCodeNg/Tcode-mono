@@ -7,8 +7,13 @@
   </div>
   <section class="container">
     <ng-container
-      [ngTemplateOutlet]="dataSource && dataSource?.data ? hasDataSource : noDataSource"
+      [ngTemplateOutlet]="dataSource && dataSource?.data && !loadingState ? hasDataSource : noDataSource"
     ></ng-container>
+    <ng-container *ngIf="loadingState">
+      <div class="spinner">
+        <div class="spin"></div>
+      </div>
+    </ng-container>
   </section>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" [length]="length"></mat-paginator>
 </section>
@@ -22,14 +27,14 @@
 
 <!-- NO DATASOURCE -->
 <ng-template #noDataSource>
-  <div class="spinner">
-    <div class="spin"></div>
-  </div>
+  <ng-template>
+    <h3 class="nodata">No Data</h3>
+  </ng-template>
 </ng-template>
 
 <!-- HAS TABLE COLUMNS -->
 <ng-template #hasTableColumns>
-  <ng-container *ngIf="dataSource?.data?.length == 0; else noEmptyData">
+  <ng-container *ngIf="!dataSource || dataSource?.data?.length == 0; else noEmptyData">
     <h3 class="nodata">No Data</h3>
   </ng-container>
   <ng-template #noEmptyData>

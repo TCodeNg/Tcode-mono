@@ -23,6 +23,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() length: number = 10;
   @Input() isSearchable: boolean = true;
   @Input() hasPagination: boolean = true;
+  @Input() loadingState: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   search = new FormControl('');
 
