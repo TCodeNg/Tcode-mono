@@ -11,6 +11,17 @@
         display: none !important;
       }
     }
+    .value {
+      &.pending {
+
+      }
+      &.cancel {
+        
+      }
+      &.pending {
+        
+      }
+    }
     @include button;
   }
 }

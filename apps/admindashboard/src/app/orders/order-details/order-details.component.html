@@ -16,7 +16,7 @@
             </li>
             <li class="grid point">
               <p class="label">Status</p>
-              <p class="value">{{ order?.status | titlecase }}</p>
+              <p class="value" [ngClass]="{ status }">{{ order?.status | titlecase }}</p>
             </li>
             <li class="grid point">
               <p class="label">Customer</p>
@@ -24,7 +24,7 @@
             </li>
             <li class="grid point">
               <p class="label">Payment option</p>
-              <p class="value">Pay on delivery</p>
+              <p class="value">{{ order?.paymentMethod?.type}}</p>
             </li>
           </ul>
         </ng-container>
