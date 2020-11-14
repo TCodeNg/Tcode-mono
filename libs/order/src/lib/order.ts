@@ -39,7 +39,10 @@ export class Order implements IOrder {
     order.objectId = payload.objectId;
     order.products = payload.products;
     order.updatedAt = payload.updatedAt;
-    order.user = payload.user;
+    order.user = {
+      firstName: payload.user?.firstName,
+      lastName: payload.user?.lastName,
+    };
     order.contact = payload.contact;
     return order;
   }
