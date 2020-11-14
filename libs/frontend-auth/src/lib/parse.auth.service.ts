@@ -12,10 +12,10 @@ export class ParseAuthService implements AuthServiceInterface {
     return of(!!Parse.User.current());
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string, returnUrl?: string): Observable<any> {
     return from(Parse.User.logIn(email, password).then(
       () => {
-        this.window.location.href = '/';
+        this.window.location.href = returnUrl ?? '/';
       }
     ));
   }
@@ -32,7 +32,7 @@ export class ParseAuthService implements AuthServiceInterface {
     return Parse.User.current();
   }
 
-  signUp(payload: { lastName: string; firstName: string; password: string; phoneNumber: string; address: string; email: string; username: string }): Observable<any> {
+  signUp(payload: { lastName: string; firstName: string; password: string; phoneNumber: string; address: string; email: string; username: string }, returnUrl?: string): Observable<any> {
     const user = new Parse.User();
     user.setUsername(payload.username);
     user.setPassword(payload.password);
@@ -42,7 +42,7 @@ export class ParseAuthService implements AuthServiceInterface {
     user.set('lastName', payload.lastName);
     return from(user.signUp().then(
       () => {
-        this.window.location.href = '/';
+        this.window.location.href = returnUrl ?? '/';
       }
     ));
   }
