@@ -26,7 +26,8 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
     map((order) => {
       return {
         ...order,
-        shipTo: order?.contact?.shippingInformation?.address || 'N/A'
+        shipTo: order?.contact?.shippingInformation?.address || 'N/A',
+        totalAmount: order.totalAmount
       }
     }),
     toArray(),
@@ -55,6 +56,16 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
         key: 'createdAt',
         dataType: 'date',
         onClick: this.navigateToDetailPage
+      },
+      {
+        name: "Total",
+        key: 'totalAmount',
+        dataType: 'currency',
+        currencyCode: 'NGN'
+      },
+      {
+        name: 'Status',
+        key: 'status',
       },
     ]
   }
