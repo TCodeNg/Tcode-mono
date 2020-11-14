@@ -29,12 +29,11 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
     this.orderId = this.activateRoute.snapshot.params.id
   }
 
-  // order$ = this.orderService.getOrder(this.orderId).pipe(
-  //   tap(console.log)
-  // )
+  order$ = this.orderService.getOrder(this.activateRoute.snapshot.params.id);
 
   ngOnInit() {
-    this.orderService.getOrder(this.orderId).subscribe(console.log)
+    // this.orderService.getOrder(this.orderId).subscribe(console.log)
+    this.order$.subscribe();
     this.tableData = new MatTableDataSource(
       [
         { item: 1, price: 200, quantity: 10, total: 2000 },
