@@ -12,10 +12,10 @@ export class ParseOrderService implements OrderServiceInterface {
     );
   }
 
-  getOrder(orderId: string): Observable<any> {
+  getOrder(orderId: string): Observable<Order> {
     const query = new Parse.Query('Order');
     return from(query.get(orderId)).pipe(
-      map(order => order.toJSON())
+      map(order => Order.generate(order.toJSON() as any))
     );
   }
 
