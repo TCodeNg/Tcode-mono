@@ -39,6 +39,7 @@ export class ParseOrderService implements OrderServiceInterface {
       });
       sub.on('close', () => subject.complete());
     }).catch(err => subject.error(err));
+    query.first().then(order => subject.next(order)).catch(err => subject.error(err));
     return subject.asObservable();
   }
 
