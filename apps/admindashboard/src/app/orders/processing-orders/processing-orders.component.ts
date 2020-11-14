@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { OrderService, ORDER_SERVICE_TOKEN } from '@tcode/order';
+import { Order, OrderService, ORDER_SERVICE_TOKEN } from '@tcode/order';
 import { ROUTES } from 'apps/admindashboard/src/core/constant';
 import { TableColumn } from 'libs/table/src/lib/table/model';
 import { map, mergeAll, startWith, tap, toArray } from 'rxjs/operators';
@@ -25,7 +25,8 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
     mergeAll(),
     map((order) => {
       return {
-        ...order
+        ...order,
+        shipTo: order?.contact?.shippingInformation?.address || 'N/A'
       }
     }),
     toArray(),
@@ -46,25 +47,15 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
       },
       {
         name: 'Ship to',
-        key: 'name',
+        key: 'shipTo',
+        onClick: this.navigateToDetailPage
       },
       {
         name: 'Date',
         key: 'createdAt',
-        dataType: 'date'
+        dataType: 'date',
+        onClick: this.navigateToDetailPage
       },
-      // {
-      //   name: 'symboling',
-      //   key: 'symbol',
-      //   onClick: this.handleClick,
-      //   dataType: 'currency',
-      //   currencyCode: 'EUR'
-      // },
-      // {
-      //   name: 'Status',
-      //   key: 'status',
-      //   columnType: 'action'
-      // }
     ]
   }
 
@@ -76,8 +67,9 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
     
   }
 
-  navigateToDetailPage = (data?): any => {
-    console.log(data);
-    // this.router.navigate([`${ROUTES.adminDashboard.orders.home}`, 2])
+  navigateToDetailPage = (data?: Order): any => {
+   if(data && data.objectId){
+     this.router.navigate([`${ROUTES.adminDashboard.orders.home}`, data.objectId]);
+   }
   }
 }
