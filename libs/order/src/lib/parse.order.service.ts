@@ -29,16 +29,17 @@ export class ParseOrderService implements OrderServiceInterface {
     );
   }
 
-  watchOrder(orderId: string): Observable<any> {
-    const subject = new Subject();
+  watchOrder(orderId: string): Observable<Order> {
+    const subject = new Subject<Order>();
     const query = new Parse.Query('Order');
     query.equalTo('objectId', orderId);
     query.subscribe().then(sub => {
       sub.on('update', (order) => {
-        subject.next(order.toJSON());
+        subject.next(Order.generate(order.toJSON() as any));
       });
       sub.on('close', () => subject.complete());
     }).catch(err => subject.error(err));
+    query.first().then(order => subject.next(Order.generate(order.toJSON() as any))).catch(err => subject.error(err));
     return subject.asObservable();
   }
 
