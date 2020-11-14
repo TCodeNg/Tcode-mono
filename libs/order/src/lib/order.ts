@@ -8,6 +8,7 @@ interface IOrder {
   contact?: any
   createdAt: string
   updatedAt: string
+  status?: string
 }
 
 export interface Gateway {
@@ -26,6 +27,7 @@ export class Order implements IOrder {
   updatedAt: string;
   contact?: any;
   user?: any;
+  status?: string;
 
   get totalAmount(): number {
     return Object.values(this.products ?? {}).reduce((acc, curr) =>  acc + curr.price?.value, 0);
@@ -44,6 +46,7 @@ export class Order implements IOrder {
       lastName: payload.user?.lastName,
     };
     order.contact = payload.contact;
+    order.status = payload.status;
     return order;
   }
 }
