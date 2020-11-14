@@ -71,7 +71,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     try {
       await this.authService.signUp(payload).toPromise();
-      await this.router.navigate(['/auth', 'login']);
     } catch (error) {
       this._snackBar.open(error.message, null, {
         duration: 2000

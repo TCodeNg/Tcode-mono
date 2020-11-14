@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxsModule } from '@ngxs/store';
+import { NgxsModule, Store } from '@ngxs/store';
 import { AuthState } from './+state/auth.state';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ParseAuthService } from './parse.auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { STORAGE_TOKEN } from './storage-token';
+import { WINDOW_TOKEN } from './window-token';
 
 @NgModule({
   imports: [
@@ -61,7 +63,16 @@ export class FrontendAuthModule {
       providers: [
         {
           provide: AUTH_SERVICE_TOKEN,
-          useClass: ParseAuthService
+          useClass: ParseAuthService,
+          deps: [ WINDOW_TOKEN, STORAGE_TOKEN, Store ]
+        },
+        {
+          provide: STORAGE_TOKEN,
+          useValue: localStorage
+        },
+        {
+          provide: WINDOW_TOKEN,
+          useValue: window
         },
         {
           provide: USER_TYPE_TOKEN,

@@ -65,8 +65,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginFormGroup.value;
     this.lState = 'loading';
     this.authService.login(email, password).toPromise().then((_) => {
-      this.lState = 'idle'
-      this.router.navigate(["/"]);
+      this.lState = 'idle';
     }).catch((error: Parse.Error) => {
       this.lState = 'idle'
       this._snackBar.open(error.message, null, {
