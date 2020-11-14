@@ -1,7 +1,7 @@
 name: Deploy Storefront
 on:
   push:
-    branches: [ stage/storefront ]
+    branches: [ develop ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,23 +26,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run:  |
-          npm i -g @nrwl/cli
           npm i
-          nx build storefront --prod
-          ./tools/docker/storefront/deploy.sh
-      - name: Login to Heroku Container registry
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-      - name: Build and push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
+          npx nx build storefront --prod
+          cp tools/docker/storefront/Dockerfile dist/apps/storefront/Dockerfile
+          cp tools/docker/storefront/nginx.conf.template dist/apps/storefront/nginx.conf.template
+          echo ${{secrets.DOCKER_HUB_ACCESS_TOKEN}} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
           cd dist/apps/storefront
-          heroku container:push -a ${{ secrets.STOREFRONT_APP_NAME_STAGE }} web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          cd dist/apps/storefront
-          heroku container:release -a ${{ secrets.STOREFRONT_APP_NAME_STAGE }} web
+          docker build . -t ${{ secrets.DOCKER_HUB_USERNAME }}/tcode-storefront:latest
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/tcode-storefront

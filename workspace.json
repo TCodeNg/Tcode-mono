@@ -24,6 +24,7 @@
             "assets": [
               "apps/storefront/src/favicon.ico",
               "apps/storefront/src/assets",
+              "apps/storefront/src/app-config.json",
               {
                 "input": "libs/shared/assets/src/lib/img",
                 "glob": "**.*",

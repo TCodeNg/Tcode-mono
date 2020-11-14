@@ -11,39 +11,51 @@ if (environment.production) {
   enableProdMode();
 }
 
-Parse.initialize(environment.appId);
-Parse.serverURL = environment.serverUrl;
-Parse.enableLocalDatastore();
-
-Parse.Object.registerSubclass('Cart', ParseCart);
-
-if (!Parse.User.current()) {
-  const anonymousCart = new ParseCart();
-  const user = localStorage.getItem(`Parse/${environment.appId}/installationId`);
-  const cartQuery = new Parse.Query(ParseCart);
-  cartQuery.equalTo('userId', user);
-  setTimeout(async () => {
-    try {
-      const cart = await cartQuery.first();
-      if (!cart) {
-        anonymousCart.set('userId', user);
-        anonymousCart.set('type', 'anonymous');
-        await anonymousCart.save();
-      }
-    } catch (e) {
-      console.log(e.message);
+fetch('/app-config.json')
+  .then(response => {
+    return response.json();
+  })
+  .then(config => {
+    configure(config);
+    if (environment.production) {
+      enableProdMode();
     }
-  }, 1000)
-}
-
-Parse.LiveQuery.on('open', () => {
-  console.log('socket connection established');
-});
-
-Parse.LiveQuery.on('close', () => {
-  console.log('socket connection closed');
-});
-
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
+    return platformBrowserDynamic()
+      .bootstrapModule(AppModule);
+  })
   .catch((err) => console.error(err));
+
+function configure(config: any) {
+  Parse.initialize(config.appId);
+  Parse.serverURL = config.serverUrl;
+  Parse.enableLocalDatastore();
+
+  Parse.Object.registerSubclass('Cart', ParseCart);
+
+  if (!Parse.User.current()) {
+    const anonymousCart = new ParseCart();
+    const user = localStorage.getItem(`Parse/${environment.appId}/installationId`);
+    const cartQuery = new Parse.Query(ParseCart);
+    cartQuery.equalTo('userId', user);
+    setTimeout(async () => {
+      try {
+        const cart = await cartQuery.first();
+        if (!cart) {
+          anonymousCart.set('userId', user);
+          anonymousCart.set('type', 'anonymous');
+          await anonymousCart.save();
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    }, 1000)
+  }
+
+  Parse.LiveQuery.on('open', () => {
+    console.log('socket connection established');
+  });
+
+  Parse.LiveQuery.on('close', () => {
+    console.log('socket connection closed');
+  });
+}
