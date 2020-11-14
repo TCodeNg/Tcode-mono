@@ -7,6 +7,8 @@ import { Order } from './order';
 export class ParseOrderService implements OrderServiceInterface {
   createOrder(payload: any): Observable<string> {
     const order = new Parse.Object('Order');
+    order.set('shippingMethod', payload.shippingMethod);
+    order.set('paymentMethod', payload.paymentMethod);
     return from(order.save()).pipe(
       map(order => order.id)
     );
