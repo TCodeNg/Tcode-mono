@@ -38,7 +38,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 99vw;
+  width: 100vw;
   height: 75vh;
   position: relative;
   .content {
@@ -46,7 +46,6 @@
     width: 70%;
     margin: 0 auto;
     color: white;
-    
     h5 {
       margin-top: 30px;
       letter-spacing: 1.08px;
@@ -62,12 +61,17 @@
       letter-spacing: 1.2px;
       font-size: 2.875rem;
       @include media('<tablet'){
-        font-size: 2.6rem;
+        font-size: 1.7rem;
+        padding: 0 1rem;
+        text-align: center;
       }
     }
     .search {
       margin-top: 32px;
       width: 50%;
+      @include media('<tablet'){
+        width: 100%;
+      }
     }
     .button{
       margin-top: 30px;
@@ -79,7 +83,7 @@
 }
 
 .product-listing {
-  width: 99vw;
+  width: 100vw;
   &.bg-grey {
     background: #f7f7f7;
   }

@@ -1,3 +1,5 @@
+@import '../../media';
+
 .wrapper {
     min-height: 80vh;
     // overflow-y: scroll;
@@ -7,11 +9,18 @@
       padding-top: 35px;
       padding-right: 111px;
       margin-bottom: 50px;
+      @include media('<tablet') {
+        flex-basis: 100%;
+        padding: 0;
+      }
     }
     .cartItems {
         flex-basis: 40%;
         background-color: #f3f1f1;
         padding: 80px 50px 20px 70px;
+        @include media('<tablet') {
+          display: none;
+        }
         .content {
           max-height: 550px;
           overflow-y: scroll;

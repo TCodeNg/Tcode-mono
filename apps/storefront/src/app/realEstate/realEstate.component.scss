@@ -48,7 +48,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 99vw;
+  width: 100vw;
   height: 75vh;
   position: relative;
   .content {
@@ -97,6 +97,9 @@
   width: 50%;
   display: flex;
   justify-content: space-between;
+  @include media('<tablet') {
+    width: 100%;
+  }
   [type="radio"]:checked,
   [type="radio"]:not(:checked){
     position: absolute;
@@ -190,7 +193,7 @@
 }
 
 .product-listing {
-  width: 99vw;
+  width: 100vw;
   &.bg-grey {
     background: #f7f7f7;
   }

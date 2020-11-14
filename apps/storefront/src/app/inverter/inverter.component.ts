@@ -8,7 +8,7 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'tcode-inverter',
   templateUrl: './inverter.component.html',
-  styleUrls: ['./inverter.component.scss'],
+  styleUrls: ['./inverter.component.scss',  '../../_base-style.scss'],
   animations: [
     trigger('fade', [ 
       transition('void => *', [
