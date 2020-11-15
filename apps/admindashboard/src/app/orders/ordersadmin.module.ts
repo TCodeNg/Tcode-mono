@@ -14,7 +14,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.component';
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { OrderDetailUiModule } from '@tcode/order-detail-ui';
 @NgModule({
   declarations: [
     OrdersComponent,
@@ -33,6 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ButtonsModule,
     OrderModule,
     MatDialogModule,
+    OrderDetailUiModule,
     RouterModule.forChild([
       {
         path: '',

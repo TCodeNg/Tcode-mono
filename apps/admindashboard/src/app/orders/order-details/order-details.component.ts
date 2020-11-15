@@ -32,7 +32,6 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
   order$ = this.orderService.getOrder(this.activateRoute.snapshot.params.id);
 
   ngOnInit() {
-    this.orderService.getOrder(this.orderId).subscribe(console.log)
     this.order$.subscribe();
     this.tableData = new MatTableDataSource(
       [
@@ -40,29 +39,6 @@ export class OrderDetailsComponent implements OnInit, OnDestroy {
         { item: 2, price: 6000, quantity: 20, total: 120000 },
         { item: 3, price: 8000, quantity: 10, total: 80000 },
       ]);
-    this.tableColumns = [
-      {
-        name: 'Item',
-        key: 'item',
-      },
-      {
-        name: 'Price',
-        key: 'price',
-        dataType: 'currency',
-        currencyCode: 'NGN'
-      },
-      {
-        name: 'Quantity',
-        key: 'quantity',
-        dataType: 'date'
-      },
-      {
-        name: 'Total',
-        key: 'total',
-        dataType: 'currency',
-        currencyCode: 'NGN'
-      },
-    ]
   }
 
   ngOnDestroy() { }

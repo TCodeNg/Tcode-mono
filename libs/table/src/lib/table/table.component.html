@@ -1,5 +1,6 @@
 <section class="wrapper">
   <div class="search" *ngIf="isSearchable">
+    <span>{{ loadingState }}</span>
     <tcode-input>
       <img src="assets/img/search 1.svg" alt="search">
       <input id="email" type="email" placeholder="Search" [formControl]="search">
@@ -9,8 +10,8 @@
     <ng-container
       [ngTemplateOutlet]="dataSource && dataSource?.data && !loadingState ? hasDataSource : noDataSource"
     ></ng-container>
-    <ng-container *ngIf="loadingState">
-      <div class="spinner">
+    <ng-container>
+      <div class="spinner" *ngIf="loadingState">
         <div class="spin"></div>
       </div>
     </ng-container>
@@ -28,14 +29,14 @@
 <!-- NO DATASOURCE -->
 <ng-template #noDataSource>
   <ng-template>
-    <h3 class="nodata">No Data</h3>
+    <h3 class="nodata">No Dataa</h3>
   </ng-template>
 </ng-template>
 
 <!-- HAS TABLE COLUMNS -->
 <ng-template #hasTableColumns>
-  <ng-container *ngIf="!dataSource || dataSource?.data?.length == 0; else noEmptyData">
-    <h3 class="nodata">No Data</h3>
+  <ng-container *ngIf="(!dataSource || dataSource?.data?.length == 0); else noEmptyData">
+    <h3 class="nodata">No records</h3>
   </ng-container>
   <ng-template #noEmptyData>
     <table mat-table [dataSource]="dataSource">

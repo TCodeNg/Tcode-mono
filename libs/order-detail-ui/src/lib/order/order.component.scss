@@ -1,0 +1,99 @@
+@import '../colors';
+@import '../button';
+
+:host {
+  &::ng-deep {
+    tcode-table {
+      .container {
+        min-height: 200px !important;
+      }
+      table {
+        width: 100%;
+      }
+      mat-paginator {
+        display: none !important;
+      }
+    }
+    .value {
+      &.pending {
+
+      }
+      &.cancel {
+        
+      }
+      &.pending {
+        
+      }
+    }
+    @include button;
+  }
+}
+.wrapper {
+  width: 92%;
+  margin: auto;
+  header {
+    color: $text;
+    color: #1E266D;
+    height: 50px;
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h1 {
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 0.9rem;
+     }
+  }
+  .metadata {
+    width: 80%;
+    tcode-card {
+      flex:1;
+    }
+  }
+  .iteminfo {
+    margin-top: 1.5rem;
+  }
+  .total {
+    ul {
+      list-style: none;
+      li {
+        padding: 1rem 0;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 19px;
+        &.total {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .actions {
+    margin-bottom: 7rem;
+  }
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  .spin {
+    border: .5rem solid #dddbd7; /* Light grey */
+    border-top: .5rem solid #6180d5; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    &.sm {
+      width: 30px;
+      height: 30px;
+      border: 0.2rem solid #dddbd7;
+      border-top: 0.2rem solid #6180d5;
+    }
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

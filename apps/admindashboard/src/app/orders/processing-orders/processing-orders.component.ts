@@ -14,14 +14,12 @@ import { map, mergeAll, startWith, tap, toArray } from 'rxjs/operators';
 export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewInit {
   tableData: MatTableDataSource<any>;
   tableColumns: TableColumn[];
-  isloading = false;
   constructor(
     private router: Router,
     @Inject(ORDER_SERVICE_TOKEN) private orderService: OrderService
   ) { }
 
   tableData$ = this.orderService.getOrders(0).pipe(
-    tap(() => this.isloading = true),
     mergeAll(),
     map((order) => {
       return {
@@ -33,7 +31,6 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
     toArray(),
     map((orders) => new MatTableDataSource(orders)),
     tap((orders) => {
-      this.isloading = false;
       this.tableData = orders;
     })
   )
