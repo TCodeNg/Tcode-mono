@@ -94,6 +94,10 @@ export class CheckoutContactInformationComponent implements OnInit, OnDestroy {
   }
 
   async submit() {
+    if(this.authFormGroup.invalid){
+      this._snackBar.open('Please ensure all inputs are filled', 'Ok')
+      return
+    }
     this.btnState = 'loading';
     const isLoggedIn = await this.isLoggedIn.toPromise();
     if (!isLoggedIn) {
