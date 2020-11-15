@@ -3,7 +3,7 @@ import { AUTH_CONFIG_TOKEN, AuthConfig } from '../auth.config';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { validatePassword } from './validator';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
 
@@ -18,13 +18,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
   isAlive: boolean;
   isLoading = new BehaviorSubject(false);
   isLoading$ = this.isLoading.asObservable();
+  returnUrl?: string;
 
   constructor(
     @Inject(AUTH_CONFIG_TOKEN) config: AuthConfig,
     fb: FormBuilder,
     private router: Router,
     public _snackBar: MatSnackBar,
-    @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService
+    @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
+    activatedRoute: ActivatedRoute
     ) {
     this.config = config;
     this.isAlive = true;
@@ -38,6 +40,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     }, { validators: validatePassword });
+    this.returnUrl = activatedRoute.snapshot.queryParams.returnUrl;
   }
 
   ngOnInit(): void {
@@ -70,8 +73,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     try {
-      await this.authService.signUp(payload).toPromise();
-      await this.router.navigate(['/auth', 'login']);
+      await this.authService.signUp(payload, this.returnUrl).toPromise();
     } catch (error) {
       this._snackBar.open(error.message, null, {
         duration: 2000

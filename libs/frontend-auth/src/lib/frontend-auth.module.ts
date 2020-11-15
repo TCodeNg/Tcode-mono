@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ParseAuthService } from './parse.auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { WINDOW_TOKEN } from './window-token';
 
 @NgModule({
   imports: [
@@ -61,7 +62,12 @@ export class FrontendAuthModule {
       providers: [
         {
           provide: AUTH_SERVICE_TOKEN,
-          useClass: ParseAuthService
+          useClass: ParseAuthService,
+          deps: [ WINDOW_TOKEN ]
+        },
+        {
+          provide: WINDOW_TOKEN,
+          useValue: window
         },
         {
           provide: USER_TYPE_TOKEN,

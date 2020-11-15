@@ -4,10 +4,10 @@ import * as Parse from 'parse';
 
 export interface AuthServiceInterface {
   currentUser?: Parse.User;
-  login(email: string, password: string): Observable<any>;
+  login(email: string, password: string, returnUrl?: string): Observable<any>;
   isLoggedIn(): Observable<boolean>;
   logout(): Observable<any>;
-  signUp(payload: { lastName: string; firstName: string; password: string; phoneNumber: string; address: string; email: string; username: string }): Observable<any>;
+  signUp(payload: { lastName: string; firstName: string; password: string; phoneNumber: string; address: string; email: string; username: string }, returnUrl?: string): Observable<any>;
 }
 
 export type AuthService = AuthServiceInterface;
