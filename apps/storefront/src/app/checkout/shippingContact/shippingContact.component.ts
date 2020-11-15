@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CheckoutService } from '../../services/checkout.service';
 import { CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 import { ORDER_SERVICE_TOKEN, OrderService } from '@tcode/order';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tcode-shipping-contact',
@@ -22,7 +23,8 @@ export class ShippingContactComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private checkoutService: CheckoutService,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
-    @Inject(ORDER_SERVICE_TOKEN) private orderService: OrderService
+    @Inject(ORDER_SERVICE_TOKEN) private orderService: OrderService,
+    private _snackbar: MatSnackBar
   ) {
     this.isAlive = true;
     this.shippingInfoFormGroup = this.fb.group({
@@ -54,7 +56,7 @@ export class ShippingContactComponent implements OnInit, OnDestroy {
       const orderId = await this.orderService.createOrder(payload).toPromise();
       await this.router.navigate(['/payment'], {queryParams: {orderId}});
     } catch (error) {
-      console.log(error);
+      this._snackbar.open(error, 'Ok')
     } finally {
       this.lState = 'idle';
     }
