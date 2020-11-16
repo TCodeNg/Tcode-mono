@@ -57,9 +57,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy, OnChang
     if(change.dataSource){
       this.dataSource = new MatTableDataSource(change?.dataSource?.currentValue?.data);
       this.dataSource.paginator = this.paginator;
-      setTimeout(() => {
-        this.loadingState = false;
-      }, 600);
+      this.loadingState = false;
     }
   }
 

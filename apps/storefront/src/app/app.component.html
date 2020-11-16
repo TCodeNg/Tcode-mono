@@ -27,7 +27,7 @@
 
 <mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
   <button mat-menu-item>Account Info</button>
-  <button mat-menu-item>Orders</button>
+  <button mat-menu-item [routerLink]="['/orders']">Orders</button>
   <button mat-menu-item (click)="logOut()">Log out</button>
 </mat-menu>
 

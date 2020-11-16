@@ -1,0 +1,13 @@
+<section class="wrapper">
+  <header class="flex item-center ">
+    <p>Order history</p>
+  </header>
+  <tcode-table 
+    [dataSource]="tableData$ | async"
+    [tableColumns]="tableColumns"
+    [pageSize]="10"
+    [length]="(tableData$ | async)?.data?.length"
+    [isSearchable]="false"
+    (onSearch)="navigateToDetailPage($event)"
+  ></tcode-table>
+</section>
