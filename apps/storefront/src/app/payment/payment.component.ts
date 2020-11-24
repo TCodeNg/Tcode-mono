@@ -34,11 +34,10 @@ export class PaymentComponent implements OnInit {
      ngOnInit(): void {
           this.getOrder(this.orderId);
           this.orderService.watchOrder(this.orderId).pipe(
-               tap((res) => console.log(res)),
                pluck('status'),
                filter((status) => !!status && status.toLowerCase() === 'paid'),
                switchMap(() => this._snackBar.open('Payment received', 'Ok').onAction().pipe(
-                    switchMap(() => from(this.router.navigate(['/'])))
+                    switchMap(() => from(this.router.navigate(['/orders', this.orderId])))
                )),
                tap(() => this.lState = 'idle')
           ).subscribe();

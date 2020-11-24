@@ -64,6 +64,7 @@
         padding: 1rem 0;
         grid-template-columns: 2fr 1fr;
         grid-gap: 19px;
+        text-align: end;
         &.total {
           font-weight: bold;
         }

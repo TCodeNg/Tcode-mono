@@ -89,11 +89,14 @@ a {
 .item-center {
   align-items: center;
 }
+.align-end {
+  align-items: flex-end;
+}
 .flex-center {
   align-items: center;
   justify-content: center;
 }
-.flex-col {
+.flex-col, .flex-column {
   flex-direction: column;
 }
 .grid {
