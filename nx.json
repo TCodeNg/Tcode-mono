@@ -105,6 +105,9 @@
     },
     "order-detail-ui": {
       "tags": ["ui"]
+    },
+    "cart-ui": {
+      "tags": ["ui"]
     }
   }
 }
