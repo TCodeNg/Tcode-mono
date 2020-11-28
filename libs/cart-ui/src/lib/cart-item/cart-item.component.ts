@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Product } from '@tcode/api-interface';
 
 @Component({
   selector: 'tcode-cart-item',
@@ -7,10 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent implements OnInit {
-
+  @Input() cartItem: Product;
   constructor() { }
 
   ngOnInit(): void {
+    console.log('item',this.cartItem);
   }
 
 }

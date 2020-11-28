@@ -32,7 +32,8 @@
 </mat-menu>
 
 <div class="cart-wrapper" *ngIf="showCart">
-  <div class="header flex">
+  <tcode-cart></tcode-cart>
+  <!-- <div class="header flex">
     <mat-icon class="cursor-pointer" (click)="showCart = false">close</mat-icon>
     <h2 class="title">Shopping Cart</h2>
     <p><span class="count bold">{{ cartCount }} </span> item(s)</p>
@@ -54,5 +55,5 @@
     <div class="button">
       <tcode-button type="normal" (click)="navigateToCheckout()">Proceed to checkout</tcode-button>
     </div>
-  </div>
+  </div> -->
 </div>

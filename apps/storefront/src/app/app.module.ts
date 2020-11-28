@@ -15,6 +15,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { ButtonsModule } from '@tcode/buttons';
 import { CartModule } from '@tcode/cart';
+import { CartUiModule } from '@tcode/cart-ui';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -36,6 +37,7 @@ const authConfig: AuthConfig = {
     MatBadgeModule,
     MatMenuModule,
     ButtonsModule,
+    CartUiModule,
     NgxsDataPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
