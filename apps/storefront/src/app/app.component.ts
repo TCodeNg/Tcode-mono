@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.cart$.pipe(
       takeWhile(() => this.isComponentAlive)
     ).subscribe((cart: Cart) => {
+      console.log(cart)
       this.cartCount = cart.itemCount;
       this.cartItems = Object.values(cart.products);
       this.cartAmount = cart.totalAmount;
