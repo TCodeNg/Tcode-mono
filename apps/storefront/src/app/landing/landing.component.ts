@@ -25,6 +25,8 @@ export class LandingComponent implements OnInit {
   realEstateProducts: Product[];
   inverterProducts: Product[];
   farmProducts: Product[];
+  index: number;
+  section: string;
   constructor(
     private router: Router,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
@@ -56,10 +58,20 @@ export class LandingComponent implements OnInit {
     this.router.navigate(['/farm-produce']);
   }
 
-  addToCart(product: Product) {
+  addToCart(product: Product, index: number, section: string) {
+    this.index = index;
+    this.section = section;
     const { objectId: productId } = product
     this.cartService.addToCart(productId).subscribe((res) => {
+      this.index = undefined;
+      this.section = undefined;
       this._snackbar.open('Product added to cart', '', {
+        duration: 2000
+      });
+    }, (error) => {
+      this.index = undefined;
+      this.section = undefined;
+      this._snackbar.open('Error adding product to cart', '', {
         duration: 2000
       });
     })

@@ -49,6 +49,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   @Input() product: Product;
+  @Input() state: 'idle' | 'loading' = 'idle';
   @Output() onAddToCart = new EventEmitter();
   @Output() onRateProduct = new EventEmitter();
   constructor() { }

@@ -43,7 +43,7 @@
     <p class="sub-title">So you will never miss out</p>
   </div>
   <div class="products">
-    <tcode-product-item *ngFor="let product of generalProducts" [product]="product" (onAddToCart)="addToCart($event)" (click)="gotoProduct($event, product)"></tcode-product-item>
+    <tcode-product-item *ngFor="let product of generalProducts; let i = index" [product]="product" (onAddToCart)="addToCart($event, i, 'general')" (click)="gotoProduct($event, product)" [state]="index === i && section === 'general' ? 'loading' : 'idle'"></tcode-product-item>
   </div>
 </section>
 
