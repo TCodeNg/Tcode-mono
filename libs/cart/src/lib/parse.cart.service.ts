@@ -35,8 +35,8 @@ export class ParseCartService implements CartServiceInterface {
     );
   }
 
-  removeFromCart(productId: string, userId?: string): Observable<void> {
-    return from(Parse.Cloud.run('removeFromCart', { productId, userId: userId ?? this.userId }));
+  removeFromCart(productId: string, userId?: string, deleteItem = false): Observable<void> {
+    return from(Parse.Cloud.run('removeFromCart', { productId, userId: userId ?? this.userId, deleteItem }));
   }
 
   checkout(userId?: string): Observable<void> {

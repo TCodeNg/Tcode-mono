@@ -5,7 +5,8 @@
         <div class="image">
             <ng-container [ngTemplateOutlet]="image"></ng-container>
             <div class="cart-bag-wrapper" (click)="handleAddtoCart()">
-                <div class="cart-bag"></div>
+                <div class="cart-bag" *ngIf="state === 'idle'"></div>
+                <img *ngIf="state === 'loading'" src="//s.svgbox.net/loaders.svg?fill=805ad5&ic=tail-spin">
             </div>
         </div>
         <div class="rating">
