@@ -15,6 +15,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { ButtonsModule } from '@tcode/buttons';
 import { CartModule } from '@tcode/cart';
+import { CartUiModule } from '@tcode/cart-ui';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { AppState } from './++state/app.state';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -31,11 +34,13 @@ const authConfig: AuthConfig = {
     AppRoutingModule,
     FrontendAuthModule.forRoot(authConfig, 'customer'),
     CartModule,
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([ AppState ]),
     MatIconModule,
     MatBadgeModule,
     MatMenuModule,
     ButtonsModule,
+    CartUiModule,
+    MatSidenavModule,
     NgxsDataPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),

@@ -34,7 +34,8 @@
       "@tcode/cart": ["libs/cart/src/index.ts"],
       "@tcode/contact": ["libs/contact/src/index.ts"],
       "@tcode/order": ["libs/order/src/index.ts"],
-      "@tcode/order-detail-ui": ["libs/order-detail-ui/src/index.ts"]
+      "@tcode/order-detail-ui": ["libs/order-detail-ui/src/index.ts"],
+      "@tcode/cart-ui": ["libs/cart-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
