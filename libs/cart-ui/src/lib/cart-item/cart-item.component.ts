@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '@tcode/api-interface';
-import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart'
+import { Cart, CartService, CART_SERVICE_TOKEN } from '@tcode/cart'
 @Component({
   selector: 'tcode-cart-item',
   templateUrl: './cart-item.component.html',
@@ -18,8 +18,18 @@ export class CartItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeFromCart(item: Product) {
-    this.cartService.removeFromCart(item.objectId).subscribe();
+  removeFromCart(cartItem: any) {
+    const quantity = cartItem.quantity;
+    if(quantity === 1){
+      this.cartService.removeFromCart(cartItem.item.objectId, true).subscribe();
+    } else {
+      this.cartService.removeFromCart(cartItem.item.objectId).subscribe();
+    }
+  }
+
+  addTocart(product: Product){
+    const { objectId: productId } = product;
+    this.cartService.addToCart(productId).subscribe();
   }
 
   async gotoProductPage(product: Product) {
