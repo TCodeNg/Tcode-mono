@@ -5,6 +5,8 @@ import { Product } from '@tcode/api-interface';
 import { Observable } from 'rxjs';
 import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 import { map, startWith, takeWhile, tap } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
+import { AppState } from './++state/app.state';
 
 @Component({
   selector: 'tcode-root',
@@ -20,10 +22,14 @@ export class AppComponent implements OnInit, OnDestroy {
   cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
   cartCount = 0;
   cartAmount = 0;
+
+  @Select(AppState.getSidenavState) showSidenav$: Observable<boolean>;
+
   constructor(
     _user: User,
     private router: Router,
-    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    private appState: AppState
   ) {
     this.user = _user as Customer;
     this.isComponentAlive = true;
@@ -33,7 +39,9 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.user.isLoggedIn();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.toggleSidenav(false);
+  }
 
   ngOnDestroy() {
     this.isComponentAlive = false;
@@ -46,6 +54,10 @@ export class AppComponent implements OnInit, OnDestroy {
   async logOut() {
     await this.user.logOut();
     await this.router.navigate(['/']);
+  }
+
+  toggleSidenav(state: boolean) {
+    this.appState.toggleSidenav(state);
   }
 
 }

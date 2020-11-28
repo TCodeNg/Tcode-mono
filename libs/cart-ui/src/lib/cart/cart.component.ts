@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 import { Observable } from 'rxjs';
@@ -14,6 +14,8 @@ export class CartComponent implements OnInit {
   cartCount = 0;
   cartItems: any;
   cartAmount = 0;
+  // tslint:disable-next-line: no-output-on-prefix
+  @Output() closeCart = new EventEmitter();
   constructor(
     private router: Router,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService
@@ -32,8 +34,12 @@ export class CartComponent implements OnInit {
   }
 
   async navigateToCheckout() {
-    // this.showCart = false;
+    this.handleCloseCart();
     await this.router.navigate(['/checkout']);
+  }
+
+  handleCloseCart(){
+    this.closeCart.emit();
   }
 
 }

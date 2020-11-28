@@ -1,36 +1,41 @@
-<tcode-information-bar></tcode-information-bar>
-<tcode-navbar>
-  <div class="logo-section">
-    <img src="../assets/img/logo.png" alt="logo">
-  </div>
-  <div class="action-section">
-    <img src="../assets/img/search.svg" class="search" alt="search">
-    <img
-      src="../assets/img/user.svg"
-      class="profile cursor-pointer" alt="profile"
-      [matMenuTriggerFor]="authMenu"
-      *ngIf="isLoggedIn | async"
-    >
-    <img
-      src="../assets/img/user.svg"
-      class="profile cursor-pointer" alt="profile"
-      (click)="handleAuthAction()"
-      matTooltip="Login"
-      *ngIf="!(isLoggedIn | async)"
-      >
-    <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
-    <mat-icon [matBadge]="cartCount$ | async" matBadgeColor="warn" class="cart cursor-pointer" matBadgeSize="small" (click)="showCart = true">local_mall</mat-icon>
-  </div>
-</tcode-navbar>
-<router-outlet></router-outlet>
-<tcode-footer></tcode-footer>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="over" [opened]="showSidenav$ | async" position="end">
+    <div class="cart-wrapper" >
+      <tcode-cart (closeCart)="toggleSidenav(false)"></tcode-cart>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <tcode-information-bar></tcode-information-bar>
+    <tcode-navbar>
+      <div class="logo-section">
+        <img src="../assets/img/logo.png" alt="logo">
+      </div>
+      <div class="action-section">
+        <img src="../assets/img/search.svg" class="search" alt="search">
+        <img
+          src="../assets/img/user.svg"
+          class="profile cursor-pointer" alt="profile"
+          [matMenuTriggerFor]="authMenu"
+          *ngIf="isLoggedIn | async"
+        >
+        <img
+          src="../assets/img/user.svg"
+          class="profile cursor-pointer" alt="profile"
+          (click)="handleAuthAction()"
+          matTooltip="Login"
+          *ngIf="!(isLoggedIn | async)"
+          >
+        <img src="../assets/img/heart.svg" class="wishlist" alt="wishlist">
+        <mat-icon [matBadge]="cartCount$ | async" matBadgeColor="warn" class="cart cursor-pointer" matBadgeSize="small" (click)="toggleSidenav(true)">local_mall</mat-icon>
+      </div>
+    </tcode-navbar>
+    <router-outlet></router-outlet>
+    <tcode-footer></tcode-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <mat-menu #authMenu="matMenu" class="auth-menu" xPosition="after">
   <button mat-menu-item>Account Info</button>
   <button mat-menu-item [routerLink]="['/orders']">Orders</button>
   <button mat-menu-item (click)="logOut()">Log out</button>
 </mat-menu>
-
-<div class="cart-wrapper" *ngIf="showCart">
-  <tcode-cart></tcode-cart>
-</div>
