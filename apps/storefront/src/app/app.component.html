@@ -44,7 +44,15 @@
       </div>
       <div class="price">
         <p class="item-name">{{ item?.item?.title }}</p>
-        <p class="item-price">{{ item?.quantity }} x {{ item?.item?.price.value | currency: (item?.item?.price?.currency): 'code' }}</p>
+        <p class="item-price">
+          <span>{{ item?.quantity }}</span> x 
+          <span>{{ item?.item?.price.value | currency: (item?.item?.price?.currency): 'code' }}</span>
+        </p>
+        <div class="quantity flex item-center ">
+          <img src="assets/img/minus.svg" alt="minus-icon" class="cursor-pointer mr-1" (click)="adjustQuantity(-1)">
+          <span> {{ item?.quantity }} </span>
+          <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="adjustQuantity(1)">
+        </div>
       </div>
       <mat-icon class="cursor-pointer" (click)="removeFromCart(item.item)">delete_outline</mat-icon>
     </div>
