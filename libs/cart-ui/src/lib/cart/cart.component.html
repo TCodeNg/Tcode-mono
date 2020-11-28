@@ -5,12 +5,12 @@
 </header>
 <main>
   <div class="items" *ngFor="let item of cartItems">
-    <tcode-cart-item></tcode-cart-item>
+    <tcode-cart-item [cartItem]="item"></tcode-cart-item>
   </div>
-  <!-- <div class="total">
+  <div class="total">
     <p class="cart-total">Total: {{ cartAmount | currency: 'NGN': 'symbol-narrow' }}</p>
     <div class="button">
-      <tcode-button type="normal">Proceed to checkout</tcode-button>
+      <tcode-button type="normal" (click)="navigateToCheckout()">Proceed to checkout</tcode-button>
     </div>
-  </div> -->
+  </div>
 </main>

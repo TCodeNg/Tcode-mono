@@ -16,10 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
   showCart = false;
   cartItems: any;
   isComponentAlive: boolean;
-  cart$: Observable<Cart> = this.cartService.getCart().pipe(tap(console.log));
+  cart$: Observable<Cart> = this.cartService.getCart();
   cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
-  cartAmount$ = this.cart$.pipe(map(cart => cart.totalAmount), startWith(0));
-  cartItems$: Observable<any> = this.cart$.pipe(map(cart => Object.values(cart.products)), startWith([]));
   cartCount = 0;
   cartAmount = 0;
   constructor(
@@ -35,16 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.user.isLoggedIn();
   }
 
-  ngOnInit() {
-    this.cart$.pipe(
-      takeWhile(() => this.isComponentAlive)
-    ).subscribe((cart: Cart) => {
-      console.log(cart)
-      this.cartCount = cart.itemCount;
-      this.cartItems = Object.values(cart.products);
-      this.cartAmount = cart.totalAmount;
-    })
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.isComponentAlive = false;
@@ -52,20 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   async handleAuthAction() {
     await this.router.navigate(['/auth/login']);
-  }
-
-  async gotoProductPage(product: Product) {
-    const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    await this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
-  }
-
-  removeFromCart(item: Product) {
-    this.cartService.removeFromCart(item.objectId).subscribe();
-  }
-
-  async navigateToCheckout() {
-    this.showCart = false;
-    await this.router.navigate(['/checkout']);
   }
 
   async logOut() {

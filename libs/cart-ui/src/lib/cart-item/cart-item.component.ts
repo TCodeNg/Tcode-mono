@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from '@tcode/api-interface';
-
+import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart'
 @Component({
   selector: 'tcode-cart-item',
   templateUrl: './cart-item.component.html',
@@ -8,11 +9,22 @@ import { Product } from '@tcode/api-interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent implements OnInit {
-  @Input() cartItem: Product;
-  constructor() { }
+  @Input() cartItem: any;
+  constructor(
+    private router: Router,
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
-    console.log('item',this.cartItem);
+  }
+
+  removeFromCart(item: Product) {
+    this.cartService.removeFromCart(item.objectId).subscribe();
+  }
+
+  async gotoProductPage(product: Product) {
+    const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
+    await this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
   }
 
 }
