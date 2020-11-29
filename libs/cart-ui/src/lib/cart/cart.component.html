@@ -1,11 +1,11 @@
 <header class="flex">
-  <mat-icon class="cursor-pointer">close</mat-icon>
+  <mat-icon (click)="close()" class="cursor-pointer">close</mat-icon>
   <h2 class="title">Shopping Carts</h2>
   <p><span class="count bold">{{ cartCount }} </span> item(s)</p>
 </header>
 <main>
   <div class="items" *ngFor="let item of cartItems">
-    <tcode-cart-item [cartItem]="item"></tcode-cart-item>
+    <tcode-cart-item (goToProduct)="goToProduct($event)" (removeFromCart)="removeItem($event)" [cartItem]="item"></tcode-cart-item>
   </div>
   <div class="total">
     <p class="cart-total">Total: {{ cartAmount | currency: 'NGN': 'symbol-narrow' }}</p>
