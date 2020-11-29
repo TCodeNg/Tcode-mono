@@ -4,7 +4,15 @@
   </div>
   <div class="price">
     <p class="item-name">{{ cartItem?.item?.title }}</p>
-    <p class="item-price">{{ cartItem?.quantity }} x {{ cartItem?.item?.price?.value | currency: (cartItem?.item?.price?.currency): 'code' }}</p>
+    <p class="item-price">
+      <span>{{ cartItem?.quantity }} </span> x 
+      <span>{{ cartItem?.item?.price?.value | currency: (cartItem?.item?.price?.currency): 'symbol-narrow' }}</span>
+    </p>
+    <div class="quantity flex item-center ">
+      <img src="assets/img/minus.svg" alt="minus-icon" class="cursor-pointer mr-1" [ngClass]="{ noEvent: count === 1 }" #reduceBtn>
+      <span> {{ count }} </span>
+      <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" #addBtn>
+    </div>
   </div>
   <mat-icon class="cursor-pointer" (click)="doRemoveFromCart(cartItem.item)">delete_outline</mat-icon>
 </div>

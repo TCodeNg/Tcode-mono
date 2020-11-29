@@ -43,9 +43,22 @@ export class CartComponent implements OnInit {
     await this.cartService.removeFromCart(product.objectId, undefined, true).toPromise();
   }
 
+  async reduceQuantity(product: Product) {
+    await this.cartService.removeFromCart(product.objectId, undefined, false).toPromise();
+  }
+
+  async increaseQuantity(product: Product) {
+    await this.cartService.addToCart(product.objectId, undefined).toPromise();
+  }
+
   async goToProduct(url: string) {
     const tree = this.router.parseUrl(url);
+    this.closeCart.emit();
     await this.router.navigateByUrl(tree);
+  }
+
+  async updateByQuantity(e: {product: Product, quantity: number}) {
+    await this.cartService.updateByQuantity(e.product.objectId, e.quantity).toPromise();
   }
 
   close() {
