@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 import { Observable } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
+
 @Component({
   selector: 'tcode-cart',
   templateUrl: './cart.component.html',
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService
-  ) { 
+  ) {
     this.isComponentAlive = true;
   }
 
