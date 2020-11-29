@@ -14,8 +14,6 @@ export class CartItemComponent implements OnInit, OnDestroy, AfterViewInit, OnCh
   @Input() cartItem?: any;
   @Output() goToProduct = new EventEmitter<string>();
   @Output() removeFromCart = new EventEmitter<Product>();
-  @Output() reduceQuantity = new EventEmitter<Product>();
-  @Output() increaseQuantity = new EventEmitter<Product>();
   @Output() updateByQuantity = new EventEmitter<{product: Product, quantity: number}>();
 
   @ViewChild('reduceBtn', { static: false }) reduceBtnRef: ElementRef;
@@ -68,14 +66,6 @@ export class CartItemComponent implements OnInit, OnDestroy, AfterViewInit, OnCh
 
   doRemoveFromCart(item: Product) {
     this.removeFromCart.emit(item);
-  }
-
-  doReduceQuantity(item: Product) {
-    this.reduceQuantity.emit(item);
-  }
-
-  doIncreaseQuantity(item: Product) {
-    this.increaseQuantity.emit(item);
   }
 
   gotoProductPage(product: Product) {

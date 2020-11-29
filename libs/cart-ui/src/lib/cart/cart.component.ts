@@ -53,6 +53,7 @@ export class CartComponent implements OnInit {
 
   async goToProduct(url: string) {
     const tree = this.router.parseUrl(url);
+    this.closeCart.emit();
     await this.router.navigateByUrl(tree);
   }
 
