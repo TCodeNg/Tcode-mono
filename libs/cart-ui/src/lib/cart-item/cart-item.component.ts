@@ -1,7 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '@tcode/api-interface';
-import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart'
+
 @Component({
   selector: 'tcode-cart-item',
   templateUrl: './cart-item.component.html',
@@ -9,22 +8,21 @@ import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartItemComponent implements OnInit {
-  @Input() cartItem: any;
-  constructor(
-    private router: Router,
-    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
-  ) { }
+  @Input() cartItem?: any;
+  @Output() goToProduct = new EventEmitter<string>();
+  @Output() removeFromCart = new EventEmitter<Product>();
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  removeFromCart(item: Product) {
-    this.cartService.removeFromCart(item.objectId).subscribe();
+  doRemoveFromCart(item: Product) {
+    this.removeFromCart.emit(item);
   }
 
-  async gotoProductPage(product: Product) {
+  gotoProductPage(product: Product) {
     const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    await this.router.navigate([`/${urlPath}`, 'product', product.objectId]);
+    this.goToProduct.emit(`/${urlPath}/product/${product.objectId}`);
   }
 
 }
