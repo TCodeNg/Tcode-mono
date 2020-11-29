@@ -1,4 +1,4 @@
-<div class="cartItem flex">
+<div class="cartItem flex" *ngIf="cartItem; else noProduct">
   <div class="image">
     <img [src]="cartItem?.item?.images[0]?.image" alt="product-image" height="98" width="128" class="cursor-pointer" (click)="gotoProductPage(cartItem.item)">
   </div>
@@ -14,5 +14,11 @@
       <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="addTocart(cartItem.item)">
     </div>
   </div>
-  <mat-icon class="cursor-pointer" (click)="removeFromCart(cartItem)">delete_outline</mat-icon>
+  <mat-icon class="cursor-pointer" (click)="doRemoveFromCart(cartItem.item)">delete_outline</mat-icon>
 </div>
+
+<ng-template #noProduct>
+  <div class="no-product-wrap">
+    <p>Product not found.</p>
+  </div>
+</ng-template>

@@ -1,25 +1,26 @@
-import { Component, OnInit, ChangeDetectionStrategy, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 import { Observable } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
+import { Product } from '@tcode/api-interface';
+
 @Component({
   selector: 'tcode-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  @Output() closeCart = new EventEmitter<any>();
   isComponentAlive: boolean;
   cart$: Observable<Cart> = this.cartService.getCart();
   cartCount = 0;
   cartItems: any;
   cartAmount = 0;
-  // tslint:disable-next-line: no-output-on-prefix
-  @Output() closeCart = new EventEmitter();
   constructor(
     private router: Router,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService
-  ) { 
+  ) {
     this.isComponentAlive = true;
   }
 
@@ -34,12 +35,20 @@ export class CartComponent implements OnInit {
   }
 
   async navigateToCheckout() {
-    this.handleCloseCart();
+    this.close();
     await this.router.navigate(['/checkout']);
   }
 
-  handleCloseCart(){
-    this.closeCart.emit();
+  async removeItem(product: Product) {
+    await this.cartService.removeFromCart(product.objectId, undefined, true).toPromise();
   }
 
+  async goToProduct(url: string) {
+    const tree = this.router.parseUrl(url);
+    await this.router.navigateByUrl(tree);
+  }
+
+  close() {
+    this.closeCart.emit();
+  }
 }
