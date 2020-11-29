@@ -44,7 +44,7 @@ export class ParseCartService implements CartServiceInterface {
   }
 
   updateByQuantity(productId: string, quantity: number, userId?: string) {
-    return from(Parse.Cloud.run('updateByQuantity', {productId, quantity, userId}));
+    return from(Parse.Cloud.run('updateByQuantity', {productId, quantity,  userId: userId ?? this.userId}));
   }
 
   private get userId(): string {
