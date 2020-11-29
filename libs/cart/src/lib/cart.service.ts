@@ -5,7 +5,8 @@ import { Cart } from './cart';
 export interface CartServiceInterface {
   getCart(userId?: string): Observable<Cart>;
   addToCart(productId: string, userId?: string): Observable<void>;
-  removeFromCart(productId: string, deleteItem?: boolean, userId?: string): Observable<void>;
+  removeFromCart(productId: string, userId?: string, deleteItem?: boolean): Observable<void>;
+  updateByQuantity(productId: string, quantity: number, userId?: string): Observable<void>;
   checkout(userId?: string): Observable<void>;
   clearCart(): Observable<Cart>;
 }

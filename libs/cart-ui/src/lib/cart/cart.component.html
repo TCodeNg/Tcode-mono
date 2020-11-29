@@ -5,7 +5,14 @@
 </header>
 <main>
   <div class="items" *ngFor="let item of cartItems">
-    <tcode-cart-item (goToProduct)="goToProduct($event)" (removeFromCart)="removeItem($event)" [cartItem]="item"></tcode-cart-item>
+    <tcode-cart-item 
+      (goToProduct)="goToProduct($event)" 
+      (removeFromCart)="removeItem($event)" 
+      (reduceQuantity)="reduceQuantity($event)" 
+      (increaseQuantity)="increaseQuantity($event)" 
+      (updateByQuantity)="updateByQuantity($event)"
+      [cartItem]="item">
+    </tcode-cart-item>
   </div>
   <div class="total">
     <p class="cart-total">Total: {{ cartAmount | currency: 'NGN': 'symbol-narrow' }}</p>
