@@ -1,5 +1,9 @@
-<header class="flex align-center">
+<!-- <header class="flex align-center justify-between">
   <p>{{ pageTitle }}</p>
+  <div class="actions">
+    <tcode-button type="normal">Product Categories</tcode-button>
+    <tcode-button type="normal">Add product</tcode-button>
+  </div>
 </header>
 <mat-tab-group>
   <mat-tab label="Real estate">
@@ -7,4 +11,17 @@
       <p>Real estate</p>
     </ng-template>
   </mat-tab>
-</mat-tab-group>
+</mat-tab-group> -->
+<tcode-product-list-lib
+  [pageTitle]="pageTitle"
+>
+  <div class="content">
+    <mat-tab-group>
+      <mat-tab label="Real estate">
+        <ng-template matTabContent>
+          <p>Real estate</p>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group> 
+  </div>
+</tcode-product-list-lib>

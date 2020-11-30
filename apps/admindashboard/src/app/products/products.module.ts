@@ -5,6 +5,7 @@ import { TableModule } from '@tcode/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CardModule } from '@tcode/card';
 import { ButtonsModule } from '@tcode/buttons'
+import { ProductListUiModule } from '@tcode/product-list-ui'
 import { ProductListComponent } from './productlist/productlist.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ProductListComponent } from './productlist/productlist.component';
     MatTabsModule,
     CardModule,
     ButtonsModule,
+    ProductListUiModule,
     RouterModule.forChild([
       {
         path: '',

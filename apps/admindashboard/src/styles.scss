@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
   margin: 0;
@@ -37,6 +38,9 @@ a {
 }
 .justify-end {
   justify-content: flex-end;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .grid {
   display: grid;

@@ -1,0 +1,33 @@
+:host {
+  &::ng-deep {
+    tcode-input {
+      margin: 10px 0;
+    }
+  }
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #CFDFEF;
+  padding-bottom: 0.5rem;
+  align-items: center;
+  h2 {
+    color: #1E266D;
+    font-weight: normal;
+    font-size: 22px;
+  }
+  p {
+    color: #E45C5C;
+    cursor: pointer;
+  }
+}
+main {
+  .content {
+    margin-top: 1.5rem;
+    .input-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+    }
+  }
+}

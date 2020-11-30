@@ -1,0 +1,10 @@
+<header class="">
+  <p>{{ pageTitle }}</p>
+  <div class="actions">
+    <tcode-button type="outline" class="secondary">Product Categories</tcode-button>
+    <tcode-button type="normal" class="add" (click)="doAddNewProduct()">Add product</tcode-button>
+  </div>
+</header>
+<main>
+  <ng-content select=".content"></ng-content>
+</main>
