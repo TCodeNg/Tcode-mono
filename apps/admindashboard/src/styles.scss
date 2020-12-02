@@ -60,3 +60,22 @@ a {
 .mat-tab-header, .mat-tab-nav-bar {
   border-bottom: 1px solid #CFDFEF;
 }
+.mat-radio-button.mat-primary .mat-radio-inner-circle{
+  color:rgb(2, 176, 117) !important;
+  background-color:rgb(2, 176, 117) !important;
+}
+.mat-radio-button.mat-primary .mat-radio-outer-circle{
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle{
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-checkbox.mat-primary .mat-checkbox-inner-container {
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: rgb(2, 176, 117) !important;
+}
+.no-padding, .mat-dialog-container {
+  padding: 0 !important;
+}

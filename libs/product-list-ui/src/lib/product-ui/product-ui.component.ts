@@ -22,9 +22,11 @@ export class ProductUiComponent implements OnInit {
   doAddNewProduct() {
     this.addNewProductDialogRef = this.dialog.open(
       AddNewProductComponent, {
-        width: "37.5rem",
+        width: "33.5rem",
         minHeight: "16.625rem",
         hasBackdrop: true,
+        panelClass: 'no-padding',
+        disableClose: true
       }
     )
   }
