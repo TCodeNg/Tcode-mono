@@ -7,6 +7,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { InputModule } from '@tcode/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { InputModule } from '@tcode/input';
     MatRadioModule,
     MatCheckboxModule,
     InputModule,
-    ButtonsModule
+    ButtonsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   declarations: [ProductUiComponent, AddNewProductComponent],
   exports: [ProductUiComponent]

@@ -3,60 +3,86 @@
   <p (click)="closeDialog()">CANCEL</p>
 </header>
 <main>
-  <section class="content">
+  <section class="content" [formGroup]="addProductForm">
+    <!-- {{ addProductForm.value | json }} -->
     <tcode-input>
       <label for="product-name">Product name</label>
-      <input id="text" type="name">
+      <input id="text" type="name" formControlName="name">
     </tcode-input>
     <tcode-input>
       <label for="price">Price</label>
-      <input id="price" type="number">
+      <input id="price" type="number" formControlName="price">
     </tcode-input>
-    <mat-radio-group aria-label="Select an option">
+    <mat-radio-group aria-label="Select an option" formControlName="type">
       <label for="product-type">Product type</label>
       <div class="" style="margin-top:12px">
-        <mat-radio-button value="1" color="primary">Real Estate</mat-radio-button>
-        <mat-radio-button value="2" color="primary">Farm Vendor</mat-radio-button>
-        <mat-radio-button value="3" color="primary">Inverter & solar power</mat-radio-button>
+        <mat-radio-button value="estate" color="primary">Real Estate</mat-radio-button>
+        <mat-radio-button value="farm" color="primary">Farm Vendor</mat-radio-button>
+        <mat-radio-button value="inverter" color="primary">Inverter & solar power</mat-radio-button>
       </div>
     </mat-radio-group>
-    <div class="checkbox-group">
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'farm'">
       <label for="product-category">Product category</label>
-      <div class="" style="margin-top:12px">
-        <mat-checkbox value="1" color="primary">Land</mat-checkbox>
-        <mat-checkbox value="2" color="primary">Building property</mat-checkbox>
-        <mat-checkbox value="3" color="primary">Rent</mat-checkbox>
-        <mat-checkbox value="3" color="primary">Lease</mat-checkbox>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of farmCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
       </div>
     </div>
-    <div class="input-group">
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'estate'">
+      <label for="product-category">Product category</label>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of estateCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'inverter'">
+      <label for="product-category">Product category</label>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of inverterCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <div class="input-group" *ngIf="addProductForm.controls.type.value === 'estate'">
       <tcode-input>
         <label for="location">Location</label>
-        <input id="text" type="location">
+        <input id="text" type="location" formControlName="location">
       </tcode-input>
       <tcode-input>
         <label for="agent">Agent</label>
-        <input id="text" type="agent">
+        <input id="text" type="agent" formControlName="agent">
       </tcode-input>
     </div>
-    <div class="input-group sm">
+    <div class="input-group sm" *ngIf="addProductForm.controls.type.value === 'estate'">
       <tcode-input>
         <label for="rooms">No. of rooms</label>
-        <input id="text" type="roooms">
+        <input id="roooms" type="number" formControlName="rooms">
       </tcode-input>
       <tcode-input>
-        <label for="bathroom">No. of bathroooms</label>
-        <input id="text" type="bathroom">
+        <label for="bathroom">No. of bathrooms</label>
+        <input id="bathrooms" type="number" formControlName="bathrooms">
       </tcode-input>
       <tcode-input>
         <label for="sitting-rooms">No. of sitting rooms</label>
-        <input id="text" type="sitting-rooms">
+        <input id="sitting-rooms" type="number" formControlName="livingRooms">
       </tcode-input>
     </div>
     <div class="text-area flex flex-column">
       <label for="product-description">Product description</label>
-      <textarea cols="5" rows="4"></textarea>
+      <textarea cols="5" rows="4" formControlName="description"></textarea>
     </div>
+    <tcode-input *ngIf="addProductForm.controls.type.value === 'farm'">
+      <label for="bathroom">Product owner</label>
+      <input id="owner" type="text" formControlName="owner">
+    </tcode-input>
     <div class="upload-area flex flex-column">
       <label for="product-images">Product images</label>
       <div class="upload flex justify-center align-center flex-column">
@@ -65,7 +91,7 @@
       </div>
     </div>
     <div class="flex button justify-center">
-      <tcode-button type="normal">Save</tcode-button>
+      <tcode-button type="normal" (click)="onSubmit()" [disabled]="!isFormValid || lState === 'loading'" [state]="lState">Save</tcode-button>
     </div>
   </section>
 </main>

@@ -7,6 +7,7 @@ import { CardModule } from '@tcode/card';
 import { ButtonsModule } from '@tcode/buttons'
 import { ProductListUiModule } from '@tcode/product-list-ui'
 import { ProductListComponent } from './productlist/productlist.component';
+import { ProductModule } from '@tcode/product';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ProductListComponent } from './productlist/productlist.component';
     MatTabsModule,
     CardModule,
     ButtonsModule,
+    ProductModule,
     ProductListUiModule,
     RouterModule.forChild([
       {

@@ -29,6 +29,9 @@ export class ProductUiComponent implements OnInit {
         disableClose: true
       }
     )
+    this.addNewProductDialogRef.afterClosed().subscribe((value) => {
+      console.log(value)
+    })
   }
 
 }
