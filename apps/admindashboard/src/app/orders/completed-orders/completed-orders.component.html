@@ -1,0 +1,8 @@
+<tcode-table 
+  [dataSource]="tableData"
+  [tableColumns]="tableColumns"
+  [pageSize]="5"
+  [length]="tableData.data.length"
+  (onRowClick)="handleClick($event)"
+  (onSearch)="handleClick($event)"
+></tcode-table>

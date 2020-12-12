@@ -1,0 +1,13 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
+    <tcode-drawer-menu></tcode-drawer-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <tcode-toolbar></tcode-toolbar>
+		<div class="route-wrapper">
+      <main>
+      </main>
+			<router-outlet></router-outlet>
+		</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -15,11 +15,16 @@
                display: flex;
                border-radius: 6px;
                margin: 15px 0;
-               align-items: flex-start;
-               flex-direction: column;
-               .amount {
+               justify-content: space-between;
+               .amount-text {
                     color: #02B075;
                     line-height: 22px;
+               }
+               .amount {
+                    font-size: 1.5rem;
+               }
+               &.btn {
+                    justify-content: center;
                }
           }
      }

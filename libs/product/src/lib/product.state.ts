@@ -1,0 +1,1 @@
+export interface ProductItemStateConfig {[key: string]: { [key: string]: 'idle' | 'loading' }}

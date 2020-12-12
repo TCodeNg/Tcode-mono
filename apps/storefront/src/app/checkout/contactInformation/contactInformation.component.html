@@ -1,5 +1,10 @@
 <div class="wrapper">
-    <p class="headline text-center" *ngIf="!(isLoggedIn | async)"><span>Already have an account? </span><span>Sign in</span></p>
+    <p class="headline text-center" *ngIf="!(isLoggedIn | async)">
+        <span>Already have an account? </span>
+        <span [routerLink]="['/auth/login']" class="link">Sign in</span> 
+        <span> or </span> 
+        <span [routerLink]="['/auth/signup']" class="link">Sign up</span>
+    </p>
     <p class="title">Contact Information</p>
     <form [formGroup]="authFormGroup">
         <div class="control">
@@ -10,18 +15,21 @@
         <div class="control">
             <tcode-input>
                 <label for="email">Email</label>
-                <input type="email" id="email" formControlName="email">
+                <input type="email" id="email" formControlName="email" autocomplete="off">
             </tcode-input>
         </div>
         <div class="control" *ngIf="!(isLoggedIn | async)">
-            <tcode-input>
+            <!-- <tcode-input>
                 <label for="password">Password</label>
-                <input type="password" id="password">
+                <input type="password" id="password" autocomplete="off" formControlName="password">
             </tcode-input>
             <tcode-input>
                 <label for="confirm-password">Confirm password</label>
-                <input type="password" id="confirm-password">
-            </tcode-input>
+                <input type="password" id="confirm-password" autocomplete="off" formControlName="confirmPassword">
+            </tcode-input> -->
+        </div>
+        <div class="error" *ngIf="authFormControlsError?.passwordMatch">
+            <span>Enter matching passwords</span>
         </div>
     </form>
     <p class="title">Shipping Information</p>
@@ -65,9 +73,9 @@
     </form>
     <div class="action flex">
         <a [routerLink]="['../']" class="back-btn flex item-center">
-            <img src="assets/img/arrow-left2.svg" alt="back"> Back to shopping
+            <img src="assets/img/arrow-left 2.svg" alt="back"> Back to shopping
         </a>
-        <tcode-button type="normal" (click)="submit()" [disabled]="authFormGroup.invalid">
+        <tcode-button type="normal" (click)="submit()" [state]="btnState" [disabled]="btnState === 'loading'">
             Continue
         </tcode-button>
     </div>

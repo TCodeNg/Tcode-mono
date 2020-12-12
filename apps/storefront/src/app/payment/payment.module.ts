@@ -3,7 +3,8 @@ import { PaymentComponent } from './payment.component';
 import { PaymentRoutingModule } from './payment.routing.module';
 import { SharedModule } from '../Shared/shared.module';
 import { CommonModule } from '@angular/common';
-
+import { ButtonsModule } from '@tcode/buttons'
+import { OrderModule } from '@tcode/order';
 
 @NgModule({
      declarations: [
@@ -12,6 +13,8 @@ import { CommonModule } from '@angular/common';
      imports: [
           PaymentRoutingModule,
           CommonModule,
-          SharedModule
+          SharedModule,
+          ButtonsModule,
+          OrderModule
      ]
 })export class PaymentModule{}

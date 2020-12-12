@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { AuthStateModel } from './auth.state.model';
 import { State } from '@ngxs/store';
 import { DataAction, StateRepository } from '@ngxs-labs/data/decorators';
 import { NgxsDataRepository } from '@ngxs-labs/data/repositories';
-import { AuthService } from '../auth.service';
-import { Login, LoginFailed, SignUpFailed, SignUp } from './actions';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore'
+import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
+import { Login, LoginFailed, LogoutFailed } from './actions';
 
 @StateRepository()
 @Injectable()
@@ -15,49 +13,26 @@ import { AngularFirestore } from '@angular/fire/firestore'
 })
 export class AuthState extends NgxsDataRepository<AuthStateModel> {
 
-  constructor(private service: AuthService, private firebaseAuth: AngularFireAuth, private firestore: AngularFirestore ) {
+  constructor(@Inject(AUTH_SERVICE_TOKEN) private service: AuthService) {
     super();
   }
 
-  // @DataAction() async login(email: string, password: string) {
-  //   const { dispatch, patchState } = this.ctx;
-  //   await dispatch(new Login()).toPromise();
-  //   try {
-  //     const res: any = await this.service.login(email, password).toPromise();
-  //     patchState({
-  //       accessToken: res.accessToken,
-  //       refreshToken: res.refreshToken
-  //     });
-  //   } catch (err) {
-  //     await dispatch(new LoginFailed(err.error)).toPromise();
-  //   }
-  // }
-
-  @DataAction() logOut() {
-    const { patchState } = this.ctx;
-    patchState({
-      accessToken: undefined,
-      refreshToken: undefined
-    });
+  @DataAction() async login(email: string, password: string) {
+    const { dispatch } = this.ctx;
+    await dispatch(new Login()).toPromise();
+    try {
+      await this.service.login(email, password).toPromise();
+    } catch (err) {
+      await dispatch(new LoginFailed(err.error)).toPromise();
+    }
   }
 
-  @DataAction() async signUp(payload) {
-    const { dispatch, patchState } = this.ctx;
-    await dispatch(new SignUp()).toPromise();
-    const {email, password} = payload;
+  @DataAction() async logOut() {
+    const { dispatch } = this.ctx;
     try {
-      const newUser = await this.firebaseAuth.createUserWithEmailAndPassword(email, password);
-     try {
-       const userId = newUser.user.uid;
-       console.log(userId);
-       const user = await this.firestore.collection("profiles").doc(userId).set(payload);
-       console.log(user)
-     } catch (error) {
-      await dispatch(new SignUpFailed(error)).toPromise();
-     }
-    } catch (error) {
-      console.log(error)
-      await dispatch(new SignUpFailed(error)).toPromise();
-    }    
+      await this.service.logout().toPromise();
+    } catch (e) {
+      await dispatch(new LogoutFailed(e));
+    }
   }
 }

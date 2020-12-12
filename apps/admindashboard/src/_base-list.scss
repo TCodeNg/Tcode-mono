@@ -1,0 +1,25 @@
+@import "../../../color";
+@mixin baselist {
+  :host {
+    &::ng-deep {
+      mat-tab-header {
+        margin: auto !important;
+        width: 92% !important;
+      }
+      .mat-tab-label {
+        opacity: 1 !important;
+      }
+      .mat-tab-label-active {
+        border-bottom: 4px solid #1D66FF;
+        color: #1D66FF
+      }
+    }
+  }
+  header {
+    color: $text;
+    height: 90px;
+    padding: 0 50px 0 50px;
+    font-size: 22px;
+    font-weight: 500;
+  }
+}

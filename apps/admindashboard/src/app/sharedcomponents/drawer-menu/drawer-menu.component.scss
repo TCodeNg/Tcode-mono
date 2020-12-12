@@ -1,0 +1,29 @@
+@import '../../../color';
+
+header {
+  height: 90px;
+}
+section.menu {
+  padding: 0 15px 38px 33px;
+  height: calc(100% - 128px);
+  justify-content: space-between;
+  ul.menu-items {
+    list-style: none;
+    li.menu-item {
+      a {
+        padding: 0.5rem 0;  
+        margin: 5px 0;
+        font-size: 0.875rem;
+        .icon {
+          margin-right: 13px;
+        }
+      }
+    }
+  }
+  .logout {
+    color: $red;
+    img {
+      margin-right: 13px;
+    }
+  }
+}

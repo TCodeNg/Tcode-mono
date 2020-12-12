@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  font-family: 'Nunito', sans-serif;
+}
+p, ul, li, h1, h2, h3, h4, h5, h6 {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+.align-end {
+  align-items: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.grid {
+  display: grid;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.pointer {
+  cursor: pointer;
+}
+.mat-paginator-page-size {
+  display: none !important;
+}
+.mat-tab-header, .mat-tab-nav-bar {
+  border-bottom: 1px solid #CFDFEF;
+}

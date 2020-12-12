@@ -1,68 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, Customer } from '@tcode/frontend-auth';
-import { CartService } from './services/cart.service';
+import { Customer, User } from '@tcode/frontend-auth';
 import { Product } from '@tcode/api-interface';
-import { AuthService } from 'libs/frontend-auth/src/lib/auth.service';
+import { Observable } from 'rxjs';
+import { Cart, CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
+import { map, startWith, takeWhile, tap } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
+import { AppState } from './++state/app.state';
 
 @Component({
   selector: 'tcode-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   user: Customer;
   showCart = false;
   cartItems: any;
+  isComponentAlive: boolean;
+  cart$: Observable<Cart> = this.cartService.getCart();
+  cartCount$ = this.cart$.pipe(map(cart => cart.itemCount), startWith(0));
+  cartCount = 0;
+  cartAmount = 0;
+
+  @Select(AppState.getSidenavState) showSidenav$: Observable<boolean>;
+
   constructor(
     _user: User,
     private router: Router,
-    private cartService: CartService,
-    private authService: AuthService
-  ){
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    private appState: AppState
+  ) {
     this.user = _user as Customer;
+    this.isComponentAlive = true;
   }
 
-  cartCount$ = this.cartService.cartCount$
-  cartAmount$ = this.cartService.cartTotalAmount$;
-  cartItems$ = this.cartService.cartItems$;
-
-  ngOnInit(){
-    this.cartService.updateCartItemCount();
-    this.cartService.updateCartTotalAmount();
-    this.cartService.updateCartItems();
+  get isLoggedIn(): Observable<boolean> {
+    return this.user.isLoggedIn();
   }
 
-  handleAuthAction(){
-    this.router.navigate(['/auth/login']);
+  ngOnInit() {
+    this.toggleSidenav(false);
   }
 
-  get isLoggedIn() {
-    return this.authService.isLoggedIn;
+  ngOnDestroy() {
+    this.isComponentAlive = false;
   }
 
-  gotoProductPage(product: Product){
-    const urlPath = product.type === 'estate' ? 'real-estate' : product.type === 'inverter' ? 'inverters' : 'farm-produce';
-    this.router.navigate([`/${urlPath}`, 'product', product.id]);
-  }
-
-  removeFromCart(item: Product){
-    this.cartService.removeItem(item)
-  }
-
-  navigateToCheckout() {
-    this.showCart = false;
-    this.router.navigate(['/checkout'])
+  async handleAuthAction() {
+    await this.router.navigate(['/auth/login']);
   }
 
   async logOut() {
-    await this.authService.logout();
-
-    localStorage.clear();
-    this.cartService.updateCartItemCount();
-    this.cartService.updateCartItems();
-    this.cartService.updateCartTotalAmount();
-    this.router.navigate(['/'])
+    await this.user.logOut();
+    await this.router.navigate(['/']);
   }
-  
+
+  toggleSidenav(state: boolean) {
+    this.appState.toggleSidenav(state);
+  }
+
 }

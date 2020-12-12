@@ -4,11 +4,11 @@ import { Customer } from './customer';
 import { NoopUser } from './noop-user';
 import { User } from './user';
 import { Vendor } from './vendor';
-import { AuthState } from '../+state/auth.state';
+import { AuthService } from '../auth.service';
 
 export const USER_TYPE_TOKEN = new InjectionToken<string>('USER_TYPE_TOKEN');
 
-export const userFactory = (type = 'customer', state?: AuthState): User => {
+export const userFactory = (type = 'customer', state?: AuthService): User => {
   const userTypes = {
     admin: Admin,
     customer: Customer,

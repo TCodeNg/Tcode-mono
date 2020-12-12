@@ -29,7 +29,15 @@
       "@tcode/card": ["libs/card/src/index.ts"],
       "@tcode/input": ["libs/input/src/index.ts"],
       "@tcode/media-api": ["libs/media-api/src/index.ts"],
-      "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"]
+      "@tcode/frontend-auth": ["libs/frontend-auth/src/index.ts"],
+      "@tcode/table": ["libs/table/src/index.ts"],
+      "@tcode/cart": ["libs/cart/src/index.ts"],
+      "@tcode/contact": ["libs/contact/src/index.ts"],
+      "@tcode/order": ["libs/order/src/index.ts"],
+      "@tcode/order-detail-ui": ["libs/order-detail-ui/src/index.ts"],
+      "@tcode/cart-ui": ["libs/cart-ui/src/index.ts"],
+      "@tcode/image": ["libs/image/src/index.ts"],
+      "@tcode/media": ["libs/media/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

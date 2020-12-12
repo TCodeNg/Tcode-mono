@@ -1,17 +1,13 @@
 <section class="wrapper flex flex-center">
      <ul>
           <li>
-               <p class="amount">Order amount</p>
-               <p>{{ "1000" }}</p>
+               <p class="amount-text">Order amount</p>
+               <p class="amount">{{ totalOrderAmount | currency:'NGN':"symbol-narrow" }}</p>
           </li>
-          <li>
-               <img src="assets/img/paystack.svg" alt="paystack" />
-          </li>
-          <li>
-               <img src="assets/img/flutterwave.svg" alt="paystack" />
-          </li>
-          <li>
-               <img src="assets/img/paypal.svg" alt="paystack" />
+          <li class="btn">
+               <tcode-button type="normal" [state]="lState" (click)="pay()" [disabled]="lState === 'loading'">
+                    Complete Payment
+               </tcode-button>
           </li>
      </ul>
 </section>

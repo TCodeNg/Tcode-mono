@@ -7,17 +7,17 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AuthConfig, FrontendAuthModule } from '@tcode/frontend-auth';
 import { NgxsDataPluginModule } from '@ngxs-labs/data';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin'
 import { SharedModule } from './Shared/shared.module';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AppRoutingModule } from './app.routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { ButtonsModule } from '@tcode/buttons';
-import { environment } from '../environments/environment';
+import { CartModule } from '@tcode/cart';
+import { CartUiModule } from '@tcode/cart-ui';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { AppState } from './++state/app.state';
 
 const authConfig: AuthConfig = {
   canResetPassword: true,
@@ -33,20 +33,20 @@ const authConfig: AuthConfig = {
     BrowserAnimationsModule,
     AppRoutingModule,
     FrontendAuthModule.forRoot(authConfig, 'customer'),
-    NgxsModule.forRoot([]),
+    CartModule,
+    NgxsModule.forRoot([ AppState ]),
     MatIconModule,
     MatBadgeModule,
     MatMenuModule,
     ButtonsModule,
+    CartUiModule,
+    MatSidenavModule,
     NgxsDataPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    SharedModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

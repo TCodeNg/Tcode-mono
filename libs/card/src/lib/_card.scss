@@ -37,14 +37,38 @@ $tcode-green: #02B075;
     }
     .profile-name {
       margin-top: 10px;
-      font-size: 0.9rem;
+      font-size: 1rem;
+      color: #1E266D;
+      font-weight: 500;
     }
     .profile-role {
       font-size: 0.5rem;
-      margin-top: 8px;
+      margin-top: 6px;
       padding: 2px 6px;
       background: rgba(0, 77, 118, 0.1);
       border-radius: 4px;
+      color: #0071BB;
+    }
+  }
+  .card-body {
+    ul {
+      grid-gap: 0.9rem;
+      justify-content: center;
+      margin-top: 20px;
+      li {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 19px;
+        font-size: 0.9rem;
+        .label {
+          text-align: end;
+          color: #1E266D;
+          font-weight: lighter;
+        }
+        .value {
+          color: #1E266D;
+          font-weight: 500;
+        }
+      }
     }
   }
 }

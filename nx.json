@@ -14,7 +14,13 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
       }
     }
   },
@@ -26,9 +32,6 @@
     "storefront-e2e": {
       "tags": [],
       "implicitDependencies": ["storefront"]
-    },
-    "storefront-api": {
-      "tags": []
     },
     "api-interface": {
       "tags": []
@@ -72,6 +75,55 @@
     "frontend-auth": {
       "tags": [],
       "implicitDependencies": ["shared-assets"]
+    },
+    "admindashboard": {
+      "tags": []
+    },
+    "admindashboard-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admindashboard"]
+    },
+    "admin": {
+      "tags": []
+    },
+    "admin-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admin"]
+    },
+    "vendor": {
+      "tags": []
+    },
+    "vendor-e2e": {
+      "tags": [],
+      "implicitDependencies": ["vendor"]
+    },
+    "table": {
+      "tags": []
+    },
+    "cart": {
+      "tags": ["ui"]
+    },
+    "contact": {
+      "tags": ["ui"]
+    },
+    "order": {
+      "tags": ["ui"]
+    },
+    "order-detail-ui": {
+      "tags": ["ui"]
+    },
+    "cart-ui": {
+      "tags": ["ui"]
+    },
+    "cart-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": ["cart-ui"]
+    },
+    "image": {
+      "tags": ["scope:shared"]
+    },
+    "media": {
+      "tags": ["scope:shared"]
     }
   }
 }

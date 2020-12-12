@@ -1,5 +1,16 @@
 @import '../../../media';
 
+:host {
+  &::ng-deep {
+    .mat-radio-label {
+      .mat-radio-label-content {
+        display: flex !important;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  }
+}
 .wrapper {
     @include media('<tablet') {
       padding: 1rem 2rem;
@@ -31,13 +42,6 @@
             margin: 0 !important;
           }
         }
-        .shipping-type {
-          align-items: center;
-          justify-content: space-between;
-          padding: 11px;
-          border-radius: 6px;
-          border: 1px solid #cfdfdf;
-        }
         .action {
           justify-content: space-between;
           margin-top: 20px;
@@ -46,14 +50,14 @@
             font-size: 0.875rem;
           }
         }  
-     .payment {
+     .payment, .shipping-type {
        mat-radio-group {
          display: grid;
          grid-row-gap: 20px;
          mat-radio-button {
-              border: 1px solid #cfdfdf;;
-              padding: 12px;
-              border-radius: 6px;
+            border: 1px solid #cfdfdf;;
+            padding: 12px;
+            border-radius: 6px;
          }
        }
      }

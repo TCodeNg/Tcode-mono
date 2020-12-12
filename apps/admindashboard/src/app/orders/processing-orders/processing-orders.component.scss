@@ -1,0 +1,9 @@
+@import '../../../table';
+
+:host {
+  &::ng-deep {
+    tcode-table {
+      @include table;
+    }
+  }
+}

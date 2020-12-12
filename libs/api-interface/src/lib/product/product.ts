@@ -8,7 +8,7 @@ export interface Product {
   category: string[];
   created: Date;
   description: string;
-  id: string;
+  objectId: string;
   images: IImage[];
   livingRooms?: number;
   owner?: Business;

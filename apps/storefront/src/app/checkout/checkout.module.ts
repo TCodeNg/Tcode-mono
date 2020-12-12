@@ -11,6 +11,10 @@ import { ShippingContactComponent } from './shippingContact/shippingContact.comp
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxsModule } from '@ngxs/store';
+import { ContactModule } from '@tcode/contact';
+import { CheckoutFormState } from './++state/checkout-form.state';
+import { OrderModule } from '@tcode/order';
 
 @NgModule({
     declarations: [
@@ -28,8 +32,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
         InputModule,
         MatCheckboxModule,
         MatRadioModule,
-        ButtonsModule
+        ButtonsModule,
+        ContactModule,
+        OrderModule,
+        NgxsModule.forFeature([CheckoutFormState])
     ],
     exports: []
 })
-export class CheckoutModule {}
+export class CheckoutModule { }

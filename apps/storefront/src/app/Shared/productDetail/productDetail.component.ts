@@ -17,7 +17,7 @@ export class ProductDetailComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.product = PageProducts.find((product) => product.id === this.productId);
+    this.product = PageProducts.find((product) => product.objectId === this.productId);
   }
 
   get productUserScore(): number {

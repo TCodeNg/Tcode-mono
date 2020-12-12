@@ -1,0 +1,38 @@
+@import "../../../color";
+
+main {
+  height: 90px;
+  background-color: #F4F8FC;
+  padding-right: 23px;
+  .user-meta {
+    .avatar {
+      margin-right: 13px;
+    }
+    .user-info {
+      margin-right: 30px;
+      p {
+        &:first-of-type {
+          font-size: 0.8rem;
+          color: #6D7D93;
+          margin-bottom: 5px;
+        }
+        &:last-of-type {
+          font-weight: 500;
+          font-size: 1rem;
+          color: $text;
+        }
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      height: 46px;
+      border-left: 1px solid #CFDFEF;
+      right: 0px;
+      margin-left: 10px;
+    }
+  }
+  .action-center {
+    margin-left: 33px;
+  }
+}

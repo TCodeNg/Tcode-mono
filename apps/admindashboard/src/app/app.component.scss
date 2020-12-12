@@ -1,0 +1,26 @@
+@import '../color';
+
+:host {
+  display: block;
+  font-family: sans-serif;
+  min-height: 100vh;
+  &::ng-deep {
+    .mat-drawer-inner-container {
+      overflow: hidden !important;
+    }
+  }
+}
+
+.mat-drawer.mat-drawer-side {
+  width: 220px !important;
+  overflow: hidden !important;
+  background: $primary;
+  color: white;
+}
+.mat-drawer-content {
+  padding-left: 220px !important;
+  margin: 0 !important;
+}
+.mat-drawer-container {
+	height: 100vh !important;
+}

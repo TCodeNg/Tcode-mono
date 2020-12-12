@@ -12,7 +12,9 @@ export const environment = {
     storageBucket: "skoolify.appspot.com",
     messagingSenderId: "133259068410",
     appId: "1:133259068410:web:3a3187a58a7de773c7da43"
-  }
+  },
+  appId: 'myAppId',
+  serverUrl: 'https://stage.backoffice.tcodemulticoncept.com/api'
 };
 
 /*

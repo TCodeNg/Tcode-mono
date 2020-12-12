@@ -1,0 +1,25 @@
+<header class="flex align-center">
+  <p>{{ pageTitle }}</p>
+</header>
+<mat-tab-group>
+  <mat-tab label="Pending">
+    <ng-template matTabContent>
+      <tc-pending-orders></tc-pending-orders>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Processing">
+    <ng-template matTabContent>
+      <tcode-orders-processing></tcode-orders-processing>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Completed">
+    <ng-template matTabContent>
+      <tcode-orders-completed></tcode-orders-completed>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Failed">
+    <ng-template matTabContent>
+      <tcode-orders-failed></tcode-orders-failed>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

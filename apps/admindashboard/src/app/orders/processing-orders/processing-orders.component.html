@@ -1,0 +1,7 @@
+<tcode-table 
+  [dataSource]="tableData$ | async"
+  [tableColumns]="tableColumns"
+  [pageSize]="10"
+  [length]="(tableData$ | async)?.data?.length"
+  (onSearch)="navigateToDetailPage($event)"
+></tcode-table>
