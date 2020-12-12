@@ -1,11 +1,9 @@
+@import '../../../table';
+
 :host {
   &::ng-deep {
     tcode-table {
-      table {
-        width: 92%;
-        margin: 0 auto;
-        height: 450px;
-      }
+      @include table;
     }
   }
 }

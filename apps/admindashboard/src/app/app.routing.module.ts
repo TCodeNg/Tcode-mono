@@ -17,8 +17,8 @@ const routes: Routes = [
   {
     path: ROUTES.adminDashboard.orders.home,
     loadChildren: async () => {
-      const m = await import('./orders/orders.module')
-      return m.OrdersModule
+      const m = await import('./orders/ordersadmin.module')
+      return m.OrdersAdminModule
     },
   },
   {

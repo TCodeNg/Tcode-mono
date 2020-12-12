@@ -1,0 +1,21 @@
+@import '../../../table';
+
+:host {
+  &::ng-deep {
+    tcode-table {
+      @include table;
+    }
+  }
+}
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+}
+header {
+  color: #1E266D;
+  height: 90px;
+  padding: 0 50px 0 50px;
+  font-size: 22px;
+  font-weight: 500;
+}

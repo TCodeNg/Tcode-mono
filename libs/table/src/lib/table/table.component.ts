@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,18 +10,20 @@ import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators'
 @Component({
   selector: 'tcode-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
 
   @Input() dataSource: MatTableDataSource<any>;
   @Input() tableColumns: TableColumn[];
   dataColumns: string[];
-  @Input() pageSize: number = 5;
+  @Input() pageSize;
   @Input() length: number = 10;
   @Input() isSearchable: boolean = true;
   @Input() hasPagination: boolean = true;
+  loadingState: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   search = new FormControl('');
 
@@ -44,13 +46,19 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-    }
+    
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if(change.dataSource){
+      this.dataSource = new MatTableDataSource(change?.dataSource?.currentValue?.data);
+      this.dataSource.paginator = this.paginator;
+      this.loadingState = false;
+    }
   }
 
 }

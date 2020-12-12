@@ -8,7 +8,7 @@ import { distinctUntilKeyChanged, filter, map, pluck, startWith, tap } from 'rxj
 import { API_ERROR } from '@tcode/shared/assets';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AUTH_SERVICE_TOKEN, AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CART_SERVICE_TOKEN, CartService } from '@tcode/cart';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   config: AuthConfig;
   loginFormGroup: FormGroup;
-
+  returnUrl?: string;
   lState: 'idle' | 'loading' = 'idle';
 
   get isValid(): boolean {
@@ -46,13 +46,15 @@ export class LoginComponent implements OnInit {
     @Inject(AUTH_SERVICE_TOKEN) private authService: AuthService,
     public _snackBar: MatSnackBar,
     public router: Router,
-    @Inject(CART_SERVICE_TOKEN) private cartService: CartService
+    @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    activatedRoute: ActivatedRoute
   ) {
     this.config = config;
     this.loginFormGroup = fb.group({
       email: [undefined, [Validators.required, Validators.email]],
       password: [undefined, Validators.required]
     });
+    this.returnUrl = activatedRoute.snapshot.queryParams.returnUrl;
   }
 
   ngOnInit(): void {
@@ -64,9 +66,8 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     const { email, password } = this.loginFormGroup.value;
     this.lState = 'loading';
-    this.authService.login(email, password).toPromise().then((_) => {
-      this.lState = 'idle'
-      this.router.navigate(["/"]);
+    this.authService.login(email, password, this.returnUrl).toPromise().then((_) => {
+      this.lState = 'idle';
     }).catch((error: Parse.Error) => {
       this.lState = 'idle'
       this._snackBar.open(error.message, null, {

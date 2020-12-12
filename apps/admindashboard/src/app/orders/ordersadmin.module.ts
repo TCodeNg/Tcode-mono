@@ -5,13 +5,16 @@ import { TableModule } from '@tcode/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CardModule } from '@tcode/card';
 import { ButtonsModule } from '@tcode/buttons'
+import { OrderModule } from '@tcode/order';
 import { OrdersComponent } from './orders/orders.component';
 import { ProcessingOrdersComponent } from './processing-orders/processing-orders.component';
 import { CompletedOrdersComponent } from './completed-orders/completed-orders.component';
 import { FailedOrdersComponent } from './failed-orders/failed-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.component';
-
+import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { OrderDetailUiModule } from '@tcode/order-detail-ui';
 @NgModule({
   declarations: [
     OrdersComponent,
@@ -19,7 +22,8 @@ import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.c
     CompletedOrdersComponent,
     FailedOrdersComponent,
     OrderDetailsComponent,
-    DisptachOrderComponent
+    DisptachOrderComponent,
+    PendingOrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,9 @@ import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.c
     MatTabsModule,
     CardModule,
     ButtonsModule,
+    OrderModule,
+    MatDialogModule,
+    OrderDetailUiModule,
     RouterModule.forChild([
       {
         path: '',
@@ -48,4 +55,4 @@ import { DisptachOrderComponent } from './modals/dispatch-order/dispatch-order.c
 
   ]
 })
-export class OrdersModule { }
+export class OrdersAdminModule { }

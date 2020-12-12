@@ -12,11 +12,11 @@
     overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    position: relative;
+    min-height: 400px;
     .nodata {
-      position: absolute;
-      bottom: 50%;
-      right: 50%;
+      display: flex;
+      justify-content: center;
+      padding: 3rem;
     }
     &::-webkit-scrollbar {
       width: 0;
@@ -40,7 +40,7 @@
         cursor: pointer;
         transition: background-color 0.2s ease-in;
         padding: 10px 0;
-        height: 55px !important;
+        // height: 55px !important;
         &:last-of-type {
           td {
             border: none !important;
@@ -65,4 +65,21 @@
     width: 92%;
     margin: 0 auto;
   }
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+  .spin {
+    border: .5rem solid #dddbd7; /* Light grey */
+    border-top: .5rem solid #6180d5; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

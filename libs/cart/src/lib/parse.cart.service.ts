@@ -35,12 +35,16 @@ export class ParseCartService implements CartServiceInterface {
     );
   }
 
-  removeFromCart(productId: string, userId?: string): Observable<void> {
-    return from(Parse.Cloud.run('removeFromCart', { productId, userId: userId ?? this.userId }));
+  removeFromCart(productId: string, userId?: string, deleteItem = false): Observable<void> {
+    return from(Parse.Cloud.run('removeFromCart', { productId, userId: userId ?? this.userId, deleteItem }));
   }
 
   checkout(userId?: string): Observable<void> {
     return from(Parse.Cloud.run('checkout', { userId: userId ?? this.userId }));
+  }
+
+  updateByQuantity(productId: string, quantity: number, userId?: string) {
+    return from(Parse.Cloud.run('updateByQuantity', {productId, quantity,  userId: userId ?? this.userId}));
   }
 
   private get userId(): string {

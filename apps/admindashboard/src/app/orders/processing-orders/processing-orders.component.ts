@@ -1,61 +1,69 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Order, OrderService, ORDER_SERVICE_TOKEN } from '@tcode/order';
 import { ROUTES } from 'apps/admindashboard/src/core/constant';
 import { TableColumn } from 'libs/table/src/lib/table/model';
+import { map, mergeAll, startWith, tap, toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'tcode-orders-processing',
   templateUrl: './processing-orders.component.html',
   styleUrls: ['./processing-orders.component.scss']
 })
-export class ProcessingOrdersComponent implements OnInit, OnDestroy {
+export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewInit {
   tableData: MatTableDataSource<any>;
   tableColumns: TableColumn[];
   constructor(
-    private router: Router
+    private router: Router,
+    @Inject(ORDER_SERVICE_TOKEN) private orderService: OrderService
   ) { }
 
+  tableData$ = this.orderService.getOrders(0).pipe(
+    mergeAll(),
+    map((order) => {
+      return {
+        ...order,
+        shipTo: order?.contact?.shippingInformation?.address || 'N/A',
+        totalAmount: order.totalAmount
+      }
+    }),
+    toArray(),
+    map((orders) => new MatTableDataSource(orders)),
+    tap((orders) => {
+      this.tableData = orders;
+    })
+  )
+
   ngOnInit(): void {
-    this.tableData = new MatTableDataSource(
-      [
-        { position: 1, name: 'Hydrogen', weight: new Date(Date.now()), symbol: 200 },
-        { position: 2, name: 'Helium', weight: new Date(Date.now()), symbol: 300 },
-        { position: 3, name: 'Lithium', weight: new Date(Date.now()), symbol: 800 },
-        { position: 4, name: 'Beryllium', weight: new Date(Date.now()), symbol: 1200 },
-        { position: 5, name: 'Boron', weight: new Date(Date.now()), symbol: 20000 },
-        { position: 6, name: 'Carbon', weight: new Date(Date.now()), symbol: 20 },
-        { position: 7, name: 'Nitrogen', weight: new Date(Date.now()), symbol: 900 },
-        { position: 8, name: 'Oxygen', weight: new Date(Date.now()), symbol: 1 },
-        { position: 9, name: 'Fluorine', weight: new Date(Date.now()), symbol: 0 },
-      ]
-    );
+    
     this.tableColumns = [
       {
-        name: 'positioning',
-        key: 'position',
+        name: 'Order Id',
+        key: 'objectId',
+        onClick: this.navigateToDetailPage
       },
       {
-        name: 'naming',
-        key: 'name',
+        name: 'Ship to',
+        key: 'shipTo',
+        onClick: this.navigateToDetailPage
       },
       {
-        name: 'weighting',
-        key: 'weight',
-        dataType: 'date'
+        name: 'Date',
+        key: 'createdAt',
+        dataType: 'date',
+        onClick: this.navigateToDetailPage
       },
       {
-        name: 'symboling',
-        key: 'symbol',
-        onClick: this.handleClick,
+        name: "Total",
+        key: 'totalAmount',
         dataType: 'currency',
-        currencyCode: 'EUR'
+        currencyCode: 'NGN'
       },
       {
         name: 'Status',
         key: 'status',
-        columnType: 'action'
-      }
+      },
     ]
   }
 
@@ -63,7 +71,13 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy {
 
   }
 
-  handleClick = (data?): any => {
-    this.router.navigate([`${ROUTES.adminDashboard.orders.home}`, 2])
+  ngAfterViewInit() {
+    
+  }
+
+  navigateToDetailPage = (data?: Order): any => {
+   if(data && data.objectId){
+     this.router.navigate([`${ROUTES.adminDashboard.orders.home}`, data.objectId]);
+   }
   }
 }

@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { OrderService, ORDER_SERVICE_TOKEN } from '@tcode/order';
 import { TableColumn } from 'libs/table/src/lib/table/model';
 
 @Component({
@@ -17,9 +18,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     this.pageTitle = activatedRoute.snapshot.data.pageTitle
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void { }
 

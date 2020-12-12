@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+.cartItem {
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+  .price {
+    .item-name {
+      font-weight: lighter;
+      font-size: 14px; 
+      text-align: left;     
+    }
+    .item-price {
+      font-size: 14px;
+      color: #02B075;
+      line-height: 20px;
+      text-align: left;
+    }
+  }
+}
+.noEvent {
+  pointer-events: none;
+  opacity: 0.6;
+}

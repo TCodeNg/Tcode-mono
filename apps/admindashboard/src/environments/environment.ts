@@ -4,6 +4,8 @@
 
 export const environment = {
   production: false,
+  appId: 'myAppId',
+  serverUrl: 'https://stage.backoffice.tcodemulticoncept.com/api'
 };
 
 /*
