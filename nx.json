@@ -27,15 +27,11 @@
   "projects": {
     "storefront": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-assets"
-      ]
+      "implicitDependencies": ["shared-assets"]
     },
     "storefront-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "storefront"
-      ]
+      "implicitDependencies": ["storefront"]
     },
     "api-interface": {
       "tags": []
@@ -78,70 +74,56 @@
     },
     "frontend-auth": {
       "tags": [],
-      "implicitDependencies": [
-        "shared-assets"
-      ]
+      "implicitDependencies": ["shared-assets"]
     },
     "admindashboard": {
       "tags": []
     },
     "admindashboard-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "admindashboard"
-      ]
+      "implicitDependencies": ["admindashboard"]
     },
     "admin": {
       "tags": []
     },
     "admin-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "admin"
-      ]
+      "implicitDependencies": ["admin"]
     },
     "vendor": {
       "tags": []
     },
     "vendor-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "vendor"
-      ]
+      "implicitDependencies": ["vendor"]
     },
     "table": {
       "tags": []
     },
     "cart": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "contact": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "order": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "order-detail-ui": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "cart-ui": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "cart-ui-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "cart-ui"
-      ]
+      "implicitDependencies": ["cart-ui"]
+    },
+    "image": {
+      "tags": ["scope:shared"]
+    },
+    "media": {
+      "tags": ["scope:shared"]
     }
   }
 }
