@@ -121,6 +121,12 @@
     },
     "product-list-ui": {
       "tags": ["ui"]
+    },
+    "image": {
+      "tags": ["scope:shared"]
+    },
+    "media": {
+      "tags": ["scope:shared"]
     }
   }
 }
