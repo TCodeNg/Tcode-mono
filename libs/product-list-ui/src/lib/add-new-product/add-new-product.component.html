@@ -87,7 +87,7 @@
       <label for="product-images">Product images</label>
       <div class="upload flex justify-center align-center flex-column">
         <p class="hint">Drop files here to upload</p>
-        <p class="btn">Browse file</p>
+        <p class="btn" (click)="upload.click()">Browse file</p>
       </div>
     </div>
     <div class="flex button justify-center">
@@ -95,3 +95,11 @@
     </div>
   </section>
 </main>
+
+<input 
+  type="file" 
+  class="uploadInput" 
+  (change)="pickFile($event)" 
+  name="upload-document" 
+  accept="image/*" #upload
+>

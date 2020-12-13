@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { ProductService, PRODUCT_SERVICE_TOKEN } from '@tcode/product';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { AddNewProductService } from './add-new-product.service';
 
 @Component({
   selector: 'tcode-add-new-product',
@@ -19,7 +20,8 @@ export class AddNewProductComponent implements OnInit {
     private _fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
     @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private addNewProductService: AddNewProductService
   ) { 
     this.initalizeForm();
   }
@@ -76,54 +78,11 @@ export class AddNewProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.addProductForm.controls.type.valueChanges.pipe(
-      tap((value) => {
-        if(value === 'estate'){
-          this.addProductForm.controls.location.setValidators(Validators.required);
-          this.addProductForm.controls.location.reset();
-          this.addProductForm.controls.agent.setValidators(Validators.required);
-          this.addProductForm.controls.agent.reset();
-          this.addProductForm.controls.rooms.setValidators(Validators.required);
-          this.addProductForm.controls.rooms.reset();
-          this.addProductForm.controls.livingRooms.setValidators(Validators.required);
-          this.addProductForm.controls.livingRooms.reset();
-          this.addProductForm.controls.bathrooms.setValidators(Validators.required);
-          this.addProductForm.controls.bathrooms.reset();
-          this.addProductForm.controls.owner.clearValidators();
-          this.addProductForm.controls.owner.reset();
-          this.addProductForm.updateValueAndValidity();
-          this.cdRef.detectChanges();
-        }else if(value === 'farm') {
-          this.addProductForm.controls.location.clearValidators();
-          this.addProductForm.controls.location.reset();
-          this.addProductForm.controls.agent.clearValidators();
-          this.addProductForm.controls.agent.reset();
-          this.addProductForm.controls.rooms.clearValidators();
-          this.addProductForm.controls.rooms.reset();
-          this.addProductForm.controls.livingRooms.clearValidators();
-          this.addProductForm.controls.livingRooms.reset();
-          this.addProductForm.controls.bathrooms.clearValidators();
-          this.addProductForm.controls.bathrooms.reset();
-          this.addProductForm.controls.owner.setValidators(Validators.required);
-          this.addProductForm.updateValueAndValidity();
-          this.cdRef.detectChanges();
-        }else if(value === 'inverter') {
-          this.addProductForm.controls.location.clearValidators();
-          this.addProductForm.controls.location.reset();
-          this.addProductForm.controls.agent.clearValidators();
-          this.addProductForm.controls.agent.reset();
-          this.addProductForm.controls.rooms.clearValidators();
-          this.addProductForm.controls.rooms.reset();
-          this.addProductForm.controls.livingRooms.clearValidators();
-          this.addProductForm.controls.livingRooms.reset();
-          this.addProductForm.controls.bathrooms.clearValidators();
-          this.addProductForm.controls.bathrooms.reset();
-          this.addProductForm.controls.owner.clearValidators();
-          this.addProductForm.controls.owner.reset();
-          this.addProductForm.updateValueAndValidity();
-          this.cdRef.detectChanges();
-        }
-      })
+      tap((value) => this.updateFormFields(value))
     ).subscribe();
+    // this.addProductForm.valueChanges.pipe(
+    //   tap(() => console.log(this.addProductForm.value))
+    // ).subscribe();
   }
 
   get categoryArray() {
@@ -197,7 +156,76 @@ export class AddNewProductComponent implements OnInit {
       this.closeDialog(true);
     }, (error) => {
       this._snackBar.open(error, 'Ok');
+      this.lState = 'idle';
     })
+  }
+
+  private updateFormFields(type: string) {
+    this.resetForm();
+    this.cdRef.detectChanges();
+    const updater = {
+      estate: this.setEstate.bind(this),
+      farm: this.setfarm.bind(this),
+      inverter: this.setInverter.bind(this)
+    };
+    if (updater[type]) {
+      updater[type]();
+    }
+    this.cdRef.detectChanges();
+  }
+
+  private resetForm() {
+    this.addProductForm.controls.location.reset();
+    this.addProductForm.controls.agent.reset();
+    this.addProductForm.controls.rooms.reset();
+    this.addProductForm.controls.livingRooms.reset();
+    this.addProductForm.controls.bathrooms.reset();
+    this.addProductForm.controls.owner.reset();
+
+    this.addProductForm.controls.location.clearValidators();
+    this.addProductForm.controls.agent.clearValidators();
+    this.addProductForm.controls.rooms.clearValidators();
+    this.addProductForm.controls.livingRooms.clearValidators();
+    this.addProductForm.controls.bathrooms.clearValidators();
+    this.addProductForm.controls.owner.clearValidators();
+
+    this.addProductForm.controls.location.updateValueAndValidity();
+    this.addProductForm.controls.agent.updateValueAndValidity();
+    this.addProductForm.controls.rooms.updateValueAndValidity();
+    this.addProductForm.controls.livingRooms.updateValueAndValidity();
+    this.addProductForm.controls.bathrooms.updateValueAndValidity();
+    this.addProductForm.controls.owner.updateValueAndValidity();
+  }
+  
+  private setEstate() {
+    this.addProductForm.controls.location.setValidators(Validators.required);
+    this.addProductForm.controls.agent.setValidators(Validators.required);
+    this.addProductForm.controls.rooms.setValidators(Validators.required);
+    this.addProductForm.controls.livingRooms.setValidators(Validators.required);
+    this.addProductForm.controls.bathrooms.setValidators(Validators.required);
+    this.addProductForm.controls.location.updateValueAndValidity();
+    this.addProductForm.controls.agent.updateValueAndValidity();
+    this.addProductForm.controls.rooms.updateValueAndValidity();
+    this.addProductForm.controls.livingRooms.updateValueAndValidity();
+    this.addProductForm.controls.bathrooms.updateValueAndValidity();
+  }
+
+  private setfarm() {
+    this.addProductForm.controls.owner.setValidators(Validators.required);
+    this.addProductForm.controls.owner.updateValueAndValidity();
+  
+  }
+
+  private setInverter() {
+  }
+
+  pickFile(event){
+    // console.log(e.target)
+    const file = event.target.files[0];
+    console.log(file)
+    this.addNewProductService.uploadImage(file).subscribe((res) => {
+      console.log(res)
+    });
   }
 
 }

@@ -9,6 +9,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { InputModule } from '@tcode/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ImageModule } from '@tcode/image';
+import { AddNewProductService } from './add-new-product/add-new-product.service';
 
 @NgModule({
   imports: [
@@ -20,9 +22,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     InputModule,
     ButtonsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ImageModule.config({ baseUrl: "https://stage.backoffice.tcodemulticoncept.com"})
   ],
   declarations: [ProductUiComponent, AddNewProductComponent],
-  exports: [ProductUiComponent]
+  exports: [ProductUiComponent],
+  providers: [
+    AddNewProductService
+  ]
 })
 export class ProductListUiModule {}
