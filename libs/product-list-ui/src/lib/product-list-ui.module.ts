@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImageModule } from '@tcode/image';
 import { AddNewProductService } from './add-new-product/add-new-product.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AddNewProductService } from './add-new-product/add-new-product.service'
     ButtonsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     ImageModule.config({ baseUrl: "https://stage.backoffice.tcodemulticoncept.com"})
   ],
   declarations: [ProductUiComponent, AddNewProductComponent],

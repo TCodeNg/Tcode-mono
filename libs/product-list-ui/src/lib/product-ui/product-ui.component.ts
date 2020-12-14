@@ -30,7 +30,7 @@ export class ProductUiComponent implements OnInit {
       }
     )
     this.addNewProductDialogRef.afterClosed().subscribe((value) => {
-      console.log(value)
+      console.log({value});
     })
   }
 
