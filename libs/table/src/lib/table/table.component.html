@@ -54,7 +54,7 @@
             </ng-container>
             <!-- DATE DATA TYPE -->
             <ng-container  *ngIf="tableColumn.dataType === 'date'">
-              <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ (data | dataGetter: tableColumn.key) | date: "medium" }} </td>
+              <td mat-cell *matCellDef="let data" (click)="tableColumn.onClick(data)"> {{ (data | dataGetter: tableColumn.key) | date: "medium" | titlecase }} </td>
             </ng-container>
             <!-- CURRENCY DATA TYPE -->
             <ng-container  *ngIf="tableColumn.dataType === 'currency'">
@@ -72,6 +72,12 @@
             <!-- NORMAL TEXT DATA TYPE -->
             <ng-container *ngIf="!tableColumn.dataType || tableColumn.dataType === 'normalText'">
               <td mat-cell *matCellDef="let data"> {{ data | dataGetter: tableColumn.key }} </td>
+            </ng-container>
+            <!-- PILL DATA TYPE -->
+            <ng-container *ngIf="!tableColumn.dataType || tableColumn.dataType === 'pill'">
+              <td mat-cell *matCellDef="let data">
+                <span [ngClass]="data | dataGetter: tableColumn.key" class="pill">{{ data | dataGetter: tableColumn.key | titlecase }}</span>
+              </td>
             </ng-container>
             <!-- DATE DATA TYPE -->
             <ng-container  *ngIf="tableColumn.dataType === 'date'">

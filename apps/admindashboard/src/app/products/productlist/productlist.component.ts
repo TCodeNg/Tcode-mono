@@ -38,19 +38,6 @@ export class ProductListComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.productService.getProducts().pipe(
-      mergeAll(),
-      map((product) => {
-        return {
-          ...product,
-          price: product?.price?.value,
-          currency: product?.price?.currency,
-          agent: product?.agent?.title,
-          owner: product?.owner?.title
-        }
-      }),
-      toArray(),
-    ).subscribe((pr) => console.log(pr))
     this.tableColumns = [
       {
         name: 'Name',
@@ -76,7 +63,8 @@ export class ProductListComponent implements OnInit {
       },
       {
         name: 'Status',
-        key: 'status'
+        key: 'status',
+        dataType: 'pill'
       }
     ]
   }

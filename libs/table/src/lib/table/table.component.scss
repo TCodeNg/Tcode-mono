@@ -37,6 +37,7 @@
           font-weight: bold;
           color: #000;
           font-size: 0.9rem;
+          padding: 2rem 0 2rem 24px;
         }
       }
       .mat-row {
@@ -58,6 +59,24 @@
           font-weight: 500;
           font-size: 0.9rem;
           border-bottom: 1px soliD #CFDFEF;
+          padding: 1.2rem 0 1.2rem 24px;
+          .pill {
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            &.pending, &.processing {
+              color: #FFBA49;
+              background: rgba(255, 186, 73, 0.1);
+            };
+            &.published, &.active, &.completed {
+              color: #02B075;
+              background: rgba(2, 176, 117, 0.1);
+            };
+            &.cancelled{
+              color: #EB5757;
+              background: rgba(235, 87, 87, 0.1);
+            }
+          }
         }
         &:hover {
           background-color: #9ec0e02b;
