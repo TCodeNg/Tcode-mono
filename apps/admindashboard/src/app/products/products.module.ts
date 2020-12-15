@@ -8,10 +8,12 @@ import { ButtonsModule } from '@tcode/buttons'
 import { ProductListUiModule } from '@tcode/product-list-ui'
 import { ProductListComponent } from './productlist/productlist.component';
 import { ProductModule } from '@tcode/product';
-
+import { ProductComponent } from './product/product.component';
+import { ProductDetailUiModule } from '@tcode/product-detail-ui';
 @NgModule({
   declarations: [
-    ProductListComponent
+    ProductListComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { ProductModule } from '@tcode/product';
     ButtonsModule,
     ProductModule,
     ProductListUiModule,
+    ProductDetailUiModule,
     RouterModule.forChild([
       {
         path: '',
@@ -29,6 +32,13 @@ import { ProductModule } from '@tcode/product';
           pageTitle: 'Products'
         }
       },
+      {
+        path: `:id`,
+        component: ProductComponent,
+        data: {
+          pageTitle: 'Product'
+        }
+      }
     ])
   ],
   exports: [

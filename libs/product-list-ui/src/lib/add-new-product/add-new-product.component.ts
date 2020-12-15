@@ -79,7 +79,7 @@ export class AddNewProductComponent implements OnInit {
 
   initalizeForm() {
     this.addProductForm = this._fb.group({
-      name: [undefined, Validators.required],
+      title: [undefined, Validators.required],
       price: [0, Validators.compose([Validators.required, Validators.min(0)])],
       type: ['', Validators.required],
       category: this.mapToCheckboxArrayGroup(this.categories),

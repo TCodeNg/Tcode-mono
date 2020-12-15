@@ -6,8 +6,8 @@
   <section class="content" [formGroup]="addProductForm">
     <!-- {{ addProductForm.value | json }} -->
     <tcode-input>
-      <label for="product-name">Product name <span *ngIf="hasRequired('name')" class="required">*</span></label>
-      <input id="text" type="name" formControlName="name">
+      <label for="product-name">Product name <span *ngIf="hasRequired('title')" class="required">*</span></label>
+      <input id="text" type="title" formControlName="title">
     </tcode-input>
     <tcode-input>
       <label for="price">Price <span *ngIf="hasRequired('price')" class="required">*</span></label>
