@@ -14,12 +14,41 @@
 </mat-tab-group> -->
 <tcode-product-list-lib
   [pageTitle]="pageTitle"
+  (ProductAdd)="handleProductAdd()"
 >
   <div class="content">
     <mat-tab-group>
       <mat-tab label="Real estate">
         <ng-template matTabContent>
-          <p>Real estate</p>
+          <tcode-table 
+            [dataSource]="tableData$ | async"
+            [tableColumns]="tableColumns"
+            [pageSize]="10"
+            [length]="(tableData$ | async)?.data?.length"
+            (onSearch)="navigateToDetailPage($event)"
+          ></tcode-table>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Farm produce">
+        <ng-template matTabContent>
+          <tcode-table 
+            [dataSource]="tableData$ | async"
+            [tableColumns]="tableColumns"
+            [pageSize]="10"
+            [length]="(tableData$ | async)?.data?.length"
+            (onSearch)="navigateToDetailPage($event)"
+          ></tcode-table>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Inverter products">
+        <ng-template matTabContent>
+          <tcode-table 
+            [dataSource]="tableData$ | async"
+            [tableColumns]="tableColumns"
+            [pageSize]="10"
+            [length]="(tableData$ | async)?.data?.length"
+            (onSearch)="navigateToDetailPage($event)"
+          ></tcode-table>
         </ng-template>
       </mat-tab>
     </mat-tab-group> 

@@ -41,7 +41,7 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
         <th mat-header-cell *matHeaderCellDef>
-          {{tableColumn.name | titlecase}}
+          {{tableColumn.name | titlecase }}
         </th>
 
         <!-- COLUMN WITHOUT ACTIONS (NORMAL COLUMN) -->

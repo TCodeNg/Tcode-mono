@@ -104,7 +104,7 @@ export class AddNewProductComponent implements OnInit {
   }
 
   closeDialog(prop?) {
-    this.dialogRef.close(prop);
+    this.dialogRef.close(true);
   }
 
   hasRequired(controlName: string): boolean {
