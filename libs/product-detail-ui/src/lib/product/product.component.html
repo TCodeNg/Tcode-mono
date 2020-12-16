@@ -14,11 +14,11 @@
     </tcode-product-rating>
     <div class="action flex" *ngIf="context === 'storefront'">
       <div class="quantity flex item-center ">
-        <!-- <img src="assets/img/minus.svg" alt="minus-icon" class="cursor-pointer mr-1" (click)="adjustQuantity(-1)">
+        <img src="assets/img/minus.svg" alt="minus-icon" class="cursor-pointer mr-1" (click)="adjustQuantity(-1)">
         <span> {{ productQuantity }} </span>
-        <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="adjustQuantity(1)"> -->
+        <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="adjustQuantity(1)">
       </div>
-      <tcode-button type="normal" (click)="addToCart()">
+      <tcode-button type="normal" (click)="addToCart()" [state]="btnState" [disabled]="btnState === 'loading'">
         Add to cart 
       </tcode-button>
     </div>

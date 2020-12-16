@@ -12,6 +12,8 @@ export class ProductDetailLibComponent implements OnInit, OnChanges {
   @Input()
   product!: Product;
   @Input() context: 'storefront' | 'vendor' | 'admin' = 'storefront';
+  productQuantity = 0;
+  btnState = 'idle';
   constructor(
     @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService,
     private _snackbar: MatSnackBar,
@@ -21,7 +23,7 @@ export class ProductDetailLibComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(change: SimpleChanges) {
-    console.log(change.product)
+    
   }
 
   get productUserScore(): number {
@@ -33,19 +35,28 @@ export class ProductDetailLibComponent implements OnInit, OnChanges {
   }
 
   addToCart() {
-    // this.loadingHelper(product.objectId, section, 'loading');
     const { objectId: productId } = this.product;
-    this.cartService.addToCart(productId).subscribe((res) => {
+    this.btnState = 'loading';
+    this.cartService.updateByQuantity(productId, this.productQuantity).subscribe((res) => {
       this._snackbar.open('Product added to cart', '', {
         duration: 2000
       });
-      // this.loadingHelper(product.objectId, section, 'idle');
+      this.btnState = 'idle';
     }, (error) => {
       this._snackbar.open('Error adding product to cart', '', {
         duration: 2000
       });
-      // this.loadingHelper(product.objectId, section, 'idle');
-    })
+      this.btnState = 'idle';
+    });
+  }
+
+  adjustQuantity(increase: number) {
+    const newQuantity = this.productQuantity += increase;
+    if(newQuantity < 0){
+      this.productQuantity = 0;
+    } else {
+      this.productQuantity = newQuantity
+    }
   }
 
 }
