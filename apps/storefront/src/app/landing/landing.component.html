@@ -44,7 +44,7 @@
   </div>
   <div class="products">
     <tcode-product-item 
-      *ngFor="let product of generalProducts; let i = index" 
+      *ngFor="let product of (generalProducts | async); let i = index" 
       [product]="product" 
       (onAddToCart)="addToCart($event,'general')" 
       (click)="gotoProduct($event, product)" 
@@ -58,7 +58,7 @@
     <h2 class="title">Real Estate</h2>
   </div>
   <div class="products">
-    <tcode-product-item *ngFor="let product of realEstateProducts" 
+    <tcode-product-item *ngFor="let product of (realEstateProducts | async)" 
       [product]="product" 
       (click)="gotoProduct($event, product)"
       (onAddToCart)="addToCart($event,'realEstate')"
@@ -78,7 +78,7 @@
   </div>
   <div class="products">
     <tcode-product-item 
-      *ngFor="let product of inverterProducts" 
+      *ngFor="let product of (inverterProducts | async)" 
       (onAddToCart)="addToCart($event, 'inverter')" 
       [product]="product" 
       (click)="gotoProduct($event, product)"
@@ -98,7 +98,7 @@
   </div>
   <div class="products">
     <tcode-product-item 
-      *ngFor="let product of farmProducts" 
+      *ngFor="let product of (farmProducts | async)" 
       (onAddToCart)="addToCart($event, 'farm')" 
       [product]="product" 
       (click)="gotoProduct($event, product)"

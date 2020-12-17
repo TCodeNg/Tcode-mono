@@ -24,7 +24,7 @@
             <p>{{ product?.title | titlecase }}</p>
         </div>
         <div class="price">
-            <p>{{ product?.price.value | currency: (product?.price?.currency): 'code' }}</p>
+            <p>{{ product?.price?.value | currency: (product?.price?.currency): 'code' }}</p>
         </div>
     </div>
 </ng-template>
@@ -34,5 +34,5 @@
 </ng-template>
 
 <ng-template #image>
-    <tcode-product-image [image]="product?.images[0]?.image"></tcode-product-image>
+    <tcode-product-image [image]="product.images ? product.images[0].image : ''"></tcode-product-image>
 </ng-template>
