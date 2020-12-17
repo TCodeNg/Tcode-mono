@@ -18,9 +18,13 @@ export class ParseProductService implements ProductServiceInterface {
     );
   }
 
-  getProducts(skip: number = 0, limit: number = 30): Observable<Product[]> {
+  getProducts(skip: number = 0, limit: number = 30, ...args: string[]): Observable<Product[]> {
     const query = new Parse.Query('Product');
+    const categories = args ?? [];
     query.limit(limit).skip(skip);
+    if (categories.length > 0) {
+      query.containedIn('category', categories);
+    }
     return from(query.find()).pipe(
       mergeAll(),
       map((obj: Parse.Object) => {
