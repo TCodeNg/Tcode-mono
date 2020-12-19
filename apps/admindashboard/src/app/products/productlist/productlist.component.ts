@@ -24,7 +24,37 @@ export class ProductListComponent implements OnInit {
     this.pageTitle = activatedRoute.snapshot.data.pageTitle
   }
 
-  tableData$ = this.productService.getProducts().pipe(
+  inverterTableData$ = this.productService.getProducts(0, 30, 'inverter').pipe(
+    mergeAll(),
+    map((product) => {
+      return {
+        ...product,
+        price: product?.price?.value,
+        currency: product?.price?.currency,
+        agent: product?.agent?.title,
+        owner: product?.owner?.title
+      }
+    }),
+    toArray(),
+    map((products) => new MatTableDataSource(products))
+  );
+
+  farmTableData$ = this.productService.getProducts(0, 30, 'farm').pipe(
+    mergeAll(),
+    map((product) => {
+      return {
+        ...product,
+        price: product?.price?.value,
+        currency: product?.price?.currency,
+        agent: product?.agent?.title,
+        owner: product?.owner?.title
+      }
+    }),
+    toArray(),
+    map((products) => new MatTableDataSource(products))
+  );
+
+  estateTableData$ = this.productService.getProducts(0, 30, 'estate').pipe(
     mergeAll(),
     map((product) => {
       return {

@@ -21,10 +21,10 @@
       <mat-tab label="Real estate">
         <ng-template matTabContent>
           <tcode-table 
-            [dataSource]="tableData$ | async"
+            [dataSource]="estateTableData$ | async"
             [tableColumns]="tableColumns"
-            [pageSize]="10"
-            [length]="(tableData$ | async)?.data?.length"
+            [pageSize]="20"
+            [length]="(estateTableData$ | async)?.data?.length"
             (onSearch)="navigateToDetailPage($event)"
           ></tcode-table>
         </ng-template>
@@ -32,10 +32,10 @@
       <mat-tab label="Farm produce">
         <ng-template matTabContent>
           <tcode-table 
-            [dataSource]="tableData$ | async"
+            [dataSource]="farmTableData$ | async"
             [tableColumns]="tableColumns"
-            [pageSize]="10"
-            [length]="(tableData$ | async)?.data?.length"
+            [pageSize]="20"
+            [length]="(farmTableData$ | async)?.data?.length"
             (onSearch)="navigateToDetailPage($event)"
           ></tcode-table>
         </ng-template>
@@ -43,10 +43,10 @@
       <mat-tab label="Inverter products">
         <ng-template matTabContent>
           <tcode-table 
-            [dataSource]="tableData$ | async"
+            [dataSource]="InverterTableData$ | async"
             [tableColumns]="tableColumns"
-            [pageSize]="10"
-            [length]="(tableData$ | async)?.data?.length"
+            [pageSize]="20"
+            [length]="(InverterTableData$ | async)?.data?.length"
             (onSearch)="navigateToDetailPage($event)"
           ></tcode-table>
         </ng-template>
