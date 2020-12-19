@@ -54,8 +54,7 @@ export class ProductItemComponent implements OnInit {
   @Output() onRateProduct = new EventEmitter();
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get productUserScore(): number {
     return this.product && this.product.rating &&this.product.rating.userScore;

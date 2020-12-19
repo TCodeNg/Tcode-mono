@@ -63,6 +63,7 @@ export class ProcessingOrdersComponent implements OnInit, OnDestroy, AfterViewIn
       {
         name: 'Status',
         key: 'status',
+        dataType: 'pill'
       },
     ]
   }

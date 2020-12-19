@@ -6,6 +6,9 @@ import { products } from './products';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { CartService, CART_SERVICE_TOKEN } from '@tcode/cart';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductService, PRODUCT_SERVICE_TOKEN } from '@tcode/product';
+import { mergeAll, mergeMap, take, toArray } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tcode-landing',
@@ -21,10 +24,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ]
 })
 export class LandingComponent implements OnInit {
-  generalProducts: Product[];
-  realEstateProducts: Product[];
-  inverterProducts: Product[];
-  farmProducts: Product[];
+  generalProducts: Observable<Product[]>;
+  realEstateProducts: Observable<Product[]>;
+  inverterProducts: Observable<Product[]>;
+  farmProducts: Observable<Product[]>;
   index: number;
   section: string;
 
@@ -33,14 +36,27 @@ export class LandingComponent implements OnInit {
   constructor(
     private router: Router,
     @Inject(CART_SERVICE_TOKEN) private cartService: CartService,
+    @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService,
     private _snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.generalProducts = products.general;
-    this.realEstateProducts = products.realEstate;
-    this.inverterProducts = products.inverters;
-    this.farmProducts = products.farmProducts;
+    this.generalProducts = this.productService.getProducts(0, 8).pipe(
+      mergeAll(),
+      toArray()
+    );
+    this.farmProducts = this.productService.getProducts(0, 8, 'farm').pipe(
+      mergeAll(),
+      toArray()
+    );
+    this.inverterProducts = this.productService.getProducts(0, 8, 'inverter').pipe(
+      mergeAll(),
+      toArray()
+    );
+    this.realEstateProducts = this.productService.getProducts(0, 8, 'estate').pipe(
+      mergeAll(),
+      toArray()
+    );
   }
 
   gotoProduct(e: MouseEvent, product: Product) {

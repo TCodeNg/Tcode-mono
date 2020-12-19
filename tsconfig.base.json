@@ -38,7 +38,8 @@
       "@tcode/cart-ui": ["libs/cart-ui/src/index.ts"],
       "@tcode/product-list-ui": ["libs/product-list-ui/src/index.ts"],
       "@tcode/image": ["libs/image/src/index.ts"],
-      "@tcode/media": ["libs/media/src/index.ts"]
+      "@tcode/media": ["libs/media/src/index.ts"],
+      "@tcode/product-detail-ui": ["libs/product-detail-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

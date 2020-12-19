@@ -1,0 +1,54 @@
+<div class="wrapper grid">
+  <tcode-img-preview
+   [images]="product?.images">
+  </tcode-img-preview>
+  <div class="details flex flex-col">
+    <p class="product-name">{{ product?.title}}</p>
+    <p class="sub-title">{{ product?.type | titlecase }}</p>
+    <p class="price">{{ product?.price.value | currency: (product?.price?.currency): 'code' }}</p>
+    <tcode-product-rating 
+      [score]="productUserScore === 0 ? product?.rating?.userScore : product?.rating?.totalScore"
+      [totalRatings]="product?.rating?.totalRatings"
+      (onRate)="rateProduct($event)"
+    >
+    </tcode-product-rating>
+    <div class="action flex" *ngIf="context === 'storefront'">
+      <div class="quantity flex item-center ">
+        <img src="assets/img/minus.svg" alt="minus-icon" class="cursor-pointer mr-1" (click)="adjustQuantity(-1)">
+        <span> {{ productQuantity }} </span>
+        <img src="assets/img/plus.svg" alt="plus-icon" class="cursor-pointer ml-1" (click)="adjustQuantity(1)">
+      </div>
+      <tcode-button type="normal" (click)="addToCart()" [state]="btnState" [disabled]="btnState === 'loading'">
+        Add to cart 
+      </tcode-button>
+    </div>
+    <div class="agent" *ngIf="context !== 'storefront'">
+      <p class="title bold">Agent</p>
+      <p class="describe">{{ product?.agent?.title | titlecase}}</p>
+    </div>
+    <div class="description">
+      <p class="title bold">Description</p>
+      <p class="describe">{{ product?.description }}</p>
+    </div>
+  </div>
+</div>
+<section class="actions flex" *ngIf="context !== 'storefront'">
+  <tcode-button [disabled]="false" type="outline" class="secondary">
+    Edit
+  </tcode-button>
+  <tcode-button [disabled]="false" type="outline" class="secondary">
+    Message agent
+  </tcode-button>
+  <tcode-button [disabled]="false" type="outline" class="tertiary">
+    Inspection request
+  </tcode-button>
+  <tcode-button [disabled]="false" type="outline" class="primary">
+    Approve
+  </tcode-button>
+  <tcode-button [disabled]="false" type="outline" class="danger">
+    Reject
+  </tcode-button>
+  <tcode-button [disabled]="false" type="outline" class="primary">
+    Publish
+  </tcode-button>
+</section>

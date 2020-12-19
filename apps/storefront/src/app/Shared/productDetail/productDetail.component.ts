@@ -1,43 +1,27 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject, OnChanges, SimpleChanges } from "@angular/core";
 import { Product } from '@tcode/api-interface';
-import { PageProducts } from '../../PageProducts';
-import { CartService } from '../../services/cart.service';
+import { ProductService, PRODUCT_SERVICE_TOKEN } from '@tcode/product';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'tcode-product-detail',
   templateUrl: './productDetail.component.html',
   styleUrls: ['productDetail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnChanges {
   @Input() productId: string;
-  product: Product;
-  productQuantity = 1;
+  product$: Observable<Product>;
   constructor(
-    private cartService: CartService
+    @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService
   ){}
 
   ngOnInit(): void {
-    this.product = PageProducts.find((product) => product.objectId === this.productId);
+    this.productService.getProduct(this.productId).subscribe(console.log);
   }
 
-  get productUserScore(): number {
-    return this.product && this.product.rating && this.product.rating.userScore;
-  }
-
-  rateProduct(e) {
-    console.log(e)
-  }
-
-  adjustQuantity(increase) {
-    const newQuantity = this.productQuantity += increase;
-    if(newQuantity < 0){
-      this.productQuantity = 0;
-    } else {
-      this.productQuantity = newQuantity
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.productId){
+      this.product$ = this.productService.getProduct(this.productId);
     }
-  }
-
-  addToCart(){
-    this.cartService.addItem(this.product, this.productQuantity)
   }
 }

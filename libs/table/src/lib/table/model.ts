@@ -2,9 +2,10 @@ export interface TableColumn {
   name: string;
   key: string;
   onClick?(): any;
-  dataType?: 'normalText' | 'date' | 'currency';
+  dataType?: 'normalText' | 'date' | 'currency' | 'pill';
   currencyCode?: string;
   columnType?: 'action' | 'normal';
+  pillType?: 'success' | 'danger' | 'warn';
   columnActions?: ColumnAction[]
 }
 

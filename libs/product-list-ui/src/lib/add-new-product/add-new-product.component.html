@@ -6,15 +6,15 @@
   <section class="content" [formGroup]="addProductForm">
     <!-- {{ addProductForm.value | json }} -->
     <tcode-input>
-      <label for="product-name">Product name</label>
-      <input id="text" type="name" formControlName="name">
+      <label for="product-name">Product name <span *ngIf="hasRequired('title')" class="required">*</span></label>
+      <input id="text" type="title" formControlName="title">
     </tcode-input>
     <tcode-input>
-      <label for="price">Price</label>
+      <label for="price">Price <span *ngIf="hasRequired('price')" class="required">*</span></label>
       <input id="price" type="number" formControlName="price">
     </tcode-input>
     <mat-radio-group aria-label="Select an option" formControlName="type">
-      <label for="product-type">Product type</label>
+      <label for="product-type">Product type <span *ngIf="hasRequired('type')" class="required">*</span></label>
       <div class="" style="margin-top:12px">
         <mat-radio-button value="estate" color="primary">Real Estate</mat-radio-button>
         <mat-radio-button value="farm" color="primary">Farm Vendor</mat-radio-button>
@@ -76,7 +76,7 @@
       </tcode-input>
     </div>
     <div class="text-area flex flex-column">
-      <label for="product-description">Product description</label>
+      <label for="product-description">Product description <span *ngIf="hasRequired('description')" class="required">*</span></label>
       <textarea cols="5" rows="4" formControlName="description"></textarea>
     </div>
     <tcode-input *ngIf="addProductForm.controls.type.value === 'farm'">
@@ -87,11 +87,15 @@
       <label for="product-images">Product images</label>
       <div class="upload flex justify-center align-center flex-column">
         <p class="hint">Drop files here to upload</p>
-        <p class="btn" (click)="upload.click()">Browse file</p>
+        <p class="btn" (click)="upload.click()">
+          {{ (uploadingFile$ | async) ? '' : 'Browse file' }}
+          <mat-spinner diameter="20" *ngIf="(uploadingFile$ | async)"></mat-spinner>
+        </p>
       </div>
+      <p *ngFor="let image of uploadedImageNames" style="margin: 0.3rem">{{ image | titlecase }}</p>
     </div>
     <div class="flex button justify-center">
-      <tcode-button type="normal" (click)="onSubmit()" [disabled]="!isFormValid || lState === 'loading'" [state]="lState">Save</tcode-button>
+      <tcode-button type="normal" (click)="onSubmit()" [disabled]="!isFormValid || lState === 'loading' || (uploadingFile$ | async)" [state]="lState">Save</tcode-button>
     </div>
   </section>
 </main>

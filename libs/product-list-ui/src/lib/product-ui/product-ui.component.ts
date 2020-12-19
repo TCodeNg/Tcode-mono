@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { filter } from 'rxjs/operators';
 import { AddNewProductComponent } from '../add-new-product/add-new-product.component';
 
 @Component({
@@ -9,6 +10,7 @@ import { AddNewProductComponent } from '../add-new-product/add-new-product.compo
 })
 export class ProductUiComponent implements OnInit {
   @Input() pageTitle: string;
+  @Output() ProductAdd = new EventEmitter();
   private addNewProductDialogRef: MatDialogRef<
     AddNewProductComponent
   >;
@@ -29,8 +31,10 @@ export class ProductUiComponent implements OnInit {
         disableClose: true
       }
     )
-    this.addNewProductDialogRef.afterClosed().subscribe((value) => {
-      console.log(value)
+    this.addNewProductDialogRef.afterClosed().pipe(
+      filter(value => value)
+    ).subscribe(() => {
+      this.ProductAdd.emit();
     })
   }
 

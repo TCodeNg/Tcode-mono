@@ -127,6 +127,9 @@
     },
     "media": {
       "tags": ["scope:shared"]
+    },
+    "product-detail-ui": {
+      "tags": []
     }
   }
 }

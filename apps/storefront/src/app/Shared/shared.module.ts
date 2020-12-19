@@ -11,7 +11,7 @@ import { InformationBarComponent } from './Information-bar/information-bar.compo
 import { FooterComponent } from './footer/footer.component';
 import { ProductDetailComponent } from './productDetail/productDetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { ProductDetailUiModule } from '@tcode/product-detail-ui';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -27,7 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ProductratingModule,
     RouterModule,
     ButtonsModule,
-    MatSnackBarModule
+    MatSnackBarModule,ProductDetailUiModule
   ],
   exports: [
     NavbarComponent,

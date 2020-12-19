@@ -57,6 +57,12 @@ a {
 .mat-paginator-page-size {
   display: none !important;
 }
+.mat-paginator-container {
+  background: #fafafa;
+}
+.mat-tab-header-pagination {
+  display: none !important;
+}
 .mat-tab-header, .mat-tab-nav-bar {
   border-bottom: 1px solid #CFDFEF;
 }

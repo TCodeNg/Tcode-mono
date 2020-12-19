@@ -1,0 +1,38 @@
+@import './colors';
+
+@mixin button {
+  tcode-button {
+    &.secondary {
+      button[mat-stroked-button] {
+        color: $btnoutline-secondary-text !important;
+        border: none !important;
+        font-weight: bold;
+        background: rgba(0, 113, 187, 0.1);
+      }
+    }
+    &.tertiary {
+      button[mat-stroked-button] {
+        color: $btnoutline-tertiary-text !important;
+        border: none !important;
+        font-weight: bold;
+        background: rgba(30, 38, 109, 0.1);
+      }
+    }
+    &.danger {
+      button[mat-stroked-button] {
+        color: $btnoutline-danger-text !important;
+        border: none !important;
+        font-weight: bold;
+        background: $btnoutline-danger-bg;
+      }
+    }
+    &.primary {
+      button[mat-stroked-button] {
+        color: $btnoutline-primary-text !important;
+        border: none !important;
+        font-weight: bold;
+        background: $btnoutline-primary-bg;
+      }
+    }
+  }
+}

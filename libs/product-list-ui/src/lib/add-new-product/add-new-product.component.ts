@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { ProductService, PRODUCT_SERVICE_TOKEN } from '@tcode/product';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { AddNewProductService } from './add-new-product.service';
+import { IImage } from 'libs/api-interface/src/lib/image';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'tcode-add-new-product',
@@ -19,12 +21,14 @@ export class AddNewProductComponent implements OnInit {
     public dialogRef: MatDialogRef<AddNewProductComponent>,
     private _fb: FormBuilder,
     private cdRef: ChangeDetectorRef,
-    @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService,
+    // @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService,
     private _snackBar: MatSnackBar,
     private addNewProductService: AddNewProductService
   ) { 
     this.initalizeForm();
   }
+  uploadingFile = new BehaviorSubject(false);
+  uploadingFile$ = this.uploadingFile.asObservable();
   categories = [
     { id: 1, name: 'FMCG', category: 'farm'},
     { id: 2, name: 'Livestock', category: 'farm'},
@@ -39,50 +43,14 @@ export class AddNewProductComponent implements OnInit {
     { id: 11, name: 'Inverter box', category: 'inverter'},
   ]
   lState: 'idle' | 'loading' = 'idle';
-  inverterImages = [
-    {
-      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1595830331/photo_wa9ask.png',
-      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/v1595830331/photo_wa9ask.png',
-      public_Id: '1',
-      width: 200,
-      height: 200
-    },
-  ];
-
-  farmImages = [
-    {
-      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_1_uhaa4w.svg',
-      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_1_uhaa4w.svg',
-      public_Id: '1',
-      width: 200,
-      height: 200
-    }
-  ];
-
-  estateImages = [
-    {
-      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_2_pj2jw1.svg',
-      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_2_pj2jw1.svg',
-      public_Id: '1',
-      width: 200,
-      height: 200
-    },
-    {
-      image: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_vbs2ir.svg',
-      thumb: 'https://res.cloudinary.com/horlabyc/image/upload/v1594847543/image_vbs2ir.svg',
-      public_Id: '2',
-      width: 200,
-      height: 200
-    }
-  ]
+  selectedProductImages: {
+    [key: string]: IImage
+  } = {};
 
   ngOnInit(): void {
     this.addProductForm.controls.type.valueChanges.pipe(
       tap((value) => this.updateFormFields(value))
     ).subscribe();
-    // this.addProductForm.valueChanges.pipe(
-    //   tap(() => console.log(this.addProductForm.value))
-    // ).subscribe();
   }
 
   get categoryArray() {
@@ -111,7 +79,7 @@ export class AddNewProductComponent implements OnInit {
 
   initalizeForm() {
     this.addProductForm = this._fb.group({
-      name: [undefined, Validators.required],
+      title: [undefined, Validators.required],
       price: [0, Validators.compose([Validators.required, Validators.min(0)])],
       type: ['', Validators.required],
       category: this.mapToCheckboxArrayGroup(this.categories),
@@ -136,28 +104,59 @@ export class AddNewProductComponent implements OnInit {
   }
 
   closeDialog(prop?) {
-    this.dialogRef.close(prop);
+    this.dialogRef.close(true);
+  }
+
+  hasRequired(controlName: string): boolean {
+    const validator = this.addProductForm.controls[controlName].validator({} as AbstractControl);
+    return validator && validator.required;
   }
 
   onSubmit() {
+    if(!this.isFormValid) {
+      this._snackBar.open('Please fill all required fields', 'Ok')
+      return;
+    }
     const { type } = this.addProductForm.value;
     const allCategories = this.farmCategoryArray.value.concat(this.estateCategoryArray.value, this.inverterCategoryArray.value) as Array<any>;
     const selectedCategories = allCategories.filter(cat => cat.category === type && cat.selected).map((c) => {
       return c.name
     })
+    if(!selectedCategories.length){
+      this._snackBar.open('Please select at least one product category', 'Ok');
+      return;
+    }
+    if(!Object.values(this.selectedProductImages).length){
+      this._snackBar.open('Please upload at least one product image', 'Ok');
+      return;
+    }
     const values = {
       ...this.addProductForm.value,
       category: selectedCategories,
-      images: type === 'estate' ? this.estateImages : type === 'farm' ? this.farmImages : this.inverterImages
+      images: Object.values(this.selectedProductImages),
+      price: {
+        value: this.addProductForm.value.price,
+        currency: 'NGN'
+      },
+      agent: {
+        id: 1,
+        title: this.addProductForm.value.agent
+      },
+      owner: {
+        id: 1,
+        title: this.addProductForm.value.owner
+      }
     }
     this.lState = 'loading';
-    this.productService.createProduct(values).subscribe((res) => {
+    this.addNewProductService.createNewProduct(values).subscribe((res) => {
       this.lState = 'idle';
+      this._snackBar.open('Product addedd successfully!!!', 'Ok');
       this.closeDialog(true);
     }, (error) => {
+      
       this._snackBar.open(error, 'Ok');
       this.lState = 'idle';
-    })
+    });
   }
 
   private updateFormFields(type: string) {
@@ -219,13 +218,22 @@ export class AddNewProductComponent implements OnInit {
   private setInverter() {
   }
 
-  pickFile(event){
-    // console.log(e.target)
-    const file = event.target.files[0];
-    console.log(file)
-    this.addNewProductService.uploadImage(file).subscribe((res) => {
-      console.log(res)
-    });
+  get uploadedImageNames(): string[] {
+    return Object.keys(this.selectedProductImages);
   }
 
+  pickFile(event){
+    const file = event.target.files[0];
+    if(file){
+      this.uploadingFile.next(true);
+      this.addNewProductService.uploadImage(file).subscribe((res) => {
+        this.selectedProductImages[file.name] = res.data;
+        this.uploadingFile.next(false);
+        this._snackBar.open('Picture uploaded', 'Ok');
+      },(error) => {
+        this._snackBar.open(error, 'Ok');
+        this.uploadingFile.next(false);
+      });
+    }
+  }
 }

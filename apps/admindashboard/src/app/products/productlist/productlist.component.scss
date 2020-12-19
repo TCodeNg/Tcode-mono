@@ -1,9 +1,22 @@
 @import "../../../color";
 @import '../../../base-list';
+@import '../../../table';
 
 @include baselist;
+
+:host {
+  &::ng-deep {
+    tcode-table {
+      @include table;
+    }
+  }
+}
+
 header {
   .actions {
     margin-top: 4rem;
   }
+}
+.mat-tab-header-pagination {
+  display: none !important;
 }
