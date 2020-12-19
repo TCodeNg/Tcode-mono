@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PhoneNumberComponent } from './phone-number.component';
 import { InputModule } from '@tcode/input';
@@ -7,9 +7,9 @@ describe('PhoneNumberComponent', () => {
   let component: PhoneNumberComponent;
   let fixture: ComponentFixture<PhoneNumberComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [ PhoneNumberComponent ],
         imports: [

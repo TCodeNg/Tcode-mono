@@ -1,7 +1,9 @@
 import { ContactServiceInterface } from './contact.service';
 import { from, Observable, throwError } from 'rxjs';
 import * as Parse from 'parse';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ParseContactService implements ContactServiceInterface {
   deleteContact(userId?: string): Observable<boolean> {
     return throwError(new Error('Method not implemented'));

@@ -3,7 +3,9 @@ import { ProductServiceInterface } from './product.service';
 import { Product } from '@tcode/api-interface';
 import { from, Observable } from 'rxjs';
 import { map, mergeAll, toArray } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ParseProductService implements ProductServiceInterface {
   private static parseProduct(obj: Parse.Object) {
     return {

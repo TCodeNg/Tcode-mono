@@ -3,7 +3,9 @@ import { from, Observable, Subject } from 'rxjs';
 import * as Parse from 'parse';
 import { map } from 'rxjs/operators';
 import { Order } from './order';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class ParseOrderService implements OrderServiceInterface {
   createOrder(payload: any): Observable<string> {
     const order = new Parse.Object('Order');

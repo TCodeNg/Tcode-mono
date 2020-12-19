@@ -1,8 +1,8 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { OrderDetailUiModule } from './order-detail-ui.module';
 
 describe('OrderDetailUiModule', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [OrderDetailUiModule],
     }).compileComponents();

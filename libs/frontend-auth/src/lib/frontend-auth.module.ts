@@ -62,7 +62,7 @@ import { UnauthorisedComponent } from './unauthorised/unauthorised.component';
   declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, UnauthorisedComponent]
 })
 export class FrontendAuthModule {
-  static forRoot(authConfig: AuthConfig, userType?: string): ModuleWithProviders {
+  static forRoot(authConfig: AuthConfig, userType?: string): ModuleWithProviders<FrontendAuthModule> {
     return {
       ngModule: FrontendAuthModule,
       providers: [

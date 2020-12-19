@@ -1,4 +1,4 @@
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { LiveTrackComponent } from './liveTrack.component';
@@ -7,7 +7,7 @@ describe('LiveTrackComponent', () => {
   let component: LiveTrackComponent;
   let fixture: ComponentFixture<LiveTrackComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LiveTrackComponent],
       imports: [

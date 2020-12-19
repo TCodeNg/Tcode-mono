@@ -1,5 +1,5 @@
 import { FarmproduceComponent } from "./farmproduce.component"
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
@@ -12,7 +12,7 @@ describe('FarmproduceComponent', () => {
   let component: FarmproduceComponent;
   let fixture: ComponentFixture<FarmproduceComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FarmproduceComponent],
       imports: [

@@ -1,5 +1,5 @@
 import { InverterComponent } from "./inverter.component";
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { InputModule } from '@tcode/input';
 import { ButtonsModule } from '@tcode/buttons';
 import { ProductModule } from '@tcode/product';
@@ -11,7 +11,7 @@ describe('InverterComponent', () => {
   let component: InverterComponent;
   let fixture: ComponentFixture<InverterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [InverterComponent],
       imports: [
