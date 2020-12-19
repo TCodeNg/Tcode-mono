@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 */
 
 export interface ProductServiceInterface {
-  getProducts(skip?: number, limit?: number, ...args: string[]): Observable<Product[]>;
+  getProducts(skip?: number, limit?: number, productType?: 'farm' | 'estate' | 'inverter', ...args: string[]): Observable<Product[]>;
   getProduct(id: string): Observable<Product>;
   updateProduct(id: string, product: Partial<Product>): Observable<any>;
   deleteProduct(id: string): Observable<any>;
