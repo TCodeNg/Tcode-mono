@@ -46,4 +46,26 @@ export class ParseAuthService implements AuthServiceInterface {
       }
     ));
   }
+
+  userHasRole(roleName: string): Observable<boolean> {
+    return new Observable((observer) => {
+      const currentUser: Parse.User = this.currentUser;
+
+      if (!currentUser) {
+        observer.error(new Error('User not authenticated'));
+        return;
+      }
+      const roleQuery = new Parse.Query(Parse.Role);
+      roleQuery.equalTo('name', roleName);
+      roleQuery.find().then((roles) => {
+        const promises = roles.map(role => role.getUsers().query().find());
+        return Promise.all(promises);
+      }).then((_users) => {
+        const users: string[] = [].concat(..._users).filter((user: Parse.User) => user.id === currentUser.id);
+        observer.next(users.length === 1);
+      })
+        .catch(err => observer.error(err))
+        .finally(() => observer.complete());
+    });
+  }
 }
