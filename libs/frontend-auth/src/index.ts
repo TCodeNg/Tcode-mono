@@ -5,3 +5,4 @@ export * from './lib/auth.config';
 export * from './lib/model';
 export { AuthService, AUTH_SERVICE_TOKEN } from './lib/auth.service';
 export * from './lib/passwordValidator';
+export * from './lib/user-type.guard';

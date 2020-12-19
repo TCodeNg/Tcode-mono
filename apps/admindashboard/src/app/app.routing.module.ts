@@ -1,22 +1,22 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTES } from '../core/constant';
-import { AuthGuard } from '@tcode/frontend-auth';
+import { AuthGuard, UserTypeGuard } from '@tcode/frontend-auth';
 
 const routes: Routes = [
   {
     path: ROUTES.adminDashboard.home,
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard, UserTypeGuard]
   },
-  
+
   {
     path: ROUTES.adminDashboard.profile,
     loadChildren: async () => {
       const m = await import('./userprofile/userprofile.module')
       return m.UserProfileModule
     },
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard, UserTypeGuard]
   },
   {
     path: ROUTES.adminDashboard.orders.home,
@@ -24,7 +24,7 @@ const routes: Routes = [
       const m = await import('./orders/ordersadmin.module')
       return m.OrdersAdminModule
     },
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard, UserTypeGuard]
   },
   {
     path: ROUTES.adminDashboard.products.home,
@@ -32,7 +32,7 @@ const routes: Routes = [
       const m = await import('./products/products.module')
       return m.ProductsModule
     },
-    canLoad: [AuthGuard]
+    canLoad: [AuthGuard, UserTypeGuard]
   }
 ]
 @NgModule({
