@@ -24,7 +24,7 @@ import { mergeAll, tap, toArray } from "rxjs/operators";
 })
 export class FarmproduceComponent implements OnInit {
   products: Observable<Product[]>;
-  limit = 3;
+  limit = 4;
   btnState = 'idle';
   constructor(
     private router: Router,
@@ -38,7 +38,7 @@ export class FarmproduceComponent implements OnInit {
   
   fetchProduct(){
     this.btnState = 'loading';
-    this.products = this.productService.getProducts(0, this.limit).pipe(
+    this.products = this.productService.getProducts(0, this.limit, 'farm').pipe(
       mergeAll(),
       toArray(),
       tap(() => this.btnState = 'idle')
@@ -56,7 +56,7 @@ export class FarmproduceComponent implements OnInit {
   }
 
   loadMoreProducts(){
-    this.limit += 2;
+    this.limit += 4;
     this.fetchProduct();
   }
 }

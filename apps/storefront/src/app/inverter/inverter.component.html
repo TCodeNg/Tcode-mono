@@ -47,10 +47,10 @@
     <p class="sub-title">So you will never miss out</p>
   </div>
   <div class="products">
-    <tcode-product-item *ngFor="let product of products" [product]="product" (onAddToCart)="addToCart($event)" (click)="gotoProduct($event, product)"></tcode-product-item>
+    <tcode-product-item *ngFor="let product of (products | async)" [product]="product" (onAddToCart)="addToCart($event)" (click)="gotoProduct($event, product)"></tcode-product-item>
   </div>
 </section>
 
 <div class="button flex flex-center">
-  <tcode-button type="normal">Load More</tcode-button>
+  <tcode-button type="normal" (click)="loadMoreProducts()" [disabled]="btnState === 'loading'" [state]="btnState">Load More</tcode-button>
 </div>

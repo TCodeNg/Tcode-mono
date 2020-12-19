@@ -1,9 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { Product } from '@tcode/api-interface';
 import { products } from './product';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import { ProductService, PRODUCT_SERVICE_TOKEN } from "@tcode/product";
+import { Observable } from "rxjs";
+import { mergeAll, tap, toArray } from "rxjs/operators";
 
 @Component({
   selector: 'tcode-inverter',
@@ -19,14 +22,31 @@ import { CartService } from '../services/cart.service';
   ]
 })
 export class InverterComponent implements OnInit {
-  products: Product[];
+  products: Observable<Product[]>;
+  limit = 4;
+  btnState = 'idle';
   constructor(
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    @Inject(PRODUCT_SERVICE_TOKEN) private productService: ProductService
   ){}
 
   ngOnInit(): void{
-    this.products = products;
+    this.fetchProduct();
+  }
+
+  fetchProduct(){
+    this.btnState = 'loading';
+    this.products = this.productService.getProducts(0, this.limit, 'inverter').pipe(
+      mergeAll(),
+      toArray(),
+      tap(() => this.btnState = 'idle')
+    );
+  }
+
+  loadMoreProducts(){
+    this.limit += 4;
+    this.fetchProduct();
   }
 
   gotoProduct(e:MouseEvent, product: Product) {

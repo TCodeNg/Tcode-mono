@@ -41,24 +41,20 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.generalProducts = this.productService.getProducts().pipe(
+    this.generalProducts = this.productService.getProducts(0, 8).pipe(
       mergeAll(),
-      take(8),
       toArray()
     );
-    this.farmProducts = this.productService.getProducts().pipe(
+    this.farmProducts = this.productService.getProducts(0, 8, 'farm').pipe(
       mergeAll(),
-      take(8),
       toArray()
     );
-    this.inverterProducts = this.productService.getProducts().pipe(
+    this.inverterProducts = this.productService.getProducts(0, 8, 'inverter').pipe(
       mergeAll(),
-      take(8),
       toArray()
     );
-    this.realEstateProducts = this.productService.getProducts().pipe(
+    this.realEstateProducts = this.productService.getProducts(0, 8, 'estate').pipe(
       mergeAll(),
-      take(8),
       toArray()
     );
   }
