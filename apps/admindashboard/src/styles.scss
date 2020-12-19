@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
   margin: 0;
@@ -38,6 +39,9 @@ a {
 .justify-end {
   justify-content: flex-end;
 }
+.justify-between {
+  justify-content: space-between;
+}
 .grid {
   display: grid;
 }
@@ -55,4 +59,23 @@ a {
 }
 .mat-tab-header, .mat-tab-nav-bar {
   border-bottom: 1px solid #CFDFEF;
+}
+.mat-radio-button.mat-primary .mat-radio-inner-circle{
+  color:rgb(2, 176, 117) !important;
+  background-color:rgb(2, 176, 117) !important;
+}
+.mat-radio-button.mat-primary .mat-radio-outer-circle{
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle{
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-checkbox.mat-primary .mat-checkbox-inner-container {
+  border-color:rgb(2, 176, 117) !important; 
+}
+.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: rgb(2, 176, 117) !important;
+}
+.no-padding, .mat-dialog-container {
+  padding: 0 !important;
 }

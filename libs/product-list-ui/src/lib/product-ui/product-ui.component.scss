@@ -1,0 +1,51 @@
+@import '~@angular/material/theming';
+
+:host {
+  &::ng-deep {
+    tcode-button {
+      &.secondary {
+        button[mat-stroked-button] {
+          color: #333333 !important;
+          border: none !important;
+          font-weight: bold;
+          background: rgba(0, 113, 187, 0.1);
+          padding: 0px 13px !important;
+        }
+      }
+      &.add {
+        button[mat-raised-button] {
+          font-weight: bold;
+          padding: 10px 70px !important;
+        }
+      }
+    }
+    mat-tab-header {
+      margin: auto !important;
+      width: 92% !important;
+    }
+    .mat-tab-label {
+      opacity: 1 !important;
+    }
+    .mat-tab-label-active {
+      border-bottom: 4px solid #1D66FF;
+      color: #1D66FF
+    }
+  }
+}
+header {
+  color: #1E266D;
+  height: 90px;
+  padding: 0 50px 0 50px;
+  font-size: 22px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .actions {
+    margin-top: 4rem;
+  }
+}
+.no-padding {
+  padding: 0;
+}
+

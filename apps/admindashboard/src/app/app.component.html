@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container *ngIf="isLoggedIn | async">
   <mat-sidenav #sidenav mode="side" opened>
     <tcode-drawer-menu></tcode-drawer-menu>
   </mat-sidenav>
@@ -11,3 +11,7 @@
 		</div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<div class="wrapper" *ngIf="!(isLoggedIn | async)">
+  <router-outlet></router-outlet>
+</div>

@@ -18,6 +18,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ParseAuthService } from './parse.auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { WINDOW_TOKEN } from './window-token';
+import { UserTypeGuard } from './user-type.guard';
+import { UnauthorisedComponent } from './unauthorised/unauthorised.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,10 @@ import { WINDOW_TOKEN } from './window-token';
         component: ResetPasswordComponent
       },
       {
+        path: 'auth/403',
+        component: UnauthorisedComponent
+      },
+      {
         path: 'auth',
         redirectTo: '/auth/login',
         pathMatch: 'full'
@@ -53,13 +59,14 @@ import { WINDOW_TOKEN } from './window-token';
   providers: [
     AuthGuard
   ],
-  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent]
+  declarations: [LoginComponent, RegisterComponent, ResetPasswordComponent, UnauthorisedComponent]
 })
 export class FrontendAuthModule {
   static forRoot(authConfig: AuthConfig, userType?: string): ModuleWithProviders {
     return {
       ngModule: FrontendAuthModule,
       providers: [
+        UserTypeGuard,
         {
           provide: AUTH_SERVICE_TOKEN,
           useClass: ParseAuthService,

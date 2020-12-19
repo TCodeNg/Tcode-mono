@@ -1,0 +1,100 @@
+:host {
+  &::ng-deep {
+    tcode-input {
+      margin: 10px 0;
+    }
+  }
+}
+header {
+  border-bottom: 1px solid #CFDFEF;
+  padding-bottom: 0.5rem;
+  margin: 24px 24px 0;
+  h2 {
+    color: #1E266D;
+    font-weight: normal;
+    font-size: 22px;
+  }
+  p {
+    color: #E45C5C;
+    cursor: pointer;
+  }
+}
+main {
+  max-height: 650px;
+  overflow-y: scroll;
+  margin: 0 5px;
+  &::-webkit-scrollbar-track {
+    border: none;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    background-color: #f5f5f5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color:#004292;
+  }
+  label {
+    font-size: 12px;
+    margin: 0 0 3px 0;
+  }
+  .content {
+    margin-top: 1.5rem;
+    padding: 0 24px 24px;
+    .input-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1rem;
+      &.sm {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .text-area {
+      margin-top: 1rem;
+      textarea {
+        border-radius: 10px;
+        border: 1px solid #CFDFEF;
+        outline: none;
+        padding: 5px;
+      }
+    }
+    .upload-area {
+      margin-top: 1rem;
+      .upload {
+        background: #F6F6F6;
+        width: 100%;
+        height: 8rem;
+        border: 2px dashed rgba(0, 16, 75, 0.2);
+        border-radius: 10px;
+        .btn {
+          cursor: pointer;
+          color: #1D66FF;
+          background: #eeeeee;
+          padding: 8px;
+          border-radius: 10px;
+          margin-top: 1rem;
+        }
+        .hint {
+          color: #1E266D;
+          font-weight: bold;
+        }
+      }
+    }
+    .button {
+      margin-top: 1rem;
+    }
+  }
+}
+.checkbox-group {
+  margin-top: 1rem;
+}
+mat-radio-button, mat-checkbox {
+  margin-right: 0.5rem !important;
+}
+.uploadInput {
+  display: none;
+}

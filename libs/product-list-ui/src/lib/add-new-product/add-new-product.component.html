@@ -1,0 +1,105 @@
+<header class="flex justify-between align-center">
+  <h2>Add product</h2>
+  <p (click)="closeDialog()">CANCEL</p>
+</header>
+<main>
+  <section class="content" [formGroup]="addProductForm">
+    <!-- {{ addProductForm.value | json }} -->
+    <tcode-input>
+      <label for="product-name">Product name</label>
+      <input id="text" type="name" formControlName="name">
+    </tcode-input>
+    <tcode-input>
+      <label for="price">Price</label>
+      <input id="price" type="number" formControlName="price">
+    </tcode-input>
+    <mat-radio-group aria-label="Select an option" formControlName="type">
+      <label for="product-type">Product type</label>
+      <div class="" style="margin-top:12px">
+        <mat-radio-button value="estate" color="primary">Real Estate</mat-radio-button>
+        <mat-radio-button value="farm" color="primary">Farm Vendor</mat-radio-button>
+        <mat-radio-button value="inverter" color="primary">Inverter & solar power</mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'farm'">
+      <label for="product-category">Product category</label>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of farmCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'estate'">
+      <label for="product-category">Product category</label>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of estateCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <div formArrayName="category" class="checkbox-group" *ngIf="addProductForm.value.type === 'inverter'">
+      <label for="product-category">Product category</label>
+      <div class="checkboxes">
+        <ng-container *ngFor="let category of inverterCategoryArray.controls" class="flex" [formGroup]="category">
+          <mat-checkbox color="primary" [formControl]="category.get('selected')">
+            {{category.get('name').value}}
+          </mat-checkbox>
+        </ng-container>
+      </div>
+    </div>
+    <div class="input-group" *ngIf="addProductForm.controls.type.value === 'estate'">
+      <tcode-input>
+        <label for="location">Location</label>
+        <input id="text" type="location" formControlName="location">
+      </tcode-input>
+      <tcode-input>
+        <label for="agent">Agent</label>
+        <input id="text" type="agent" formControlName="agent">
+      </tcode-input>
+    </div>
+    <div class="input-group sm" *ngIf="addProductForm.controls.type.value === 'estate'">
+      <tcode-input>
+        <label for="rooms">No. of rooms</label>
+        <input id="roooms" type="number" formControlName="rooms">
+      </tcode-input>
+      <tcode-input>
+        <label for="bathroom">No. of bathrooms</label>
+        <input id="bathrooms" type="number" formControlName="bathrooms">
+      </tcode-input>
+      <tcode-input>
+        <label for="sitting-rooms">No. of sitting rooms</label>
+        <input id="sitting-rooms" type="number" formControlName="livingRooms">
+      </tcode-input>
+    </div>
+    <div class="text-area flex flex-column">
+      <label for="product-description">Product description</label>
+      <textarea cols="5" rows="4" formControlName="description"></textarea>
+    </div>
+    <tcode-input *ngIf="addProductForm.controls.type.value === 'farm'">
+      <label for="bathroom">Product owner</label>
+      <input id="owner" type="text" formControlName="owner">
+    </tcode-input>
+    <div class="upload-area flex flex-column">
+      <label for="product-images">Product images</label>
+      <div class="upload flex justify-center align-center flex-column">
+        <p class="hint">Drop files here to upload</p>
+        <p class="btn" (click)="upload.click()">Browse file</p>
+      </div>
+    </div>
+    <div class="flex button justify-center">
+      <tcode-button type="normal" (click)="onSubmit()" [disabled]="!isFormValid || lState === 'loading'" [state]="lState">Save</tcode-button>
+    </div>
+  </section>
+</main>
+
+<input 
+  type="file" 
+  class="uploadInput" 
+  (change)="pickFile($event)" 
+  name="upload-document" 
+  accept="image/*" #upload
+>

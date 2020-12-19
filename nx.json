@@ -119,6 +119,9 @@
       "tags": [],
       "implicitDependencies": ["cart-ui"]
     },
+    "product-list-ui": {
+      "tags": ["ui"]
+    },
     "image": {
       "tags": ["scope:shared"]
     },
