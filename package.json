@@ -44,7 +44,7 @@
     "@nestjs/jwt": "7.0.0",
     "@nestjs/mongoose": "7.0.1",
     "@nestjs/passport": "7.0.0",
-    "@nestjs/platform-express": "^6.8.3",
+    "@nestjs/platform-express": "^9.2.1",
     "@ngxs-labs/data": "3.0.6",
     "@ngxs/storage-plugin": "3.6.2",
     "@ngxs/store": "3.6.2",
